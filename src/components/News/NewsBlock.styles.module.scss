@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+
+.newsblock {
+	max-width: 1000px;
+	height: 100%;
+	background-color: $blockColor;
+	box-shadow: $blockShadow;
+	padding: 12px 24px;
+
+	&__content {
+		width: 100%;
+		height: 100%;
+		p {
+			font-weight: 500;
+			margin-bottom: 16px;
+		}
+	}
+}
+.newsblock__info {
+	display: flex;
+	img {
+		max-width: 235px;
+		height: 100%;
+		margin-right: 36px;
+	}
+}

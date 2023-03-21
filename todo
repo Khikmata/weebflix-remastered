@@ -1,0 +1,24 @@
+Stack:
+[x] react
+[x] typescript,
+[x] axios,
+[x] rtk,
+[] redux-persist,
+[x] react-css-module (scss)
+
+Functionality:
+[x] rtk query for different fetch endpoints
+[] search
+[] filters
+[] history
+[] recommendations
+[] top100 in different categories by choice
+[] news slider
+[] mainpage slider
+[] auth
+[] rating anime and put it in the history
+[] make recommendations based on the last rated anime
+[] user profile
+[] admin panel
+[] setting watch state (Watching, already watched, dropped, onPause, gonna watch)
+

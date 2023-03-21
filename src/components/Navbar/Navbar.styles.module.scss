@@ -1,0 +1,28 @@
+.Navbar {
+	z-index: 10;
+	position: sticky;
+	top: 0;
+	left: 0;
+	height: 86px;
+	background-color: rgba(0, 0, 0, 0.3);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		max-width: 1440px;
+		height: 100%;
+		width: 100%;
+		padding-right: 20px;
+	}
+	&-logo {
+	}
+	&-auth {
+		letter-spacing: 0.11em;
+		font-size: 24px;
+	}
+}
