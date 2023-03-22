@@ -1,15 +1,17 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { AnimeApi } from "../services/getAnime"
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { CatalogueFilterReducer } from "./reducers/CatalogueFilterSlice";
+import { AnimeApi } from "./services/getAnime";
 
-export const store = configureStore({
-	reducer: {
-		[AnimeApi.reducerPath]: AnimeApi.reducer
-	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(AnimeApi.middleware)
+const rootReducer = combineReducers({
+	[AnimeApi.reducerPath]: AnimeApi.reducer,
+	catalogueFilter: CatalogueFilterReducer,
 })
 
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+export const store = configureStore({
+	reducer: rootReducer,
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(AnimeApi.middleware)
+})
+
 export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch

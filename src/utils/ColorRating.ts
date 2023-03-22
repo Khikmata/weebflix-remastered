@@ -13,4 +13,5 @@ export const ColorRating = (item: IData) => {
 	if (Number(item.score) < 4) {
 		return '#F97979'
 	}
+	return '';
 }

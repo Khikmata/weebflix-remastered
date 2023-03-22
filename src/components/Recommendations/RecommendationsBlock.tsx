@@ -2,12 +2,11 @@ import { IRecommendations } from '../../types/GetAnimeTypes';
 import styles from './RecommendationsBlock.styles.module.scss';
 
 interface RecommendationsBlockProps {
-	item: any;
-	index: number;
+	item: IRecommendations[];
 }
 
 
-const RecommendationsBlock: React.FC<RecommendationsBlockProps> = ({ item, index }) => {
+const RecommendationsBlock: React.FC<RecommendationsBlockProps> = ({ item }) => {
 
 
 	return (
@@ -16,8 +15,8 @@ const RecommendationsBlock: React.FC<RecommendationsBlockProps> = ({ item, index
 				<p>Похожее на то, что вы смотрели ранее:</p>
 				<div className={styles['recommendations-content__grid']}>
 					{
-						item.map((item: any) => (
-							< img src={item.images.webp.image_url} />
+						item.map((item: IRecommendations) => (
+							< img src={item.entry.images.webp.image_url} />
 						))
 					}
 				</div>

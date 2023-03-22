@@ -23,8 +23,15 @@ export interface IData {
 	score: Float32Array;
 }
 
-export interface IRecommendations {
+interface IEntry {
 	images: IImages;
+	mal_id: number;
 	title: string;
+	url: string;
+}
+
+export interface IRecommendations {
+	entry: IEntry;
+	url: string;
 	votes: number;
 }

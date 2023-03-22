@@ -1,20 +1,13 @@
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { CatalogueFilterActions, filterOptions } from '../../store/reducers/CatalogueFilterSlice';
 import styles from './CatalogueFilterBlock.styles.module.scss';
 
 const CatalogueFilterBlock = () => {
 
-	const [activeOption, setActiveOption] = useState(1)
-
-	const filterOptions = [
-		"Актуальное",
-		"Недавно вышедшее",
-		"Скоро выйдет",
-		"Самое ожидаемое"
-	]
-
-
+	const dispatch = useAppDispatch();
+	const activeFilterOption = useAppSelector((state) => state.catalogueFilter.activeFilterIndex)
 	const handleChangeOption = (index: number) => {
-		setActiveOption(index)
+		dispatch(CatalogueFilterActions.setActiveFilterIndex(index))
 	}
 
 	return (
@@ -23,7 +16,7 @@ const CatalogueFilterBlock = () => {
 				<ul>
 					{
 						filterOptions.map((option, index: number) => (
-							<li key={index} onClick={() => handleChangeOption(index)} className={styles[`${activeOption === index && 'active'}`]}>{option}</li>
+							<li key={index} onClick={() => handleChangeOption(index)} className={styles[`${activeFilterOption === index && 'active'}`]}>{option}</li>
 						))
 					}
 				</ul>
