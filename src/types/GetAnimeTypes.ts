@@ -30,8 +30,28 @@ interface IEntry {
 	url: string;
 }
 
+
 export interface IRecommendations {
 	entry: IEntry;
-	url: string;
+	title: string;
 	votes: number;
+}
+
+interface IPaginationItems {
+	count: number;
+	total: number;
+	per_page: number;
+}
+
+interface IPagination {
+	current_page: number;
+	has_next_page: boolean;
+	items: IPaginationItems
+	last_visible_page: number;
+}
+
+
+export interface IGetAnime {
+	pagination: IPagination;
+	data: IData[];
 }

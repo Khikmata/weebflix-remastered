@@ -79,3 +79,9 @@
 .info__watchstate {
 	color: $greenColor;
 }
+
+@media (max-width: 1025px) {
+	.history {
+		width: 100%;
+	}
+}

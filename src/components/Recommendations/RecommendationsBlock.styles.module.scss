@@ -1,12 +1,14 @@
 @import "../../styles/variables";
 
 .recommendations {
+	max-width: 450px;
 	padding: 24px;
 	background-color: $blockColor;
 	box-shadow: $blockShadow;
 	&-content {
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
 		p {
 			margin-bottom: 16px;
 		}
@@ -16,8 +18,15 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
 	img {
 		width: 85px;
 		height: 120px;
+	}
+}
+
+@media (max-width: 1025px) {
+	.recommendations {
+		max-width: none;
 	}
 }

@@ -1,45 +1,78 @@
 
 
 
+import { FreeMode, Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/scss';
+import 'swiper/scss/navigation';
 import CatalogueBlock from '../components/Catalogue/CatalogueBlock';
 import CatalogueFilterBlock from '../components/CatalogueFilter/CatalogueFilterBlock';
 import HistoryBlock from '../components/History/HistoryBlock';
 import NewsBlock from '../components/News/NewsBlock';
 import RecommendationsBlock from '../components/Recommendations/RecommendationsBlock';
-import { AnimeApi } from '../store/services/getAnime';
-import { IData } from '../types/GetAnimeTypes';
+import { useAppSelector } from '../hooks/redux';
+import { AnimeApi } from '../services/getAnime';
 import styles from './home.styles.module.scss';
-
-
 
 const HomePage = () => {
 
-	const { data: currentSeasonData, error: currentSeasonErrors, isLoading: currentSeasonLoading } = AnimeApi.useGetCurrentSeasonQuery(5)
-	const { data: upcomingSeasonData, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading } = AnimeApi.useGetCurrentSeasonQuery(5)
-	const { data: recommendationsData, error: recommendationsErrors, isLoading: recomendationLoading } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043);
+	const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading } = AnimeApi.useGetCurrentSeasonQuery(5)
+	const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading } = AnimeApi.useGetUpcomingSeasonQuery(5)
+	const { data: recommendations, error: recommendationsErrors, isLoading: recomendationLoading } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043);
 
-	const currentSeason = currentSeasonData && currentSeasonData.data;
-	currentSeason && console.log(currentSeasonData);
+	const selectedFilterOption = useAppSelector((state) => state.catalogueFilter.activeFilterIndex);
+
+	const currentFilter = [currentSeason, upcomingSeason]
 
 
 
 	return (
-		<div className={styles['home']}>
+		<div className={styles['home']} >
 			<div className={styles['home-background']} />
 			<div className={styles['home-container']}>
 				<CatalogueFilterBlock />
 				<div className={styles.catalogue} >
-					{
-						currentSeason ? currentSeason.map((item: IData, index: number) => (
-							<CatalogueBlock key={item.mal_id} item={item} index={index} />
-						)) : <h1> loading...</h1>
-					}
+					<Swiper
+						modules={[Navigation, FreeMode]}
+						speed={400}
+						spaceBetween={8}
+						slidesPerView={6}
+						navigation
+						breakpoints={{
+							0: {
+								slidesPerView: 1,
+							},
+							426: {
+								slidesPerView: 2,
+							},
+							600: {
+								slidesPerView: 3,
+							},
+							869: {
+								slidesPerView: 4,
+							},
+							1025: {
+								slidesPerView: 5,
+							},
+							1225: {
+								slidesPerView: 6,
+							},
+						}}
+					>
+						{
+							currentFilter && currentFilter[selectedFilterOption]?.data.map((item: any, index: number) => (
+								<SwiperSlide>
+									<CatalogueBlock key={item.mal_id} item={item} index={index} />
+								</SwiperSlide>
+							))
+						}
+					</Swiper>
 				</div >
 				<div className={styles['home-container__content']}>
 					<div className={styles['home-content__left']}>
 						<HistoryBlock />
-						{recommendationsData &&
-							<RecommendationsBlock item={recommendationsData.slice(0, 4)} />
+						{recommendations &&
+							<RecommendationsBlock item={recommendations} />
 						}
 					</div>
 					<div className={styles['home-content__right']}>
@@ -47,7 +80,7 @@ const HomePage = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 	)
 }
 

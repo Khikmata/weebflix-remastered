@@ -11,15 +11,17 @@ interface CatalogueProps {
 	item: IData;
 
 }
-
+//Link to = {`/anime/${item.mal_id}`}
 
 
 const CatalogueBlock: React.FC<CatalogueProps> = ({ index, item }) => {
 
 	return (
-		<Link to={`/anime/${item.mal_id}`} key={index} className={styles['anime-card']}>
+		<div key={index} className={styles['anime-card']}>
 			<div className={styles['anime-card__image']}>
-				<img src={item.images.webp.image_url} alt={item.title_english} width={200} height={300} />
+				<Link to={`/anime/${item.mal_id}`}>
+					<img loading="lazy" src={item.images.webp.image_url} alt={item.title_english} width={200} height={300} />
+				</Link>
 			</div>
 			<div className={styles['anime-card__info']}>
 				<Tooltip content={item.title_english || item.title} direction="bottom" delay={500}>
@@ -27,7 +29,7 @@ const CatalogueBlock: React.FC<CatalogueProps> = ({ index, item }) => {
 				</Tooltip>
 				<div className={styles['anime-card__info__rating']} style={{ color: ColorRating(item) }}>{item.score}</div>
 			</div>
-		</Link>
+		</div>
 	)
 }
 

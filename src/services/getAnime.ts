@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IGetAnime, IRecommendations } from '../../types/GetAnimeTypes';
-import { IData } from './../../types/GetAnimeTypes';
+import { IData, IGetAnime, IRecommendations } from '../types/GetAnimeTypes';
 
 export const AnimeApi = createApi({
 	reducerPath: 'animeAPI',

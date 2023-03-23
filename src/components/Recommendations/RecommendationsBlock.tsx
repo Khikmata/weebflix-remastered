@@ -15,8 +15,8 @@ const RecommendationsBlock: React.FC<RecommendationsBlockProps> = ({ item }) => 
 				<p>Похожее на то, что вы смотрели ранее:</p>
 				<div className={styles['recommendations-content__grid']}>
 					{
-						item.map((item: IRecommendations) => (
-							< img src={item.entry.images.webp.image_url} />
+						item.map((item: IRecommendations, index: number) => (
+							< img key={index} src={item.entry.images.webp.image_url} alt={item.entry.title + ' banner image'} />
 						))
 					}
 				</div>

@@ -6,6 +6,7 @@
 	background-color: $backgroundColor;
 	padding: 8px 24px;
 	box-shadow: $blockShadow;
+	overflow: hidden;
 	&__content {
 		ul {
 			display: flex;
@@ -29,5 +30,9 @@
 				background-color: $blockColor;
 			}
 		}
+	}
+}
+@media (max-width: 426px) {
+	.catalogue__filter {
 	}
 }
