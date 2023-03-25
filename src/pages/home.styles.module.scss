@@ -51,4 +51,17 @@
 	.home-container__content {
 		flex-direction: column;
 	}
+	.home-content__left {
+		display: flex;
+		flex-direction: row;
+	}
+}
+@media (max-width: 600px) {
+	.home-container__content {
+		flex-direction: column;
+	}
+	.home-content__left {
+		display: flex;
+		flex-direction: column;
+	}
 }

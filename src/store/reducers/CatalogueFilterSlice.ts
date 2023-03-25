@@ -2,9 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const filterOptions = [
 	"Актуальное",
-	"Недавно вышедшее",
 	"Скоро выйдет",
-	"Самое ожидаемое"
 ]
 
 export interface CounterState {

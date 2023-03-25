@@ -20,7 +20,7 @@ const HistoryBlock = () => {
 							<p className={styles['info__episodes']}>24 эпизодов</p>
 						</div>
 						<div className={styles['content__info__bottom']}>
-							<ul className="info__genres">
+							<ul className={styles['info__genres']}>
 								<li>Триллер</li>
 								<li>Драма</li>
 							</ul>

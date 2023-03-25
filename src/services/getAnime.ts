@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IData, IGetAnime, IRecommendations } from '../types/GetAnimeTypes';
+import { IDetails, IGetAnime, IRecommendations } from '../types/GetAnimeTypes';
+import { IData } from './../types/GetAnimeTypes';
 
 export const AnimeApi = createApi({
 	reducerPath: 'animeAPI',
@@ -17,10 +18,17 @@ export const AnimeApi = createApi({
 				transformResponse: (response: { data: IData }) => response.data,
 			})
 		}),
+		getAnimeDetails: builder.query<IDetails, number>({
+			query: (id) => ({
+				url: `https://api.jikan.moe/v4/anime/${id}/full`,
+				transformResponse: (response: { data: IDetails }) => response.data,
+			})
+		}),
 		getRecentAnimeRecommendations: builder.query<IRecommendations[], number>({
 			query: (id) => ({ url: `anime/${id}/recommendations` }),
 			transformResponse: (response: { data: IRecommendations[] }, meta, arg) => response.data,
 		}),
+
 	})
 })
 export const { useGetCurrentSeasonQuery } = AnimeApi;

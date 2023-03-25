@@ -23,6 +23,48 @@ export interface IData {
 	score: Float32Array;
 }
 
+interface ITrailer {
+	youtube_id: string;
+	embed_url: string;
+}
+
+interface IAired {
+	from: string;
+	to: string;
+}
+
+interface IMoreDetails {
+	mal_id: number;
+	type: string;
+	name: string;
+	url: string;
+}
+
+export interface IDetails {
+	mal_id: string;
+	images: IImages;
+	trailer: ITrailer;
+	title: string;
+	title_english: string;
+	type: string;
+	episodes: number;
+	status: string;
+	aired: IAired;
+	duration: string;
+	rating: string;
+	score: number;
+	scored_by: number;
+	rank: number;
+	popularity: number;
+	synopsis: string;
+	background: string;
+	season: string;
+	year: number;
+	studios: IMoreDetails
+	genres: IMoreDetails
+	relation: string;
+}
+
 interface IEntry {
 	images: IImages;
 	mal_id: number;

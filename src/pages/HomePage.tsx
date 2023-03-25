@@ -12,6 +12,7 @@ import NewsBlock from '../components/News/NewsBlock';
 import RecommendationsBlock from '../components/Recommendations/RecommendationsBlock';
 import { useAppSelector } from '../hooks/redux';
 import { AnimeApi } from '../services/getAnime';
+import { IData } from '../types/GetAnimeTypes';
 import styles from './home.styles.module.scss';
 
 const HomePage = () => {
@@ -40,7 +41,7 @@ const HomePage = () => {
 						navigation
 						breakpoints={{
 							0: {
-								slidesPerView: 1,
+								slidesPerView: 2,
 							},
 							426: {
 								slidesPerView: 2,
@@ -60,7 +61,7 @@ const HomePage = () => {
 						}}
 					>
 						{
-							currentFilter && currentFilter[selectedFilterOption]?.data.map((item: any, index: number) => (
+							currentFilter && currentFilter[selectedFilterOption]?.data.map((item: IData, index: number) => (
 								<SwiperSlide>
 									<CatalogueBlock key={item.mal_id} item={item} index={index} />
 								</SwiperSlide>
