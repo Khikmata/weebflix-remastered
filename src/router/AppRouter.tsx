@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from '../Layout/Layout'
-import AnimePage from '../pages/AnimePage'
+import AnimePage from '../pages/AnimePage/AnimePage'
 import HomePage from '../pages/HomePage'
 
 const AppRouter = () => {

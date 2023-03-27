@@ -27,7 +27,9 @@ const CatalogueBlock: React.FC<CatalogueProps> = ({ index, item }) => {
 				<Tooltip content={item.title_english || item.title} direction="bottom" delay={500}>
 					<div className={styles['anime-card__info__title']}>{item.title_english ? item.title_english : item.title}</div>
 				</Tooltip>
-				<div className={styles['anime-card__info__rating']} style={{ color: ColorRating(item) }}>{item.score}</div>
+				{
+					item.score && <div className={styles['anime-card__info__rating']} style={{ color: ColorRating(item) }}>{item.score}</div>
+				}
 			</div>
 		</div>
 	)

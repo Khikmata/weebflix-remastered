@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IGetAnime, IRecommendations } from '../../types/GetAnimeTypes';
+import { IDetails, IGetAnime, IRecommendations } from '../../types/GetAnimeTypes';
 import { IData } from './../../types/GetAnimeTypes';
 
 export const AnimeApi = createApi({
@@ -21,6 +21,10 @@ export const AnimeApi = createApi({
 		getRecentAnimeRecommendations: builder.query<IRecommendations[], number>({
 			query: (id) => ({ url: `anime/${id}/recommendations` }),
 			transformResponse: (response: { data: IRecommendations[] }, meta, arg) => response.data,
+		}),
+		getAnimeDetails: builder.query<IDetails, string>({
+			query: (id) => ({ url: `/anime/${id}/full` }),
+			transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
 		}),
 	})
 })

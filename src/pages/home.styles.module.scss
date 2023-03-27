@@ -39,7 +39,7 @@
 }
 
 .catalogue {
-	height: 340px;
+	max-height: 340px;
 	background-color: $blockColor;
 	box-shadow: $blockShadow;
 	padding: 24px 36px;
@@ -63,5 +63,10 @@
 	.home-content__left {
 		display: flex;
 		flex-direction: column;
+	}
+}
+@media (max-width: 425px) {
+	.catalogue {
+		padding: 12px;
 	}
 }
