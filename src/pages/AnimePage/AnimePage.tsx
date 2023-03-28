@@ -15,6 +15,7 @@ const AnimePage = () => {
 
 	return (
 		<div className={styles['anime-page']}>
+			<div className={styles['anime-page__background']} style={{ background: `url(${details ? details.images.webp.large_image_url : ''})` }} />
 			<div className={styles['anime-page__container']}>
 				<div className={styles['anime-block__info']}>
 					<div className={styles['anime-info__leftside']}>

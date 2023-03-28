@@ -7,7 +7,7 @@ interface tooltipProps {
 	children: React.ReactNode;
 }
 
-const Tooltip: React.FC<tooltipProps> = (props) => {
+export const Tooltip: React.FC<tooltipProps> = (props) => {
 	let timeout: NodeJS.Timeout;
 	const [active, setActive] = useState(false);
 
@@ -40,5 +40,3 @@ const Tooltip: React.FC<tooltipProps> = (props) => {
 		</div>
 	);
 };
-
-export default Tooltip;

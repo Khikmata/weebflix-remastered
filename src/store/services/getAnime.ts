@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IDetails, IGetAnime, IRecommendations } from '../../types/GetAnimeTypes';
-import { IData } from './../../types/GetAnimeTypes';
+import { IData, IImages } from './../../types/GetAnimeTypes';
 
 export const AnimeApi = createApi({
 	reducerPath: 'animeAPI',
@@ -26,6 +26,10 @@ export const AnimeApi = createApi({
 			query: (id) => ({ url: `/anime/${id}/full` }),
 			transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
 		}),
+		getAnimeImages: builder.query<IImages, string>({
+			query: (id) => ({ url: `/anime/${id}/pictures` }),
+			transformResponse: (response: { data: IImages }) => response.data,
+		})
 	})
 })
 export const { useGetCurrentSeasonQuery } = AnimeApi;

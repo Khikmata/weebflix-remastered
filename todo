@@ -3,20 +3,24 @@ Stack:
 [x] typescript,
 [x] axios,
 [x] rtk,
-[] redux-persist,
-[x] react-css-module (scss)
+[] redux-persist (for auth),
+[x] react-css-modules (scss)
+[x] swiper (for carousels)
+
 
 Functionality:
 [x] rtk query for different fetch endpoints
+[x] page based on id of the card
+[] internal player
 [] search
 [] filters
 [] history
 [] recommendations
-[] top100 in different categories by choice
-[] news slider
+[] top based on position ratings of the current category
+[] news slider?
 [] mainpage slider
 [] auth
-[] rating anime and put it in the history
+[] rating anime and putting it in the history block
 [] make recommendations based on the last rated anime
 [] user profile
 [] admin panel

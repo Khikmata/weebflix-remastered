@@ -5,14 +5,16 @@ import { FreeMode, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
-import CatalogueBlock from '../components/Catalogue/CatalogueBlock';
-import CatalogueFilterBlock from '../components/CatalogueFilter/CatalogueFilterBlock';
-import HistoryBlock from '../components/History/HistoryBlock';
-import NewsBlock from '../components/News/NewsBlock';
-import RecommendationsBlock from '../components/Recommendations/RecommendationsBlock';
-import { useAppSelector } from '../hooks/redux';
-import { AnimeApi } from '../services/getAnime';
-import { IData } from '../types/GetAnimeTypes';
+import CatalogueBlock from '../../components/Catalogue/CatalogueBlock';
+import CatalogueFilterBlock from '../../components/CatalogueFilter/CatalogueFilterBlock';
+import HistoryBlock from '../../components/History/HistoryBlock';
+import NewsBlock from '../../components/News/NewsBlock';
+import RecommendationsBlock from '../../components/Recommendations/RecommendationsBlock';
+import { useAppSelector } from '../../hooks/redux';
+import { AnimeApi } from '../../store/services/getAnime';
+
+import { IData } from '../../types/GetAnimeTypes';
+
 import styles from './home.styles.module.scss';
 
 const HomePage = () => {
@@ -85,4 +87,4 @@ const HomePage = () => {
 	)
 }
 
-export default HomePage
+export default HomePage;
