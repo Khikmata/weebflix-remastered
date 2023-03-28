@@ -21,7 +21,7 @@ const HomePage = () => {
 
 	const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading } = AnimeApi.useGetCurrentSeasonQuery(5)
 	const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading } = AnimeApi.useGetUpcomingSeasonQuery(5)
-	const { data: recommendations, error: recommendationsErrors, isLoading: recomendationLoading } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043);
+
 
 	const selectedFilterOption = useAppSelector((state) => state.catalogueFilter.activeFilterIndex);
 
@@ -63,6 +63,9 @@ const HomePage = () => {
 						}}
 					>
 						{
+
+						}
+						{
 							currentFilter && currentFilter[selectedFilterOption]?.data.map((item: IData, index: number) => (
 								<SwiperSlide>
 									<CatalogueBlock key={item.mal_id} item={item} index={index} />
@@ -74,9 +77,7 @@ const HomePage = () => {
 				<div className={styles['home-container__content']}>
 					<div className={styles['home-content__left']}>
 						<HistoryBlock />
-						{recommendations &&
-							<RecommendationsBlock item={recommendations} />
-						}
+						<RecommendationsBlock />
 					</div>
 					<div className={styles['home-content__right']}>
 						<NewsBlock />

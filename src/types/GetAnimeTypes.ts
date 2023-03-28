@@ -1,13 +1,18 @@
 
 
-export interface IIWebp {
+export interface IImagesSettings {
 	image_url: string;
 	small_image_url: string;
 	large_image_url: string;
 }
 
 export interface IImages {
-	webp: IIWebp;
+	webp: IImagesSettings;
+	jpg: IImagesSettings;
+}
+interface ITrailer {
+	youtube_id: string;
+	embed_url: string;
 }
 
 export interface IData {
@@ -21,11 +26,6 @@ export interface IData {
 	status: string;
 	rank: number;
 	score: Float32Array;
-}
-
-interface ITrailer {
-	youtube_id: string;
-	embed_url: string;
 }
 
 interface IAired {
@@ -46,6 +46,7 @@ export interface IDetails {
 	trailer: ITrailer;
 	title: string;
 	title_english: string;
+	title_japanese: string;
 	type: string;
 	episodes: number;
 	status: string;

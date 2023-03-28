@@ -21,7 +21,7 @@ const CatalogueBlock: React.FC<CatalogueProps> = ({ index, item }) => {
 		<div key={index} className={styles['anime-card']}>
 			<div className={styles['anime-card__image']}>
 				<Link to={`/anime/${item.mal_id}`}>
-					<img loading="lazy" src={item.images.webp.image_url} alt={item.title_english} width={200} height={300} />
+					<img loading="lazy" src={item.images.webp.large_image_url || item.images.webp.image_url} alt={item.title_english + 'poster'} width={200} height={300} />
 				</Link>
 			</div>
 			<div className={styles['anime-card__info']}>
