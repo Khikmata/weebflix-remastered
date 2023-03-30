@@ -27,6 +27,12 @@ svg path {
   shape-rendering: geometricprecision;
 }
 
+button {
+  border: none;
+  outline: 0;
+  cursor: pointer;
+}
+
 input {
   outline: 0;
   background-color: transparent;
@@ -70,4 +76,13 @@ li {
     $blockColor 0%,
     rgba(255, 255, 255, 0) 100%
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.block {
+  background-color: #3a3a3a;
+  border-radius: 4px;
+  padding: 12px;
+  &-list {
+    display: flex;
+  }
 }

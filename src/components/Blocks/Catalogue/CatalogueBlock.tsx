@@ -1,10 +1,10 @@
 
 import { Link } from "react-router-dom";
-import { IData } from "../../types/GetAnimeTypes";
-import { ColorRating } from "../../utils/ColorRating";
-import { Tooltip } from "../../utils/Tooltip";
+import { IData } from "../../../types/GetAnimeTypes";
+import { ColorRating } from "../../../utils/ColorRating";
 
 import styles from './CatalogueBlock.styles.module.scss';
+import { Tooltip } from "../../../utils/Tooltip";
 
 
 interface CatalogueProps {

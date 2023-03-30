@@ -33,7 +33,7 @@ interface IAired {
 	to: string;
 }
 
-interface IMoreDetails {
+export interface IMoreDetails {
 	mal_id: string;
 	type: string;
 	name: string;
@@ -61,21 +61,21 @@ export interface IDetails {
 	background: string;
 	season: string;
 	year: number;
-	studios: IMoreDetails
-	genres: IMoreDetails
+	studios: IMoreDetails[];
+	genres: IMoreDetails[];
 	relation: string;
 }
 
 interface IEntry {
 	images: IImages;
-	mal_id: number;
+	mal_id: string;
 	title: string;
 	url: string;
 }
 
 
 export interface IRecommendations {
-	mal_id: number;
+	mal_id: string;
 	entry: IEntry;
 	title: string;
 	votes: number;

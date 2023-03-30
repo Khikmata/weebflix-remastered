@@ -1,5 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { CatalogueFilterActions, filterOptions } from '../../store/reducers/CatalogueFilterSlice';
+
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { CatalogueFilterActions, filterOptions } from '../../../store/reducers/CatalogueFilterSlice';
 import styles from './CatalogueFilterBlock.styles.module.scss';
 
 export const CatalogueFilterBlock = () => {

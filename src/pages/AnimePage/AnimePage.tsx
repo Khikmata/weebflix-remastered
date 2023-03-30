@@ -1,8 +1,10 @@
-
-import { useParams } from 'react-router-dom';
+import { Fragment } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import dropdown from '../../assets/icons/dropdown.svg';
 import star from '../../assets/icons/star.svg';
+import { Button } from '../../components/Button';
 import { AnimeApi } from '../../store/services/getAnime';
+import { IMoreDetails } from '../../types/GetAnimeTypes';
 import styles from './animepage.styles.module.scss';
 
 const AnimePage = () => {
@@ -58,6 +60,17 @@ const AnimePage = () => {
 									<span>{details?.scored_by || '?'}</span>
 								</div>
 							</div>
+						</div>
+						<Button marginVertical={16}><Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Посмотреть трейлер</Link></Button>
+						<div className='block'>
+							<p>Тип: {details?.type}</p>
+							<p>Эпизоды: {details?.episodes}</p>
+							<p>Статус: {details?.status}</p>
+							<p>Жанры: {details?.genres.map((genre: IMoreDetails) => <Fragment>{genre.name}</Fragment>)}</p>
+							<p>Студия: {details?.studios.map((studio: IMoreDetails) => <Fragment>{studio.name}</Fragment>)}</p>
+							<p>Статус: {details?.rating}</p>
+							<p>Длительность: {details?.duration}</p>
+							<p>Выпуск: {details?.year} {details?.season}</p>
 						</div>
 					</div>
 				</div>

@@ -1,21 +1,18 @@
-
-
 import { useRef } from 'react';
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import { CatalogueBlock } from '../../components/Catalogue';
-import { CatalogueFilterBlock } from '../../components/CatalogueFilter';
-import { HistoryBlock } from '../../components/History';
-import { NewsBlock } from '../../components/News';
-import { RecommendationsBlock } from '../../components/Recommendations';
-import { useAppSelector } from '../../hooks/redux';
-import { AnimeApi } from '../../store/services/getAnime';
-
 import { FreeMode, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { CatalogueBlock } from '../../components/Blocks/Catalogue';
+import { CatalogueFilterBlock } from '../../components/Blocks/CatalogueFilter';
+import { HistoryBlock } from '../../components/Blocks/History';
+import { NewsBlock } from '../../components/Blocks/News';
+import { RecommendationsBlock } from '../../components/Blocks/Recommendations';
+import { useAppSelector } from '../../hooks/redux';
+import { AnimeApi } from '../../store/services/getAnime';
 import { IData } from '../../types/GetAnimeTypes';
 import styles from './home.styles.module.scss';
+
+import 'swiper/scss';
+import 'swiper/scss/navigation';
 
 const HomePage = () => {
 

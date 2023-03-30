@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { AnimeApi } from '../../store/services/getAnime';
-import { IRecommendations } from '../../types/GetAnimeTypes';
 import styles from './RecommendationsBlock.styles.module.scss';
+import { AnimeApi } from '../../../store/services/getAnime';
+import { IRecommendations } from '../../../types/GetAnimeTypes';
 
 
 
@@ -21,7 +21,7 @@ export const RecommendationsBlock: React.FC = () => {
 					}
 					{
 						recommendations && recommendations.map((item: IRecommendations, index: number) => (
-							<Link to={`/anime/${item.entry.mal_id.toString()}`}>
+							<Link to={`/anime/${item.entry.mal_id}`}>
 								< img key={index} src={item.entry.images.webp.image_url} alt={item.entry.title + ' banner image'} />
 							</Link>
 						))

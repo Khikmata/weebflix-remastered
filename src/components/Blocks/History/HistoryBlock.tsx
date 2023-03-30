@@ -1,4 +1,4 @@
-import star from '../../assets/icons/star.svg'
+import star from '../../../assets/icons/star.svg'
 import styles from './HistoryBlock.styles.module.scss'
 
 export const HistoryBlock = () => {
