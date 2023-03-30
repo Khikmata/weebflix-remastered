@@ -34,7 +34,7 @@ interface IAired {
 }
 
 interface IMoreDetails {
-	mal_id: number;
+	mal_id: string;
 	type: string;
 	name: string;
 	url: string;
@@ -75,6 +75,7 @@ interface IEntry {
 
 
 export interface IRecommendations {
+	mal_id: number;
 	entry: IEntry;
 	title: string;
 	votes: number;

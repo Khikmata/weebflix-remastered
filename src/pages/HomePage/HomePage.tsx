@@ -1,8 +1,6 @@
 
 
-
-import { FreeMode, Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useRef } from 'react';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import { CatalogueBlock } from '../../components/Catalogue';
@@ -13,8 +11,10 @@ import { RecommendationsBlock } from '../../components/Recommendations';
 import { useAppSelector } from '../../hooks/redux';
 import { AnimeApi } from '../../store/services/getAnime';
 
-import { IData } from '../../types/GetAnimeTypes';
+import { FreeMode, Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { IData } from '../../types/GetAnimeTypes';
 import styles from './home.styles.module.scss';
 
 const HomePage = () => {
@@ -28,19 +28,24 @@ const HomePage = () => {
 	const currentFilter = [currentSeason, upcomingSeason]
 
 
+	const swiperRef = useRef(null);
+
 
 	return (
 		<div className={styles['home']} >
 			<div className={styles['home-background']} />
 			<div className={styles['home-container']}>
 				<CatalogueFilterBlock />
-				<div className={styles.catalogue} >
+				<div className={styles.catalogue}>
 					<Swiper
 						modules={[Navigation, FreeMode]}
 						speed={400}
-						spaceBetween={8}
+						spaceBetween={54}
 						slidesPerView={6}
-						navigation
+						navigation={{
+							prevEl: '.prev-button',
+							nextEl: '.next-button',
+						}}
 						breakpoints={{
 							0: {
 								slidesPerView: 2,
@@ -62,9 +67,7 @@ const HomePage = () => {
 							},
 						}}
 					>
-						{
-
-						}
+						<button className='prev-button'></button>
 						{
 							currentFilter && currentFilter[selectedFilterOption]?.data.map((item: IData, index: number) => (
 								<SwiperSlide>
@@ -72,6 +75,7 @@ const HomePage = () => {
 								</SwiperSlide>
 							))
 						}
+						<button className='next-button'></button>
 					</Swiper>
 				</div >
 				<div className={styles['home-container__content']}>
