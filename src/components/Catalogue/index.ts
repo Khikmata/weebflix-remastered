@@ -1,0 +1,2 @@
+export { CatalogueBlock } from './CatalogueBlock';
+

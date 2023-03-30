@@ -1,5 +1,5 @@
 import styles from './NewsBlock.styles.module.scss'
-const NewsBlock = () => {
+export const NewsBlock = () => {
 	return (
 		<div className={styles['newsblock']}>
 			<div className={styles['newsblock__content']}>
@@ -16,5 +16,3 @@ const NewsBlock = () => {
 		</div>
 	)
 }
-
-export default NewsBlock

@@ -4,7 +4,7 @@ import styles from './RecommendationsBlock.styles.module.scss';
 
 
 
-const RecommendationsBlock: React.FC = () => {
+export const RecommendationsBlock: React.FC = () => {
 
 	const { data: recommendations, error: recommendationsErrors, isLoading: recomendationLoading } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043);
 
@@ -31,5 +31,3 @@ const RecommendationsBlock: React.FC = () => {
 		</div>
 	)
 }
-
-export default RecommendationsBlock;

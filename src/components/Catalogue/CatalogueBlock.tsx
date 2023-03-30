@@ -15,7 +15,7 @@ interface CatalogueProps {
 //Link to = {`/anime/${item.mal_id}`}
 
 
-const CatalogueBlock: React.FC<CatalogueProps> = ({ index, item }) => {
+export const CatalogueBlock: React.FC<CatalogueProps> = ({ index, item }) => {
 
 	return (
 		<div key={index} className={styles['anime-card']}>
@@ -35,5 +35,3 @@ const CatalogueBlock: React.FC<CatalogueProps> = ({ index, item }) => {
 		</div>
 	)
 }
-
-export default CatalogueBlock;

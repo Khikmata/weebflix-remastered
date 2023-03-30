@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import logo from '../../assets/icons/logo.svg'
 import styles from './Navbar.styles.module.scss'
 
-const Navbar = () => {
+export const Navbar = () => {
 
 
 	return (
@@ -19,4 +19,3 @@ const Navbar = () => {
 	)
 }
 
-export default Navbar

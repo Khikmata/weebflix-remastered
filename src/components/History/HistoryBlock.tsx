@@ -1,7 +1,7 @@
 import star from '../../assets/icons/star.svg'
 import styles from './HistoryBlock.styles.module.scss'
 
-const HistoryBlock = () => {
+export const HistoryBlock = () => {
 	return (
 		<div className={styles['history']}>
 			<div className={styles['history__content']}>
@@ -35,4 +35,3 @@ const HistoryBlock = () => {
 	)
 }
 
-export default HistoryBlock;

@@ -5,11 +5,11 @@ import { FreeMode, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
-import CatalogueBlock from '../../components/Catalogue/CatalogueBlock';
-import CatalogueFilterBlock from '../../components/CatalogueFilter/CatalogueFilterBlock';
-import HistoryBlock from '../../components/History/HistoryBlock';
-import NewsBlock from '../../components/News/NewsBlock';
-import RecommendationsBlock from '../../components/Recommendations/RecommendationsBlock';
+import { CatalogueBlock } from '../../components/Catalogue';
+import { CatalogueFilterBlock } from '../../components/CatalogueFilter';
+import { HistoryBlock } from '../../components/History';
+import { NewsBlock } from '../../components/News';
+import { RecommendationsBlock } from '../../components/Recommendations';
 import { useAppSelector } from '../../hooks/redux';
 import { AnimeApi } from '../../store/services/getAnime';
 

@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { CatalogueFilterActions, filterOptions } from '../../store/reducers/CatalogueFilterSlice';
 import styles from './CatalogueFilterBlock.styles.module.scss';
 
-const CatalogueFilterBlock = () => {
+export const CatalogueFilterBlock = () => {
 
 	const dispatch = useAppDispatch();
 	const activeFilterOption = useAppSelector((state) => state.catalogueFilter.activeFilterIndex)
@@ -24,5 +24,3 @@ const CatalogueFilterBlock = () => {
 		</div >
 	)
 }
-
-export default CatalogueFilterBlock;

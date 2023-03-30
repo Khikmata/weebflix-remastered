@@ -1,0 +1,1 @@
+export { RecommendationsBlock } from './RecommendationsBlock';
