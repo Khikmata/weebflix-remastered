@@ -1,0 +1,17 @@
+@import "../../../styles/variables";
+.infoBlock {
+	padding: 12px;
+	background-color: $blockActiveColor;
+	box-shadow: $blockShadow;
+	border-radius: 4px;
+	p {
+		font-weight: 600;
+		margin-bottom: 4px;
+		text-align: left;
+	}
+	&-genres {
+		button {
+			margin-right: 4px;
+		}
+	}
+}
