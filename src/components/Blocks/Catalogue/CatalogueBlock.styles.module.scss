@@ -1,5 +1,14 @@
 @import "../../../styles/variables";
 
+.catalogue {
+	height: 340px;
+	background-color: $blockColor;
+	box-shadow: $blockShadow;
+	padding: 24px 36px;
+	display: flex;
+	margin-bottom: 64px;
+}
+
 .anime-card {
 	max-height: 300px;
 	max-width: 200px;
@@ -44,5 +53,8 @@
 		&__rating {
 			border-left: none;
 		}
+	}
+	.catalogue {
+		padding: 12px;
 	}
 }

@@ -55,6 +55,9 @@ li {
   border: none;
   top: 45%;
   transform: translate(-50%, -50%);
+  &:disabled {
+    opacity: 0;
+  }
 }
 .prev-button {
   left: 25px;

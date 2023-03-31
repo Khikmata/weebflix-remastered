@@ -38,15 +38,6 @@
 	}
 }
 
-.catalogue {
-	height: 340px;
-	background-color: $blockColor;
-	box-shadow: $blockShadow;
-	padding: 24px 36px;
-	display: flex;
-	margin-bottom: 64px;
-}
-
 @media (max-width: 1025px) {
 	.home-container__content {
 		flex-direction: column;
@@ -63,11 +54,6 @@
 	.home-content__left {
 		display: flex;
 		flex-direction: column;
-	}
-}
-@media (max-width: 425px) {
-	.catalogue {
-		padding: 12px;
 	}
 }
 

@@ -1,3 +1,4 @@
+import { TypeLocalistion } from "./AnimeLocalisation";
 
 
 export interface IImagesSettings {
@@ -47,7 +48,7 @@ export interface IDetails {
 	title: string;
 	title_english: string;
 	title_japanese: string;
-	type: string;
+	type: TypeLocalistion;
 	episodes: number;
 	status: string;
 	aired: IAired;
