@@ -21,7 +21,7 @@ export const RecommendationsBlock: React.FC = () => {
 					}
 					{
 						recommendations && recommendations.map((item: IRecommendations, index: number) => (
-							<Link to={`/anime/${item.entry.mal_id}`}>
+							<Link className={styles['content-grid__card']} to={`/anime/${item.entry.mal_id}`}>
 								< img key={index} src={item.entry.images.webp.image_url} alt={item.entry.title + ' banner image'} />
 							</Link>
 						))

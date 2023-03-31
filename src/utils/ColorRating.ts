@@ -10,8 +10,9 @@ export const ColorRating = (item: IData) => {
 	if (Number(item.score) < 7 && Number(item.score) > 5) {
 		return '#F0F0F0'
 	}
-	if (Number(item.score) < 4) {
+	if (Number(item.score) < 4 && Number(item.score) > 0) {
 		return '#F97979'
 	}
-	return '';
+	return '#F0F0F0';
+
 }

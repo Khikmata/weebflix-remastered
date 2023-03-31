@@ -29,11 +29,9 @@ export const Tooltip: React.FC<tooltipProps> = (props) => {
 			onMouseEnter={showTip}
 			onMouseLeave={hideTip}
 		>
-			{/* Wrapping */}
 			{props.children}
 			{active && (
 				<div className={`Tooltip-Tip ${props.direction || "top"}`}>
-					{/* Content */}
 					{props.content}
 				</div>
 			)}

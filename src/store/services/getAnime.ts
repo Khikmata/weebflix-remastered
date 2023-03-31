@@ -29,7 +29,13 @@ export const AnimeApi = createApi({
 		getAnimeImages: builder.query<IImages, string>({
 			query: (id) => ({ url: `/anime/${id}/pictures` }),
 			transformResponse: (response: { data: IImages }) => response.data,
-		})
+		}),
+		getTopAnime: builder.query<IGetAnime, number>({
+			query: () => ({
+				url: '/top/anime',
+				transformResponse: (response: { data: IData }) => response.data,
+			})
+		}),
 	})
 })
 export const { useGetCurrentSeasonQuery } = AnimeApi;

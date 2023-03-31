@@ -48,6 +48,7 @@ li {
 
 .prev-button,
 .next-button {
+  font-size: 24px;
   z-index: 1000;
   position: absolute;
   width: 60px;
@@ -87,5 +88,12 @@ li {
   padding: 12px;
   &-list {
     display: flex;
+  }
+}
+
+@media (max-width: 426px) {
+  .prev-button,
+  .next-button {
+    top: 42%;
   }
 }

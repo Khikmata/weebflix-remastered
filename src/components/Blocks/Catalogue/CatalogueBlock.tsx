@@ -9,6 +9,7 @@ import { ColorRating } from "../../../utils/ColorRating";
 import { Tooltip } from "../../../utils/Tooltip";
 import styles from './CatalogueBlock.styles.module.scss';
 
+import { useMemo } from "react";
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 
@@ -16,13 +17,13 @@ import 'swiper/scss/navigation';
 export const CatalogueBlock: React.FC = () => {
 
 
-	const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading } = AnimeApi.useGetCurrentSeasonQuery(5)
+	const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading } = AnimeApi.useGetTopAnimeQuery(5)
 	const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading } = AnimeApi.useGetUpcomingSeasonQuery(5)
 
 
 	const selectedFilterOption = useAppSelector((state) => state.catalogueFilter.activeFilterIndex);
 
-	const currentFilter = [currentSeason, upcomingSeason]
+	const currentFilter = useMemo(() => [currentSeason, upcomingSeason], [currentSeason, upcomingSeason])
 
 	return (
 
@@ -39,6 +40,7 @@ export const CatalogueBlock: React.FC = () => {
 				freeMode={{
 					enabled: true,
 					sticky: true,
+					momentumRatio: 0.5,
 				}}
 				breakpoints={{
 					0: {
@@ -75,9 +77,7 @@ export const CatalogueBlock: React.FC = () => {
 									<Tooltip content={item.title_english || item.title} direction="bottom" delay={500}>
 										<div className={styles['anime-card__info__title']}>{item.title_english ? item.title_english : item.title}</div>
 									</Tooltip>
-									{
-										item.score && <div className={styles['anime-card__info__rating']} style={{ color: ColorRating(item) }}>{item.score}</div>
-									}
+									<div className={styles['anime-card__info__rating']} style={{ color: ColorRating(item) }}>{item.score || '?'}</div>
 								</div>
 							</div>
 						</SwiperSlide>

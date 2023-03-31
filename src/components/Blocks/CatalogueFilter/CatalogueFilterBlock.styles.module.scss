@@ -8,7 +8,9 @@
 	box-shadow: $blockShadow;
 	overflow: hidden;
 	&__content {
+		height: 100%;
 		ul {
+			height: 100%;
 			display: flex;
 			justify-content: flex-start;
 			align-items: center;

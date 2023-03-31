@@ -1,46 +1,48 @@
 @import "../../../styles/variables";
 
 .catalogue {
-	height: 340px;
+	height: 360px;
 	background-color: $blockColor;
 	box-shadow: $blockShadow;
 	padding: 24px 36px;
 	display: flex;
 	margin-bottom: 64px;
+	border: 1px solid $lowopacity;
 }
 
 .anime-card {
-	max-height: 300px;
-	max-width: 200px;
-	width: 100%;
 	&__image {
 		height: 260px;
-		width: 180px;
 		position: relative;
 		min-height: 210px;
+		padding: 0px 0px;
 		img {
+			border: 1px solid $lowopacity;
 			height: 100%;
 			width: 100%;
-			object-fit: contain;
+			object-fit: cover;
 		}
 	}
 	&__info {
-		width: 100%;
-		height: 40px;
+		margin-top: 8px;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
 		box-shadow: $blockShadow;
 		color: $blockColor;
+		border: 1px solid $lowopacity;
 		&__title {
 			white-space: nowrap;
-			width: 130px;
+			max-width: 125px;
 			overflow: hidden;
 			margin-right: 10px;
 		}
 		&__rating {
 			border-left: 1px solid $halfopacity;
-			padding-left: 8px;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 	}
 }
@@ -49,6 +51,8 @@
 	.anime-card__info {
 		flex-direction: column;
 		&__title {
+			max-width: 165px;
+			margin-right: 0px;
 		}
 		&__rating {
 			border-left: none;
@@ -56,5 +60,17 @@
 	}
 	.catalogue {
 		padding: 12px;
+	}
+}
+
+@media (max-width: 376px) {
+	.anime-card__info {
+		flex-direction: column;
+		&__title {
+			max-width: 120px;
+		}
+		&__rating {
+			border-left: none;
+		}
 	}
 }
