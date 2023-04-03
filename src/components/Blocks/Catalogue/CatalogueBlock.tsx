@@ -6,7 +6,6 @@ import { useAppSelector } from "../../../hooks/redux";
 import { AnimeApi } from '../../../store/services/getAnime';
 import { IData } from "../../../types/GetAnimeTypes";
 import { ColorRating } from "../../../utils/ColorRating";
-import { Tooltip } from "../../../utils/Tooltip";
 import styles from './CatalogueBlock.styles.module.scss';
 
 import { useMemo } from "react";
@@ -74,9 +73,8 @@ export const CatalogueBlock: React.FC = () => {
 									</Link>
 								</div>
 								<div className={styles['anime-card__info']}>
-									<Tooltip content={item.title_english || item.title} direction="bottom" delay={500}>
-										<div className={styles['anime-card__info__title']}>{item.title_english ? item.title_english : item.title}</div>
-									</Tooltip>
+									<div className={styles['anime-card__info__title']}>{item.title_english ? item.title_english : item.title}</div>
+
 									<div className={styles['anime-card__info__rating']} style={{ color: ColorRating(item) }}>{item.score || '?'}</div>
 								</div>
 							</div>

@@ -4,7 +4,7 @@
 	height: 360px;
 	background-color: $blockColor;
 	box-shadow: $blockShadow;
-	padding: 24px 36px;
+	padding: 12px 24px;
 	display: flex;
 	margin-bottom: 64px;
 	border: 1px solid $lowopacity;
@@ -21,6 +21,10 @@
 			height: 100%;
 			width: 100%;
 			object-fit: cover;
+			transition: all 0.3s ease-in-out;
+			&:hover {
+				scale: 105%;
+			}
 		}
 	}
 	&__info {
