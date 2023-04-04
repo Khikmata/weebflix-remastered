@@ -38,6 +38,9 @@
 		margin-right: 24px;
 		margin-bottom: 24px;
 		min-height: 0px;
+		img {
+			height: 260px;
+		}
 		@media (max-width: 500px) {
 			height: 220px;
 			width: 120px;
