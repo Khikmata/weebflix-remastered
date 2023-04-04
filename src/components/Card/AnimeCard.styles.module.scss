@@ -1,0 +1,63 @@
+@import "../../styles/variables";
+
+.anime-card {
+	&__image {
+		height: 260px;
+		min-height: 240px;
+		position: relative;
+		transition: all 0.3s ease-in-out;
+		&:hover {
+			scale: 106%;
+		}
+		&__rating {
+			position: absolute;
+			bottom: 12px;
+			left: 8px;
+			background-color: $backgroundColor;
+			box-shadow: $blockShadow;
+			border-radius: 4px;
+			padding: 4px 8px;
+		}
+		img {
+			border: 1px solid $lowopacity;
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+	&__info {
+		margin-top: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		&__title {
+			white-space: nowrap;
+			max-width: 100%;
+			overflow: hidden;
+		}
+	}
+}
+@media (max-width: 426px) {
+	.anime-card__info {
+		flex-direction: column;
+		&__title {
+			max-width: 165px;
+			margin-right: 0px;
+		}
+		&__rating {
+			border-left: none;
+		}
+	}
+}
+@media (max-width: 376px) {
+	.anime-card__info {
+		flex-direction: column;
+		&__title {
+			max-width: 120px;
+		}
+		&__rating {
+			border-left: none;
+		}
+	}
+}

@@ -2,10 +2,8 @@
 
 .newsblock {
 	height: 100%;
-	background-color: $blockColor;
-	box-shadow: $blockShadow;
 	padding: 12px 24px;
-
+	@include block;
 	&__content {
 		width: 100%;
 		height: 100%;

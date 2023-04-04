@@ -1,0 +1,69 @@
+@import "../../../styles/variables";
+.animegrid {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	@include block;
+
+	&-container {
+		padding: 24px;
+		width: 100%;
+		height: 100%;
+		@media (max-width: 426px) {
+			gap: 4px;
+		}
+		&__content {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+		}
+
+		h2 {
+			margin-bottom: 16px;
+		}
+	}
+}
+
+.animegrid-content__items {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-wrap: wrap;
+	> div {
+		width: 200px;
+		height: 300px;
+		margin-right: 24px;
+		margin-bottom: 24px;
+		@media (max-width: 426px) {
+			height: 220px;
+			width: 120px;
+			img {
+				height: 80%;
+			}
+		}
+	}
+}
+.animegrid-content__filter {
+	width: 20%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 32px;
+	@include block;
+	> div {
+		width: 200px;
+		height: 300px;
+		@media (max-width: 426px) {
+			height: 220px;
+			width: 120px;
+			img {
+				height: 80%;
+			}
+		}
+	}
+}

@@ -1,3 +1,4 @@
+//colors
 $backgroundColor: #1e1e1e;
 $blockColor: #2a2a2a;
 $blockActiveColor: #3a3a3a;
@@ -13,4 +14,12 @@ $gray: #b5b5b5;
 $buttonColorPrimary: #28646c;
 $buttonColorSecondary: #7d8099;
 
+//block-shadow
 $blockShadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+
+//mixins
+@mixin block {
+	background-color: $blockColor;
+	box-shadow: $blockShadow;
+	border: 1px solid $lowopacity;
+}

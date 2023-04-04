@@ -52,10 +52,11 @@ li {
   z-index: 1000;
   position: absolute;
   width: 60px;
-  height: 260px;
+  height: 280px;
   border: none;
-  top: 45%;
+  top: 41%;
   transform: translate(-50%, -50%);
+
   &:disabled {
     opacity: 0;
   }
@@ -88,12 +89,5 @@ li {
   padding: 12px;
   &-list {
     display: flex;
-  }
-}
-
-@media (max-width: 426px) {
-  .prev-button,
-  .next-button {
-    top: 42%;
   }
 }

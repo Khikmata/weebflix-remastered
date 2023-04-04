@@ -4,9 +4,8 @@
 	max-width: 450px;
 	height: 200px;
 	padding: 12px 24px;
-	background-color: $blockColor;
-	box-shadow: $blockShadow;
 	overflow: hidden;
+	@include block;
 	&-content {
 		width: 100%;
 		height: 100%;

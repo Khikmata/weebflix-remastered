@@ -1,0 +1,2 @@
+export { AnimeCard } from "./AnimeCard";
+

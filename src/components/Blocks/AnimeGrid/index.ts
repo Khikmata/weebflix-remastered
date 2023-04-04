@@ -1,0 +1,2 @@
+export { AnimeGridBlock } from "./AnimeGridBlock";
+
