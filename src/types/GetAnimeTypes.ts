@@ -98,3 +98,25 @@ export interface IGetAnime {
 	pagination: IPagination;
 	data: IData[];
 }
+
+
+
+export interface IAnimeFilterQueries {
+	page?: string;
+	limit?: number;
+	q?: string;
+	type?: 'tv' | 'movie' | 'ova' | 'special' | 'ona' | 'music',
+	score?: number,
+	min_score?: number,
+	max_score?: string,
+	status?: 'airing' | 'complete' | 'upcoming',
+	rating?: 'g' | 'pg' | 'pg13' | 'r17' | 'r' | 'rx',
+	genres?: string[],
+	genres_exclude?: string[],
+	order_by?: "mal_id" | "title" | "type" | "rating" | "start_date" | "end_date" | "episodes" | "score" | "scored_by" | "rank" | "popularity" | "members" | "favorites",
+	sort?: 'desc' | 'asc',
+	letter?: string;
+	producers?: string;
+	start_date?: string;
+	end_date?: string;
+}

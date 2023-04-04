@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IDetails, IGetAnime, IRecommendations } from '../../types/GetAnimeTypes';
+import { IAnimeFilterQueries, IDetails, IGetAnime, IRecommendations } from '../../types/GetAnimeTypes';
 import { IData, IImages } from './../../types/GetAnimeTypes';
 
 export const AnimeApi = createApi({
@@ -34,6 +34,17 @@ export const AnimeApi = createApi({
 			query: () => ({
 				url: '/top/anime',
 				transformResponse: (response: { data: IData }) => response.data,
+			})
+		}),
+		getAnimeSearch: builder.query<IGetAnime, IAnimeFilterQueries>({
+			query: ({ page, limit, q, type, score, min_score, max_score, status, rating, genres, genres_exclude, order_by, sort, letter, producers, start_date, end_date }) => ({
+				url: `anime?
+				${min_score ? `min_score=${min_score}&` : ''}
+				${max_score ? `max_score=${max_score}&` : ''}
+				${start_date ? `start_date=${start_date}&` : ''} 
+				${end_date ? `end_date=${end_date}&` : ''} 
+				`,
+				transformResponse: (response: { data: IData[] }) => response.data,
 			})
 		}),
 	})

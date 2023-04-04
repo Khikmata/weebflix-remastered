@@ -1,23 +1,33 @@
 
 import React from 'react';
-import styles from './Button.styles.module.scss';
+import styles from './Input.styles.module.scss';
 
 
 interface ButtonProps {
+	className?: string;
 	children?: React.ReactNode;
+
 	marginVertical?: number;
 	marginHorizontal?: number;
+
 	color?: "primary" | "secondary";
 	outlined?: boolean;
 	scale?: boolean;
 	height?: number;
 	contentPadding?: number;
+
+	type?: "range" | "input";
+	max?: number;
+	min?: number;
+
+
+	onChange?: (e: any) => void;
 }
 
 
-export const Button: React.FC<ButtonProps> = ({ children, marginHorizontal, marginVertical, color, outlined, scale, height, contentPadding }) => {
+export const Input: React.FC<ButtonProps> = ({ className, children, marginHorizontal, marginVertical, color, outlined, scale, height, contentPadding, type, max, min, onChange }) => {
 	return (
-		<button
+		<input
 			style={{
 				width: scale ? '100%' : 'auto',
 				height: height,
@@ -36,9 +46,11 @@ export const Button: React.FC<ButtonProps> = ({ children, marginHorizontal, marg
 					('transparent')
 			}}
 			className={styles['button']}
-			type='button'
+			type={type}
+			max={max}
+			min={min}
 		>
 			{children}
-		</button>
+		</input>
 	)
 }

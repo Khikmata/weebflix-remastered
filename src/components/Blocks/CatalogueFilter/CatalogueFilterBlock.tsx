@@ -5,6 +5,7 @@ import styles from './CatalogueFilterBlock.styles.module.scss';
 
 export const CatalogueFilterBlock = () => {
 
+
 	const dispatch = useAppDispatch();
 	const activeFilterOption = useAppSelector((state) => state.catalogueFilter.activeFilterIndex)
 	const handleChangeOption = (index: number) => {

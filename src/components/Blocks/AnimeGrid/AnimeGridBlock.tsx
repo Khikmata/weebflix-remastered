@@ -2,9 +2,13 @@ import { AnimeApi } from '../../../store/services/getAnime'
 import { IData } from '../../../types/GetAnimeTypes'
 import { AnimeCard } from '../../Card'
 
+import { FilterBlock } from '../Filter'
+
 import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
+
+
 	const { data: top100Data, error: top1000Errors, isLoading: top100Loading } = AnimeApi.useGetTopAnimeQuery(5)
 
 
@@ -16,12 +20,12 @@ export const AnimeGridBlock = () => {
 					<div className={styles['animegrid-content__items']}>
 						{
 							top100Data && top100Data.data.map((item: IData, index: number) => (
-								<AnimeCard index={index} item={item} />
+								<AnimeCard key={index} index={index} item={item} />
 							))
 						}
 					</div>
 					<div className={styles['animegrid-content__filter']}>
-						<p>Фильтр</p>
+						<FilterBlock />
 					</div>
 				</div>
 			</div>

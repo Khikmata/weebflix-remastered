@@ -5,7 +5,7 @@ interface InfoBlockProps {
 	details: IDetails;
 }
 
-enum TypeLocalisation {
+export enum TypeLocalisation {
 	TV = "ТВ-Сериал",
 	Movie = "Фильм",
 }

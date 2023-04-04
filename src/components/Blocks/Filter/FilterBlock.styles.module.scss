@@ -1,0 +1,10 @@
+.filterblock {
+	width: 100%;
+	height: 100%;
+	padding: 24px;
+	&-filter {
+		&__maxrating {
+			width: 100%;
+		}
+	}
+}
