@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { CatalogueFilterReducer } from "./reducers/CatalogueFilterSlice";
+import { SearchFilterReducer } from "./reducers/SearchFilterSlice";
 import { AnimeApi } from "./services/getAnime";
 
 const rootReducer = combineReducers({
 	[AnimeApi.reducerPath]: AnimeApi.reducer,
 	catalogueFilter: CatalogueFilterReducer,
+	searchFilter: SearchFilterReducer,
 })
 
 

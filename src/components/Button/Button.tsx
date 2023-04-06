@@ -12,10 +12,11 @@ interface ButtonProps {
 	scale?: boolean;
 	height?: number;
 	contentPadding?: number;
+	onClick?: (e: any) => void;
 }
 
 
-export const Button: React.FC<ButtonProps> = ({ children, marginHorizontal, marginVertical, color, outlined, scale, height, contentPadding }) => {
+export const Button: React.FC<ButtonProps> = ({ children, marginHorizontal, marginVertical, color, outlined, scale, height, contentPadding, onClick }) => {
 	return (
 		<button
 			style={{
@@ -37,6 +38,7 @@ export const Button: React.FC<ButtonProps> = ({ children, marginHorizontal, marg
 			}}
 			className={styles['button']}
 			type='button'
+			onClick={onClick}
 		>
 			{children}
 		</button>

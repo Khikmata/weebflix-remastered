@@ -42,6 +42,7 @@
 			height: 260px;
 		}
 		@media (max-width: 500px) {
+			flex-direction: column;
 			height: 220px;
 			width: 120px;
 			margin-right: 12px;

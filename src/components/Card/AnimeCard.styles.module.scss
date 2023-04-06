@@ -3,6 +3,7 @@
 .anime-card {
 	&__image {
 		max-height: 260px;
+		height: 260px;
 		position: relative;
 		transition: all 0.3s ease-in-out;
 		&:hover {

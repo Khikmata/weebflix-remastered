@@ -107,7 +107,7 @@ export interface IAnimeFilterQueries {
 	q?: string;
 	type?: 'tv' | 'movie' | 'ova' | 'special' | 'ona' | 'music',
 	score?: number,
-	min_score?: number,
+	min_score?: string,
 	max_score?: string,
 	status?: 'airing' | 'complete' | 'upcoming',
 	rating?: 'g' | 'pg' | 'pg13' | 'r17' | 'r' | 'rx',

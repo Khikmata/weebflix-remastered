@@ -2,22 +2,37 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 export interface CounterState {
-	max_rating: number;
+	maxScore: string;
+	minScore: string;
+	dateFrom: string;
+	dateTo: string;
 }
 
 
 const initialState: CounterState = {
-	max_rating: 10,
+	maxScore: "10",
+	minScore: "0",
+	dateFrom: "1941",
+	dateTo: "2023",
 }
 
 const slice = createSlice({
 	name: 'counter',
 	initialState,
 	reducers: {
-		setActiveFilterIndex: (state, action) => {
-			state.max_rating = action.payload;
+		setMaxScore: (state, action) => {
+			state.maxScore = action.payload;
+		},
+		setMinScore: (state, action) => {
+			state.minScore = action.payload;
+		},
+		setDateFrom: (state, action) => {
+			state.dateFrom = action.payload;
+		},
+		setDateTo: (state, action) => {
+			state.dateTo = action.payload;
 		}
 	},
 })
 
-export const { reducer: CatalogueFilterReducer, actions: CatalogueFilterActions } = slice;
+export const { reducer: SearchFilterReducer, actions: SearchFilterActions } = slice;
