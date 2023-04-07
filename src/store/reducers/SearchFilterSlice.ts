@@ -4,20 +4,20 @@ import { createSlice } from '@reduxjs/toolkit';
 export interface CounterState {
 	maxScore: number;
 	minScore: number;
-	dateFrom: string;
-	dateTo: string;
+	dateFrom: number;
+	dateTo: number;
 }
 
 
 const initialState: CounterState = {
 	maxScore: 10,
 	minScore: 0,
-	dateFrom: "1941",
-	dateTo: "2023",
+	dateFrom: 1990,
+	dateTo: 2023,
 }
 
 const slice = createSlice({
-	name: 'counter',
+	name: 'search',
 	initialState,
 	reducers: {
 		setMaxScore: (state, action) => {

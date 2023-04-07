@@ -9,12 +9,19 @@ import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
 
-	const maxScore = useAppSelector(state => state.searchFilter.maxScore)
-	const minScore = useAppSelector(state => state.searchFilter.minScore)
-	console.log(maxScore)
-	console.log(minScore)
+	const data = useAppSelector(state => state.searchFilter)
 	const { data: top100Data, error: top100Errors, isLoading: top100Loading } = AnimeApi.useGetTopAnimeQuery(5);
-	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery({ max_score: maxScore.toString(), min_score: minScore.toString(), order_by: 'score', sort: 'desc' });
+	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading, refetch } = AnimeApi.useGetAnimeSearchQuery
+		({
+			max_score: data.maxScore.toString(),
+			min_score: data.minScore.toString(),
+			start_date: data.dateFrom.toString(),
+			end_date: data.dateTo.toString(),
+			order_by: 'score',
+			sort: 'desc',
+		});
+
+
 
 	return (
 		<div className={styles['animegrid']}>

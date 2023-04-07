@@ -47,8 +47,9 @@ export const AnimeApi = createApi({
 				${sort ? `sort=${sort}&` : ''} 
 				`,
 				transformResponse: (response: { data: IData[] }) => response.data,
+
 			})
 		}),
 	})
 })
-export const { useGetCurrentSeasonQuery } = AnimeApi;
+export const { } = AnimeApi;

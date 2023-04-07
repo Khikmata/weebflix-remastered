@@ -1,46 +1,53 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Range, getTrackBackground } from 'react-range';
-import { useDispatch } from 'react-redux';
-import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice';
+import { useDebounce } from '../../hooks/useDebounce';
 
 
 
 interface RangeComponentProps {
+	handleRange: (values: number[]) => void;
+	title: string;
 	step: number;
 	max: number;
 	min: number;
+	showMiles?: boolean;
 }
 
 
-export const RangeComponent: React.FC<RangeComponentProps> = ({ step, min, max }) => {
+export const RangeComponent: React.FC<RangeComponentProps> = ({ title, step, min, max, handleRange, showMiles }) => {
 
 	const [values, setValues] = useState([min, max])
 
-	const dispatch = useDispatch();
+	const handleWithDebounce = useDebounce(() => {
+		handleRange(values);
+	}, 400)
 
-	const handleScoreRange = (values: number[]) => {
-		dispatch(SearchFilterActions.setMinScore(values[0]));
-		dispatch(SearchFilterActions.setMaxScore(values[1]));
+	const handleChange = (values: number[]) => {
 		setValues(values);
-	}
+	};
+
+	useEffect(() => {
+		handleWithDebounce(values)
+	}, [values])
+
 
 	return (
 		<>
-			<p>Сортировка по рейтингу</p>
+			<p>{title}</p>
 			<Range
-				step={1}
-				min={0}
-				max={10}
+				step={step}
+				min={min}
+				max={max}
 				values={values}
-				onChange={(values) => handleScoreRange(values)}
+				onChange={(values) => handleChange(values)}
 				renderMark={({ props, index }) => (
 					<div
 						{...props}
 						style={{
 							...props.style,
 							height: '15px',
-							width: '3px',
-							backgroundColor: index * 1 < values[1] && index * 1 > values[0] ? '#abe96e' : '#ccc'
+							width: showMiles ? '3px' : '1px',
+							backgroundColor: index * step < values[1] && index * step > values[0] ? '#abe96e' : '#ccc'
 						}}
 					/>
 				)}
@@ -98,8 +105,8 @@ export const RangeComponent: React.FC<RangeComponentProps> = ({ step, min, max }
 								background: getTrackBackground({
 									values,
 									colors: ['#ccc', '#abe96e', '#ccc'],
-									min: 0,
-									max: 10,
+									min: min,
+									max: max,
 								}),
 								alignSelf: 'center'
 							}}
