@@ -11,9 +11,10 @@ export const AnimeGridBlock = () => {
 
 	const maxScore = useAppSelector(state => state.searchFilter.maxScore)
 	const minScore = useAppSelector(state => state.searchFilter.minScore)
-
-	const { data: top100Data, error: top1000Errors, isLoading: top100Loading } = AnimeApi.useGetTopAnimeQuery(5);
-	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery({ max_score: maxScore, min_score: minScore });
+	console.log(maxScore)
+	console.log(minScore)
+	const { data: top100Data, error: top100Errors, isLoading: top100Loading } = AnimeApi.useGetTopAnimeQuery(5);
+	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery({ max_score: maxScore.toString(), min_score: minScore.toString(), order_by: 'score', sort: 'desc' });
 
 	return (
 		<div className={styles['animegrid']}>
@@ -21,11 +22,6 @@ export const AnimeGridBlock = () => {
 				<h2>Топ 100</h2>
 				<div className={styles['animegrid-container__content']}>
 					<div className={styles['animegrid-content__items']}>
-						{
-							top100Data && top100Data.data.map((item: IData, index: number) => (
-								<AnimeCard key={index} index={index} item={item} />
-							))
-						}
 						{
 							filteredData && filteredData.data.map((item: IData, index: number) => (
 								<AnimeCard key={index} index={index} item={item} />

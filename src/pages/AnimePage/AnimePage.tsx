@@ -14,9 +14,6 @@ const AnimePage = () => {
 	const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '')
 	const { data: pictures, error: picturesErrors, isLoading: PicturesLoading } = AnimeApi.useGetAnimeImagesQuery(id ? id : '')
 
-	console.log(id)
-	console.log(details);
-	console.log(pictures);
 
 	return (
 		<div className={styles['anime-page']}>

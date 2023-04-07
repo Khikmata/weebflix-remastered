@@ -9,7 +9,6 @@ export const RecommendationsBlock: React.FC = () => {
 
 	const { data: recommendations, error: recommendationsErrors, isLoading: recomendationLoading } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043);
 
-	console.log(recommendations)
 
 	return (
 		<div className={styles['recommendations']}>
@@ -21,8 +20,8 @@ export const RecommendationsBlock: React.FC = () => {
 					}
 					{
 						recommendations && recommendations.map((item: IRecommendations, index: number) => (
-							<Link className={styles['content-grid__card']} to={`/anime/${item.entry.mal_id}`}>
-								< img key={index} src={item.entry.images.webp.image_url || item.entry.images.webp.small_image_url} alt={item.entry.title + ' banner image'} />
+							<Link key={index} className={styles['content-grid__card']} to={`/anime/${item.entry.mal_id}`}>
+								< img src={item.entry.images.webp.image_url || item.entry.images.webp.small_image_url} alt={item.entry.title + ' banner image'} />
 							</Link>
 						))
 					}

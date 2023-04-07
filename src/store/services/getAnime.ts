@@ -43,6 +43,8 @@ export const AnimeApi = createApi({
 				${max_score ? `max_score=${max_score}&` : ''}
 				${start_date ? `start_date=${start_date}&` : ''} 
 				${end_date ? `end_date=${end_date}&` : ''} 
+				${order_by ? `order_by=${order_by}&` : ''} 
+				${sort ? `sort=${sort}&` : ''} 
 				`,
 				transformResponse: (response: { data: IData[] }) => response.data,
 			})

@@ -67,7 +67,7 @@ export const CatalogueBlock: React.FC = () => {
 				<button className='prev-button'></button>
 				{
 					currentFilter && currentFilter[selectedFilterOption]?.data.map((item: IData, index: number) => (
-						<SwiperSlide>
+						<SwiperSlide key={index}>
 							<AnimeCard index={index} item={item} />
 						</SwiperSlide>
 					))

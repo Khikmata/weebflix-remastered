@@ -2,16 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 export interface CounterState {
-	maxScore: string;
-	minScore: string;
+	maxScore: number;
+	minScore: number;
 	dateFrom: string;
 	dateTo: string;
 }
 
 
 const initialState: CounterState = {
-	maxScore: "10",
-	minScore: "0",
+	maxScore: 10,
+	minScore: 0,
 	dateFrom: "1941",
 	dateTo: "2023",
 }
