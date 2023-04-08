@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from '../Layout/Layout'
-import ScrollToTop from '../hooks/scroll'
 import AnimePage from '../pages/AnimePage/AnimePage'
 import HomePage from '../pages/HomePage/HomePage'
 

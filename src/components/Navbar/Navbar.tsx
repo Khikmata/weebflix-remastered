@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import logo from '../../assets/icons/logo.svg'
 
 import closeIcon from '../../assets/icons/close.svg'
+import eraseIcon from '../../assets/icons/erase.svg'
 import profileIcon from '../../assets/icons/profile.svg'
 import searchIcon from '../../assets/icons/search.svg'
 
@@ -30,7 +31,7 @@ export const Navbar = () => {
 					<img className={styles['profile']} width={24} src={profileIcon} alt="Профиль"></img>
 					<div className={styles['search-container']} >
 						<input value={searchInput} onChange={handleSearchInput} className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')} placeholder='Поиск...' />
-						<button type='button' className={[styles['search-bar__clear'], styles[searchOpen ? 'active' : '']].join(' ')} onClick={handleSearchClear}>x</button>
+						<button type='button' className={[styles['search-bar__clear'], styles[searchOpen ? 'active' : '']].join(' ')} onClick={handleSearchClear}><img width={16} src={eraseIcon} alt='Очистить'></img></button>
 					</div>
 					<button type="button" onClick={() => setSearchOpen(!searchOpen)}>
 						<img className={[styles['search-open'], styles[searchOpen ? '' : 'active']].join(' ')} width={24} src={searchIcon} alt="Поиск"></img>

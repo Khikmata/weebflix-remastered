@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../../hooks/redux';
 import { SearchFilterActions } from '../../../store/reducers/SearchFilterSlice';
 import { RangeComponent } from '../../Range';
 import { SelectComponent } from '../../Select';
+import { SelectType } from '../../Select/SelectComponent';
 import styles from './FilterBlock.styles.module.scss';
 
 export const FilterBlock = () => {
@@ -25,14 +26,14 @@ export const FilterBlock = () => {
 			<div className={styles['filterblock']}>
 				<RangeComponent min={0} max={10} step={1} title={'Сортировка по рейтингу:'} handleRange={handleScoreChange} />
 				<RangeComponent showMiles={false} min={1990} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
-				<SelectComponent title='Жанры:' tooltip='Выбрать жанры' />
-				<SelectComponent title='Тип:' tooltip='Выбрать тип' />
-				<SelectComponent title='Отсортировать по:' tooltip='Рейтингу' />
-				<SelectComponent title='Рейтинг:' tooltip='Отсортировать по рейтингу' />
-				<SelectComponent title='Сезон:' tooltip='Выбрать сезон' />
-				<SelectComponent title='Количество эпизодов:' tooltip='Выбрать размер' />
-				<SelectComponent title='Студия:' tooltip='Выбрать студию' />
-				<SelectComponent title='Статус:' tooltip='Выбрать статус' />
+				<SelectComponent title='Жанры:' tooltip='Выбрать жанры' type={SelectType.GENRES} />
+				<SelectComponent title='Тип:' tooltip='Выбрать тип' type={SelectType.TYPES} />
+				<SelectComponent title='Отсортировать по:' tooltip='Рейтингу' type={SelectType.SORT} />
+				<SelectComponent title='Рейтинг:' tooltip='Отсортировать по рейтингу' type={SelectType.RATING} />
+				<SelectComponent title='Сезон:' tooltip='Выбрать сезон' type={SelectType.SEASON} />
+				<SelectComponent title='Количество эпизодов:' tooltip='Выбрать размер' type={SelectType.EPISODE} />
+				<SelectComponent title='Студия:' tooltip='Выбрать студию' type={SelectType.STUDIO} />
+				<SelectComponent title='Статус:' tooltip='Выбрать статус' type={SelectType.STATUS} />
 			</div >
 		</>
 	)

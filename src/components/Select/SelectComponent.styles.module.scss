@@ -13,6 +13,8 @@
 			border: 2px solid $gray;
 			background-color: $blockActiveColor;
 		}
+		&:active {
+		}
 		padding: 8px;
 		border-radius: 4px;
 		display: flex;

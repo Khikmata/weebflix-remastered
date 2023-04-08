@@ -19,7 +19,7 @@ export const RangeComponent: React.FC<RangeComponentProps> = ({ title, step, min
 
 	const handleWithDebounce = useDebounce(() => {
 		handleRange(values);
-	}, 400)
+	}, 300)
 
 	const handleChange = (values: number[]) => {
 		setValues(values);
@@ -44,7 +44,8 @@ export const RangeComponent: React.FC<RangeComponentProps> = ({ title, step, min
 						{...props}
 						style={{
 							...props.style,
-							height: '15px',
+							bottom: '13px',
+							height: '8px',
 							width: showMiles ? '3px' : '1px',
 							backgroundColor: index * step < values[1] && index * step > values[0] ? '#abe96e' : '#ccc'
 						}}
