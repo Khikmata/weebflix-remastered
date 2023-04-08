@@ -5,7 +5,10 @@
 	height: 100%;
 	padding: 24px;
 	> div {
-		margin-bottom: 24px;
+		margin-bottom: 32px;
+	}
+	> button {
+		margin-bottom: 12px;
 	}
 	&-filter {
 		&__maxrating {

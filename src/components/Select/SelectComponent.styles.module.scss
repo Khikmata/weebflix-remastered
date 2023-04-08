@@ -1,0 +1,56 @@
+@import "../../styles/variables";
+.selectComponent {
+	width: 100%;
+	p {
+		text-align: left;
+		margin-bottom: 8px;
+		font-weight: 500;
+		font-size: 16px;
+	}
+	&-container {
+		border: 2px solid $lowopacity;
+		&:hover {
+			border: 2px solid $gray;
+			background-color: $blockActiveColor;
+		}
+		padding: 8px;
+		border-radius: 4px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		p {
+			height: 100%;
+			margin-right: 8px;
+			font-weight: 400;
+			display: flex;
+			margin-bottom: 0px;
+		}
+		img {
+		}
+	}
+	&-dropdown {
+		background-color: $blockActiveColor;
+	}
+}
+.dropdown-list {
+	li {
+		display: flex;
+		padding: 4px 16px;
+		justify-content: flex-start;
+		align-items: center;
+		font-size: 16px;
+		border: 1px solid $lowopacity;
+		input {
+			margin-right: 8px;
+		}
+		&:hover {
+			background-color: gray;
+			input {
+				scale: 130%;
+			}
+			p {
+				scale: 104%;
+			}
+		}
+	}
+}

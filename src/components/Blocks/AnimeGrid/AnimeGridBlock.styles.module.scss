@@ -43,8 +43,8 @@
 		}
 		@media (max-width: 500px) {
 			flex-direction: column;
-			height: 220px;
 			width: 120px;
+			height: 220px;
 			margin-right: 12px;
 			margin-bottom: 12px;
 			img {
@@ -61,7 +61,6 @@
 	justify-content: flex-start;
 	padding: 4px;
 	flex-direction: column;
-	gap: 32px;
 	@include block;
 }
 

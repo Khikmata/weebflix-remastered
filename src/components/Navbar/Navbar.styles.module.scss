@@ -35,7 +35,6 @@
 }
 
 .search {
-	height: 100%;
 	&-bar {
 		width: 0px;
 		height: 40px;
@@ -50,5 +49,34 @@
 			padding: 0 12px;
 			width: 400px;
 		}
+		&__clear {
+			display: none;
+			position: absolute;
+			top: 45%;
+			font-size: 24px;
+			font-weight: 700;
+			right: 12px;
+			transform: translate(-50%, -50%);
+			color: $backgroundColor;
+			opacity: 0.3;
+			&.active {
+				display: block;
+			}
+		}
+	}
+	&-container {
+		width: 100%;
+		position: relative;
+	}
+}
+
+.search-open,
+.search-close {
+	display: none;
+	opacity: 0;
+	transition: all 0.3s ease-in-out;
+	&.active {
+		display: block;
+		opacity: 1;
 	}
 }
