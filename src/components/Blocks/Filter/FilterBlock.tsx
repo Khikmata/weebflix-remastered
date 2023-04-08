@@ -1,4 +1,5 @@
 
+import filterIcon from '../../../assets/icons/filters.svg';
 import { useAppDispatch } from '../../../hooks/redux';
 import { SearchFilterActions } from '../../../store/reducers/SearchFilterSlice';
 import { RangeComponent } from '../../Range';
@@ -19,10 +20,10 @@ export const FilterBlock = () => {
 
 	return (
 		<>
-			<p className={styles['filter__title']}>Фильтр</p>
+			<p className={styles['filter__title']}><img width={16} src={filterIcon} alt='Фильтр картинка'></img>Фильтр</p>
 			<div className={styles['filterblock']}>
-				<RangeComponent min={0} max={10} step={1} title={'Сортировка по рейтингу'} handleRange={handleScoreChange} />
-				<RangeComponent showMiles={false} min={1990} max={2023} step={1} title={'Сортировка по дате'} handleRange={handleDateChange} />
+				<RangeComponent min={0} max={10} step={1} title={'Сортировка по рейтингу:'} handleRange={handleScoreChange} />
+				<RangeComponent showMiles={false} min={1990} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
 			</div >
 		</>
 	)

@@ -3,7 +3,6 @@ import { Range, getTrackBackground } from 'react-range';
 import { useDebounce } from '../../hooks/useDebounce';
 
 
-
 interface RangeComponentProps {
 	handleRange: (values: number[]) => void;
 	title: string;
@@ -70,14 +69,14 @@ export const RangeComponent: React.FC<RangeComponentProps> = ({ title, step, min
 							style={{
 
 								position: 'absolute',
-								top: '-28px',
+								bottom: '-28px',
 								color: '#fff',
 								fontWeight: 'bold',
 								fontSize: '14px',
 								fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
 								padding: '4px',
 								borderRadius: '4px',
-								backgroundColor: '#28646c'
+								backgroundColor: '#3a3a3a'
 							}}
 						>
 							{values[index]}

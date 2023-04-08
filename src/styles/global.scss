@@ -6,7 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--lato-font);
+  font-family: "Golos Text", sans-serif;
   color: white;
 }
 
@@ -31,6 +31,7 @@ button {
   border: none;
   outline: 0;
   cursor: pointer;
+  background-color: transparent;
 }
 
 input {

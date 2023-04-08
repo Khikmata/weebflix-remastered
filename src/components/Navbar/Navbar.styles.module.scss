@@ -1,4 +1,5 @@
-.Navbar {
+@import "../../styles/variables";
+.navbar {
 	z-index: 10;
 	position: sticky;
 	top: 0;
@@ -22,7 +23,32 @@
 	&-logo {
 	}
 	&-auth {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		letter-spacing: 0.11em;
 		font-size: 24px;
+		> img {
+			margin-right: 24px;
+		}
+	}
+}
+
+.search {
+	height: 100%;
+	&-bar {
+		width: 0px;
+		height: 40px;
+		outline: none;
+		background-color: $whiteColor;
+		color: black;
+		border-radius: 4px;
+		border: none;
+		margin-right: 12px;
+		transition: all 0.3s ease-in-out;
+		&.active {
+			padding: 0 12px;
+			width: 400px;
+		}
 	}
 }
