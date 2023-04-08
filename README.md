@@ -1,21 +1,21 @@
-В активной разработке
+<h1>В активной разработке</h1>
 
-Текущий стек: <br>
-[x] react <br>
-[x] typescript, <br>
-[x] rtk, <br>
-[x] axios, <br>
-[x] Router-dom, <br>
-[] redux-persist, <br>
-[x] react-range <br>
-[x] react-css-modules (scss) <br>
-[x] swiper <br>
-[x] jest && testing libraries <br> <br>
+<h2> Текущий стек: </h2>
+<strong>[X] - React </strong>  <br>
+<strong>[X] - Typescript </strong> <br>
+<strong>[X] - Redux Toolkit </strong> <br>
+<strong>[X] - Axios </strong> <br>
+<strong>[X] - Router-DOM </strong> <br>
+<strong>[X] - Redux-Persist </strong> <br>
+<strong>[X] - React-Range </strong> <br>
+<strong>[X] - React css modules (SCSS) </strong> <br>
+<strong>[X] - Swiper </strong>  <br>
+<strong>[X] - Jest && testing libraries </strong>  <br> <br>
 
-Functionality: <br>
-[x] RTK query для различных фетча данных с эндпоинтов <br>
-[x] Слайдер с текущим/будущим сезоном <br>
-[x] Переход по странице по айди аниме <br>
+<h2> Функционал: </h2> <br>
+<strong>[X] - RTK query для различных фетча данных с эндпоинтов </strong> <br>
+<strong>[X] - Слайдер с текущим/будущим сезоном </strong> <br>
+<strong>[X] - Переход по странице по айди аниме </strong> <br>
 [] Поиск (50%) <br>
 [] Фильтры (50%) <br>
 [] Внутренний плеер <br>
