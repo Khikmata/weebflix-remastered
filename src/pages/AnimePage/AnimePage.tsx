@@ -22,7 +22,7 @@ const AnimePage = () => {
 				<div className={styles['anime-page__info']}>
 					<div className={styles['anime-info__leftside']}>
 						<div className={styles['anime-info__image']}>
-							<img loading='lazy' src={details?.images.webp.large_image_url} alt='' />
+							<img loading='lazy' src={details?.images.webp.large_image_url || '../../assets/images/home.png'} alt='' />
 						</div>
 						<button className={styles['anime-info__rate']}>
 							<img src={star} alt='оценить' />

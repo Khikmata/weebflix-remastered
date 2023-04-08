@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Range, getTrackBackground } from 'react-range';
-import { useDebounce } from '../../hooks/useDebounce';
+import { useDebounce } from '../../hooks/debounce';
 
 
 interface RangeComponentProps {
