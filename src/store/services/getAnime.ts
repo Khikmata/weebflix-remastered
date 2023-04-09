@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IAnimeFilterQueries, IDetails, IGetAnime, IRecommendations } from '../../types/GetAnimeTypes';
+import { IAnimeFilterQueries, IDetails, IGenres, IGetAnime, IGetGenres, IRecommendations } from '../../types/GetAnimeTypes';
 import { IData, IImages } from './../../types/GetAnimeTypes';
 
 export const AnimeApi = createApi({
@@ -47,7 +47,12 @@ export const AnimeApi = createApi({
 				${sort ? `sort=${sort}&` : ''} 
 				`,
 				transformResponse: (response: { data: IData[] }) => response.data,
-
+			})
+		}),
+		getAnimeGenres: builder.query<IGetGenres, number>({
+			query: () => ({
+				url: '/genres/anime',
+				transformResponse: (response: { data: IGenres }) => response.data,
 			})
 		}),
 	})

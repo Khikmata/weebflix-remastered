@@ -93,10 +93,17 @@ interface IPagination {
 	last_visible_page: number;
 }
 
+export interface IGenres {
+	name: string;
+}
 
 export interface IGetAnime {
 	pagination: IPagination;
 	data: IData[];
+}
+export interface IGetGenres {
+	pagination: IPagination;
+	data: IGenres[];
 }
 
 
@@ -111,7 +118,7 @@ export interface IAnimeFilterQueries {
 	max_score?: string,
 	status?: 'airing' | 'complete' | 'upcoming',
 	rating?: 'g' | 'pg' | 'pg13' | 'r17' | 'r' | 'rx',
-	genres?: string[],
+	genres?: IGenres,
 	genres_exclude?: string[],
 	order_by?: "mal_id" | "title" | "type" | "rating" | "start_date" | "end_date" | "episodes" | "score" | "scored_by" | "rank" | "popularity" | "members" | "favorites",
 	sort?: 'desc' | 'asc',

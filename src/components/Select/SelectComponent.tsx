@@ -1,5 +1,8 @@
 
+import { useState } from 'react';
 import Dropdown from '../../assets/icons/dropdown.svg';
+import { IGenres } from '../../types/GetAnimeTypes';
+import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
 import styles from './SelectComponent.styles.module.scss';
 
 export enum SelectType {
@@ -14,53 +17,62 @@ export enum SelectType {
 }
 
 interface SelectComponentProps {
+	data?: IGenres[];
 	title: string;
 	tooltip: string;
 	type: SelectType;
 }
 
 
-export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, type }) => {
+export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, type, data }) => {
+
+	const [openDropdown, setOpenDropdown] = useState(false);
+
+	const handleDropdown = () => {
+		setOpenDropdown(!openDropdown)
+	}
 
 	const renderByType = () => {
 		if (type === SelectType.GENRES) {
 			return (
 				<>
-					<li><input type='checkbox'></input>Экшен</li>
-					<li><input type='checkbox'></input>Экшен</li>
-					<li><input type='checkbox'></input>Экшен</li>
+					{
+						data && data.map((item: IGenres) => (
+							<label><li><input type='checkbox'></input>{TranslateGenresToRussian(item.name)}</li></label >
+						))
+					}
 				</>
 			)
 		}
 		if (type === SelectType.TYPES) {
 			return (
 				<>
-					<li><input type='checkbox'></input>ТВ-Сериал</li>
-					<li><input type='checkbox'></input>Фильм</li>
-					<li><input type='checkbox'></input>OVA</li>
-					<li><input type='checkbox'></input>Спешл</li>
-					<li><input type='checkbox'></input>ONA</li>
-					<li><input type='checkbox'></input>Музыка</li>
+					<label><li><input type='checkbox'></input>ТВ-Сериал</li></label >
+					<label><li><input type='checkbox'></input>Фильм</li></label >
+					<label><li><input type='checkbox'></input>OVA</li></label >
+					<label><li><input type='checkbox'></input>Спешл</li></label >
+					<label><li><input type='checkbox'></input>ONA</li></label >
+					<label><li><input type='checkbox'></input>Музыка</li></label >
 				</>
 			)
 		}
 		if (type === SelectType.EPISODE) {
 			return (
 				<>
-					<li><input type='checkbox'></input>0-12 Серии</li>
-					<li><input type='checkbox'></input>13-24 Серии</li>
-					<li><input type='checkbox'></input>25+</li>
+					<label><li><input type='checkbox'></input>0-12 Серии</li></label>
+					<label><li><input type='checkbox'></input>13-24 Серии</li></label>
+					<label><li><input type='checkbox'></input>25+</li></label>
 				</>
 			)
 		}
 		if (type === SelectType.SEASON) {
 			return (
 				<>
-					<li><input type='checkbox'></input>2023 Весна</li>
-					<li><input type='checkbox'></input>2022 Зима</li>
-					<li><input type='checkbox'></input>2022 Осень</li>
-					<li><input type='checkbox'></input>2022 Лето</li>
-					<li><input type='checkbox'></input>2022 Весна</li>
+					<label><li><input type='checkbox'></input>2023 Весна</li></label>
+					<label><li><input type='checkbox'></input>2022 Зима</li></label >
+					<label><li><input type='checkbox'></input>2022 Осень</li></label >
+					<label><li><input type='checkbox'></input>2022 Лето</li></label >
+					<label><li><input type='checkbox'></input>2022 Весна</li></label >
 				</>
 			)
 		}
@@ -68,19 +80,19 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 
 
 	return (
-		<button className={styles['selectComponent']}>
+		<div className={styles['selectComponent']}>
 			<p>{title}</p>
-			<div className={styles['selectComponent-container']}>
+			<button onClick={handleDropdown} className={styles['selectComponent-container']}>
 				<p>{tooltip}</p>
 				<img src={Dropdown} width={12} alt='Выпадающее меню' />
-			</div>
-			<div className={styles['selectComponent-dropdown']}>
+			</button>
+			<div className={[styles['selectComponent-dropdown'], styles[openDropdown ? 'active' : '']].join(' ')}>
 				<ul className={styles['dropdown-list']}>
 					{
 						renderByType()
 					}
 				</ul>
 			</div>
-		</button>
+		</div>
 	)
 }

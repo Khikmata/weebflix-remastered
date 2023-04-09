@@ -56,12 +56,10 @@
 .animegrid-content__filter {
 	width: 40%;
 	height: 100%;
-	min-height: 600px;
 	display: flex;
 	justify-content: flex-start;
 	padding: 4px;
 	flex-direction: column;
-	@include block;
 }
 
 @media (max-width: 768px) {
