@@ -1,5 +1,5 @@
 <h1>В активной разработке</h1>
-<a href='weebflix-remastered.vercel.app'> Деплой </a>
+<a href='https://weebflix-remastered.vercel.app/'> Деплой </a>
 <br>
 <br>
 
