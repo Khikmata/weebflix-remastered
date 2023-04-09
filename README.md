@@ -1,5 +1,5 @@
-<h1>В активной разработке</h1>
-
+<h1>В активной разработке</h1> <br>
+Деплой: weebflix-remastered.vercel.app <br>
 ![Screenshot_1](https://user-images.githubusercontent.com/105242673/230794472-3ff9ef39-f3e0-4eaa-80c3-55af0a24b64d.png)
 
 <h2> Текущий стек: </h2>
