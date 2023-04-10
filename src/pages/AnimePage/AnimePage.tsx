@@ -12,8 +12,6 @@ const AnimePage = () => {
 	let { id } = useParams<string>();
 
 	const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '')
-	const { data: pictures, error: picturesErrors, isLoading: PicturesLoading } = AnimeApi.useGetAnimeImagesQuery(id ? id : '')
-
 
 	return (
 		<div className={styles['anime-page']}>
@@ -41,7 +39,13 @@ const AnimePage = () => {
 						<RankBlock details={details} />
 						<Button scale height={40} marginVertical={16} color='primary'><Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Посмотреть трейлер</Link></Button>
 						{
-							!detailsLoading && !detailsErrors && details && <InfoBlock details={details} />
+							detailsLoading && <p>Загрузка описания...</p>
+						}
+						{
+							detailsErrors && <p>Ошибка при загрузке описания...</p>
+						}
+						{
+							details && <InfoBlock details={details} />
 						}
 					</div>
 				</div>

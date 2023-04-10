@@ -66,6 +66,18 @@ export const CatalogueBlock: React.FC = () => {
 			>
 				<button className='prev-button'></button>
 				{
+					currentFilter[0] && currentSeasonLoading && <p> Загрузка каталога...</p>
+				}
+				{
+					currentFilter[1] && upcomingSeasonLoading && <p> Загрузка каталога...</p>
+				}
+				{
+					currentFilter[0] && currentSeasonErrors && <p>Ошибка при загрузке данных каталога</p>
+				}
+				{
+					currentFilter[1] && upcomingSeasonErrors && <p> Ошибка при загрузке данных каталога</p>
+				}
+				{
 					currentFilter && currentFilter[selectedFilterOption]?.data.map((item: IData, index: number) => (
 						<SwiperSlide key={index}>
 							<AnimeCard index={index} item={item} />

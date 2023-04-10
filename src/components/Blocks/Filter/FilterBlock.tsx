@@ -41,7 +41,9 @@ export const FilterBlock = () => {
 			<div className={[styles['filterblock'], styles[openFilters ? 'active' : '']].join(' ')}>
 				<RangeComponent min={0} max={10} step={1} title={'Сортировка по рейтингу:'} handleRange={handleScoreChange} />
 				<RangeComponent showMiles={false} min={1990} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
-				<SelectComponent data={genresData && genresData.data} title='Жанры:' tooltip='Выбрать жанры' type={SelectType.GENRES} />
+				{
+					genresLoading ? <p> Загрузка жанров... </p> : <SelectComponent data={genresData && genresData.data} title='Жанры:' tooltip='Выбрать жанры' type={SelectType.GENRES} />
+				}
 				<SelectComponent title='Тип:' tooltip='Выбрать тип' type={SelectType.TYPES} />
 				<SelectComponent title='Отсортировать по:' tooltip='Рейтингу' type={SelectType.SORT} />
 				<SelectComponent title='Рейтинг:' tooltip='Отсортировать по рейтингу' type={SelectType.RATING} />

@@ -65,6 +65,12 @@ export const RecommendationsBlock: React.FC = () => {
 					>
 						<button className='prev-button'></button>
 						{
+							recomendationLoading && <p>Загрузка блока рекоммендаций...</p>
+						}
+						{
+							recommendationsErrors && <p>Произошла ошибка при загрузке блока..</p>
+						}
+						{
 							recommendations && recommendations.map((item: IRecommendations, index: number) => (
 								<SwiperSlide key={index}>
 									<Link className={styles['content-grid__card']} to={`/anime/${item.entry.mal_id}`}>
@@ -76,9 +82,7 @@ export const RecommendationsBlock: React.FC = () => {
 						}
 						<button className='next-button'></button>
 					</Swiper>
-					{
-						recommendationsErrors && <p>Произошла ошибка при загрузке блока..</p>
-					}
+
 				</div>
 			</div>
 		</div >

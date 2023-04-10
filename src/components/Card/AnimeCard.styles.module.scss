@@ -3,9 +3,13 @@
 .anime-card {
 	&__image {
 		position: relative;
-		transition: all 0.3s ease-in-out;
+
+		overflow: hidden;
 		&:hover {
-			scale: 106%;
+			img {
+				transition: all 0.2s ease-in-out;
+				scale: 105%;
+			}
 		}
 		&__rating {
 			position: absolute;
@@ -17,6 +21,7 @@
 			padding: 4px 8px;
 		}
 		img {
+			transition: all 0.2s ease-in-out;
 			border: 1px solid $lowopacity;
 			height: 100%;
 			width: 100%;

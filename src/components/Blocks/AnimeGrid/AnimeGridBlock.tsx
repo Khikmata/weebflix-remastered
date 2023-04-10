@@ -12,9 +12,7 @@ export const AnimeGridBlock = () => {
 	const data = useAppSelector(state => state.searchFilter)
 
 
-	const { data: top100Data, error: top100Errors, isLoading: top100Loading } = AnimeApi.useGetTopAnimeQuery(5);
-
-	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading, refetch } = AnimeApi.useGetAnimeSearchQuery
+	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery
 
 
 
@@ -34,6 +32,12 @@ export const AnimeGridBlock = () => {
 				<h2>Топ 100</h2>
 				<div className={styles['animegrid-container__content']}>
 					<div className={styles['animegrid-content__items']}>
+						{
+							filteredLoading && <p>Загрузка даты...</p>
+						}
+						{
+							filteredErrors && <p>Ошибка при загрузке данных</p>
+						}
 						{
 							filteredData && filteredData.data.map((item: IData, index: number) => (
 								<AnimeCard key={index} index={index} item={item} />
