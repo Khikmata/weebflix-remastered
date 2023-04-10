@@ -14,7 +14,7 @@ import { useState } from 'react';
 
 export const FilterBlock = () => {
 
-	const { data: genresData, error: genresErrors, isLoading: genresLoading } = AnimeApi.useGetAnimeGenresQuery(0);
+	const { data: genresData, error: genresErrors, isLoading: genresLoading } = AnimeApi.useGetAnimeGenresQuery('Avant Garde');
 
 	const [openFilters, setOpenFilters] = useState(false);
 	const dispatch = useAppDispatch();
@@ -42,7 +42,10 @@ export const FilterBlock = () => {
 				<RangeComponent min={0} max={10} step={1} title={'Сортировка по рейтингу:'} handleRange={handleScoreChange} />
 				<RangeComponent showMiles={false} min={1990} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
 				{
-					genresLoading ? <p> Загрузка жанров... </p> : <SelectComponent data={genresData && genresData.data} title='Жанры:' tooltip='Выбрать жанры' type={SelectType.GENRES} />
+					genresLoading ? <p> Загрузка жанров... </p> : <SelectComponent data={genresData?.genres} title='Жанры:' tooltip='Выбрать жанры' type={SelectType.GENRES} />
+				}
+				{
+					genresLoading ? <p> Загрузка тематик... </p> : <SelectComponent data={genresData?.themes} title='Жанры:' tooltip='Выбрать тематику' type={SelectType.THEMES} />
 				}
 				<SelectComponent title='Тип:' tooltip='Выбрать тип' type={SelectType.TYPES} />
 				<SelectComponent title='Отсортировать по:' tooltip='Рейтингу' type={SelectType.SORT} />

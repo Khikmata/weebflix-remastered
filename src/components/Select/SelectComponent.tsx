@@ -1,12 +1,16 @@
 
 import { useState } from 'react';
 import Dropdown from '../../assets/icons/dropdown.svg';
+import { useAppDispatch } from '../../hooks/redux';
+import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice';
 import { IGenres } from '../../types/GetAnimeTypes';
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
+import { TranslateThemesToRussian } from '../../utils/Translation/TranslateThemes';
 import styles from './SelectComponent.styles.module.scss';
 
 export enum SelectType {
 	GENRES = 'genres',
+	THEMES = 'themes',
 	TYPES = 'types',
 	SORT = 'sort',
 	RATING = 'rating',
@@ -32,13 +36,30 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		setOpenDropdown(!openDropdown)
 	}
 
+	const dispatch = useAppDispatch();
+
+	const handleGenreCheckmark = (item: IGenres) => {
+		dispatch(SearchFilterActions.setGenre(item.name))
+	}
+
 	const renderByType = () => {
 		if (type === SelectType.GENRES) {
 			return (
 				<>
 					{
 						data && data.map((item: IGenres) => (
-							<label><li><input type='checkbox'></input>{TranslateGenresToRussian(item.name)}</li></label >
+							<label><li><input onClick={() => handleGenreCheckmark} type='checkbox'></input>{TranslateGenresToRussian(item.name)}</li></label >
+						))
+					}
+				</>
+			)
+		}
+		if (type === SelectType.THEMES) {
+			return (
+				<>
+					{
+						data && data.map((item: IGenres) => (
+							<label><li><input type='checkbox'></input>{TranslateThemesToRussian(item.name)}</li></label >
 						))
 					}
 				</>

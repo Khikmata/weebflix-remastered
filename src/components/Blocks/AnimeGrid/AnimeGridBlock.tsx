@@ -12,18 +12,15 @@ export const AnimeGridBlock = () => {
 	const data = useAppSelector(state => state.searchFilter)
 
 
-	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery
-
-
-
-		({
-			max_score: data.maxScore.toString(),
-			min_score: data.minScore.toString(),
-			start_date: data.dateFrom.toString(),
-			end_date: data.dateTo.toString(),
-			order_by: 'score',
-			sort: 'desc',
-		});
+	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery({
+		max_score: data.maxScore.toString(),
+		min_score: data.minScore.toString(),
+		start_date: data.dateFrom.toString(),
+		end_date: data.dateTo.toString(),
+		order_by: 'score',
+		sort: 'desc',
+		genres: data.genres,
+	});
 
 
 	return (
@@ -39,7 +36,7 @@ export const AnimeGridBlock = () => {
 							filteredErrors && <p>Ошибка при загрузке данных</p>
 						}
 						{
-							filteredData && filteredData.data.map((item: IData, index: number) => (
+							filteredData && filteredData.map((item: IData, index: number) => (
 								<AnimeCard key={index} index={index} item={item} />
 							))
 						}

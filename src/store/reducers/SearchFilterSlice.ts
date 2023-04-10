@@ -6,6 +6,7 @@ export interface CounterState {
 	minScore: number;
 	dateFrom: number;
 	dateTo: number;
+	genres: string;
 }
 
 
@@ -14,6 +15,7 @@ const initialState: CounterState = {
 	minScore: 0,
 	dateFrom: 1990,
 	dateTo: 2023,
+	genres: '',
 }
 
 const slice = createSlice({
@@ -31,6 +33,9 @@ const slice = createSlice({
 		},
 		setDateTo: (state, action) => {
 			state.dateTo = action.payload;
+		},
+		setGenre: (state, action) => {
+			state.genres += action.payload;
 		}
 	},
 })

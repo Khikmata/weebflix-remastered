@@ -78,7 +78,7 @@ export const CatalogueBlock: React.FC = () => {
 					currentFilter[1] && upcomingSeasonErrors && <p> Ошибка при загрузке данных каталога</p>
 				}
 				{
-					currentFilter && currentFilter[selectedFilterOption]?.data.map((item: IData, index: number) => (
+					currentFilter && currentFilter[selectedFilterOption]?.map((item: IData, index: number) => (
 						<SwiperSlide key={index}>
 							<AnimeCard index={index} item={item} />
 						</SwiperSlide>
