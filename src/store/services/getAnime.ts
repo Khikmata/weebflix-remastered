@@ -49,6 +49,8 @@ export const AnimeApi = createApi({
 				if (order_by) url += `order_by=${order_by}&`;
 				if (sort) url += `sort=${sort}&`;
 				if (genres) url += `genres=${genres}&`;
+				if (q) url += `q=${q}&`;
+				if (letter) url += `letter=${letter}&`;
 
 				return { url };
 			},

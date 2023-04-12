@@ -7,14 +7,19 @@ import eraseIcon from '../../assets/icons/erase.svg'
 import profileIcon from '../../assets/icons/profile.svg'
 import searchIcon from '../../assets/icons/search.svg'
 
+import { useDispatch } from 'react-redux'
+import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice'
 import styles from './Navbar.styles.module.scss'
 
 export const Navbar = () => {
 	const [searchInput, setSearchInput] = useState('');
 	const [searchOpen, setSearchOpen] = useState(false);
 
+	const dispatch = useDispatch()
+
 	const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchInput(e.target.value)
+		dispatch(SearchFilterActions.setSearchQuery(e.target.value))
 		console.log(searchInput)
 	}
 	const handleSearchClear = () => {

@@ -19,7 +19,8 @@ export const AnimeGridBlock = () => {
 		end_date: data.dateTo.toString(),
 		order_by: 'score',
 		sort: 'desc',
-		genres: data.genres,
+		genres: data.genresQuery,
+		letter: data.searchQuery,
 	});
 
 

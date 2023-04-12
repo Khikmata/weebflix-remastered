@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import Dropdown from '../../assets/icons/dropdown.svg';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice';
 import { IGenres } from '../../types/GetAnimeTypes';
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
@@ -28,31 +28,32 @@ interface SelectComponentProps {
 }
 
 
+
 export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, type, data }) => {
 
 	const [openDropdown, setOpenDropdown] = useState(false);
 
+	const dispatch = useAppDispatch();
+	const genreNames = useAppSelector((state) => state.searchFilter.genresName)
+	console.log(genreNames)
 	const handleDropdown = () => {
 		setOpenDropdown(!openDropdown)
 	}
 
-	const dispatch = useAppDispatch();
-
 	const handleGenreCheckmark = (item: IGenres, event: React.FormEvent<HTMLInputElement>) => {
-		if (event.currentTarget.checked) {
-			dispatch(SearchFilterActions.setGenre(item.mal_id))
-		} else {
-			dispatch(SearchFilterActions.removeGenre(item.mal_id))
-		}
-	}
-	const handleThemesCheckmark = (item: IGenres, event: React.FormEvent<HTMLInputElement>) => {
-		if (event.currentTarget.checked) {
-			dispatch(SearchFilterActions.setGenre(item.mal_id))
-		} else {
-			dispatch(SearchFilterActions.removeGenre(item.mal_id))
-		}
+		event.currentTarget.checked
+			? dispatch(SearchFilterActions.setGenre(item))
+			: dispatch(SearchFilterActions.removeGenre(item));
 	}
 
+	const translateGenreToDisplay = (item: string) => {
+		if (type === SelectType.GENRES) {
+			return TranslateGenresToRussian(item)
+		}
+		if (type === SelectType.THEMES) {
+			return TranslateThemesToRussian(item)
+		}
+	}
 
 	const renderByType = () => {
 		if (type === SelectType.GENRES) {
@@ -75,7 +76,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 			return (
 				<>
 					{
-						data && [...data].sort((b, a) => a.count - b.count).map((item: IGenres, index) => (
+						data && [...data].sort((b, a) => a.mal_id - b.mal_id).map((item: IGenres, index) => (
 							<label key={index}>
 								<li>
 									<input onChange={(event) => handleGenreCheckmark(item, event)} type='checkbox' />
@@ -126,8 +127,8 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		<div className={styles['selectComponent']}>
 			<p>{title}</p>
 			<button onClick={handleDropdown} className={styles['selectComponent-container']}>
-				<p>{tooltip}</p>
-				<img src={Dropdown} width={12} alt='Выпадающее меню' />
+				<p>{genreNames ? genreNames : tooltip}</p>
+				{!genreNames && <img src={Dropdown} width={12} alt='Выпадающее меню' />}
 			</button>
 			<div className={[styles['selectComponent-dropdown'], styles[openDropdown ? 'active' : '']].join(' ')}>
 				<ul className={styles['dropdown-list']}>
