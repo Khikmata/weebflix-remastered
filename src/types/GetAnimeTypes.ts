@@ -95,6 +95,8 @@ interface IPagination {
 
 export interface IGenres {
 	name: string;
+	count: number;
+	mal_id: number;
 }
 
 export interface IGetAnime {

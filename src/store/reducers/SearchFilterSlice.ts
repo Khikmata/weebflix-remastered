@@ -35,8 +35,11 @@ const slice = createSlice({
 			state.dateTo = action.payload;
 		},
 		setGenre: (state, action) => {
-			state.genres += action.payload;
-		}
+			state.genres += `${action.payload},`;
+		},
+		removeGenre: (state, action) => {
+			state.genres = state.genres.replace(`${action.payload},`, '');
+		},
 	},
 })
 

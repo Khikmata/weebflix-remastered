@@ -1,7 +1,7 @@
 export function TranslateGenresToRussian(genre: string) {
 	const genresNames = ['Action', 'Adventure', 'Avant Garde', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Isekai',
 		'Mystery', 'Romance', 'Sci-fi', 'Slice of Life', 'Sports', 'Supernatural', 'Suspense', 'Josei', 'Kids',
-		'Seinen', 'Shoujo', 'Shounen'];
+		'Seinen', 'Shoujo', 'Shounen', 'Boys Love', 'Girls Love',];
 	const index = genresNames.indexOf(genre);
 	switch (index) {
 		case 0:
@@ -44,7 +44,12 @@ export function TranslateGenresToRussian(genre: string) {
 			return 'Сёдзе';
 		case 19:
 			return 'Сёнен';
+		case 20:
+			return 'Яой';
+		case 21:
+			return 'Юри';
 		default:
 			return '';
 	}
+
 }

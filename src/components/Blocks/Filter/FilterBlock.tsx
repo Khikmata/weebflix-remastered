@@ -45,7 +45,7 @@ export const FilterBlock = () => {
 					genresLoading ? <p> Загрузка жанров... </p> : <SelectComponent data={genresData?.genres} title='Жанры:' tooltip='Выбрать жанры' type={SelectType.GENRES} />
 				}
 				{
-					genresLoading ? <p> Загрузка тематик... </p> : <SelectComponent data={genresData?.themes} title='Жанры:' tooltip='Выбрать тематику' type={SelectType.THEMES} />
+					genresLoading ? <p> Загрузка тематик... </p> : <SelectComponent data={genresData?.themes} title='Тематика:' tooltip='Выбрать тематику' type={SelectType.THEMES} />
 				}
 				<SelectComponent title='Тип:' tooltip='Выбрать тип' type={SelectType.TYPES} />
 				<SelectComponent title='Отсортировать по:' tooltip='Рейтингу' type={SelectType.SORT} />

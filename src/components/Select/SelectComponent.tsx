@@ -38,17 +38,34 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 
 	const dispatch = useAppDispatch();
 
-	const handleGenreCheckmark = (item: IGenres) => {
-		dispatch(SearchFilterActions.setGenre(item.name))
+	const handleGenreCheckmark = (item: IGenres, event: React.FormEvent<HTMLInputElement>) => {
+		if (event.currentTarget.checked) {
+			dispatch(SearchFilterActions.setGenre(item.mal_id))
+		} else {
+			dispatch(SearchFilterActions.removeGenre(item.mal_id))
+		}
 	}
+	const handleThemesCheckmark = (item: IGenres, event: React.FormEvent<HTMLInputElement>) => {
+		if (event.currentTarget.checked) {
+			dispatch(SearchFilterActions.setGenre(item.mal_id))
+		} else {
+			dispatch(SearchFilterActions.removeGenre(item.mal_id))
+		}
+	}
+
 
 	const renderByType = () => {
 		if (type === SelectType.GENRES) {
 			return (
 				<>
 					{
-						data && data.map((item: IGenres) => (
-							<label><li><input onClick={() => handleGenreCheckmark} type='checkbox'></input>{TranslateGenresToRussian(item.name)}</li></label >
+						data && [...data].sort((b, a) => a.count - b.count).map((item: IGenres, index) => (
+							<label key={index}>
+								<li>
+									<input onChange={(event) => handleGenreCheckmark(item, event)} type='checkbox' />
+									{TranslateGenresToRussian(item.name)} ({item.count})
+								</li>
+							</label >
 						))
 					}
 				</>
@@ -58,8 +75,13 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 			return (
 				<>
 					{
-						data && data.map((item: IGenres) => (
-							<label><li><input type='checkbox'></input>{TranslateThemesToRussian(item.name)}</li></label >
+						data && [...data].sort((b, a) => a.count - b.count).map((item: IGenres, index) => (
+							<label key={index}>
+								<li>
+									<input onChange={(event) => handleGenreCheckmark(item, event)} type='checkbox' />
+									{TranslateThemesToRussian(item.name)} ({item.count})
+								</li>
+							</label >
 						))
 					}
 				</>

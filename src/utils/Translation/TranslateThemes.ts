@@ -1,5 +1,5 @@
 export function TranslateThemesToRussian(theme: string) {
-	const themeNames = ['Adult Cast', 'Boys Love', 'Girls Love', 'Anthropomorphic', 'CGDCT', 'Childcare', 'Combat Sports', 'Detective',
+	const themeNames = ['Adult Cast', 'Anthropomorphic', 'CGDCT', 'Childcare', 'Combat Sports', 'Detective',
 		'Educational', 'Gag Humor', 'Gore', 'Harem', 'High Stakes Game', 'Historical', 'Love Polygon',
 		'Idols(Female)', 'Mythology', 'Parody', 'Psychological', 'Racing', 'Reverse Harem', 'School', 'Space',
 		'Time Travel', 'Vampire', 'Video Game', 'Ecchi', 'Erotica', 'Hentai'];
@@ -8,60 +8,56 @@ export function TranslateThemesToRussian(theme: string) {
 		case 0:
 			return 'Взрослый каст';
 		case 1:
-			return 'Яой';
-		case 2:
-			return 'Юри';
-		case 3:
 			return 'Антропоморфный';
-		case 4:
-			return 'НЯШНЫЙ)';
-		case 5:
+		case 2:
+			return 'CGDCT';
+		case 3:
 			return 'Дети';
-		case 6:
+		case 4:
 			return 'Боевой спорт';
-		case 7:
+		case 5:
 			return 'Детектив';
-		case 8:
+		case 6:
 			return 'Образовательный';
-		case 9:
+		case 7:
 			return 'Шутки-приколы';
-		case 10:
+		case 8:
 			return 'Жестокость';
-		case 11:
+		case 9:
 			return 'Гарем';
-		case 12:
+		case 10:
 			return 'Батлрояль';
-		case 13:
+		case 11:
 			return 'Исторический';
-		case 14:
+		case 12:
 			return 'Любовный треугольник';
-		case 15:
+		case 13:
 			return 'Айдолы';
-		case 16:
+		case 14:
 			return 'Мифология';
-		case 17:
+		case 15:
 			return 'Пародия';
-		case 18:
+		case 16:
 			return 'Психологический';
-		case 19:
+		case 17:
 			return 'Гонки';
-		case 20:
+		case 18:
 			return 'Обратный гарем';
-		case 21:
+		case 19:
 			return 'Школа';
-		case 22:
+		case 20:
 			return 'Космос';
-		case 23:
+		case 21:
 			return 'Путешествие во времени';
-		case 24:
+		case 22:
 			return 'Вампиры';
-		case 25:
+		case 23:
 			return 'Видео игра';
-		case 26:
+		case 24:
 			return 'Эччи';
-		case 27:
+		case 25:
 			return 'Эротика';
-		case 28:
+		case 26:
 			return 'Хентай';
 		default:
 			return '';
