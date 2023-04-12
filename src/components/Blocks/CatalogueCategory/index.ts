@@ -1,2 +1,2 @@
-export { CatalogueFilterBlock } from './CatalogueCategoryBlock';
+export { CatalogueFilterBlock } from './CategoryBlock';
 

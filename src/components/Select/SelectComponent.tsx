@@ -58,7 +58,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		return (item: string) => item;
 	}, [dropDownType]);
 
-	const sortedData = useMemo(() => {
+	const sortedDropDownContent = useMemo(() => {
 		if (dropDownType === DropDownType.GENRES) {
 			if (data) {
 				return [...data]?.sort((a, b) => b.count - a.count);
@@ -80,7 +80,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 				return (
 					<>
 						{
-							sortedData && [...sortedData].map((item: IGenres, index) => (
+							sortedDropDownContent && sortedDropDownContent.map((item: IGenres, index) => (
 								<label key={index}>
 									<li>
 										<input onChange={(event) => handleCheckBoxChange(item, event)} type='checkbox' />

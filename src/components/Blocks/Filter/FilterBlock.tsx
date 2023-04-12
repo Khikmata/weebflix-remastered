@@ -16,7 +16,7 @@ export const FilterBlock = () => {
 
 	const { data: genresData, error: genresErrors, isLoading: genresLoading } = AnimeApi.useGetAnimeGenresQuery('Avant Garde');
 
-	const [openFilters, setOpenFilters] = useState(false);
+	const [openFilters, setOpenFilters] = useState(true);
 	const dispatch = useAppDispatch();
 
 	const handleFiltersDropdown = () => {

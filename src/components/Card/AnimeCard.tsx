@@ -10,17 +10,19 @@ interface CatalogueCardProps {
 }
 
 export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item }) => {
-	return (<div key={index} className={styles['anime-card']}>
-		<div className={styles['anime-card__image']}>
-			<Link to={`/anime/${item.mal_id}`}>
-				<img loading="lazy" src={item.images.webp.large_image_url || item.images.webp.image_url} alt={item.title_english
-					+ 'poster'} width={200} height={300} />
+	return (
+		<div key={index} className={styles['anime-card']}>
+			<Link to={`/anime/${item.mal_id}`} className={styles['anime-card__image']}>
+				<img
+					loading="lazy"
+					src={item.images.webp.large_image_url || item.images.webp.image_url}
+					alt={item.title_english + 'poster'} width={200} height={300}
+				/>
 				<div className={styles['anime-card__image__rating']} style={{ color: ColorRating(item) }}>{item.score || '?'}</div>
 			</Link>
+			<div className={styles['anime-card__info']}>
+				<div className={styles['anime-card__info__title']}>{item.title_english ? item.title_english : item.title}</div>
+			</div>
 		</div>
-		<div className={styles['anime-card__info']}>
-			<div className={styles['anime-card__info__title']}>{item.title_english ? item.title_english : item.title}</div>
-		</div>
-	</div>
 	);
 }
