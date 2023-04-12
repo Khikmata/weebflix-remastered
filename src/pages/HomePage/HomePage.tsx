@@ -1,7 +1,7 @@
 
 import { AnimeGridBlock } from '../../components/Blocks/AnimeGrid';
 import { CatalogueBlock } from '../../components/Blocks/Catalogue';
-import { CatalogueFilterBlock } from '../../components/Blocks/CatalogueFilter';
+import { CatalogueFilterBlock } from '../../components/Blocks/CatalogueCategory';
 import { HistoryBlock } from '../../components/Blocks/History';
 import { NewsBlock } from '../../components/Blocks/News';
 import { RecommendationsBlock } from '../../components/Blocks/Recommendations';

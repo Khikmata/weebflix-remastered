@@ -1,2 +1,0 @@
-export { CatalogueFilterBlock } from './CatalogueFilterBlock';
-

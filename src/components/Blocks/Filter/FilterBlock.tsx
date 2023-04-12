@@ -7,7 +7,7 @@ import { SearchFilterActions } from '../../../store/reducers/SearchFilterSlice';
 import { AnimeApi } from '../../../store/services/getAnime';
 import { RangeComponent } from '../../Range';
 import { SelectComponent } from '../../Select';
-import { SelectType } from '../../Select/SelectComponent';
+import { DropDownType } from '../../Select/SelectComponent';
 import styles from './FilterBlock.styles.module.scss';
 
 import { useState } from 'react';
@@ -41,19 +41,17 @@ export const FilterBlock = () => {
 			<div className={[styles['filterblock'], styles[openFilters ? 'active' : '']].join(' ')}>
 				<RangeComponent min={0} max={10} step={1} title={'Сортировка по рейтингу:'} handleRange={handleScoreChange} />
 				<RangeComponent showMiles={false} min={1990} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
-				{
-					genresLoading ? <p> Загрузка жанров... </p> : <SelectComponent data={genresData?.genres} title='Жанры:' tooltip='Выбрать жанры' type={SelectType.GENRES} />
-				}
-				{
-					genresLoading ? <p> Загрузка тематик... </p> : <SelectComponent data={genresData?.themes} title='Тематика:' tooltip='Выбрать тематику' type={SelectType.THEMES} />
-				}
-				<SelectComponent title='Тип:' tooltip='Выбрать тип' type={SelectType.TYPES} />
-				<SelectComponent title='Отсортировать по:' tooltip='Рейтингу' type={SelectType.SORT} />
-				<SelectComponent title='Рейтинг:' tooltip='Отсортировать по рейтингу' type={SelectType.RATING} />
-				<SelectComponent title='Сезон:' tooltip='Выбрать сезон' type={SelectType.SEASON} />
-				<SelectComponent title='Количество эпизодов:' tooltip='Выбрать размер' type={SelectType.EPISODE} />
-				<SelectComponent title='Студия:' tooltip='Выбрать студию' type={SelectType.STUDIO} />
-				<SelectComponent title='Статус:' tooltip='Выбрать статус' type={SelectType.STATUS} />
+				{genresLoading && <p> Загрузка жанров и типов... </p>}
+				{genresErrors && <p> Произошла ошибка при загрузке жанров... </p>}
+				{genresData && <SelectComponent data={genresData?.genres} title='Жанры:' tooltip='Выбрать жанры' dropDownType={DropDownType.GENRES} />}
+				{genresData && <SelectComponent data={genresData?.themes} title='Тематика:' tooltip='Выбрать тематику' dropDownType={DropDownType.THEMES} />}
+				<SelectComponent title='Тип:' tooltip='Выбрать тип' dropDownType={DropDownType.TYPES} />
+				<SelectComponent title='Отсортировать по:' tooltip='Рейтингу' dropDownType={DropDownType.SORT} />
+				<SelectComponent title='Рейтинг:' tooltip='Отсортировать по рейтингу' dropDownType={DropDownType.RATING} />
+				<SelectComponent title='Сезон:' tooltip='Выбрать сезон' dropDownType={DropDownType.SEASON} />
+				<SelectComponent title='Количество эпизодов:' tooltip='Выбрать размер' dropDownType={DropDownType.EPISODE} />
+				<SelectComponent title='Студия:' tooltip='Выбрать студию' dropDownType={DropDownType.STUDIO} />
+				<SelectComponent title='Статус:' tooltip='Выбрать статус' dropDownType={DropDownType.STATUS} />
 			</div >
 		</>
 	)

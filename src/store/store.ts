@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { CatalogueFilterReducer } from "./reducers/CatalogueFilterSlice";
+import { CatalogueFilterReducer } from "./reducers/CatalogueCategorySlice";
 import { SearchFilterReducer } from "./reducers/SearchFilterSlice";
 import { AnimeApi } from "./services/getAnime";
 

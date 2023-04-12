@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Link } from "react-router-dom"
 import logo from '../../assets/icons/logo.svg'
 
@@ -16,14 +16,22 @@ export const Navbar = () => {
 	const [searchOpen, setSearchOpen] = useState(false);
 
 	const dispatch = useDispatch()
+	const searchRef = useRef<HTMLInputElement>(null)
 
-	const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchInput(e.target.value)
-		dispatch(SearchFilterActions.setSearchQuery(e.target.value))
-		console.log(searchInput)
-	}
+	const handleSearchInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchInput(e.target.value);
+		dispatch(SearchFilterActions.setSearchQuery(e.target.value));
+		console.log(searchInput);
+	}, [dispatch, setSearchInput, searchInput]);
+
+
 	const handleSearchClear = () => {
 		setSearchInput('')
+	}
+
+	const handleSearchButton = () => {
+		setSearchOpen(!searchOpen);
+		searchRef.current?.focus();
 	}
 
 	return (
@@ -35,10 +43,10 @@ export const Navbar = () => {
 				<Link to={'/'} className={styles['navbar-auth']}>
 					<img className={styles['profile']} width={24} src={profileIcon} alt="Профиль"></img>
 					<div className={styles['search-container']} >
-						<input value={searchInput} onChange={handleSearchInput} className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')} placeholder='Поиск...' />
+						<input ref={searchRef} value={searchInput} onChange={handleSearchInputChange} className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')} placeholder='Поиск...' />
 						<button type='button' className={[styles['search-bar__clear'], styles[searchOpen ? 'active' : '']].join(' ')} onClick={handleSearchClear}><img width={16} src={eraseIcon} alt='Очистить'></img></button>
 					</div>
-					<button type="button" onClick={() => setSearchOpen(!searchOpen)}>
+					<button type="button" onClick={handleSearchButton}>
 						<img className={[styles['search-open'], styles[searchOpen ? '' : 'active']].join(' ')} width={24} src={searchIcon} alt="Поиск"></img>
 						<img className={[styles['search-close'], styles[searchOpen ? 'active' : '']].join(' ')} width={24} src={closeIcon} alt="Закрыть" />
 					</button>
