@@ -36,7 +36,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const dispatch = useAppDispatch();
 
 	const genreDisplay = useAppSelector((state) => state.searchFilter.genresName);
-	const typesDisplay = useAppSelector((state) => state.searchFilter.typeQuery)
+	const typesDisplay = useAppSelector((state) => state.searchFilter.typeDisplay)
 
 
 	const handleDropdown = () => {
@@ -124,7 +124,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 				return (
 					<>
 						{
-							AnimeTypes && AnimeTypes.map((item: string, index) => (
+							AnimeTypes && AnimeTypes.map((item: any, index) => (
 								<label key={index}>
 									<li>
 										<input onChange={(event) => handleCheckBoxChange(item, event)} type='checkbox' />
