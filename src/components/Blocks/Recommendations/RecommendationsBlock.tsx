@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FreeMode, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { AnimeApi } from '../../../store/services/getAnime';
-import { IRecommendations } from '../../../types/GetAnimeTypes';
+import { IRecommendations } from '../../../types/FetchTypes';
 import styles from './RecommendationsBlock.styles.module.scss';
 
 

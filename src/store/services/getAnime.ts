@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IAnimeFilterQueries, IDetails, IGenres, IGetGenres, IRecommendations } from '../../types/GetAnimeTypes';
-import { IData, IImages } from './../../types/GetAnimeTypes';
+import { IGenres, IImages } from '../../types/DetailsTypes';
+import { IAnimeFilterQueries, IData, IDetails, IRecommendations } from '../../types/FetchTypes';
 
 export const AnimeApi = createApi({
 	reducerPath: 'animeAPI',
@@ -51,42 +51,16 @@ export const AnimeApi = createApi({
 				if (genres) url += `genres=${genres}&`;
 				if (q) url += `q=${q}&`;
 				if (letter) url += `letter=${letter}&`;
+				if (type) url += `type=${type}&`;
 
 				return { url };
 			},
 			transformResponse: (response: { data: IData[] }) => response.data,
 		}),
-		getAnimeGenres: builder.query<IGetGenres, string>({
-			query: () => '/genres/anime',
+		getAnimeGenres: builder.query<IGenres[], string>({
+			query: () => ({ url: '/genres/anime' }),
 			transformResponse: (response: { data: IGenres[] }) => {
-
-				//Названия жанров
-				const genresNames = ['Action', 'Adventure', 'Avant Garde', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Isekai',
-					'Mystery', 'Romance', 'Sci-fi', 'Slice of Life', 'Sports', 'Supernatural', 'Suspense', 'Josei', 'Kids',
-					'Seinen', 'Shoujo', 'Shounen', 'Boys Love', 'Girls Love']
-
-				//Названия тем
-				const themeNames = ['Adult Cast', , 'Anthropomorphic', 'CGDCT', 'Childcare', 'Combat Sports', 'Detective',
-					'Educational', 'Gag Humor', 'Gore', 'Harem', 'High Stakes Game', 'Historical', 'Love Polygon',
-					'Idols(Female)', 'Mythology', 'Parody', 'Psychological', 'Racing', 'Reverse Harem', 'School', 'Space',
-					'Time Travel', 'Vampire', 'Video Game', 'Ecchi', 'Erotica', 'Hentai']
-
-				const genres: IGenres[] = [];
-				const themes: IGenres[] = [];
-				const filteredGenres = {
-					genres, themes
-				}
-
-				for (const genre of response.data) {
-					if (genresNames.includes(genre.name)) {
-						genres.push(genre);
-					} else if (themeNames.includes(genre.name)) {
-						themes.push(genre);
-					}
-				}
-
-
-				return filteredGenres
+				return response.data;
 			},
 		}),
 	})

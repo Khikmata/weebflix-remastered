@@ -1,9 +1,10 @@
-import { IDetails, IMoreDetails } from "../../../types/GetAnimeTypes";
+
+import { IMoreDetails } from "../../../types/DetailsTypes";
+import { IDetails } from "../../../types/FetchTypes";
 import { TranslateGenresToRussian } from "../../../utils/Translation/TranslateGenres";
 import { TranslateRatingToRussian } from "../../../utils/Translation/TranslateRating";
 import { TranslateReleaseToRussian } from "../../../utils/Translation/TranslateRelease";
 import { TranslateStatusToRussian } from "../../../utils/Translation/TranslateStatus";
-import { TranslateThemesToRussian } from "../../../utils/Translation/TranslateThemes";
 import { TranslateTypeToRussian } from "../../../utils/Translation/TranslateTypes";
 import { Button } from "../../Button";
 import styles from './InfoBlock.styles.module.scss';
@@ -22,7 +23,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
 			<p className={styles['infoBlock-genres']}>
 				Жанры: {details.genres.map((genre: IMoreDetails) =>
 					<Button color='secondary' contentPadding={3}>
-						{TranslateGenresToRussian(genre.name)}{TranslateThemesToRussian(genre.name)}
+						{TranslateGenresToRussian(genre.name)}
 					</Button>)}
 			</p>
 			<p>Студия: {details.studios.map((studio: IMoreDetails) => <Button outlined contentPadding={3}>{studio.name}</Button>)}</p>

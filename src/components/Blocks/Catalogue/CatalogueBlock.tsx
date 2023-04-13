@@ -3,7 +3,7 @@ import { FreeMode, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useAppSelector } from "../../../hooks/redux";
 import { AnimeApi } from '../../../store/services/getAnime';
-import { IData } from "../../../types/GetAnimeTypes";
+import { IData } from "../../../types/FetchTypes";
 
 import styles from './CatalogueBlock.styles.module.scss';
 

@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IGenres } from '../../types/GetAnimeTypes';
+import { IGenres } from '../../types/DetailsTypes';
+
 
 
 export interface CounterState {
@@ -8,8 +9,10 @@ export interface CounterState {
 	dateFrom: number;
 	dateTo: number;
 	genresQuery: string;
-	genresName: string;
+	genresName: string[];
 	searchQuery: string,
+	typeQuery: string,
+	typeDisplay: string[],
 }
 
 
@@ -19,8 +22,10 @@ const initialState: CounterState = {
 	dateFrom: 1990,
 	dateTo: 2023,
 	genresQuery: '',
-	genresName: '',
 	searchQuery: '',
+	typeQuery: '',
+	genresName: [],
+	typeDisplay: [],
 }
 
 const slice = createSlice({
@@ -41,11 +46,29 @@ const slice = createSlice({
 		},
 		setGenre: (state, action: PayloadAction<IGenres>) => {
 			state.genresQuery += `${action.payload.mal_id},`;
-			state.genresName += `${action.payload.name}, `;
+			state.genresName.push(action.payload.name);
 		},
 		removeGenre: (state, action: PayloadAction<IGenres>) => {
 			state.genresQuery = state.genresQuery.replace(`${action.payload.mal_id},`, '');
-			state.genresName = state.genresName.replace(`${action.payload.name}, `, '');
+			const indexToRemove = state.genresName.findIndex(el => el === action.payload.name);
+			if (indexToRemove !== 0) {
+				state.genresName.splice(indexToRemove, 1);
+			} else {
+				state.genresName.shift();
+			}
+		},
+		setType: (state, action) => {
+			state.typeQuery = action.payload;
+			state.typeDisplay.push(action.payload);
+		},
+		removeType: (state, action) => {
+			state.typeQuery = state.typeQuery.replace(`${action.payload.mal_id}`, '');
+			const indexToRemove = state.typeDisplay.findIndex(el => el === action.payload.name);
+			if (indexToRemove !== 0) {
+				state.typeDisplay.splice(indexToRemove, 1);
+			} else {
+				state.genresName.shift();
+			}
 		},
 		setSearchQuery: (state, action: PayloadAction<string>) => {
 			state.searchQuery = action.payload

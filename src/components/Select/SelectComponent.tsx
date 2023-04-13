@@ -3,14 +3,15 @@ import { useMemo, useState } from 'react';
 import Dropdown from '../../assets/icons/dropdown.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice';
-import { IGenres } from '../../types/GetAnimeTypes';
+
+import { IGenres } from '../../types/DetailsTypes';
+import { AnimeTypes } from '../../utils/DataTypes/InfoBlockData';
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
-import { TranslateThemesToRussian } from '../../utils/Translation/TranslateThemes';
+import { TranslateTypeToRussian } from '../../utils/Translation/TranslateTypes';
 import styles from './SelectComponent.styles.module.scss';
 
 export enum DropDownType {
 	GENRES = 'genres',
-	THEMES = 'themes',
 	TYPES = 'types',
 	SORT = 'sort',
 	RATING = 'rating',
@@ -33,27 +34,61 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const dispatch = useAppDispatch();
-	const genreNames = useAppSelector((state) => state.searchFilter.genresName)
 
+	const genreDisplay = useAppSelector((state) => state.searchFilter.genresName);
+	const typesDisplay = useAppSelector((state) => state.searchFilter.typeQuery)
 
 
 	const handleDropdown = () => {
 		setOpenDropdown(!openDropdown)
 	}
 
-	const handleCheckBoxChange = (item: IGenres, event: React.FormEvent<HTMLInputElement>) => {
-		const action = event.currentTarget.checked
-			? SearchFilterActions.setGenre(item)
-			: SearchFilterActions.removeGenre(item);
-		dispatch(action);
+	const handleCheckBoxChange = (item: any, event: React.FormEvent<HTMLInputElement>) => {
+		if (dropDownType === DropDownType.GENRES) {
+			const action = event.currentTarget.checked
+				? SearchFilterActions.setGenre(item)
+				: SearchFilterActions.removeGenre(item);
+			dispatch(action);
+		}
+		if (dropDownType === DropDownType.TYPES) {
+			const action = event.currentTarget.checked
+				? SearchFilterActions.setType(item)
+				: SearchFilterActions.removeType(item);
+			dispatch(action);
+		}
 	}
+
+	const placeholderName = () => {
+		if (dropDownType === DropDownType.GENRES) {
+			if (genreDisplay.length !== 0) {
+				let result = "";
+				for (let i = 0; i < genreDisplay.length; i++) {
+					result += `${TranslateGenresToRussian(genreDisplay[i])}, `;
+				}
+				return result.slice(0, -2);
+			}
+			return tooltip;
+		}
+		if (dropDownType === DropDownType.TYPES) {
+			if (typesDisplay.length !== 0) {
+				let result = "";
+				for (let i = 0; i < typesDisplay.length; i++) {
+					result += `${TranslateTypeToRussian(typesDisplay[i])}, `;
+				}
+				return result.slice(0, -2);
+			}
+			return tooltip;
+		}
+		return tooltip;
+	}
+
 
 	const translateDropdownContent = useMemo(() => {
 		if (dropDownType === DropDownType.GENRES) {
 			return TranslateGenresToRussian;
 		}
-		if (dropDownType === DropDownType.THEMES) {
-			return TranslateThemesToRussian;
+		if (dropDownType === DropDownType.TYPES) {
+			return TranslateTypeToRussian;
 		}
 		return (item: string) => item;
 	}, [dropDownType]);
@@ -64,11 +99,6 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 				return [...data]?.sort((a, b) => b.count - a.count);
 			}
 		}
-		if (dropDownType === DropDownType.THEMES) {
-			if (data) {
-				return [...data]?.sort((a, b) => a.mal_id - b.mal_id);
-			}
-		}
 		return data;
 	}, [data, dropDownType]);
 
@@ -76,7 +106,6 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const renderDropDown = () => {
 		switch (dropDownType) {
 			case DropDownType.GENRES:
-			case DropDownType.THEMES:
 				return (
 					<>
 						{
@@ -94,12 +123,16 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 			case DropDownType.TYPES:
 				return (
 					<>
-						<label><li><input type='checkbox'></input>ТВ-Сериал</li></label >
-						<label><li><input type='checkbox'></input>Фильм</li></label >
-						<label><li><input type='checkbox'></input>OVA</li></label >
-						<label><li><input type='checkbox'></input>Спешл</li></label >
-						<label><li><input type='checkbox'></input>ONA</li></label >
-						<label><li><input type='checkbox'></input>Музыка</li></label >
+						{
+							AnimeTypes && AnimeTypes.map((item: string, index) => (
+								<label key={index}>
+									<li>
+										<input onChange={(event) => handleCheckBoxChange(item, event)} type='checkbox' />
+										{translateDropdownContent(item)}
+									</li>
+								</label >
+							))
+						}
 					</>
 				)
 			case DropDownType.EPISODE:
@@ -128,8 +161,8 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		<div className={styles['selectComponent']}>
 			<p>{title}</p>
 			<button onClick={handleDropdown} className={styles['selectComponent-container']}>
-				<p>{genreNames ? genreNames : tooltip}</p>
-				{!genreNames && <img src={Dropdown} width={12} alt='Выпадающее меню' />}
+				<p>{placeholderName()}</p>
+				<img src={Dropdown} width={12} alt='Выпадающее меню' />
 			</button>
 			<div className={[styles['selectComponent-dropdown'], styles[openDropdown ? 'active' : '']].join(' ')}>
 				<ul className={styles['dropdown-list']}>

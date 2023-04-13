@@ -1,5 +1,4 @@
-import { IDetails } from "../../../types/GetAnimeTypes";
-import styles from './RankBlock.styles.module.scss'
+import styles from './RankBlock.styles.module.scss';
 
 interface RankBlockProps {
 	details: any

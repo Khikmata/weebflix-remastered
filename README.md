@@ -1,6 +1,7 @@
 <h1>В активной разработке</h1>
 <a href='https://weebflix-remastered.vercel.app/'> Деплой </a>
 <br>
+<a href='https://www.figma.com/file/bT9Qet39nNRbfEZ64ql7z2/Untitled?node-id=0%3A1&t=if7ZzmOFAJQrMQjo-1'> Макет </a>
 <br>
 
 
@@ -39,10 +40,12 @@
 <br>
 <br>
 
-<h3>[50%] Поиск: </h3>
+<h3>[30%] Поиск: </h3>
 <strong>[X] Поиск на навбаре </strong>
 <br>
 [0%] - Модальное окно возможных вариантов поиска
+<br>
+[0%] - Не показывать NSFW контент без согласия пользователя в поиске и каталоге
 
 <br>
 <br>
@@ -61,7 +64,7 @@
 <br>
 <strong>[X] Фильтрация по тематикам </strong> 
 <br>
-[0%] Фильтрация по типу 
+<strong>[X] Фильтрация по типу  </strong> 
 <br>
 [0%] Фильтрация по рейтингу  
 <br>

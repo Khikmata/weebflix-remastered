@@ -1,4 +1,4 @@
-import { IData } from "../../types/GetAnimeTypes";
+import { IData } from "../../types/FetchTypes";
 
 
 export const ColorRating = (item: IData) => {

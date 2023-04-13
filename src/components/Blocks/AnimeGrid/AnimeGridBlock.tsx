@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../../hooks/redux'
 import { AnimeApi } from '../../../store/services/getAnime'
-import { IData } from '../../../types/GetAnimeTypes'
+import { IData } from '../../../types/FetchTypes'
 import { AnimeCard } from '../../Card'
 
 import { FilterBlock } from '../Filter'
@@ -12,14 +12,15 @@ export const AnimeGridBlock = () => {
 	const data = useAppSelector(state => state.searchFilter)
 
 	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery({
+		letter: data.searchQuery,
 		max_score: data.maxScore.toString(),
 		min_score: data.minScore.toString(),
 		start_date: data.dateFrom.toString(),
 		end_date: data.dateTo.toString(),
+		genres: data.genresQuery,
+		type: data.typeQuery,
 		order_by: 'score',
 		sort: 'desc',
-		genres: data.genresQuery,
-		letter: data.searchQuery,
 	});
 
 	return (
