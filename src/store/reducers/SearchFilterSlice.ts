@@ -13,6 +13,8 @@ export interface CounterState {
 	searchQuery: string,
 	typeQuery: string,
 	typeDisplay: string[],
+	ratingQuery: string,
+	ratingDisplay: string[],
 }
 
 
@@ -21,11 +23,13 @@ const initialState: CounterState = {
 	minScore: 0,
 	dateFrom: 1990,
 	dateTo: 2023,
-	genresQuery: '',
 	searchQuery: '',
-	typeQuery: '',
+	genresQuery: '',
 	genresName: [],
+	typeQuery: '',
 	typeDisplay: [],
+	ratingQuery: '',
+	ratingDisplay: [],
 }
 
 const slice = createSlice({
@@ -67,7 +71,20 @@ const slice = createSlice({
 			if (indexToRemove !== 0) {
 				state.typeDisplay.splice(indexToRemove, 1);
 			} else {
-				state.genresName.shift();
+				state.typeDisplay.shift();
+			}
+		},
+		setRating: (state, action) => {
+			state.typeQuery = action.payload;
+			state.typeDisplay.push(action.payload);
+		},
+		removeRating: (state, action) => {
+			state.ratingQuery = state.ratingQuery.replace(`${action.payload.mal_id}`, '');
+			const indexToRemove = state.ratingDisplay.findIndex(el => el === action.payload.name);
+			if (indexToRemove !== 0) {
+				state.ratingDisplay.splice(indexToRemove, 1);
+			} else {
+				state.ratingDisplay.shift();
 			}
 		},
 		setSearchQuery: (state, action: PayloadAction<string>) => {

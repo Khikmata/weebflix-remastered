@@ -52,6 +52,7 @@ export const AnimeApi = createApi({
 				if (q) url += `q=${q}&`;
 				if (letter) url += `letter=${letter}&`;
 				if (type) url += `type=${type}&`;
+				if (rating) url += `type=${rating}&`;
 
 				return { url };
 			},

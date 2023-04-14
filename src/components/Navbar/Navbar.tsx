@@ -21,7 +21,6 @@ export const Navbar = () => {
 	const handleSearchInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchInput(e.target.value);
 		dispatch(SearchFilterActions.setSearchQuery(e.target.value));
-		console.log(searchInput);
 	}, [dispatch, setSearchInput, searchInput]);
 
 

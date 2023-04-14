@@ -7,14 +7,13 @@ import { SearchFilterActions } from '../../../store/reducers/SearchFilterSlice';
 import { AnimeApi } from '../../../store/services/getAnime';
 import { RangeComponent } from '../../Range';
 import { SelectComponent } from '../../Select';
-import { DropDownType } from '../../Select/SelectComponent';
 import styles from './FilterBlock.styles.module.scss';
 
 import { useState } from 'react';
 
 export const FilterBlock = () => {
 
-	const { data: genresData, error: genresErrors, isLoading: genresLoading } = AnimeApi.useGetAnimeGenresQuery('s');
+	const { data: genresData } = AnimeApi.useGetAnimeGenresQuery('s');
 
 	const [openFilters, setOpenFilters] = useState(true);
 	const dispatch = useAppDispatch();
@@ -33,7 +32,9 @@ export const FilterBlock = () => {
 		dispatch(SearchFilterActions.setDateTo(values[1]));
 	}
 
-	console.log(genresData)
+	const selectTitle = ['Жанры', 'Тип', 'Рейтинг', 'Сезон', 'Студия', 'Статус', 'Отсортровать по:'];
+	const selectTooltip = ['Cортировать по жанрам', 'Сортировать по типам', 'Сортировать по рейтингу', 'Сортировать по сезонам', 'Сортировать по студии', 'Сортировать по статусу', 'Сортировать по оценке'];
+	const SelectDropDownType = ['genres', 'types', 'rating', 'season', 'studio', 'status', 'sort']
 
 	return (
 		<>
@@ -41,16 +42,10 @@ export const FilterBlock = () => {
 			<div className={[styles['filterblock'], styles[openFilters ? 'active' : '']].join(' ')}>
 				<RangeComponent min={0} max={10} step={1} title={'Сортировка по рейтингу:'} handleRange={handleScoreChange} />
 				<RangeComponent showMiles={false} min={1990} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
-				{genresLoading && <p> Загрузка жанров и типов... </p>}
-				{genresErrors && <p> Произошла ошибка при загрузке жанров... </p>}
-				{genresData && <SelectComponent data={genresData} title='Жанры:' tooltip='Выбрать жанры' dropDownType={DropDownType.GENRES} />}
-				<SelectComponent title='Тип:' tooltip='Выбрать тип' dropDownType={DropDownType.TYPES} />
-				<SelectComponent title='Отсортировать по:' tooltip='Рейтингу' dropDownType={DropDownType.SORT} />
-				<SelectComponent title='Рейтинг:' tooltip='Отсортировать по рейтингу' dropDownType={DropDownType.RATING} />
-				<SelectComponent title='Сезон:' tooltip='Выбрать сезон' dropDownType={DropDownType.SEASON} />
-				<SelectComponent title='Количество эпизодов:' tooltip='Выбрать размер' dropDownType={DropDownType.EPISODE} />
-				<SelectComponent title='Студия:' tooltip='Выбрать студию' dropDownType={DropDownType.STUDIO} />
-				<SelectComponent title='Статус:' tooltip='Выбрать статус' dropDownType={DropDownType.STATUS} />
+				{
+					selectTitle.map((_, index) => (
+						<SelectComponent key={index} title={selectTitle[index]} tooltip={selectTooltip[index]} dropDownType={SelectDropDownType[index]} genresData={genresData} />)
+					)}
 			</div >
 		</>
 	)

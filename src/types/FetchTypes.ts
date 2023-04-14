@@ -18,7 +18,7 @@ export interface IAnimeFilterQueries {
 	min_score?: string,
 	max_score?: string,
 	status?: 'airing' | 'complete' | 'upcoming',
-	rating?: 'g' | 'pg' | 'pg13' | 'r17' | 'r' | 'rx',
+	rating?: string,
 	genres?: string,
 	genres_exclude?: string[],
 	order_by?: "mal_id" | "title" | "type" | "rating" | "start_date" | "end_date" | "episodes" | "score" | "scored_by" | "rank" | "popularity" | "members" | "favorites",

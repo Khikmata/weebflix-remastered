@@ -5,38 +5,30 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice';
 
 import { IGenres } from '../../types/DetailsTypes';
-import { AnimeTypes } from '../../utils/DataTypes/InfoBlockData';
+import { AnimeRating, AnimeTypes, DropDownType } from '../../utils/DataTypes/AnimeData';
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
+import { TranslateRatingToRussian } from '../../utils/Translation/TranslateRating';
+import { TranslateReleaseToRussian } from '../../utils/Translation/TranslateRelease';
 import { TranslateTypeToRussian } from '../../utils/Translation/TranslateTypes';
 import styles from './SelectComponent.styles.module.scss';
 
-export enum DropDownType {
-	GENRES = 'genres',
-	TYPES = 'types',
-	SORT = 'sort',
-	RATING = 'rating',
-	SEASON = 'season',
-	EPISODE = 'episode',
-	STUDIO = 'studio',
-	STATUS = 'status',
-}
-
 interface SelectComponentProps {
-	data?: IGenres[];
 	title: string;
 	tooltip: string;
-	dropDownType: DropDownType;
+	dropDownType: string;
+	genresData?: IGenres[];
 }
 
 
 
-export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType, data }) => {
+export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType, genresData }) => {
 
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const dispatch = useAppDispatch();
 
 	const genreDisplay = useAppSelector((state) => state.searchFilter.genresName);
 	const typesDisplay = useAppSelector((state) => state.searchFilter.typeDisplay)
+	const ratingDisplay = useAppSelector((state) => state.searchFilter.ratingDisplay)
 
 
 	const handleDropdown = () => {
@@ -56,30 +48,58 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 				: SearchFilterActions.removeType(item);
 			dispatch(action);
 		}
+		if (dropDownType === DropDownType.RATING) {
+			const action = event.currentTarget.checked
+				? SearchFilterActions.setRating(item)
+				: SearchFilterActions.removeRating(item);
+			dispatch(action);
+		}
+	}
+
+	const sortedAnimeGenres = useMemo(() => {
+		if (dropDownType === DropDownType.GENRES) {
+			if (genresData) {
+				return [...genresData]?.sort((a, b) => b.count - a.count);
+			}
+		}
+		return genresData;
+	}, [genresData, dropDownType]);
+
+
+	//Логика появления жанров внутри селектора
+	const addSelectTooltipName = (display: string[], translateTo?: (display: string) => void) => {
+		let result = "";
+		if (display.length !== 0) {
+			for (let i = 0; i < display.length; i++) {
+				translateTo && (result += `${translateTo(display[i])}, `);
+			}
+			return result;
+		}
+		return tooltip
 	}
 
 	const placeholderName = () => {
 		if (dropDownType === DropDownType.GENRES) {
-			if (genreDisplay.length !== 0) {
-				let result = "";
-				for (let i = 0; i < genreDisplay.length; i++) {
-					result += `${TranslateGenresToRussian(genreDisplay[i])}, `;
-				}
-				return result.slice(0, -2);
-			}
-			return tooltip;
+			return addSelectTooltipName(genreDisplay, TranslateGenresToRussian)
 		}
 		if (dropDownType === DropDownType.TYPES) {
-			if (typesDisplay.length !== 0) {
-				let result = "";
-				for (let i = 0; i < typesDisplay.length; i++) {
-					result += `${TranslateTypeToRussian(typesDisplay[i])}, `;
-				}
-				return result.slice(0, -2);
-			}
-			return tooltip;
+			return addSelectTooltipName(typesDisplay, TranslateTypeToRussian)
 		}
-		return tooltip;
+		if (dropDownType === DropDownType.RATING) {
+			return addSelectTooltipName(ratingDisplay, TranslateRatingToRussian)
+		}
+		if (dropDownType === DropDownType.SEASON) {
+			return addSelectTooltipName(ratingDisplay, TranslateReleaseToRussian)
+		}
+		if (dropDownType === DropDownType.STATUS) {
+			return addSelectTooltipName(ratingDisplay, TranslateReleaseToRussian)
+		}
+		if (dropDownType === DropDownType.STUDIO) {
+			return addSelectTooltipName(ratingDisplay)
+		}
+		if (dropDownType === DropDownType.SORT) {
+			return addSelectTooltipName(ratingDisplay, TranslateReleaseToRussian)
+		}
 	}
 
 
@@ -90,51 +110,43 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		if (dropDownType === DropDownType.TYPES) {
 			return TranslateTypeToRussian;
 		}
+		if (dropDownType === DropDownType.RATING) {
+			return TranslateRatingToRussian;
+		}
 		return (item: string) => item;
 	}, [dropDownType]);
 
-	const sortedDropDownContent = useMemo(() => {
-		if (dropDownType === DropDownType.GENRES) {
-			if (data) {
-				return [...data]?.sort((a, b) => b.count - a.count);
-			}
-		}
-		return data;
-	}, [data, dropDownType]);
 
+
+
+	const dropDownContent = (animeData: any) => {
+		return (
+			<>
+				{
+					animeData && animeData.map((item: any, index: number) => (
+						<label key={index}>
+							<li>
+								<input onChange={(event) => handleCheckBoxChange(item, event)} type='checkbox' />
+								{dropDownType === DropDownType.GENRES
+									? translateDropdownContent(item.name) + `(${item.count && item.count})`
+									: translateDropdownContent(item)
+								}
+							</li>
+						</label >
+					))
+				}
+			</>
+		)
+	}
 
 	const renderDropDown = () => {
 		switch (dropDownType) {
 			case DropDownType.GENRES:
-				return (
-					<>
-						{
-							sortedDropDownContent && sortedDropDownContent.map((item: IGenres, index) => (
-								<label key={index}>
-									<li>
-										<input onChange={(event) => handleCheckBoxChange(item, event)} type='checkbox' />
-										{translateDropdownContent(item.name)} ({item.count})
-									</li>
-								</label >
-							))
-						}
-					</>
-				)
+				return dropDownContent(sortedAnimeGenres);
 			case DropDownType.TYPES:
-				return (
-					<>
-						{
-							AnimeTypes && AnimeTypes.map((item: any, index) => (
-								<label key={index}>
-									<li>
-										<input onChange={(event) => handleCheckBoxChange(item, event)} type='checkbox' />
-										{translateDropdownContent(item)}
-									</li>
-								</label >
-							))
-						}
-					</>
-				)
+				return dropDownContent(AnimeTypes)
+			case DropDownType.RATING:
+				return dropDownContent(AnimeRating)
 			case DropDownType.EPISODE:
 				return (
 					<>

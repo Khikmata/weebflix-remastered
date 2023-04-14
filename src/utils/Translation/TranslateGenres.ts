@@ -1,4 +1,5 @@
-import { genresNames } from "../DataTypes/GenresData";
+import { genresNames } from "../DataTypes/AnimeData";
+
 
 export function TranslateGenresToRussian(genre: string) {
 
@@ -76,8 +77,8 @@ export function TranslateGenresToRussian(genre: string) {
 					return 'Исторический';
 				case 'Love Polygon':
 					return 'Любовный треугольник';
-				case 'Idols(Female)':
-					return 'Айдолы';
+				case 'Idols (Female)':
+					return 'Айдолы (Девушки)';
 				case 'Mythology':
 					return 'Мифология';
 				case 'Parody':
@@ -156,6 +157,8 @@ export function TranslateGenresToRussian(genre: string) {
 					return 'Номинированные';
 				case 'Crossdressing':
 					return 'Кроссдрессинг';
+				case 'Delinquents':
+					return 'Преступления';
 				default:
 					return genresNames[i];
 			}

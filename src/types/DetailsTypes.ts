@@ -31,7 +31,7 @@ export interface IGenres {
 	count: number;
 	mal_id: number;
 }
-export enum IAnimeTypes {
+export enum AnimeTypesEnum {
 	'tv',
 	'movie',
 	'ova',
