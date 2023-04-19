@@ -6,22 +6,22 @@ export const filterOptions = [
 ]
 
 export interface CounterState {
-	activeFilterIndex: number
+	activeSliderIndex: number
 }
 
 
 const initialState: CounterState = {
-	activeFilterIndex: 0,
+	activeSliderIndex: 0,
 }
 
 const slice = createSlice({
-	name: 'counter',
+	name: 'catalogueSlider',
 	initialState,
 	reducers: {
-		setActiveFilterIndex: (state, action) => {
-			state.activeFilterIndex = action.payload;
+		setActiveCatalogueSliderIndex: (state, action) => {
+			state.activeSliderIndex = action.payload;
 		}
 	},
 })
 
-export const { reducer: CatalogueFilterReducer, actions: CatalogueFilterActions } = slice;
+export const { reducer: CatalogueSliderReducer, actions: CatalogueSliderActions } = slice;

@@ -65,7 +65,7 @@ const slice = createSlice({
 		},
 		setType: (state, action) => {
 			state.typeQuery = action.payload;
-			state.typeDisplay.push(action.payload);
+			state.typeDisplay[0] = (action.payload);
 		},
 		removeType: (state, action) => {
 			state.typeQuery = state.typeQuery.replace(`${action.payload.mal_id}`, '');
@@ -78,11 +78,11 @@ const slice = createSlice({
 		},
 		setRating: (state, action) => {
 			state.ratingQuery = action.payload;
-			state.ratingDisplay = action.payload;
+			state.ratingDisplay[0] = (action.payload);
 		},
-		removeRating: (state, action) => {
-			state.ratingQuery = state.ratingQuery.replace(`${action.payload.mal_id}`, '');
-			state.ratingDisplay.shift();
+		removeRating: (state, action: PayloadAction<string>) => {
+			state.ratingQuery = state.ratingQuery.replace(`${action.payload}`, '');
+			state.ratingDisplay[0] = ('');
 		},
 		setSearchQuery: (state, action: PayloadAction<string>) => {
 			state.searchQuery = action.payload

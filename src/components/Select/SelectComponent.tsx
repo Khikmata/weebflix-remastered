@@ -8,7 +8,6 @@ import { IGenres } from '../../types/DetailsTypes';
 import { AnimeRating, AnimeTypes, DropDownType } from '../../utils/DataTypes/AnimeData';
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
 import { TranslateRatingToRussian } from '../../utils/Translation/TranslateRating';
-import { TranslateReleaseToRussian } from '../../utils/Translation/TranslateRelease';
 import { TranslateTypeToRussian } from '../../utils/Translation/TranslateTypes';
 import styles from './SelectComponent.styles.module.scss';
 
@@ -38,17 +37,6 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		setOpenDropdown(!openDropdown)
 	}
 
-	function convertAnimeRatingToQuery(rating: string): string {
-		const mapping: Record<string, string> = {
-			'G - All Ages': 'g',
-			'PG - Children': 'pg',
-			'PG-13 - Teens 13 or older': 'pg13',
-			'R - 17+ (violence & profanity)': 'r17',
-			'R+ - Mild Nudity': 'r',
-			'Rx - Hentai': 'rx',
-		};
-		return mapping[rating];
-	}
 
 	const handleCheckBoxChange = (item: any, event: React.FormEvent<HTMLInputElement>, i?: number | null) => {
 		if (dropDownType === DropDownType.GENRES) {
@@ -65,8 +53,8 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		}
 		if (dropDownType === DropDownType.RATING) {
 			const action = event.currentTarget.checked
-				? SearchFilterActions.setRating(AnimeRating)
-				: SearchFilterActions.removeRating(AnimeRating);
+				? SearchFilterActions.setRating(TranslateRatingToRussian(item))
+				: SearchFilterActions.removeRating(TranslateRatingToRussian(item));
 			dispatch(action);
 		}
 	}
@@ -86,7 +74,10 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		let result = "";
 		if (display.length !== 0) {
 			for (let i = 0; i < display.length; i++) {
-				translateTo && (result += `${translateTo(display[i])}, `);
+				translateTo && (result += `${translateTo(display[i])}${display === genreDisplay ? ', ' : ''} `);
+			}
+			if (result === ' ') {
+				return tooltip
 			}
 			return result;
 		}
@@ -102,18 +93,6 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		}
 		if (dropDownType === DropDownType.RATING) {
 			return addSelectTooltipName(ratingDisplay, TranslateRatingToRussian)
-		}
-		if (dropDownType === DropDownType.SEASON) {
-			return addSelectTooltipName(ratingDisplay, TranslateReleaseToRussian)
-		}
-		if (dropDownType === DropDownType.STATUS) {
-			return addSelectTooltipName(ratingDisplay, TranslateReleaseToRussian)
-		}
-		if (dropDownType === DropDownType.STUDIO) {
-			return addSelectTooltipName(ratingDisplay)
-		}
-		if (dropDownType === DropDownType.SORT) {
-			return addSelectTooltipName(ratingDisplay, TranslateReleaseToRussian)
 		}
 	}
 

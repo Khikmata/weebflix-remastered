@@ -5,27 +5,27 @@ import { useAppSelector } from "../../../hooks/redux";
 import { AnimeApi } from '../../../store/services/getAnime';
 import { IData } from "../../../types/FetchTypes";
 
-import styles from './CatalogueBlock.styles.module.scss';
+import styles from './CatalogueSlider.styles.module.scss';
 
 import { useMemo } from "react";
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import { AnimeCard } from '../../Card';
 
-export const CatalogueBlock: React.FC = () => {
+export const CatalogueSlider: React.FC = () => {
 
 
 	const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading } = AnimeApi.useGetCurrentSeasonQuery(5)
 	const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading } = AnimeApi.useGetUpcomingSeasonQuery(5)
 
 
-	const selectedFilterOption = useAppSelector((state) => state.catalogueFilter.activeFilterIndex);
+	const selectedFilterOption = useAppSelector((state) => state.catalogueSlider.activeSliderIndex);
 
 	const currentFilter = useMemo(() => [currentSeason, upcomingSeason], [currentSeason, upcomingSeason])
 
 	return (
 
-		<div className={styles.catalogue}>
+		<div className={styles.catalogueSlider}>
 			<Swiper
 				modules={[Navigation, FreeMode, Grid]}
 				speed={400}
