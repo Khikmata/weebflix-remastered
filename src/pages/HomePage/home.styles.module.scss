@@ -12,11 +12,12 @@
 		left: 0;
 		top: 0;
 		width: 100%;
-		max-height: 600px;
+		max-height: 900px;
 		height: 50vw;
 		z-index: 0;
 		background: linear-gradient(360deg, $backgroundColor 2.57%, rgba(0, 0, 0, 0) 100%),
 			url(../../assets/images/home.png), $whiteColor;
+		filter: blur(10px);
 		background-repeat: no-repeat;
 		background-position: 0% 0%;
 		background-size: cover;

@@ -22,7 +22,7 @@ export const AnimeGridBlock = () => {
 		rating: data.ratingQuery,
 		order_by: 'score',
 		sort: 'desc',
-		sfw: data.sfw,
+		sfw: (data.ratingQuery === 'RX' || data.genresName.includes('Hentai') ? '' : 'true'),
 	});
 
 	return (

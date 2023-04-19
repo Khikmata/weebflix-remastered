@@ -15,12 +15,13 @@ const AnimePage = () => {
 
 	return (
 		<div className={styles['anime-page']}>
-			<div className={styles['anime-page__background']} />
+			<div className={styles['anime-page__background__overlay']} />
+			<img src={`${details?.images.webp.large_image_url}`} alt='' className={styles['anime-page__background']} />
 			<div className={styles['anime-page__container']}>
 				<div className={styles['anime-page__info']}>
 					<div className={styles['anime-info__leftside']}>
 						<div className={styles['anime-info__image']}>
-							<img loading='lazy' src={details?.images.webp.large_image_url || '../../assets/images/home.png'} alt='' />
+							<img loading='lazy' src={details?.images.webp.large_image_url} alt='' />
 						</div>
 						<Button scale color='primary' marginVertical={4}>
 							<img src={star} alt='оценить' />
@@ -37,7 +38,9 @@ const AnimePage = () => {
 							<span> {details?.title_japanese}</span>
 						</div>
 						{details && <RankBlock details={details} />}
-						<Button scale height={40} marginVertical={16} color='primary'><Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Смотреть сейчас</Link></Button>
+						<Button scale height={40} marginVertical={16} color='primary'>
+							<Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Смотреть сейчас</Link>
+						</Button>
 						{detailsLoading && <p>Загрузка описания...</p>}
 						{detailsErrors && <p>Ошибка при загрузке описания...</p>}
 						{
