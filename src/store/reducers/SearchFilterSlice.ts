@@ -15,14 +15,15 @@ export interface CounterState {
 	typeDisplay: string[],
 	ratingQuery: string,
 	ratingDisplay: string[],
+	sfw: string,
 }
 
 
 const initialState: CounterState = {
 	maxScore: 10,
 	minScore: 0,
-	dateFrom: 1990,
-	dateTo: 2023,
+	dateFrom: 1960,
+	dateTo: 2024,
 	searchQuery: '',
 	genresQuery: '',
 	genresName: [],
@@ -30,6 +31,7 @@ const initialState: CounterState = {
 	typeDisplay: [],
 	ratingQuery: '',
 	ratingDisplay: [],
+	sfw: 'true',
 }
 
 const slice = createSlice({
@@ -75,17 +77,12 @@ const slice = createSlice({
 			}
 		},
 		setRating: (state, action) => {
-			state.typeQuery = action.payload;
-			state.typeDisplay.push(action.payload);
+			state.ratingQuery = action.payload;
+			state.ratingDisplay = action.payload;
 		},
 		removeRating: (state, action) => {
 			state.ratingQuery = state.ratingQuery.replace(`${action.payload.mal_id}`, '');
-			const indexToRemove = state.ratingDisplay.findIndex(el => el === action.payload.name);
-			if (indexToRemove !== 0) {
-				state.ratingDisplay.splice(indexToRemove, 1);
-			} else {
-				state.ratingDisplay.shift();
-			}
+			state.ratingDisplay.shift();
 		},
 		setSearchQuery: (state, action: PayloadAction<string>) => {
 			state.searchQuery = action.payload

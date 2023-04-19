@@ -8,7 +8,7 @@ export interface IGetAnime {
 export interface IGetGenres {
 	genres: IGenres[],
 }
-
+//Тип для поиска
 export interface IAnimeFilterQueries {
 	page?: string;
 	limit?: number;
@@ -27,6 +27,7 @@ export interface IAnimeFilterQueries {
 	producers?: string;
 	start_date?: string;
 	end_date?: string;
+	sfw?: string,
 }
 
 export interface IData {

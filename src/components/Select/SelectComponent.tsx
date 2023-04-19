@@ -23,6 +23,9 @@ interface SelectComponentProps {
 
 export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType, genresData }) => {
 
+	const [selected, setSelected] = useState<null | number>(null);
+
+
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const dispatch = useAppDispatch();
 
@@ -35,7 +38,19 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		setOpenDropdown(!openDropdown)
 	}
 
-	const handleCheckBoxChange = (item: any, event: React.FormEvent<HTMLInputElement>) => {
+	function convertAnimeRatingToQuery(rating: string): string {
+		const mapping: Record<string, string> = {
+			'G - All Ages': 'g',
+			'PG - Children': 'pg',
+			'PG-13 - Teens 13 or older': 'pg13',
+			'R - 17+ (violence & profanity)': 'r17',
+			'R+ - Mild Nudity': 'r',
+			'Rx - Hentai': 'rx',
+		};
+		return mapping[rating];
+	}
+
+	const handleCheckBoxChange = (item: any, event: React.FormEvent<HTMLInputElement>, i?: number | null) => {
 		if (dropDownType === DropDownType.GENRES) {
 			const action = event.currentTarget.checked
 				? SearchFilterActions.setGenre(item)
@@ -50,8 +65,8 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		}
 		if (dropDownType === DropDownType.RATING) {
 			const action = event.currentTarget.checked
-				? SearchFilterActions.setRating(item)
-				: SearchFilterActions.removeRating(item);
+				? SearchFilterActions.setRating(AnimeRating)
+				: SearchFilterActions.removeRating(AnimeRating);
 			dispatch(action);
 		}
 	}

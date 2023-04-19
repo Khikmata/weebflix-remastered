@@ -1,7 +1,8 @@
+import { IDetails } from '../../../types/FetchTypes';
 import styles from './RankBlock.styles.module.scss';
 
 interface RankBlockProps {
-	details: any
+	details: IDetails
 }
 
 
@@ -10,6 +11,7 @@ export const RankBlock: React.FC<RankBlockProps> = ({ details }) => {
 		<div className={styles['rank-avg']}>
 			<p>Рейтинг</p>
 			<span>{details?.score || '?'}</span>
+			<small>scored by {details.scored_by}</small>
 		</div>
 		<div className={styles['rank-stats']}>
 			<div className={styles['rank-place']}>

@@ -12,6 +12,11 @@
 	&-genres {
 		button {
 			margin-right: 4px;
+			transition: all 0.2s ease-in-out;
+			&:hover {
+				filter: brightness(110%);
+				filter: hue-rotate(-45deg);
+			}
 		}
 	}
 }

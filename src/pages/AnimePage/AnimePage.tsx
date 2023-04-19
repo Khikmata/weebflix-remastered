@@ -22,10 +22,10 @@ const AnimePage = () => {
 						<div className={styles['anime-info__image']}>
 							<img loading='lazy' src={details?.images.webp.large_image_url || '../../assets/images/home.png'} alt='' />
 						</div>
-						<button className={styles['anime-info__rate']}>
+						<Button scale color='primary' marginVertical={4}>
 							<img src={star} alt='оценить' />
 							<p>Оцените сериал</p>
-						</button>
+						</Button>
 						<button className={styles['anime-info__addlist']}>
 							<p><span>+</span> Добавить в список</p>
 							<img src={dropdown} alt='' />
@@ -36,14 +36,10 @@ const AnimePage = () => {
 							<p>{details?.title_english || details?.title}</p>
 							<span> {details?.title_japanese}</span>
 						</div>
-						<RankBlock details={details} />
-						<Button scale height={40} marginVertical={16} color='primary'><Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Посмотреть трейлер</Link></Button>
-						{
-							detailsLoading && <p>Загрузка описания...</p>
-						}
-						{
-							detailsErrors && <p>Ошибка при загрузке описания...</p>
-						}
+						{details && <RankBlock details={details} />}
+						<Button scale height={40} marginVertical={16} color='primary'><Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Смотреть сейчас</Link></Button>
+						{detailsLoading && <p>Загрузка описания...</p>}
+						{detailsErrors && <p>Ошибка при загрузке описания...</p>}
 						{
 							details && <InfoBlock details={details} />
 						}

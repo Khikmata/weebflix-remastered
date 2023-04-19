@@ -41,7 +41,7 @@ export const FilterBlock = () => {
 			<button onClick={handleFiltersDropdown} className={styles['filter-title']}><img width={16} src={filterIcon} alt='Фильтр картинка'></img>Фильтр <img className={styles['filter-title__dropdown']} src={dropdownIcon} width={12} alt='Выпадающее меню'></img></button >
 			<div className={[styles['filterblock'], styles[openFilters ? 'active' : '']].join(' ')}>
 				<RangeComponent min={0} max={10} step={1} title={'Сортировка по рейтингу:'} handleRange={handleScoreChange} />
-				<RangeComponent showMiles={false} min={1990} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
+				<RangeComponent showMiles={false} min={1960} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
 				{
 					selectTitle.map((_, index) => (
 						<SelectComponent key={index} title={selectTitle[index]} tooltip={selectTooltip[index]} dropDownType={SelectDropDownType[index]} genresData={genresData} />)

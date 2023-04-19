@@ -24,6 +24,13 @@
 		width: 85px;
 		height: 130px;
 		object-fit: cover;
+		transition: all 0.2s ease-in-out;
+		scale: 103%;
+		&:hover {
+			overflow: hidden;
+			transition: all 0.2s ease-in-out;
+			scale: 107%;
+		}
 	}
 	p {
 		width: 100%;

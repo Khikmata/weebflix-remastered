@@ -1,5 +1,5 @@
 
-import { FreeMode, Navigation } from 'swiper';
+import { FreeMode, Grid, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useAppSelector } from "../../../hooks/redux";
 import { AnimeApi } from '../../../store/services/getAnime';
@@ -27,9 +27,9 @@ export const CatalogueBlock: React.FC = () => {
 
 		<div className={styles.catalogue}>
 			<Swiper
-				modules={[Navigation, FreeMode]}
+				modules={[Navigation, FreeMode, Grid]}
 				speed={400}
-				spaceBetween={54}
+				spaceBetween={30}
 				slidesPerView={6}
 				navigation={{
 					prevEl: '.prev-button',
@@ -43,11 +43,11 @@ export const CatalogueBlock: React.FC = () => {
 				breakpoints={{
 					0: {
 						slidesPerView: 2,
-						spaceBetween: 12,
+						spaceBetween: 10,
 					},
-					426: {
-						slidesPerView: 2,
-						spaceBetween: 54,
+					386: {
+						slidesPerView: 3,
+						spaceBetween: 10,
 					},
 					600: {
 						slidesPerView: 3,

@@ -22,6 +22,7 @@ export const AnimeGridBlock = () => {
 		rating: data.ratingQuery,
 		order_by: 'score',
 		sort: 'desc',
+		sfw: data.sfw,
 	});
 
 	return (

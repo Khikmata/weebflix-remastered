@@ -1,7 +1,7 @@
 
 
 export function TranslateTypeToRussian(type: string) {
-	switch (type) {
+	switch (type.toLowerCase()) {
 		case 'tv':
 			return 'ТВ-Сериал';
 		case 'movie':

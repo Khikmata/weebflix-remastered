@@ -28,8 +28,16 @@
 		justify-content: center;
 		letter-spacing: 0.11em;
 		font-size: 24px;
-		> img {
+		.profile {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			margin-right: 24px;
+			button {
+				width: 32px;
+				height: 32px;
+				position: absolute;
+			}
 		}
 	}
 }
@@ -49,16 +57,19 @@
 			padding: 0 12px;
 			width: 400px;
 		}
-		&__clear {
+		&__next {
 			display: none;
 			position: absolute;
-			top: 45%;
+			top: 50%;
 			font-size: 24px;
 			font-weight: 700;
 			right: 12px;
 			transform: translate(-50%, -50%);
-			color: $backgroundColor;
-			opacity: 0.3;
+			opacity: 0.4;
+			transition: all 0.2s ease-in-out;
+			&:hover {
+				opacity: 0.8;
+			}
 			&.active {
 				display: block;
 			}

@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 import logo from '../../assets/icons/logo.svg'
 
 import closeIcon from '../../assets/icons/close.svg'
-import eraseIcon from '../../assets/icons/erase.svg'
+import forwardIcon from '../../assets/icons/forward.svg'
+
 import profileIcon from '../../assets/icons/profile.svg'
 import searchIcon from '../../assets/icons/search.svg'
 
@@ -39,17 +40,20 @@ export const Navbar = () => {
 				<Link to={'/'} className={styles['navbar-logo']}>
 					<img src={logo} alt={"Главная"} />
 				</Link>
-				<Link to={'/'} className={styles['navbar-auth']}>
-					<img className={styles['profile']} width={32} src={profileIcon} alt="Профиль"></img>
+				<div className={styles['navbar-auth']}>
+					<div className={styles['profile']} >
+						<button type='button'></button>
+						<img width={32} src={profileIcon} alt="Профиль"></img>
+					</div>
 					<div className={styles['search-container']} >
 						<input ref={searchRef} value={searchInput} onChange={handleSearchInputChange} className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')} placeholder='Поиск...' />
-						<button type='button' className={[styles['search-bar__clear'], styles[searchOpen ? 'active' : '']].join(' ')} onClick={handleSearchClear}><img width={16} src={eraseIcon} alt='Очистить'></img></button>
+						<Link to={'/search'} type='button' className={[styles['search-bar__next'], styles[searchOpen ? 'active' : '']].join(' ')} onClick={handleSearchClear}><img width={12} src={forwardIcon} alt='Очистить'></img></Link>
 					</div>
 					<button type="button" onClick={handleSearchButton}>
 						<img className={[styles['search-open'], styles[searchOpen ? '' : 'active']].join(' ')} width={32} src={searchIcon} alt="Поиск"></img>
 						<img className={[styles['search-close'], styles[searchOpen ? 'active' : '']].join(' ')} width={32} src={closeIcon} alt="Закрыть" />
 					</button>
-				</Link>
+				</div>
 			</nav>
 		</header >
 	)

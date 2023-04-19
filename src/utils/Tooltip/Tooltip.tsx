@@ -1,6 +1,7 @@
+import { Portal } from "../Portal"
 
 export const Tooltip = () => {
 	return (
-		<div>Tooltip</div>
+		<Portal>Tooltip</Portal>
 	)
 }
