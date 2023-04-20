@@ -43,6 +43,18 @@ export interface IData {
 	score: Float32Array;
 }
 
+export enum season {
+	'winter',
+	'spring',
+	'summer',
+	'fall',
+}
+
+export interface ISeasons {
+	year: number;
+	seasons: string[];
+}
+
 export interface IDetails {
 	mal_id: string;
 	images: IImages;

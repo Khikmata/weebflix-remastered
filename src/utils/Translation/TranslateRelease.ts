@@ -1,10 +1,11 @@
-export function TranslateReleaseToRussian(season: string) {
+
+export function TranslateSeasonToRussian(season: string) {
 	switch (season) {
-		case 'winter':
-			return 'Экшен';
+		case "winter":
+			return 'Зима';
 		case 'summer':
 			return 'Лето';
-		case 'autumn':
+		case 'fall':
 			return 'Осень';
 		case 'spring':
 			return 'Весна';

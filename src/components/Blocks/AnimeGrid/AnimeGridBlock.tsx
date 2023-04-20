@@ -9,8 +9,8 @@ import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
 
-	const data = useAppSelector(state => state.searchFilter)
 
+	const data = useAppSelector(state => state.searchFilter)
 	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery({
 		letter: data.searchQuery,
 		max_score: data.maxScore.toString(),

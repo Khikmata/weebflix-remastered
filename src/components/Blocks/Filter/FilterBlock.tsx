@@ -14,7 +14,7 @@ import { useState } from 'react';
 export const FilterBlock = () => {
 
 	const { data: genresData } = AnimeApi.useGetAnimeGenresQuery('s');
-
+	const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery('lol')
 	const [openFilters, setOpenFilters] = useState(true);
 	const dispatch = useAppDispatch();
 
@@ -44,7 +44,7 @@ export const FilterBlock = () => {
 				<RangeComponent showMiles={false} min={1960} max={2023} step={1} title={'Сортировка по дате:'} handleRange={handleDateChange} />
 				{
 					selectTitle.map((_, index) => (
-						<SelectComponent key={index} title={selectTitle[index]} tooltip={selectTooltip[index]} dropDownType={SelectDropDownType[index]} genresData={genresData} />)
+						<SelectComponent key={index} title={selectTitle[index]} tooltip={selectTooltip[index]} dropDownType={SelectDropDownType[index]} genresData={genresData} seasonsData={seasonsData} />)
 					)}
 			</div >
 		</>

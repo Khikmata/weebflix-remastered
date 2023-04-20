@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IGenres, IImages } from '../../types/DetailsTypes';
-import { IAnimeFilterQueries, IData, IDetails, IRecommendations } from '../../types/FetchTypes';
+import { IAnimeFilterQueries, IData, IDetails, IRecommendations, ISeasons } from '../../types/FetchTypes';
 
 export const AnimeApi = createApi({
 	reducerPath: 'animeAPI',
@@ -67,11 +67,14 @@ export const AnimeApi = createApi({
 			query: () => ({ url: `https://api.jikan.moe/v4/random/anime` }),
 			transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
 		}),
-		getAnimeSeasons: builder.query<IDetails, string>({
+		getAnimeSeasons: builder.query<ISeasons[], string>({
 			query: () => ({ url: `https://api.jikan.moe/v4/seasons` }),
-			transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
+			transformResponse: (response: { data: ISeasons[] }) => response.data,
 		}),
-
+		getAnimeProducers: builder.query<ISeasons[], string>({
+			query: () => ({ url: `https://api.jikan.moe/v4/seasons` }),
+			transformResponse: (response: { data: ISeasons[] }) => response.data,
+		}),
 		getAnimeGenres: builder.query<IGenres[], string>({
 			query: () => ({ url: '/genres/anime' }),
 			transformResponse: (response: { data: IGenres[] }) => {

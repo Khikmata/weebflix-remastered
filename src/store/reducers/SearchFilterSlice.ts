@@ -22,7 +22,7 @@ export interface CounterState {
 const initialState: CounterState = {
 	maxScore: 10,
 	minScore: 0,
-	dateFrom: 1960,
+	dateFrom: 1917,
 	dateTo: 2024,
 	searchQuery: '',
 	genresQuery: '',

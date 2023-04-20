@@ -3,7 +3,7 @@ import { IMoreDetails } from "../../../types/DetailsTypes";
 import { IDetails } from "../../../types/FetchTypes";
 import { TranslateGenresToRussian } from "../../../utils/Translation/TranslateGenres";
 import { TranslateRatingToRussian } from "../../../utils/Translation/TranslateRating";
-import { TranslateReleaseToRussian } from "../../../utils/Translation/TranslateRelease";
+import { TranslateSeasonToRussian } from "../../../utils/Translation/TranslateRelease";
 import { TranslateStatusToRussian } from "../../../utils/Translation/TranslateStatus";
 import { TranslateTypeToRussian } from "../../../utils/Translation/TranslateTypes";
 import { Button } from "../../Button";
@@ -29,7 +29,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
 			<p>Студия: {details.studios.map((studio: IMoreDetails) => <Button outlined contentPadding={3}>{studio.name}</Button>)}</p>
 			<p>Рейтинг: {TranslateRatingToRussian(details.rating)}</p>
 			<p>Длительность: {details.duration}</p>
-			<p>Выпуск: {TranslateReleaseToRussian(details.season)} {details.year} </p>
+			<p>Выпуск: {TranslateSeasonToRussian(details.season)} {details.year} </p>
 		</div>
 	);
 }

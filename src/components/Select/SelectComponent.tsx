@@ -5,9 +5,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice';
 
 import { IGenres } from '../../types/DetailsTypes';
+import { ISeasons } from '../../types/FetchTypes';
 import { AnimeRating, AnimeTypes, DropDownType } from '../../utils/DataTypes/AnimeData';
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
 import { TranslateRatingToRussian } from '../../utils/Translation/TranslateRating';
+
+import { TranslateSeasonToRussian } from '../../utils/Translation/TranslateRelease';
 import { TranslateTypeToRussian } from '../../utils/Translation/TranslateTypes';
 import styles from './SelectComponent.styles.module.scss';
 
@@ -16,11 +19,12 @@ interface SelectComponentProps {
 	tooltip: string;
 	dropDownType: string;
 	genresData?: IGenres[];
+	seasonsData?: ISeasons[];
 }
 
 
 
-export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType, genresData }) => {
+export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType, genresData, seasonsData }) => {
 
 	const [selected, setSelected] = useState<null | number>(null);
 
@@ -49,6 +53,12 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 			const action = event.currentTarget.checked
 				? SearchFilterActions.setType(item)
 				: SearchFilterActions.removeType(item);
+			dispatch(action);
+		}
+		if (dropDownType === DropDownType.RATING) {
+			const action = event.currentTarget.checked
+				? SearchFilterActions.setRating(TranslateRatingToRussian(item))
+				: SearchFilterActions.removeRating(TranslateRatingToRussian(item));
 			dispatch(action);
 		}
 		if (dropDownType === DropDownType.RATING) {
@@ -107,6 +117,9 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		if (dropDownType === DropDownType.RATING) {
 			return TranslateRatingToRussian;
 		}
+		if (dropDownType === DropDownType.SEASON) {
+			return TranslateSeasonToRussian;
+		}
 		return (item: string) => item;
 	}, [dropDownType]);
 
@@ -118,13 +131,15 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 			<>
 				{
 					animeData && animeData.map((item: any, index: number) => (
-						<label key={index}>
+						<label className='container' key={index}>
 							<li>
-								<input onChange={(event) => handleCheckBoxChange(item, event)} type='checkbox' />
-								{dropDownType === DropDownType.GENRES
-									? translateDropdownContent(item.name) + `(${item.count && item.count})`
-									: translateDropdownContent(item)
-								}
+								<input
+									onChange={(event) => handleCheckBoxChange(item, event)}
+									value={0} onClick={(e) => e.currentTarget.checked ? e.currentTarget.checked : e.currentTarget.checked}
+									name={dropDownType}
+									type={dropDownType === DropDownType.GENRES ? 'checkbox' : 'radio'} />
+								{dropDownType === DropDownType.GENRES && translateDropdownContent(item.name) + `(${item.count && item.count})`}
+								{(dropDownType === DropDownType.TYPES || dropDownType === DropDownType.RATING) && translateDropdownContent(item)}
 							</li>
 						</label >
 					))
@@ -133,6 +148,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		)
 	}
 
+	console.log(seasonsData)
 	const renderDropDown = () => {
 		switch (dropDownType) {
 			case DropDownType.GENRES:
@@ -152,11 +168,19 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 			case DropDownType.SEASON:
 				return (
 					<>
-						<label><li><input type='checkbox'></input>2023 Весна</li></label>
-						<label><li><input type='checkbox'></input>2022 Зима</li></label >
-						<label><li><input type='checkbox'></input>2022 Осень</li></label >
-						<label><li><input type='checkbox'></input>2022 Лето</li></label >
-						<label><li><input type='checkbox'></input>2022 Весна</li></label >
+						{
+							seasonsData && seasonsData.map((season) =>
+								<div>
+									<p>{season.year}</p>
+									{season.seasons.map((year) => <label>
+										<li>
+											<input type='checkbox' />
+											{TranslateSeasonToRussian(year)}
+										</li>
+									</label>
+									)}
+								</div>)
+						}
 					</>
 				)
 		}
