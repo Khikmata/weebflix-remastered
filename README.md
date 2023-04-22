@@ -1,13 +1,8 @@
 <h1>В активной разработке</h1>
 <a href='https://weebflix-remastered.vercel.app/'> Деплой </a>
 <br>
-<a href='https://www.figma.com/file/bT9Qet39nNRbfEZ64ql7z2/Untitled?node-id=0%3A1&t=if7ZzmOFAJQrMQjo-1'> Макет </a>
-<br>
-
-
 
 <img src='Screenshot_1.png'></img>
-
 
 <br>
 
