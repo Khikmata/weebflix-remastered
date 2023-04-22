@@ -15,6 +15,8 @@ export interface CounterState {
 	typeDisplay: string[],
 	ratingQuery: string,
 	ratingDisplay: string[],
+	producersQuery: string,
+	producersDisplay: string[],
 	sfw: string,
 }
 
@@ -22,7 +24,7 @@ export interface CounterState {
 const initialState: CounterState = {
 	maxScore: 10,
 	minScore: 0,
-	dateFrom: 1917,
+	dateFrom: 1960,
 	dateTo: 2024,
 	searchQuery: '',
 	genresQuery: '',
@@ -31,6 +33,9 @@ const initialState: CounterState = {
 	typeDisplay: [],
 	ratingQuery: '',
 	ratingDisplay: [],
+
+	producersQuery: '',
+	producersDisplay: [],
 	sfw: 'true',
 }
 
@@ -81,6 +86,15 @@ const slice = createSlice({
 			state.ratingDisplay[0] = (action.payload);
 		},
 		removeRating: (state, action: PayloadAction<string>) => {
+			state.ratingQuery = state.ratingQuery.replace(`${action.payload}`, '');
+			state.ratingDisplay[0] = ('');
+		},
+
+		setProducer: (state, action) => {
+			state.ratingQuery = action.payload;
+			state.ratingDisplay[0] = (action.payload);
+		},
+		removeProducer: (state, action: PayloadAction<string>) => {
 			state.ratingQuery = state.ratingQuery.replace(`${action.payload}`, '');
 			state.ratingDisplay[0] = ('');
 		},

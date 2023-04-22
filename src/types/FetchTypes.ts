@@ -55,6 +55,15 @@ export interface ISeasons {
 	seasons: string[];
 }
 
+
+interface ProducersTitle {
+	title: string;
+}
+
+export interface IProducers {
+	titles: ProducersTitle[];
+}
+
 export interface IDetails {
 	mal_id: string;
 	images: IImages;

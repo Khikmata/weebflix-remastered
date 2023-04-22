@@ -5,11 +5,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice';
 
 import { IGenres } from '../../types/DetailsTypes';
-import { ISeasons } from '../../types/FetchTypes';
+import { IProducers, ISeasons } from '../../types/FetchTypes';
 import { AnimeRating, AnimeTypes, DropDownType } from '../../utils/DataTypes/AnimeData';
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
 import { TranslateRatingToRussian } from '../../utils/Translation/TranslateRating';
 
+import { SeasonActions } from '../../store/reducers/SeasonsSlice';
+import { AnimeApi } from '../../store/services/getAnime';
 import { TranslateSeasonToRussian } from '../../utils/Translation/TranslateRelease';
 import { TranslateTypeToRussian } from '../../utils/Translation/TranslateTypes';
 import styles from './SelectComponent.styles.module.scss';
@@ -20,11 +22,12 @@ interface SelectComponentProps {
 	dropDownType: string;
 	genresData?: IGenres[];
 	seasonsData?: ISeasons[];
+	producersData?: IProducers[];
 }
 
 
 
-export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType, genresData, seasonsData }) => {
+export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType, genresData, seasonsData, producersData }) => {
 
 	const [selected, setSelected] = useState<null | number>(null);
 
@@ -35,6 +38,8 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const genreDisplay = useAppSelector((state) => state.searchFilter.genresName);
 	const typesDisplay = useAppSelector((state) => state.searchFilter.typeDisplay)
 	const ratingDisplay = useAppSelector((state) => state.searchFilter.ratingDisplay)
+	const seasonsDisplay = useAppSelector((state) => state.seasonFilter.season)
+	const producersDisplay = useAppSelector((state) => state.searchFilter.producersDisplay)
 
 
 	const handleDropdown = () => {
@@ -61,10 +66,16 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 				: SearchFilterActions.removeRating(TranslateRatingToRussian(item));
 			dispatch(action);
 		}
-		if (dropDownType === DropDownType.RATING) {
+		if (dropDownType === DropDownType.SEASON) {
 			const action = event.currentTarget.checked
-				? SearchFilterActions.setRating(TranslateRatingToRussian(item))
-				: SearchFilterActions.removeRating(TranslateRatingToRussian(item));
+				? SeasonActions.setSeason(item)
+				: SeasonActions.removeSeason(item);
+			dispatch(action);
+		}
+		if (dropDownType === DropDownType.STUDIO) {
+			const action = event.currentTarget.checked
+				? SearchFilterActions.setProducer((item))
+				: SearchFilterActions.removeProducer((item));
 			dispatch(action);
 		}
 	}
@@ -103,6 +114,12 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		}
 		if (dropDownType === DropDownType.RATING) {
 			return addSelectTooltipName(ratingDisplay, TranslateRatingToRussian)
+		}
+		if (dropDownType === DropDownType.SEASON) {
+			return addSelectTooltipName(ratingDisplay, TranslateSeasonToRussian)
+		}
+		if (dropDownType === DropDownType.STUDIO) {
+			return addSelectTooltipName(producersDisplay)
 		}
 	}
 
@@ -183,9 +200,25 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 						}
 					</>
 				)
+			case DropDownType.STUDIO:
+				return (
+					<>
+						{
+							producersData && producersData.map((producer) =>
+							(
+								<label>
+									<li>
+										<input type='checkbox' />
+										{producer.titles[0].title}
+									</li>
+								</label>
+							))}
+					</>
+				)
 		}
 	}
 
+	console.log(producersData)
 
 	return (
 		<div className={styles['selectComponent']}>

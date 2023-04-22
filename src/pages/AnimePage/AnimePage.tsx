@@ -43,9 +43,8 @@ const AnimePage = () => {
 						</Button>
 						{detailsLoading && <p>Загрузка описания...</p>}
 						{detailsErrors && <p>Ошибка при загрузке описания...</p>}
-						{
-							details && <InfoBlock details={details} />
-						}
+						{details && <InfoBlock details={details} />}
+
 					</div>
 				</div>
 			</div>

@@ -10,7 +10,12 @@ import styles from './AnimeGridBlock.styles.module.scss'
 export const AnimeGridBlock = () => {
 
 
+	const year = useAppSelector((state) => state.seasonFilter.year)
+	const season = useAppSelector((state) => state.seasonFilter.season)
+
 	const data = useAppSelector(state => state.searchFilter)
+
+
 	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = AnimeApi.useGetAnimeSearchQuery({
 		letter: data.searchQuery,
 		max_score: data.maxScore.toString(),
@@ -25,6 +30,10 @@ export const AnimeGridBlock = () => {
 		sfw: (data.ratingQuery === 'RX' || data.genresName.includes('Hentai') ? '' : 'true'),
 	});
 
+	//const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery('')
+
+	//const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery({ year, season })
+
 	return (
 		<div className={styles['animegrid']}>
 			<div className={styles['animegrid-container']}>
@@ -36,6 +45,9 @@ export const AnimeGridBlock = () => {
 						{filteredData && filteredData.map((item: IData, index: number) => (
 							<AnimeCard key={index} index={index} item={item} />
 						))}
+						{/* {animeSeasonData && animeSeasonData.map((item: IData, index: number) => (
+							<AnimeCard key={index} index={index} item={item} />
+						))} */}
 					</div>
 					<div className={styles['animegrid-content__filter']}>
 						<FilterBlock />

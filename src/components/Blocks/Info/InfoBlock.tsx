@@ -30,6 +30,8 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
 			<p>Рейтинг: {TranslateRatingToRussian(details.rating)}</p>
 			<p>Длительность: {details.duration}</p>
 			<p>Выпуск: {TranslateSeasonToRussian(details.season)} {details.year} </p>
+			<p>Описание:{details.synopsis}</p>
+
 		</div>
 	);
 }

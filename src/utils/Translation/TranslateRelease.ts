@@ -10,6 +10,6 @@ export function TranslateSeasonToRussian(season: string) {
 		case 'spring':
 			return 'Весна';
 		default:
-			return '';
+			return season;
 	}
 }

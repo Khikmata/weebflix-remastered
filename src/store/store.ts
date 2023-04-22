@@ -4,12 +4,14 @@ import { CatalogueReducer } from "./reducers/CatalogueSlice";
 import { CatalogueSliderReducer } from "./reducers/CatalogueSliderSlice";
 import { SearchFilterReducer } from "./reducers/SearchFilterSlice";
 import { AnimeApi } from "./services/getAnime";
+import { SeasonReducer } from "./reducers/SeasonsSlice";
 
 const rootReducer = combineReducers({
 	[AnimeApi.reducerPath]: AnimeApi.reducer,
 	catalogueSlider: CatalogueSliderReducer,
 	catalogue: CatalogueReducer,
 	searchFilter: SearchFilterReducer,
+	seasonFilter: SeasonReducer,
 })
 
 
