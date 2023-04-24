@@ -3,7 +3,7 @@ import dropdownIcon from '../../../assets/icons/dropdown.svg';
 import filterIcon from '../../../assets/icons/filters.svg';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { SearchFilterActions } from '../../../store/reducers/SearchFilterSlice';
+import { dateFilterActions, scoreFilterActions } from '../../../store/reducers/Filters';
 import { AnimeApi } from '../../../store/services/getAnime';
 import { RangeComponent } from '../../Range';
 import { SelectComponent } from '../../Select';
@@ -25,13 +25,13 @@ export const FilterBlock = () => {
 	}
 
 	const handleScoreChange = (values: number[]) => {
-		dispatch(SearchFilterActions.setMinScore(values[0]));
-		dispatch(SearchFilterActions.setMaxScore(values[1]));
+		dispatch(scoreFilterActions.setMinScore(values[0]));
+		dispatch(scoreFilterActions.setMaxScore(values[1]));
 	}
 
 	const handleDateChange = (values: number[]) => {
-		dispatch(SearchFilterActions.setDateFrom(values[0]));
-		dispatch(SearchFilterActions.setDateTo(values[1]));
+		dispatch(dateFilterActions.setDateFrom(values[0]));
+		dispatch(dateFilterActions.setDateTo(values[1]));
 	}
 
 	const selectTitle = [

@@ -9,8 +9,9 @@ import profileIcon from '../../assets/icons/profile.svg'
 import searchIcon from '../../assets/icons/search.svg'
 
 import { useDispatch } from 'react-redux'
-import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice'
+
 import styles from './Navbar.styles.module.scss'
+import { searchFilterActions } from '../../store/reducers/Filters'
 
 export const Navbar = () => {
 	const [searchInput, setSearchInput] = useState('');
@@ -21,7 +22,7 @@ export const Navbar = () => {
 
 	const handleSearchInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchInput(e.target.value);
-		dispatch(SearchFilterActions.setSearchQuery(e.target.value));
+		dispatch(searchFilterActions.setSearchQuery(e.target.value));
 	}, [dispatch, setSearchInput, searchInput]);
 
 

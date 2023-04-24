@@ -1,20 +1,25 @@
 
 import { useMemo, useState } from 'react';
-import Dropdown from '../../assets/icons/dropdown.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { SearchFilterActions } from '../../store/reducers/SearchFilterSlice';
+
+import Dropdown from '../../assets/icons/dropdown.svg';
+import styles from './SelectComponent.styles.module.scss';
 
 import { IGenres } from '../../types/DetailsTypes';
 import { IProducers, ISeasons } from '../../types/FetchTypes';
+
 import { AnimeRating, AnimeTypes, DropDownType } from '../../utils/DataTypes/AnimeData';
+
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres';
 import { TranslateRatingToRussian } from '../../utils/Translation/TranslateRating';
-
-import { SeasonActions } from '../../store/reducers/SeasonsSlice';
-import { AnimeApi } from '../../store/services/getAnime';
 import { TranslateSeasonToRussian } from '../../utils/Translation/TranslateRelease';
 import { TranslateTypeToRussian } from '../../utils/Translation/TranslateTypes';
-import styles from './SelectComponent.styles.module.scss';
+
+import { genreFilterActions } from '../../store/reducers/Filters/GenreFilterSlice';
+import { ratingFilterActions } from '../../store/reducers/Filters/RatingFilterSlice';
+import { seasonFilterActions } from '../../store/reducers/Filters/SeasonsFilterSlice';
+import { studioFilterActions } from '../../store/reducers/Filters/StudioFilterSlice';
+import { typeFilterActions } from '../../store/reducers/Filters/TypeFilterSlice';
 
 interface SelectComponentProps {
 	title: string;
@@ -35,11 +40,11 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const dispatch = useAppDispatch();
 
-	const genreDisplay = useAppSelector((state) => state.searchFilter.genresName);
-	const typesDisplay = useAppSelector((state) => state.searchFilter.typeDisplay)
-	const ratingDisplay = useAppSelector((state) => state.searchFilter.ratingDisplay)
-	const seasonsDisplay = useAppSelector((state) => state.seasonFilter.season)
-	const producersDisplay = useAppSelector((state) => state.searchFilter.producersDisplay)
+	const genreDisplay = useAppSelector((state) => state.genreFilter.genresName);
+	const typesDisplay = useAppSelector((state) => state.typeFilter.typeDisplay)
+	const ratingDisplay = useAppSelector((state) => state.ratingFilter.ratingDisplay)
+	const seasonsDisplay = useAppSelector((state) => state.seasonsFilter.season)
+	const producersDisplay = useAppSelector((state) => state.studioFilter.producersDisplay)
 
 
 	const handleDropdown = () => {
@@ -50,32 +55,32 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const handleCheckBoxChange = (item: any, event: React.FormEvent<HTMLInputElement>, i?: number | null) => {
 		if (dropDownType === DropDownType.GENRES) {
 			const action = event.currentTarget.checked
-				? SearchFilterActions.setGenre(item)
-				: SearchFilterActions.removeGenre(item);
+				? genreFilterActions.setGenre(item)
+				: genreFilterActions.removeGenre(item);
 			dispatch(action);
 		}
 		if (dropDownType === DropDownType.TYPES) {
 			const action = event.currentTarget.checked
-				? SearchFilterActions.setType(item)
-				: SearchFilterActions.removeType(item);
+				? typeFilterActions.setType(item)
+				: typeFilterActions.removeType(item);
 			dispatch(action);
 		}
 		if (dropDownType === DropDownType.RATING) {
 			const action = event.currentTarget.checked
-				? SearchFilterActions.setRating(TranslateRatingToRussian(item))
-				: SearchFilterActions.removeRating(TranslateRatingToRussian(item));
+				? ratingFilterActions.setRating(TranslateRatingToRussian(item))
+				: ratingFilterActions.removeRating(TranslateRatingToRussian(item));
 			dispatch(action);
 		}
 		if (dropDownType === DropDownType.SEASON) {
 			const action = event.currentTarget.checked
-				? SeasonActions.setSeason(item)
-				: SeasonActions.removeSeason(item);
+				? seasonFilterActions.setSeasonData(item)
+				: seasonFilterActions.removeSeasonData(item);
 			dispatch(action);
 		}
 		if (dropDownType === DropDownType.STUDIO) {
 			const action = event.currentTarget.checked
-				? SearchFilterActions.setProducer((item))
-				: SearchFilterActions.removeProducer((item));
+				? studioFilterActions.setProducer((item))
+				: studioFilterActions.removeProducer((item));
 			dispatch(action);
 		}
 	}
@@ -186,15 +191,18 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 				return (
 					<>
 						{
-							seasonsData && seasonsData.map((season) =>
-								<div>
-									<p>{season.year}</p>
-									{season.seasons.map((year) => <label>
-										<li>
-											<input type='checkbox' />
-											{TranslateSeasonToRussian(year)}
-										</li>
-									</label>
+							seasonsData && seasonsData.map((yearSeasons, index) =>
+								<div key={index}>
+									<p>{yearSeasons.year}</p>
+									{yearSeasons.seasons.map((season, index) =>
+										<label>
+											<li key={index} >
+												<input
+													type='checkbox'
+													onChange={(event) => handleCheckBoxChange({ year: yearSeasons.year, season }, event)} />
+												{TranslateSeasonToRussian(season)}
+											</li>
+										</label>
 									)}
 								</div>)
 						}

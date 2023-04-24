@@ -1,17 +1,28 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
+
+
+import { AnimeApi } from "./services/getAnime";
+
 import { CatalogueReducer } from "./reducers/CatalogueSlice";
 import { CatalogueSliderReducer } from "./reducers/CatalogueSliderSlice";
-import { SearchFilterReducer } from "./reducers/SearchFilterSlice";
-import { AnimeApi } from "./services/getAnime";
-import { SeasonReducer } from "./reducers/SeasonsSlice";
+
+import { dateFilterReducer, genreFilterReducer, ratingFilterReducer, scoreFilterReducer, searchFilterReducer, seasonFilterReducer, studioFilterReducer, typeFilterReducer } from "./reducers/Filters/";
+
 
 const rootReducer = combineReducers({
 	[AnimeApi.reducerPath]: AnimeApi.reducer,
 	catalogueSlider: CatalogueSliderReducer,
 	catalogue: CatalogueReducer,
-	searchFilter: SearchFilterReducer,
-	seasonFilter: SeasonReducer,
+
+	dateFilter: dateFilterReducer,
+	scoreFilter: scoreFilterReducer,
+	genreFilter: genreFilterReducer,
+	typeFilter: typeFilterReducer,
+	ratingFilter: ratingFilterReducer,
+	seasonsFilter: seasonFilterReducer,
+	studioFilter: studioFilterReducer,
+	searchFilter: searchFilterReducer
 })
 
 

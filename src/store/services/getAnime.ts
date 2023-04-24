@@ -1,3 +1,4 @@
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IGenres, IImages } from '../../types/DetailsTypes';
 import { IAnimeFilterQueries, IData, IDetails, IProducers, IRecommendations, ISeasons } from '../../types/FetchTypes';
@@ -6,6 +7,8 @@ export interface seasonQuery {
 	year: string,
 	season: string
 }
+
+
 
 export const AnimeApi = createApi({
 	reducerPath: 'animeAPI',
@@ -69,8 +72,8 @@ export const AnimeApi = createApi({
 			},
 			transformResponse: (response: { data: IData[] }) => response.data,
 		}),
-		getAnimeBySeason: builder.query<IData[], seasonQuery>({
-			query: ({ year, season }) => ({ url: `https://api.jikan.moe/v4/seasons/${year}/${season}` }),
+		getAnimeBySeason: builder.query<IData[], string>({
+			query: (seasonQuery) => ({ url: `https://api.jikan.moe/v4/seasons/${seasonQuery}` }),
 			transformResponse: (response: { data: IData[] }) => response.data,
 		}),
 		getAnimeRandom: builder.query<IDetails, string>({
