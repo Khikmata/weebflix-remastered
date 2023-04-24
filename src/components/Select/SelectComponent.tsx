@@ -40,11 +40,15 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const dispatch = useAppDispatch();
 
+	const seasonYear = useAppSelector((state) => state.seasonsFilter.year)
+	const seasonSeason = useAppSelector((state) => state.seasonsFilter.season)
+
 	const genreDisplay = useAppSelector((state) => state.genreFilter.genresName);
 	const typesDisplay = useAppSelector((state) => state.typeFilter.typeDisplay)
 	const ratingDisplay = useAppSelector((state) => state.ratingFilter.ratingDisplay)
-	const seasonsDisplay = useAppSelector((state) => state.seasonsFilter.season)
 	const producersDisplay = useAppSelector((state) => state.studioFilter.producersDisplay)
+
+	const seasonDisplay = `${seasonYear} ` + TranslateSeasonToRussian(seasonSeason);
 
 
 	const handleDropdown = () => {
@@ -96,7 +100,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 
 
 	//Логика появления жанров внутри селектора
-	const addSelectTooltipName = (display: string[], translateTo?: (display: string) => void) => {
+	const addSelectTooltipName = (display: string[] | string, translateTo?: (display: string) => void) => {
 		let result = "";
 		if (display.length !== 0) {
 			for (let i = 0; i < display.length; i++) {
@@ -121,7 +125,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 			return addSelectTooltipName(ratingDisplay, TranslateRatingToRussian)
 		}
 		if (dropDownType === DropDownType.SEASON) {
-			return addSelectTooltipName(ratingDisplay, TranslateSeasonToRussian)
+			return seasonDisplay === ' ' ? tooltip : seasonDisplay;
 		}
 		if (dropDownType === DropDownType.STUDIO) {
 			return addSelectTooltipName(producersDisplay)

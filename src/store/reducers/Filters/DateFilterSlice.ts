@@ -8,7 +8,7 @@ export interface CounterState {
 
 const initialState: CounterState = {
 	dateFrom: 1960,
-	dateTo: 2024,
+	dateTo: 2023,
 }
 
 const slice = createSlice({

@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react'
 import { useAppSelector } from '../../../hooks/redux'
 import { AnimeApi } from '../../../store/services/getAnime'
 import { IData } from '../../../types/FetchTypes'
 import { AnimeCard } from '../../Card'
-
 import { FilterBlock } from '../Filter'
 
 import styles from './AnimeGridBlock.styles.module.scss'
@@ -32,13 +32,22 @@ export const AnimeGridBlock = () => {
 		genres: AddGenreToQuery.genresQuery,
 		type: AddTypeToQuery.typeQuery,
 		rating: AddRatingToQuery.ratingQuery,
+		producers: AddStudioToQuery.producersQuery,
 		order_by: 'score',
 		sort: 'desc',
 		sfw: (AddRatingToQuery.ratingQuery === 'RX' || AddGenreToQuery.genresName.includes('Hentai') ? '' : 'true'),
 	});
 
+	const [skip, setSkip] = useState(true)
 	const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery('')
-	const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(AddSeasonsToQuery.seasonQuery)
+	const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(AddSeasonsToQuery.seasonQuery, { skip })
+	const { data: producersData } = AnimeApi.useGetAnimeProducersQuery('', { skip })
+
+
+
+	useEffect(() => {
+		seasonsData && setSkip((prevState) => !prevState);
+	}, [seasonsData])
 
 	return (
 		<div className={styles['animegrid']}>
