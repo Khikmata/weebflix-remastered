@@ -14,8 +14,7 @@ const AnimePage = () => {
 
 	let { id } = useParams<string>();
 
-	const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '')
-
+	const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '',);
 	return (
 		<div className={styles['anime-page']}>
 			<div className={styles['anime-page__background__overlay']} />

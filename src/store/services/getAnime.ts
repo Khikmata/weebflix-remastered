@@ -1,5 +1,6 @@
 
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
 import { IGenres, IImages } from '../../types/DetailsTypes';
 import { IAnimeFilterQueries, IData, IDetails, IProducers, IRecommendations, ISeasons } from '../../types/FetchTypes';
 
@@ -8,11 +9,13 @@ export interface seasonQuery {
 	season: string
 }
 
-
+const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.jikan.moe/v4' }), {
+	maxRetries: 3,
+})
 
 export const AnimeApi = createApi({
 	reducerPath: 'animeAPI',
-	baseQuery: fetchBaseQuery({ baseUrl: "https://api.jikan.moe/v4" }),
+	baseQuery: staggeredBaseQuery,
 	endpoints: (builder) => ({
 		getCurrentSeason: builder.query<IData[], number>({
 			query: () => ({
