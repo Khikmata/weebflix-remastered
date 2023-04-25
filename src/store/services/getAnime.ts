@@ -36,7 +36,7 @@ export const AnimeApi = createApi({
 			query: (id) => ({ url: `/anime/${id}/full` }),
 			transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
 		}),
-		getAnimeImages: builder.query<IImages, string>({
+		getAnimePictures: builder.query<IImages, string>({
 			query: (id) => ({ url: `/anime/${id}/pictures` }),
 			transformResponse: (response: { data: IImages }) => response.data,
 		}),
@@ -87,7 +87,10 @@ export const AnimeApi = createApi({
 		getAnimeProducers: builder.query<IProducers[], string>({
 			query: () => ({ url: `https://api.jikan.moe/v4/producers` }),
 			transformResponse: (response: { data: IProducers[] }) => response.data,
-
+		}),
+		getAnimeCharacters: builder.query<any[], string>({
+			query: (id) => ({ url: `https://api.jikan.moe/v4/anime/${id}/characters` }),
+			transformResponse: (response: { data: any[] }) => response.data,
 		}),
 		getAnimeGenres: builder.query<IGenres[], string>({
 			query: () => ({ url: '/genres/anime' }),

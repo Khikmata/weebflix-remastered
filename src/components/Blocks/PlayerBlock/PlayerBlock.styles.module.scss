@@ -1,0 +1,15 @@
+@import "../../../styles/variables";
+
+.playerBlock {
+	margin-top: 36px;
+	h2 {
+		margin-bottom: 12px;
+	}
+	@include block;
+	padding: 16px;
+	&-player {
+		width: 100%;
+		background-color: $blockActiveColor;
+		height: 500px;
+	}
+}

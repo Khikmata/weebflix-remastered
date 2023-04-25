@@ -2,6 +2,9 @@ import { Link, useParams } from 'react-router-dom';
 import dropdown from '../../assets/icons/dropdown.svg';
 import star from '../../assets/icons/star.svg';
 import { InfoBlock } from '../../components/Blocks/Info';
+
+import { CharactersBlock } from '../../components/Blocks/PicturesBlock';
+import { PlayerBlock } from '../../components/Blocks/PlayerBlock';
 import { RankBlock } from '../../components/Blocks/Rank';
 import { Button } from '../../components/Button';
 import { AnimeApi } from '../../store/services/getAnime';
@@ -23,10 +26,10 @@ const AnimePage = () => {
 						<div className={styles['anime-info__image']}>
 							<img loading='lazy' src={details?.images.webp.large_image_url} alt='' />
 						</div>
-						<Button scale color='primary' marginVertical={4}>
+						<button className={styles['anime-info__rate']}>
 							<img src={star} alt='оценить' />
 							<p>Оцените сериал</p>
-						</Button>
+						</button>
 						<button className={styles['anime-info__addlist']}>
 							<p><span>+</span> Добавить в список</p>
 							<img src={dropdown} alt='' />
@@ -47,6 +50,8 @@ const AnimePage = () => {
 
 					</div>
 				</div>
+				<CharactersBlock id={id ? id : ''} />
+				<PlayerBlock />
 			</div>
 		</div>
 	)

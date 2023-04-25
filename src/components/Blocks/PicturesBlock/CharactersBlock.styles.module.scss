@@ -1,0 +1,34 @@
+@import "../../../styles/variables";
+.charactersBlock {
+	margin-top: 32px;
+	@include block;
+	height: 100%;
+	padding: 16px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	grid-column-gap: 12px;
+	grid-row-gap: 12px;
+}
+.characterCard {
+	display: flex;
+	border: 1px solid $blockActiveColor;
+	padding: 4px;
+	img {
+		width: 50px;
+		margin-right: 8px;
+		object-fit: cover;
+		border: 0.5px solid white;
+	}
+	.characterInfo {
+		display: flex;
+		flex-direction: column;
+		p {
+			font-weight: 400;
+		}
+		small {
+			color: $gray;
+			font-weight: 500;
+		}
+	}
+}

@@ -1,0 +1,2 @@
+export { CharactersBlock } from "./CharactersBlock";
+

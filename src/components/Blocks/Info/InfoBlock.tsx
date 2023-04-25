@@ -16,23 +16,27 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
 
 
 	return (
-		<div className={styles['infoBlock']}>
-			<p>Тип: <Button contentPadding={3} outlined>{(TranslateTypeToRussian(details.type))}</Button></p>
-			<p>Эпизоды: {details.episodes || 0}</p>
-			<p>Статус: {TranslateStatusToRussian(details.status)}</p>
-			<p className={styles['infoBlock-genres']}>
-				Жанры: {details.genres.map((genre: IMoreDetails) =>
-					<Button color='secondary' contentPadding={3}>
-						{TranslateGenresToRussian(genre.name)}
-					</Button>)}
-			</p>
-			<p>Студия: {details.studios.map((studio: IMoreDetails) => <Button outlined contentPadding={3}>{studio.name}</Button>)}</p>
-			<p>Рейтинг: {TranslateRatingToRussian(details.rating)}</p>
-			<p>Длительность: {details.duration}</p>
-			<p>Выпуск: {TranslateSeasonToRussian(details.season)} {details.year} </p>
-			<p>Описание:{details.synopsis}</p>
+		<>
+			<div className={styles['infoBlock']}>
+				<p>Тип: <Button contentPadding={3} outlined>{(TranslateTypeToRussian(details.type))}</Button></p>
+				<p>Эпизоды: {details.episodes || 0}</p>
+				<p>Статус: {TranslateStatusToRussian(details.status)}</p>
+				<p className={styles['infoBlock-genres']}>
+					Жанры: {details.genres.map((genre: IMoreDetails) =>
+						<Button color='secondary' contentPadding={3}>
+							{TranslateGenresToRussian(genre.name)}
+						</Button>)}
+				</p>
+				<p>Студия: {details.studios.map((studio: IMoreDetails) => <Button outlined contentPadding={3}>{studio.name}</Button>)}</p>
+				<p>Рейтинг: {TranslateRatingToRussian(details.rating)}</p>
+				<p>Длительность: {details.duration}</p>
+				<p>Выпуск: {TranslateSeasonToRussian(details.season)} {details.year} </p>
 
-		</div>
+			</div>
+			<div className={styles['description']}>
+				<p><strong>Описание:</strong> <br />{details.synopsis}</p>
+			</div>
+		</>
 	);
 }
 
