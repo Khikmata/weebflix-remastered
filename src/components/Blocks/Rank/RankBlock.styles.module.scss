@@ -73,3 +73,10 @@
 		height: 360px;
 	}
 }
+@media (max-width: 850px) {
+	.rank-place,
+	.rank-popularity,
+	.rank-reviews {
+		margin: 0 12px;
+	}
+}
