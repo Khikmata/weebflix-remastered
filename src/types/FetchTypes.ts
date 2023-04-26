@@ -65,6 +65,7 @@ export interface IProducers {
 }
 
 export interface IDetails {
+	url: string;
 	mal_id: string;
 	images: IImages;
 	trailer: ITrailer;
@@ -111,5 +112,12 @@ interface IPagination {
 	last_visible_page: number;
 }
 
+export interface ISources {
+	isM3U8: boolean;
+	quality: string;
+	url: string;
+}
 
-
+export interface IPlayerData {
+	sources: ISources[]
+}

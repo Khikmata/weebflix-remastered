@@ -25,4 +25,10 @@
 	margin-top: 24px;
 	@include block;
 	padding: 8px;
+	max-height: 200px;
+	overflow: hidden;
+
+	&.active {
+		max-height: none;
+	}
 }

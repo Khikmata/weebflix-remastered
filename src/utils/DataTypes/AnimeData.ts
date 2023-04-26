@@ -1,5 +1,5 @@
 //Типы селектов
-export enum DropDownType {
+export enum DropDownTypeEnum {
 	GENRES = 'genres',
 	TYPES = 'types',
 	SORT = 'sort',

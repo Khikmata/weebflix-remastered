@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 export const catalogueOptions = [
 	"Аниме",
 	"Манга",
-	"Персонажи",
 ]
 
 export interface CounterState {

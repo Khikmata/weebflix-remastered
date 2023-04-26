@@ -13,7 +13,7 @@ import styles from './home.styles.module.scss';
 const HomePage = () => {
 
 	const catalogueSliderOptions = ['Актуальное', 'Скоро выйдет']
-	const catalogueOptions = ['Аниме', 'Персонажи', 'Манга']
+	const catalogueOptions = ['Аниме', 'Манга']
 
 	return (
 		<div className={styles['home']} >

@@ -2,7 +2,6 @@ import { genresNames } from "../DataTypes/AnimeData";
 
 
 export function TranslateGenresToRussian(genre: string) {
-
 	for (let i = 0; i < genresNames.length; i++) {
 		const genreName = genresNames[i].toLowerCase();
 		if (genre.toLowerCase().includes(genreName)) {

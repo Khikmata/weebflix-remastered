@@ -3,18 +3,61 @@ import dropdown from '../../assets/icons/dropdown.svg';
 import star from '../../assets/icons/star.svg';
 import { InfoBlock } from '../../components/Blocks/Info';
 
-import { CharactersBlock } from '../../components/Blocks/PicturesBlock';
+import { useEffect, useState } from 'react';
+import { CharactersBlock } from '../../components/Blocks/CharactersBlock';
 import { PlayerBlock } from '../../components/Blocks/PlayerBlock';
 import { RankBlock } from '../../components/Blocks/Rank';
 import { Button } from '../../components/Button';
 import { AnimeApi } from '../../store/services/getAnime';
+import { PlayerApi } from '../../store/services/getPlayer';
 import styles from './animepage.styles.module.scss';
 
 const AnimePage = () => {
 
+	const [skip, setSkip] = useState(true);
+	const [urlQuery, setUrlQuery] = useState('');
+
 	let { id } = useParams<string>();
 
 	const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '',);
+	const { data: playerData } = PlayerApi.useGetAnimePlayerQuery(urlQuery, { skip })
+	console.log(playerData)
+
+	let url = '';
+	const getUrl = () => {
+		let tempSlashes = 0;
+		let tempUnderscores = 0;
+		if (details?.url) {
+			for (let i = 0; i < details?.url.length; i++) {
+				if (details.url[i] === '/') {
+					tempSlashes++
+				}
+				if (tempSlashes > 4 && i !== details.url.length - 1) {
+					if (details.url[i + 1] === '_') {
+						tempUnderscores++;
+						if (tempUnderscores === 2) {
+							continue;
+						}
+					}
+					else {
+						tempUnderscores = 0;
+					}
+					url += details.url[i + 1];
+				}
+			}
+		}
+		url = url.replace(/_/g, '-')
+		setUrlQuery(url);
+	}
+
+	useEffect(() => {
+		details && getUrl();
+		if (url !== '') {
+			console.log(url)
+			setSkip(false)
+		}
+	}, [details, url])
+
 	return (
 		<div className={styles['anime-page']}>
 			<div className={styles['anime-page__background__overlay']} />
@@ -50,7 +93,7 @@ const AnimePage = () => {
 					</div>
 				</div>
 				<CharactersBlock id={id ? id : ''} />
-				<PlayerBlock />
+				{playerData && <PlayerBlock sources={playerData.sources} />}
 			</div>
 		</div>
 	)

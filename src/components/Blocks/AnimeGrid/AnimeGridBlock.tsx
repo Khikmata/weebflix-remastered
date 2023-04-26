@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react'
-import { useAppSelector } from '../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { AnimeApi } from '../../../store/services/getAnime'
 import { IData } from '../../../types/FetchTypes'
 import { AnimeCard } from '../../Card'
 import { FilterBlock } from '../Filter'
 
+import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice'
 import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
 
 
-	const year = useAppSelector((state) => state.seasonsFilter.year)
-	const season = useAppSelector((state) => state.seasonsFilter.season)
 
 	const AddDateToQuery = useAppSelector(state => state.dateFilter)
 	const AddScoreToQuery = useAppSelector(state => state.scoreFilter)
@@ -43,11 +42,14 @@ export const AnimeGridBlock = () => {
 	const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(AddSeasonsToQuery.seasonQuery, { skip })
 	const { data: producersData } = AnimeApi.useGetAnimeProducersQuery('', { skip })
 
-
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		seasonsData && setSkip((prevState) => !prevState);
-	}, [seasonsData])
+
+		producersData && dispatch(DropDownDataActions.setProducerData(producersData))
+		seasonsData && dispatch(DropDownDataActions.setSeasonData(seasonsData))
+	}, [producersData, seasonsData])
 
 	return (
 		<div className={styles['animegrid']}>

@@ -13,6 +13,7 @@ const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.jikan.mo
 	maxRetries: 3,
 })
 
+
 export const AnimeApi = createApi({
 	reducerPath: 'animeAPI',
 	baseQuery: staggeredBaseQuery,
@@ -101,6 +102,16 @@ export const AnimeApi = createApi({
 				return response.data;
 			},
 		}),
+		getAnimePlayer: builder.query<IGenres[], string>({
+			query: (url) => ({ url: `anime/gogoanime/watch/${url}-episode-1?server=gogocdn` }),
+			transformResponse: (response: { data: IGenres[] }) => {
+				return response.data;
+			},
+		}),
 	})
 })
+
+
+
+
 export const { } = AnimeApi;

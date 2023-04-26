@@ -22,7 +22,7 @@ export const OptionsBlock: React.FC<OptionsBlockProps> = ({ options }) => {
 
 	function handleActiveOption() {
 		if (options[0] === 'Актуальное') {
-			console.log(activeCatalogueSliderOption)
+
 			return activeCatalogueSliderOption
 		}
 		if (options[0] === 'Аниме') {

@@ -2,23 +2,28 @@
 import dropdownIcon from '../../../assets/icons/dropdown.svg';
 import filterIcon from '../../../assets/icons/filters.svg';
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
+import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice';
 import { dateFilterActions, scoreFilterActions } from '../../../store/reducers/Filters';
 import { AnimeApi } from '../../../store/services/getAnime';
 import { RangeComponent } from '../../Range';
 import { SelectComponent } from '../../Select';
 import styles from './FilterBlock.styles.module.scss';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const FilterBlock = () => {
 
 	const { data: genresData } = AnimeApi.useGetAnimeGenresQuery('s');
-	const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery('')
 
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		genresData && dispatch(DropDownDataActions.setGenreData(genresData))
+	}, [genresData])
 
 	const [openFilters, setOpenFilters] = useState(true);
-	const dispatch = useAppDispatch();
+
 
 	const handleFiltersDropdown = () => {
 		setOpenFilters(!openFilters)
@@ -70,7 +75,13 @@ export const FilterBlock = () => {
 				/>
 				{
 					selectTitle.map((_, index) => (
-						<SelectComponent key={index} title={selectTitle[index]} tooltip={selectTooltip[index]} dropDownType={SelectDropDownType[index]} genresData={genresData} seasonsData={seasonsData} />)
+						<SelectComponent
+							key={index}
+							title={selectTitle[index]}
+							tooltip={selectTooltip[index]}
+							dropDownType={SelectDropDownType[index]}
+						/>
+					)
 					)}
 			</div >
 		</>
