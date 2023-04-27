@@ -9,7 +9,7 @@ const playerBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.consumet.or
 
 export const PlayerApi = createApi({
 	reducerPath: 'playerAPI',
-	baseQuery: fetchBaseQuery({ baseUrl: 'https://api.consumet.org/' }),
+	baseQuery: playerBaseQuery,
 	endpoints: (builder) => ({
 		getAnimePlayer: builder.query<IPlayerData, string>({
 			query: (url) => ({ url: `anime/gogoanime/watch/${url}-episode-1` }),

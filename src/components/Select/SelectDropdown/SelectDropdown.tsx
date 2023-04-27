@@ -39,10 +39,11 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 			dispatch(action);
 		}
 		if (dropDownType === DropDownTypeEnum.TYPES) {
-			const action = event.currentTarget.checked
-				? typeFilterActions.setType(item)
-				: typeFilterActions.removeType(item);
-			dispatch(action);
+			if (event.currentTarget.checked) {
+				return dispatch(typeFilterActions.setType(item))
+			} else {
+				return dispatch(typeFilterActions.removeType(item))
+			}
 		}
 		if (dropDownType === DropDownTypeEnum.RATING) {
 			const action = event.currentTarget.checked

@@ -20,17 +20,17 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
 	return (
 		<>
 			<div className={styles['infoBlock']}>
-				<p>Тип: <Button contentPadding={3} outlined>{(TranslateTypeToRussian(details.type))}</Button></p>
+				<p>Тип: <Button contentPadding={'3'} outlined>{(TranslateTypeToRussian(details.type))}</Button></p>
 				<p>Эпизоды: {details.episodes || 0}</p>
 				<p>Статус: {TranslateStatusToRussian(details.status)}</p>
 				<p className={styles['infoBlock-genres']}>
 					Жанры: {details.genres.map((genre: IMoreDetails, index) =>
-						<Button key={index} color='secondary' contentPadding={3}>
+						<Button key={index} color='secondary' contentPadding={'3'}>
 							{TranslateGenresToRussian(genre.name)}
 						</Button>)}
 				</p>
 				<p>Студия: {details.studios.map((studio: IMoreDetails, index) =>
-					<Button key={index} outlined contentPadding={3}>
+					<Button key={index} outlined contentPadding={'3'}>
 						{studio.name}
 					</Button>)}
 				</p>

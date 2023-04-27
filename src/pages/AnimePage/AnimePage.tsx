@@ -20,7 +20,7 @@ const AnimePage = () => {
 	let { id } = useParams<string>();
 
 	const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '',);
-	const { data: playerData } = PlayerApi.useGetAnimePlayerQuery(urlQuery, { skip })
+	const { data: playerData, error: playerError, isLoading: playerLoading } = PlayerApi.useGetAnimePlayerQuery(urlQuery, { skip })
 	console.log(playerData)
 
 	let url = '';
@@ -28,6 +28,7 @@ const AnimePage = () => {
 		let tempSlashes = 0;
 		let tempUnderscores = 0;
 		if (details?.url) {
+			//преобразование юрла и замена _ на - для плеера
 			for (let i = 0; i < details?.url.length; i++) {
 				if (details.url[i] === '/') {
 					tempSlashes++
@@ -84,7 +85,7 @@ const AnimePage = () => {
 						</div>
 						{details && <RankBlock details={details} />}
 						<Button scale height={40} marginVertical={16} color='primary'>
-							<Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Смотреть сейчас</Link>
+							<Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Смотреть трейлер</Link>
 						</Button>
 						{detailsLoading && <p>Загрузка описания...</p>}
 						{detailsErrors && <p>Ошибка при загрузке описания...</p>}
@@ -93,7 +94,9 @@ const AnimePage = () => {
 					</div>
 				</div>
 				<CharactersBlock id={id ? id : ''} />
+				{playerLoading && <p>Загрузка плеера...</p>}
 				{playerData && <PlayerBlock sources={playerData.sources} />}
+				{playerError && <p>Произошла ошибка при загрузке плеера.</p>}
 			</div>
 		</div>
 	)

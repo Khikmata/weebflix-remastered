@@ -14,7 +14,7 @@ interface ButtonProps {
 	outlined?: boolean;
 	scale?: boolean;
 	height?: number;
-	contentPadding?: number;
+	contentPadding?: string;
 
 	type?: "range" | "input";
 	max?: number;

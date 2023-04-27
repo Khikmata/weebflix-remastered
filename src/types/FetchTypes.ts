@@ -119,5 +119,5 @@ export interface ISources {
 }
 
 export interface IPlayerData {
-	sources: ISources[]
+	sources: ISources[];
 }

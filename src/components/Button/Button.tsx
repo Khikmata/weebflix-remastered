@@ -8,15 +8,18 @@ interface ButtonProps {
 	marginVertical?: number;
 	marginHorizontal?: number;
 	color?: "primary" | "secondary";
+	borderCol?: string;
+	borderWidth?: number;
 	outlined?: boolean;
 	scale?: boolean;
 	height?: number;
-	contentPadding?: number;
+	contentPadding?: string;
 	onClick?: (e: any) => void;
 }
 
 
-export const Button: React.FC<ButtonProps> = ({ children, marginHorizontal, marginVertical, color, outlined, scale, height, contentPadding, onClick }) => {
+
+export const Button: React.FC<ButtonProps> = ({ children, marginHorizontal, marginVertical, color, outlined, scale, height, contentPadding, onClick, borderCol, borderWidth, }) => {
 	return (
 		<button
 			style={{
@@ -24,13 +27,14 @@ export const Button: React.FC<ButtonProps> = ({ children, marginHorizontal, marg
 				height: height,
 				padding: contentPadding,
 
+
 				marginBottom: marginVertical,
 				marginTop: marginVertical,
 
 				marginLeft: marginHorizontal,
 				marginRight: marginHorizontal,
 
-				border: outlined ? '1px solid #B5B5B5' : 'none',
+				border: outlined ? `${borderWidth ? borderWidth : 1}px solid ${borderCol ? borderCol : 'white'}` : 'none',
 				backgroundColor:
 					(color === 'primary' && '#28646c') ||
 					(color === 'secondary' && '#7d8099') ||
