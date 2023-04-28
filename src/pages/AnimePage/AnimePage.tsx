@@ -11,6 +11,7 @@ import { Button } from '../../components/Button';
 import { AnimeApi } from '../../store/services/getAnime';
 import { PlayerApi } from '../../store/services/getPlayer';
 import styles from './animepage.styles.module.scss';
+import { RelationBlock } from '../../components/Blocks/RelationBlock';
 
 const AnimePage = () => {
 
@@ -94,6 +95,7 @@ const AnimePage = () => {
 					</div>
 				</div>
 				<CharactersBlock id={id ? id : ''} />
+				<RelationBlock />
 				{playerLoading && <p>Загрузка плеера...</p>}
 				{playerData && <PlayerBlock sources={playerData.sources} />}
 				{playerError && <p>Произошла ошибка при загрузке плеера.</p>}

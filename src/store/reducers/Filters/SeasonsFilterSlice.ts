@@ -29,7 +29,7 @@ const slice = createSlice({
 			state.season = action.payload.season;
 			state.seasonQuery = `${state.year}/${state.season}`
 		},
-		removeSeasonData: (state, action: PayloadAction<string>) => {
+		removeSeasonData: (state, action: PayloadAction<SeasonData>) => {
 			state.seasonQuery = ''
 			state.year = ''
 			state.season = ''

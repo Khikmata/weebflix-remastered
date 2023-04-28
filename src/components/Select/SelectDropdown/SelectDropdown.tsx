@@ -1,14 +1,15 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { genreFilterActions, ratingFilterActions, seasonFilterActions, studioFilterActions, typeFilterActions } from '../../../store/reducers/Filters';
 import { AnimeRating, AnimeTypes, DropDownTypeEnum } from '../../../utils/DataTypes/AnimeData';
 import { TranslateRatingToRussian } from '../../../utils/Translation/TranslateRating';
 import { TranslateSeasonToRussian } from '../../../utils/Translation/TranslateRelease';
+import styles from './SelectDropdown.styles.module.scss';
 import { translateDropdownContent } from './TranslateDropdown';
-
 interface SelectDropdownProps {
 	dropDownType: string
 }
+
 
 
 export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) => {
@@ -18,7 +19,6 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 	const producersData = useAppSelector((state) => state.dropDownData.producersData)
 	const genresData = useAppSelector((state) => state.dropDownData.genreData)
 	const seasonsData = useAppSelector((state) => state.dropDownData.seasonsData)
-
 
 	const sortedAnimeGenres = useMemo(() => {
 		if (dropDownType === DropDownTypeEnum.GENRES) {
@@ -30,6 +30,45 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 	}, [genresData, dropDownType]);
 
 
+	const [selectedYear, setSelectedYear] = useState(0);
+	const [selectedSeason, setSelectedSeason] = useState(0);
+
+	const SeasonsData = useMemo(() => {
+
+		console.log(selectedYear, selectedSeason)
+		const handleSeasonChange = (year: string, season: string, yearIndex: number, seasonIndex: number, event: React.FormEvent<HTMLInputElement>) => {
+			const action = event.currentTarget.checked
+				? seasonFilterActions.setSeasonData({ year, season })
+				: seasonFilterActions.removeSeasonData({ year, season });
+			dispatch(action);
+
+			setSelectedYear(yearIndex);
+			setSelectedSeason(seasonIndex);
+
+			console.log((yearIndex === selectedYear && seasonIndex === selectedSeason))
+		}
+
+
+		return (
+			seasonsData && seasonsData.map((yearSeasons, yearIndex) =>
+				<div key={yearIndex}>
+					<p className={styles[yearIndex === selectedYear ? 'active' : '']}> {yearSeasons.year}</p>
+					{yearSeasons.seasons.map((season, seasonIndex) => (
+						<label className={styles['container']} key={seasonIndex}>
+							<li onClick={() => console.log(yearIndex, seasonIndex)} className={styles[(yearIndex === selectedYear && seasonIndex === selectedSeason) ? 'active' : '']}>
+								<input
+									type='radio'
+									name={`seasons`}
+									onChange={(event) => handleSeasonChange(yearSeasons.year.toString(), season, yearIndex, seasonIndex, event)}
+								/>
+								{TranslateSeasonToRussian(season)}
+							</li>
+						</label>
+					))}
+				</div >
+			)
+		)
+	}, [seasonsData, selectedSeason])
 
 	const handleCheckBoxChange = (item: any, event: React.FormEvent<HTMLInputElement>, i?: number | null) => {
 		if (dropDownType === DropDownTypeEnum.GENRES) {
@@ -52,10 +91,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 			dispatch(action);
 		}
 		if (dropDownType === DropDownTypeEnum.SEASON) {
-			const action = event.currentTarget.checked
-				? seasonFilterActions.setSeasonData(item)
-				: seasonFilterActions.removeSeasonData(item);
-			dispatch(action);
+
 		}
 		if (dropDownType === DropDownTypeEnum.STUDIO) {
 			const action = event.currentTarget.checked
@@ -70,7 +106,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 			<>
 				{
 					animeData && animeData.map((item: any, index: number) => (
-						<label className='container' key={index}>
+						<label className={styles['container']} key={index}>
 							<li>
 								<input
 									onChange={(event) => handleCheckBoxChange(item, event)}
@@ -107,20 +143,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 				return (
 					<>
 						{
-							seasonsData && seasonsData.map((yearSeasons, index) =>
-								<div key={index}>
-									<p>{yearSeasons.year}</p>
-									{yearSeasons.seasons.map((season, index) =>
-										<label key={index}>
-											<li  >
-												<input
-													type='checkbox'
-													onChange={(event) => handleCheckBoxChange({ year: yearSeasons.year, season }, event)} />
-												{TranslateSeasonToRussian(season)}
-											</li>
-										</label>
-									)}
-								</div>)
+							SeasonsData
 						}
 					</>
 				)

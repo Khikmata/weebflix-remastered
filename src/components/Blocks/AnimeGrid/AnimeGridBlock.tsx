@@ -40,13 +40,13 @@ export const AnimeGridBlock = () => {
 
 	const [skip, setSkip] = useState(true)
 	const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery('')
-	const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(AddSeasonsToQuery, { skip, refetchOnMountOrArgChange: true, })
+	const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(AddSeasonsToQuery, { skip })
 	const { data: producersData } = AnimeApi.useGetAnimeProducersQuery('', { skip })
 
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		seasonsData && setSkip((prevState) => !prevState);
+		AddSeasonsToQuery && setSkip((prevState) => !prevState);
 		producersData && dispatch(DropDownDataActions.setProducerData(producersData))
 		seasonsData && dispatch(DropDownDataActions.setSeasonData(seasonsData))
 	}, [producersData, seasonsData, AddSeasonsToQuery])
