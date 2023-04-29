@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useAppSelector } from '../../hooks/redux';
 
 import Dropdown from '../../assets/icons/dropdown.svg';
@@ -22,8 +22,6 @@ interface SelectComponentProps {
 
 }
 
-
-
 export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType }) => {
 
 	const [openDropdown, setOpenDropdown] = useState(false);
@@ -31,11 +29,11 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const seasonYear = useAppSelector((state) => state.seasonsFilter.year)
 	const seasonSeason = useAppSelector((state) => state.seasonsFilter.season)
 
+	//tooltips for inputs
 	const genreDisplay = useAppSelector((state) => state.genreFilter.genresName);
 	const typesDisplay = useAppSelector((state) => state.typeFilter.typeDisplay)
 	const ratingDisplay = useAppSelector((state) => state.ratingFilter.ratingDisplay)
 	const producersDisplay = useAppSelector((state) => state.studioFilter.producersDisplay)
-
 	const seasonDisplay = `${seasonYear} ` + TranslateSeasonToRussian(seasonSeason);
 
 
@@ -43,44 +41,53 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		setOpenDropdown(!openDropdown)
 	}
 
-	const addSelectTooltipName = (display: string[] | string, translateTo?: (display: string) => void) => {
+	const GetTooltipDisplay = (display: string[] | string, translateTo?: (display: string) => void) => {
+
 		let result = "";
 		if (display.length !== 0) {
-			for (let i = 0; i < display.length; i++) {
-				translateTo && (result += `${translateTo(display[i])}${display === genreDisplay ? ', ' : ''} `);
+			if (translateTo) {
+				for (let i = 0; i < display.length; i++) {
+					translateTo && (result += `${translateTo(display[i])}${display === genreDisplay ? ', ' : ''} `);
+				}
+				if (result === ' ') {
+					return tooltip
+				}
 			}
-			if (result === ' ') {
-				return tooltip
-			}
-			return result;
+			return result += display;
 		}
 		return tooltip
 	}
 
 	//Перенаправлятор
-	const placeholderName = () => {
+	const placeholderName = useMemo(() => {
 		if (dropDownType === DropDownTypeEnum.GENRES) {
-			return addSelectTooltipName(genreDisplay, TranslateGenresToRussian)
+			return GetTooltipDisplay(genreDisplay, TranslateGenresToRussian)
 		}
 		if (dropDownType === DropDownTypeEnum.TYPES) {
-			return addSelectTooltipName(typesDisplay, TranslateTypeToRussian)
+			return GetTooltipDisplay(typesDisplay, TranslateTypeToRussian)
 		}
 		if (dropDownType === DropDownTypeEnum.RATING) {
-			return addSelectTooltipName(ratingDisplay, TranslateRatingToRussian)
+			return GetTooltipDisplay(ratingDisplay, TranslateRatingToRussian)
 		}
 		if (dropDownType === DropDownTypeEnum.SEASON) {
 			return seasonDisplay === ' ' ? tooltip : seasonDisplay;
 		}
 		if (dropDownType === DropDownTypeEnum.STUDIO) {
-			return addSelectTooltipName(producersDisplay)
+			return GetTooltipDisplay(producersDisplay)
 		}
-	}
+	}, [dropDownType,
+		genreDisplay,
+		producersDisplay,
+		ratingDisplay,
+		seasonDisplay,
+		tooltip,
+		typesDisplay,])
 
 	return (
 		<div className={styles['selectComponent']}>
 			<p>{title}</p>
 			<button onClick={handleDropdown} className={styles['selectComponent-container']}>
-				<p>{placeholderName()}</p>
+				<p>{placeholderName}</p>
 				<img src={Dropdown} width={12} alt='Выпадающее меню' />
 			</button>
 			<div className={[styles['selectComponent-dropdown'], styles[openDropdown ? 'active' : '']].join(' ')}>

@@ -163,4 +163,5 @@ export function TranslateGenresToRussian(genre: string) {
 			}
 		}
 	}
+	return genre;
 }

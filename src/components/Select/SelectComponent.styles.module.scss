@@ -44,23 +44,31 @@
 	max-height: 300px;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	p {
+		height: 100%;
+	}
 	li {
 		display: flex;
+
 		padding: 4px 16px;
 		justify-content: flex-start;
 		align-items: center;
 		font-size: 16px;
 		border: 1px solid $lowopacity;
+		color: $fontColor;
 		input {
 			margin-right: 8px;
 		}
+
 		&:hover {
-			background-color: gray;
+			filter: brightness(140%);
+
 			input {
 				scale: 130%;
 			}
 			p {
 				scale: 104%;
+				filter: brightness(140%);
 			}
 		}
 	}

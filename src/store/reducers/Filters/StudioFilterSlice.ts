@@ -1,28 +1,29 @@
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { IProducers } from '../../../types/FetchTypes';
 
 export interface CounterState {
 	producersQuery: string,
-	producersDisplay: string[],
+	producersDisplay: string,
 }
 
 
 const initialState: CounterState = {
 	producersQuery: '',
-	producersDisplay: [],
+	producersDisplay: '',
 }
 
 const slice = createSlice({
-	name: 'studioFilter',
+	name: 'producersFilter',
 	initialState,
 	reducers: {
-		setProducer: (state, action) => {
-			state.producersQuery = action.payload;
-			state.producersDisplay[0] = (action.payload);
+		setProducer: (state, action: PayloadAction<IProducers>) => {
+			state.producersQuery = action.payload.mal_id.toString();
+			state.producersDisplay = action.payload.titles[0].title;
 		},
 		removeProducer: (state, action: PayloadAction<string>) => {
 			state.producersQuery = state.producersQuery.replace(`${action.payload}`, '');
-			state.producersDisplay[0] = ('');
+			state.producersDisplay = '';
 		},
 	}
 })

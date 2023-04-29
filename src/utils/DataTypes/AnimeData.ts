@@ -9,6 +9,8 @@ export enum DropDownTypeEnum {
 	STUDIO = 'studio',
 	STATUS = 'status',
 }
+
+
 //Названия жанров
 export const genresNames = [
 	'Action', 'Adventure', 'Avant Garde', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Isekai',

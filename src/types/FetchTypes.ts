@@ -62,6 +62,12 @@ interface ProducersTitle {
 
 export interface IProducers {
 	titles: ProducersTitle[];
+	count: number;
+	favorites: number;
+	mal_id: number;
+	url: string;
+	established: string;
+	about: string;
 }
 
 export interface IDetails {
@@ -117,6 +123,26 @@ export interface ISources {
 	quality: string;
 	url: string;
 }
+
+
+export interface ICharacter {
+	mal_id: number;
+	url: string;
+	images: IImages;
+	name: string;
+}
+
+interface IVoiceActor {
+	person: ICharacter;
+	language: string;
+}
+
+export interface IGetCharacters {
+	character: ICharacter;
+	role: string;
+	voice_actors: IVoiceActor;
+}
+
 
 export interface IPlayerData {
 	sources: ISources[];

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimeApi } from '../../../store/services/getAnime'
+import { IGetCharacters } from '../../../types/FetchTypes'
 import styles from './CharactersBlock.styles.module.scss'
 
 interface charactersBlockProps {
@@ -24,7 +25,7 @@ export const CharactersBlock: React.FC<charactersBlockProps> = (id) => {
 	return (
 		<div className={styles['charactersBlock']}>
 			{
-				charactersData?.filter((item, index) => index < 8).map((item: any, index) => (
+				charactersData?.filter((item, index) => index < 8).map((item: IGetCharacters, index) => (
 					<div className={styles['characterCard']} key={index}>
 						<img src={item.character.images.webp.image_url} />
 						<div className={styles['characterInfo']}>

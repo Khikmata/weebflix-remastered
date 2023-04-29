@@ -56,7 +56,9 @@ export const AnimeApi = createApi({
 		}),
 		getAnimeBySeason: builder.query<IData[], string>({
 			query: (seasonQuery) => ({ url: `https://api.jikan.moe/v4/seasons/${seasonQuery}` }),
-			transformResponse: (response: { data: IData[] }) => response.data,
+			transformResponse: (response: { data: IData[] }) => {
+				return response.data;
+			}
 		}),
 		getAnimeRandom: builder.query<IDetails, string>({
 			query: () => ({ url: `https://api.jikan.moe/v4/random/anime` }),
@@ -64,7 +66,9 @@ export const AnimeApi = createApi({
 		}),
 		getAnimeSeasons: builder.query<ISeasons[], string>({
 			query: () => ({ url: `https://api.jikan.moe/v4/seasons` }),
-			transformResponse: (response: { data: ISeasons[] }) => response.data,
+			transformResponse: (response: { data: ISeasons[] }) => {
+				return response.data = response.data.filter((season) => season.year > 1963);
+			},
 		}),
 		getAnimeProducers: builder.query<IProducers[], string>({
 			query: () => ({ url: `https://api.jikan.moe/v4/producers` }),
