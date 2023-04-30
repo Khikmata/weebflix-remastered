@@ -4,6 +4,7 @@ import { genreFilterActions, ratingFilterActions, studioFilterActions, typeFilte
 import { AnimeRating, AnimeTypes, DropDownTypeEnum } from '../../../utils/DataTypes/AnimeData';
 import { TranslateRatingToRussian } from '../../../utils/Translation/TranslateRating';
 import { SeasonsDropdown } from './FilterDropdowns/SeasonsDropdown';
+import { StatusDropdown } from './FilterDropdowns/StatusDropdown';
 import styles from './SelectDropdown.styles.module.scss';
 import { translateDropdownContent } from './TranslateDropdown';
 interface SelectDropdownProps {
@@ -59,7 +60,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 			dispatch(action);
 		}
 		if (dropDownType === DropDownTypeEnum.STATUS) {
-
+			return <StatusDropdown />
 		}
 	}
 	const dropDownContent = (animeData: any) => {
@@ -118,6 +119,8 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 							))}
 					</>
 				)
+			case DropDownTypeEnum.STATUS:
+				return <StatusDropdown />
 		}
 	}
 

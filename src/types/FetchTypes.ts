@@ -10,14 +10,14 @@ export interface IGetGenres {
 }
 //Тип для поиска
 export interface IAnimeFilterQueries {
-	page?: string;
+	page?: number;
 	limit?: number;
 	q?: string;
 	type?: string,
 	score?: number,
 	min_score?: string,
 	max_score?: string,
-	status?: 'airing' | 'complete' | 'upcoming',
+	status?: string | null,
 	rating?: string,
 	genres?: string,
 	genres_exclude?: string[],

@@ -2,6 +2,7 @@ import { DropDownTypeEnum } from "../../../utils/DataTypes/AnimeData";
 import { TranslateGenresToRussian } from "../../../utils/Translation/TranslateGenres";
 import { TranslateRatingToRussian } from "../../../utils/Translation/TranslateRating";
 import { TranslateSeasonToRussian } from "../../../utils/Translation/TranslateRelease";
+import { TranslateStatusToRussian } from "../../../utils/Translation/TranslateStatus";
 import { TranslateTypeToRussian } from "../../../utils/Translation/TranslateTypes";
 
 export const translateDropdownContent = (item: string, dropDownType: string): string => {
@@ -16,6 +17,9 @@ export const translateDropdownContent = (item: string, dropDownType: string): st
 	}
 	if (dropDownType === DropDownTypeEnum.SEASON) {
 		return TranslateSeasonToRussian(item);
+	}
+	if (dropDownType === DropDownTypeEnum.STATUS) {
+		return TranslateStatusToRussian(item);
 	}
 	return item;
 };

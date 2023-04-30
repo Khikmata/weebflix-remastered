@@ -21,7 +21,7 @@ export const AnimeGridBlock = () => {
 	const AddSeasonsToQuery = useAppSelector(state => state.seasonsFilter.seasonQuery)
 	const AddProducersToQuery = useAppSelector(state => state.studioFilter.producersQuery)
 	const AddSearchToQuery = useAppSelector(state => state.searchFilter.searchQuery)
-
+	const AddStatusToQuery = useAppSelector(state => state.statusFilter.statusType)
 
 	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = SearchAPI.useGetAnimeSearchQuery({
 		letter: AddSearchToQuery,
@@ -33,8 +33,11 @@ export const AnimeGridBlock = () => {
 		type: AddTypeToQuery,
 		rating: AddRatingToQuery,
 		producers: AddProducersToQuery,
+		status: AddStatusToQuery,
 		order_by: 'score',
 		sort: 'desc',
+		limit: 20,
+		page: 1,
 		sfw: (AddRatingToQuery === 'RX' || AddGenreToQuery.genresName.includes('Hentai') ? '' : 'true'),
 	});
 

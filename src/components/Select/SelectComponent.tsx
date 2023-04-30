@@ -1,5 +1,5 @@
 
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useAppSelector } from '../../hooks/redux';
 
 import Dropdown from '../../assets/icons/dropdown.svg';
@@ -13,6 +13,7 @@ import { TranslateRatingToRussian } from '../../utils/Translation/TranslateRatin
 import { TranslateSeasonToRussian } from '../../utils/Translation/TranslateRelease';
 import { TranslateTypeToRussian } from '../../utils/Translation/TranslateTypes';
 
+import { TranslateStatusToRussian } from '../../utils/Translation/TranslateStatus';
 import { SelectDropdown } from './SelectDropdown';
 
 interface SelectComponentProps {
@@ -22,12 +23,13 @@ interface SelectComponentProps {
 
 }
 
+
+
 export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip, dropDownType }) => {
 
 	const [openDropdown, setOpenDropdown] = useState(false);
 
-	const seasonYear = useAppSelector((state) => state.seasonsFilter.year)
-	const seasonSeason = useAppSelector((state) => state.seasonsFilter.season)
+	const { year: seasonYear, season: seasonSeason } = useAppSelector((state) => state.seasonsFilter)
 
 	//tooltips for inputs
 	const genreDisplay = useAppSelector((state) => state.genreFilter.genresName);
@@ -35,31 +37,35 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const ratingDisplay = useAppSelector((state) => state.ratingFilter.ratingDisplay)
 	const producersDisplay = useAppSelector((state) => state.studioFilter.producersDisplay)
 	const seasonDisplay = `${seasonYear} ` + TranslateSeasonToRussian(seasonSeason);
+	const statusDisplay = useAppSelector((state) => state.statusFilter.statusType)
 
 
-	const handleDropdown = () => {
-		setOpenDropdown(!openDropdown)
-	}
-
-	const GetTooltipDisplay = (display: string[] | string, translateTo?: (display: string) => void) => {
-
+	//Отображение выбранных нами параметров и их перевод
+	const GetTooltipDisplay = useCallback((display: string[] | string | null, translateTo?: (display: string) => void) => {
 		let result = "";
-		if (display.length !== 0) {
-			if (translateTo) {
-				for (let i = 0; i < display.length; i++) {
-					translateTo && (result += `${translateTo(display[i])}${display === genreDisplay ? ', ' : ''} `);
+		if (display !== null) {
+			if (display.length !== 0) {
+				//если текст для дисплея не нужно переводить, то возвращаем оригинальный дисплей
+				if (!translateTo) {
+					return result += display;
 				}
+				//Дисплей переводится, для дисплея жанров добавляется ',' для перечисления
+				for (let i = 0; i < display.length; i++) {
+					translateTo && (result += `${translateTo(display[i])}${display === genreDisplay ? ', ' : ''}`);
+				}
+				//Если никакой из вариантов не выбран, получаем исходный тултип
 				if (result === ' ') {
 					return tooltip
 				}
+				//возвращаем результат дисплея (с/без) перевод(ом/а)
+				return result;
 			}
-			return result += display;
 		}
 		return tooltip
-	}
+	}, [genreDisplay, tooltip]);
 
-	//Перенаправлятор
-	const placeholderName = useMemo(() => {
+	//Перенаправление конкретных селектов для отображения
+	const displayHandler = useMemo(() => {
 		if (dropDownType === DropDownTypeEnum.GENRES) {
 			return GetTooltipDisplay(genreDisplay, TranslateGenresToRussian)
 		}
@@ -75,19 +81,28 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		if (dropDownType === DropDownTypeEnum.STUDIO) {
 			return GetTooltipDisplay(producersDisplay)
 		}
+		if (dropDownType === DropDownTypeEnum.STATUS) {
+			return statusDisplay === '' ? tooltip : (TranslateStatusToRussian(statusDisplay !== null ? statusDisplay : tooltip));
+		}
 	}, [dropDownType,
 		genreDisplay,
 		producersDisplay,
 		ratingDisplay,
 		seasonDisplay,
 		tooltip,
-		typesDisplay,])
+		typesDisplay,
+		statusDisplay])
+
+	const handleDropdown = useCallback(() => {
+		setOpenDropdown(prevState => !prevState);
+	}, []);
+
 
 	return (
 		<div className={styles['selectComponent']}>
 			<p>{title}</p>
 			<button onClick={handleDropdown} className={styles['selectComponent-container']}>
-				<p>{placeholderName}</p>
+				<p>{displayHandler}</p>
 				<img src={Dropdown} width={12} alt='Выпадающее меню' />
 			</button>
 			<div className={[styles['selectComponent-dropdown'], styles[openDropdown ? 'active' : '']].join(' ')}>

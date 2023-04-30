@@ -27,7 +27,7 @@ export const CharactersBlock: React.FC<charactersBlockProps> = (id) => {
 			{
 				charactersData?.filter((item, index) => index < 8).map((item: IGetCharacters, index) => (
 					<div className={styles['characterCard']} key={index}>
-						<img src={item.character.images.webp.image_url} />
+						<img src={item.character.images.webp.image_url} alt={'обложка'} />
 						<div className={styles['characterInfo']}>
 							<p>{item.character.name}</p>
 							<small>{item.role}</small>

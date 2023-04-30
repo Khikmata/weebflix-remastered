@@ -26,12 +26,10 @@ export const SeasonsDropdown = () => {
 			seasonIndex: number,
 		) => {
 			if (yearIndex === selectedYear && seasonIndex === selectedSeason) {
-				// Radio button is already selected, so uncheck it
 				dispatch(seasonFilterActions.removeSeasonData({ year, season }));
 				setSelectedYear(null);
 				setSelectedSeason(null);
 			} else {
-				// Radio button is not selected, so select it
 				dispatch(seasonFilterActions.setSeasonData({ year, season }));
 				setSelectedYear(yearIndex);
 				setSelectedSeason(seasonIndex);

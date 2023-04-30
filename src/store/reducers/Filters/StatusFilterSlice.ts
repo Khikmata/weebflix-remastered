@@ -1,18 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export enum statusTypeEnum {
+const statusType = [
 	'airing',
 	"complete",
 	"upcoming"
-}
+]
+
+
 
 export interface CounterState {
-	statusType: statusTypeEnum | null,
+	statusType: string | null,
 }
 
 
 const initialState: CounterState = {
-	statusType: null,
+	statusType: '',
 }
 
 const slice = createSlice({

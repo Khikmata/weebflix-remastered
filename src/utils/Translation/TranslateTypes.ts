@@ -15,7 +15,7 @@ export function TranslateTypeToRussian(type: string) {
 		case 'music':
 			return 'Музыкальный';
 		default:
-			return '';
+			return type;
 	}
 }
 

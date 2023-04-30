@@ -15,8 +15,6 @@
 			border: 2px solid $gray;
 			background-color: $blockActiveColor;
 		}
-		&:active {
-		}
 		padding: 8px;
 		border-radius: 4px;
 		display: flex;
@@ -44,12 +42,13 @@
 	max-height: 300px;
 	overflow-y: scroll;
 	overflow-x: hidden;
+
 	p {
 		height: 100%;
 	}
 	li {
 		display: flex;
-
+		cursor: pointer;
 		padding: 4px 16px;
 		justify-content: flex-start;
 		align-items: center;
@@ -61,8 +60,8 @@
 		}
 
 		&:hover {
-			filter: brightness(140%);
-
+			filter: brightness(110%);
+			border: 2px solid $buttonColorPrimary;
 			input {
 				scale: 130%;
 			}

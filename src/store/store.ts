@@ -12,6 +12,8 @@ import { dateFilterReducer, genreFilterReducer, ratingFilterReducer, scoreFilter
 import { AnimeApi } from "./services/getAnime";
 import { PlayerApi } from "./services/getPlayer";
 import { SearchAPI } from "./services/getSearch";
+import { statusFilterReducer } from "./reducers/Filters/StatusFilterSlice";
+import { sortFilterReducer } from "./reducers/Filters/SortFilterSlice";
 
 const rootReducer = combineReducers({
 	[AnimeApi.reducerPath]: AnimeApi.reducer,
@@ -30,7 +32,9 @@ const rootReducer = combineReducers({
 	ratingFilter: ratingFilterReducer,
 	seasonsFilter: seasonFilterReducer,
 	studioFilter: studioFilterReducer,
-	searchFilter: searchFilterReducer
+	searchFilter: searchFilterReducer,
+	statusFilter: statusFilterReducer,
+	sortFilter: sortFilterReducer,
 })
 
 
