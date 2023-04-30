@@ -6,14 +6,15 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { CatalogueReducer } from "./reducers/CatalogueSlice";
 import { CatalogueSliderReducer } from "./reducers/CatalogueSliderSlice";
 import { DropDownDataReducer } from "./reducers/DropDownDataSlice";
-import { dateFilterReducer, genreFilterReducer, ratingFilterReducer, scoreFilterReducer, searchFilterReducer, seasonFilterReducer, studioFilterReducer, typeFilterReducer } from "./reducers/Filters/";
+import { dateFilterReducer, genreFilterReducer, producersFilterReducer, ratingFilterReducer, scoreFilterReducer, searchFilterReducer, seasonFilterReducer, typeFilterReducer } from "./reducers/Filters/";
 
 
+import { orderByFilterReducer } from "./reducers/Filters/OrderFilterSlice";
+import { sortFilterReducer } from "./reducers/Filters/SortFilterSlice";
+import { statusFilterReducer } from "./reducers/Filters/StatusFilterSlice";
 import { AnimeApi } from "./services/getAnime";
 import { PlayerApi } from "./services/getPlayer";
 import { SearchAPI } from "./services/getSearch";
-import { statusFilterReducer } from "./reducers/Filters/StatusFilterSlice";
-import { sortFilterReducer } from "./reducers/Filters/SortFilterSlice";
 
 const rootReducer = combineReducers({
 	[AnimeApi.reducerPath]: AnimeApi.reducer,
@@ -25,16 +26,18 @@ const rootReducer = combineReducers({
 
 	dropDownData: DropDownDataReducer,
 
+	//фильтры
 	dateFilter: dateFilterReducer,
 	scoreFilter: scoreFilterReducer,
 	genreFilter: genreFilterReducer,
 	typeFilter: typeFilterReducer,
 	ratingFilter: ratingFilterReducer,
 	seasonsFilter: seasonFilterReducer,
-	studioFilter: studioFilterReducer,
+	producerFilter: producersFilterReducer,
 	searchFilter: searchFilterReducer,
 	statusFilter: statusFilterReducer,
 	sortFilter: sortFilterReducer,
+	orderByFilter: orderByFilterReducer,
 })
 
 

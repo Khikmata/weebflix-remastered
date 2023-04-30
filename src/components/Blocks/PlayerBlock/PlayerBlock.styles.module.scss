@@ -1,6 +1,17 @@
 @import "../../../styles/variables";
 
 .playerBlock {
+	ul {
+		width: 100%;
+		li {
+			padding: 8px;
+			margin-bottom: 8px;
+			border: 1px solid $blockActiveColor;
+			&.active {
+				border: 2px solid $redColor;
+			}
+		}
+	}
 	margin-top: 36px;
 	h2 {
 		margin-bottom: 12px;
@@ -25,15 +36,4 @@ button {
 	width: 100%;
 	height: 100%;
 	padding: 8px;
-}
-ul {
-	width: 100%;
-	li {
-		padding: 8px;
-		margin-bottom: 8px;
-		border: 1px solid $blockActiveColor;
-		&.active {
-			border: 2px solid $redColor;
-		}
-	}
 }

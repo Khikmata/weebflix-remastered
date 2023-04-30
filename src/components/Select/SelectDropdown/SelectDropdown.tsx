@@ -1,11 +1,14 @@
 import React, { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { genreFilterActions, ratingFilterActions, studioFilterActions, typeFilterActions } from '../../../store/reducers/Filters';
+import { genreFilterActions, ratingFilterActions, typeFilterActions } from '../../../store/reducers/Filters';
 import { AnimeRating, AnimeTypes, DropDownTypeEnum } from '../../../utils/DataTypes/AnimeData';
 import { TranslateRatingToRussian } from '../../../utils/Translation/TranslateRating';
+import { OrderByDropdown } from './FilterDropdowns/OrderByDropdown';
 import { SeasonsDropdown } from './FilterDropdowns/SeasonsDropdown';
+import { SortDropdown } from './FilterDropdowns/SortDropdown';
 import { StatusDropdown } from './FilterDropdowns/StatusDropdown';
-import styles from './SelectDropdown.styles.module.scss';
+
+import { ProducersDropdown } from './FilterDropdowns/ProducersDropdown';
 import { translateDropdownContent } from './TranslateDropdown';
 interface SelectDropdownProps {
 	dropDownType: string
@@ -17,7 +20,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 
 	const dispatch = useAppDispatch();
 
-	const producersData = useAppSelector((state) => state.dropDownData.producersData)
+
 	const genresData = useAppSelector((state) => state.dropDownData.genreData)
 
 	const sortedAnimeGenres = useMemo(() => {
@@ -53,14 +56,17 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 		if (dropDownType === DropDownTypeEnum.SEASON) {
 			return <SeasonsDropdown />
 		}
-		if (dropDownType === DropDownTypeEnum.STUDIO) {
-			const action = event.currentTarget.checked
-				? studioFilterActions.setProducer((item))
-				: studioFilterActions.removeProducer((item));
-			dispatch(action);
+		if (dropDownType === DropDownTypeEnum.PRODUCER) {
+			return <ProducersDropdown />
 		}
 		if (dropDownType === DropDownTypeEnum.STATUS) {
 			return <StatusDropdown />
+		}
+		if (dropDownType === DropDownTypeEnum.SORT) {
+			return <SortDropdown />
+		}
+		if (dropDownType === DropDownTypeEnum.ORDER) {
+			return <OrderByDropdown />
 		}
 	}
 	const dropDownContent = (animeData: any) => {
@@ -69,7 +75,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 			<>
 				{
 					animeData && animeData.map((item: any, index: number) => (
-						<label className={styles['container']} key={index}>
+						<label key={index}>
 							<li>
 								<input
 									onChange={(event) => handleCheckBoxChange(item, event)}
@@ -104,23 +110,14 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) 
 				)
 			case DropDownTypeEnum.SEASON:
 				return <SeasonsDropdown />
-			case DropDownTypeEnum.STUDIO:
-				return (
-					<>
-						{
-							producersData && producersData.map((producer, index) =>
-							(
-								<label key={index}>
-									<li >
-										<input type='radio' onClick={(e) => handleCheckBoxChange(producer, e)} />
-										{producer.titles[0].title}
-									</li>
-								</label>
-							))}
-					</>
-				)
+			case DropDownTypeEnum.PRODUCER:
+				return <ProducersDropdown />
 			case DropDownTypeEnum.STATUS:
 				return <StatusDropdown />
+			case DropDownTypeEnum.SORT:
+				return <SortDropdown />;
+			case DropDownTypeEnum.ORDER:
+				return <OrderByDropdown />;
 		}
 	}
 

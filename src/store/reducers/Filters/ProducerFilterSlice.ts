@@ -22,10 +22,10 @@ const slice = createSlice({
 			state.producersDisplay = action.payload.titles[0].title;
 		},
 		removeProducer: (state, action: PayloadAction<string>) => {
-			state.producersQuery = state.producersQuery.replace(`${action.payload}`, '');
+			state.producersQuery = '';
 			state.producersDisplay = '';
 		},
 	}
 })
 
-export const { reducer: studioFilterReducer, actions: studioFilterActions } = slice;
+export const { reducer: producersFilterReducer, actions: producersFilterActions } = slice;

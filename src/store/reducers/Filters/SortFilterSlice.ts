@@ -1,25 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 
-export enum sortTypeEnum {
-	desc = 'По убыванию',
-	asc = 'По возрастанию'
-}
-
 export interface CounterState {
-	sortType: sortTypeEnum | null,
+	sortType: string,
 }
 
 
 const initialState: CounterState = {
-	sortType: sortTypeEnum.desc,
+	sortType: 'desc',
 }
 
 const slice = createSlice({
 	name: 'sortFilter',
 	initialState,
 	reducers: {
-		setType: (state, action: PayloadAction<sortTypeEnum>) => {
+		setSortType: (state, action: PayloadAction<string>) => {
 			state.sortType = action.payload;
 		}
 	}

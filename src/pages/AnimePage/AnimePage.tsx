@@ -22,7 +22,6 @@ const AnimePage = () => {
 
 	const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '',);
 	const { data: playerData, error: playerError, isLoading: playerLoading } = PlayerApi.useGetAnimePlayerQuery(urlQuery, { skip })
-	console.log(playerData)
 
 	let url = '';
 	const getUrl = () => {
@@ -55,7 +54,7 @@ const AnimePage = () => {
 	useEffect(() => {
 		details && getUrl();
 		if (url !== '') {
-			console.log(url)
+
 			setSkip(false)
 		}
 	}, [details, url])

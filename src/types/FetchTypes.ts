@@ -8,7 +8,12 @@ export interface IGetAnime {
 export interface IGetGenres {
 	genres: IGenres[],
 }
-//Тип для поиска
+
+export interface IGetAnimeByFilter {
+	pagination: IPagination;
+	data: IAnimeFilterQueries[];
+}
+
 export interface IAnimeFilterQueries {
 	page?: number;
 	limit?: number;
@@ -21,8 +26,8 @@ export interface IAnimeFilterQueries {
 	rating?: string,
 	genres?: string,
 	genres_exclude?: string[],
-	order_by?: "mal_id" | "title" | "type" | "rating" | "start_date" | "end_date" | "episodes" | "score" | "scored_by" | "rank" | "popularity" | "members" | "favorites",
-	sort?: 'desc' | 'asc',
+	order_by?: string,
+	sort?: string,
 	letter?: string;
 	producers?: string;
 	start_date?: string;

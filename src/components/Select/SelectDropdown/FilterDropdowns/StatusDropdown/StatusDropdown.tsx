@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { statusFilterActions } from "../../../../../store/reducers/Filters/StatusFilterSlice";
-import { translateDropdownContent } from "../../TranslateDropdown";
-import styles from './StatusDropdown.styles.module.scss';
 import { DropDownTypeEnum } from "../../../../../utils/DataTypes/AnimeData";
+import { translateDropdownContent } from "../../TranslateDropdown";
 
+import styles from '../FilterDropdown.styles.module.scss';
 
 export const StatusDropdown = () => {
 
@@ -19,14 +19,13 @@ export const StatusDropdown = () => {
 
 		const handleStatusChange = (index: number, selectedStatus: number | null) => {
 			if (index === selectedStatus) {
-				dispatch(statusFilterActions.setStatus(null));
+				dispatch(statusFilterActions.setStatusType(null));
 				setSelectedStatusIndex(null)
 			} else {
-				dispatch(statusFilterActions.setStatus(statusData[index]));
+				dispatch(statusFilterActions.setStatusType(statusData[index]));
 				setSelectedStatusIndex(index)
 			}
-			console.log(selectedStatusIndex)
-			console.log(index)
+
 		}
 		return (
 			statusData.map((status, index) => (

@@ -21,7 +21,7 @@ const slice = createSlice({
 	name: 'statusFilter',
 	initialState,
 	reducers: {
-		setStatus: (state, action) => {
+		setStatusType: (state, action) => {
 			state.statusType = action.payload;
 		},
 	},

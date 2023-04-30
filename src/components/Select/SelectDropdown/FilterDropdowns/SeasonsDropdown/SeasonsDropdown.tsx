@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 
 
 
-import styles from './SeasonsDropdown.styles.module.scss'
+import styles from '../FilterDropdown.styles.module.scss'
 import { seasonFilterActions } from '../../../../../store/reducers/Filters';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 import { TranslateSeasonToRussian } from '../../../../../utils/Translation/TranslateRelease';

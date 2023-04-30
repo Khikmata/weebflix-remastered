@@ -13,6 +13,8 @@ import { TranslateRatingToRussian } from '../../utils/Translation/TranslateRatin
 import { TranslateSeasonToRussian } from '../../utils/Translation/TranslateRelease';
 import { TranslateTypeToRussian } from '../../utils/Translation/TranslateTypes';
 
+import { TranslateOrderToRussian } from '../../utils/Translation/TranslateOrder';
+import { TranslateSortToRussian } from '../../utils/Translation/TranslateSort';
 import { TranslateStatusToRussian } from '../../utils/Translation/TranslateStatus';
 import { SelectDropdown } from './SelectDropdown';
 
@@ -35,9 +37,11 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 	const genreDisplay = useAppSelector((state) => state.genreFilter.genresName);
 	const typesDisplay = useAppSelector((state) => state.typeFilter.typeDisplay)
 	const ratingDisplay = useAppSelector((state) => state.ratingFilter.ratingDisplay)
-	const producersDisplay = useAppSelector((state) => state.studioFilter.producersDisplay)
+	const producersDisplay = useAppSelector((state) => state.producerFilter.producersDisplay)
 	const seasonDisplay = `${seasonYear} ` + TranslateSeasonToRussian(seasonSeason);
 	const statusDisplay = useAppSelector((state) => state.statusFilter.statusType)
+	const sortDisplay = useAppSelector((state) => state.sortFilter.sortType)
+	const orderDisplay = useAppSelector((state) => state.orderByFilter.orderBy)
 
 
 	//Отображение выбранных нами параметров и их перевод
@@ -78,11 +82,17 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		if (dropDownType === DropDownTypeEnum.SEASON) {
 			return seasonDisplay === ' ' ? tooltip : seasonDisplay;
 		}
-		if (dropDownType === DropDownTypeEnum.STUDIO) {
+		if (dropDownType === DropDownTypeEnum.PRODUCER) {
 			return GetTooltipDisplay(producersDisplay)
 		}
 		if (dropDownType === DropDownTypeEnum.STATUS) {
 			return statusDisplay === '' ? tooltip : (TranslateStatusToRussian(statusDisplay !== null ? statusDisplay : tooltip));
+		}
+		if (dropDownType === DropDownTypeEnum.SORT) {
+			return TranslateSortToRussian(sortDisplay);
+		}
+		if (dropDownType === DropDownTypeEnum.ORDER) {
+			return TranslateOrderToRussian(orderDisplay);
 		}
 	}, [dropDownType,
 		genreDisplay,
@@ -91,7 +101,9 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 		seasonDisplay,
 		tooltip,
 		typesDisplay,
-		statusDisplay])
+		statusDisplay,
+		sortDisplay,
+		orderDisplay])
 
 	const handleDropdown = useCallback(() => {
 		setOpenDropdown(prevState => !prevState);

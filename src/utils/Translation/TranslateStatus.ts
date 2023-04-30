@@ -1,5 +1,5 @@
 export function TranslateStatusToRussian(status: string) {
-	console.log(status)
+
 	switch (status) {
 		case 'Not yet aired':
 			return 'Еще не выходит';

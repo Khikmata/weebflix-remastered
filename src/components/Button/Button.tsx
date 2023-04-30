@@ -6,7 +6,7 @@ import styles from './Button.styles.module.scss';
 interface ButtonProps {
 	children?: React.ReactNode;
 	marginVertical?: number;
-	marginHorizontal?: number;
+	marginHorizontal?: number | string;
 	color?: "primary" | "secondary";
 	borderCol?: string;
 	borderWidth?: number;

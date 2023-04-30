@@ -6,8 +6,8 @@ import { AnimeCard } from '../../Card'
 import { FilterBlock } from '../Filter'
 
 import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice'
-import styles from './AnimeGridBlock.styles.module.scss'
 import { SearchAPI } from '../../../store/services/getSearch'
+import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
 
@@ -19,11 +19,16 @@ export const AnimeGridBlock = () => {
 	const AddTypeToQuery = useAppSelector(state => state.typeFilter.typeQuery)
 	const AddRatingToQuery = useAppSelector(state => state.ratingFilter.ratingQuery)
 	const AddSeasonsToQuery = useAppSelector(state => state.seasonsFilter.seasonQuery)
-	const AddProducersToQuery = useAppSelector(state => state.studioFilter.producersQuery)
+	const AddProducersToQuery = useAppSelector(state => state.producerFilter.producersQuery)
 	const AddSearchToQuery = useAppSelector(state => state.searchFilter.searchQuery)
 	const AddStatusToQuery = useAppSelector(state => state.statusFilter.statusType)
+	const AddSortByToQuery = useAppSelector(state => state.sortFilter.sortType)
+	const AddOrderByToQuery = useAppSelector(state => state.orderByFilter.orderBy)
 
-	const { data: filteredData, error: filteredErrors, isLoading: filteredLoading } = SearchAPI.useGetAnimeSearchQuery({
+	const [prevPageData, setPrevPageData] = useState<IData[]>([]);
+
+	const [pages, setPages] = useState(1)
+	const { data: SearchData, error: filteredErrors, isLoading: filteredLoading } = SearchAPI.useGetAnimeSearchQuery({
 		letter: AddSearchToQuery,
 		max_score: AddScoreToQuery.maxScore.toString(),
 		min_score: AddScoreToQuery.minScore.toString(),
@@ -34,10 +39,10 @@ export const AnimeGridBlock = () => {
 		rating: AddRatingToQuery,
 		producers: AddProducersToQuery,
 		status: AddStatusToQuery,
-		order_by: 'score',
-		sort: 'desc',
+		order_by: AddOrderByToQuery,
+		sort: AddSortByToQuery,
 		limit: 20,
-		page: 1,
+		page: pages,
 		sfw: (AddRatingToQuery === 'RX' || AddGenreToQuery.genresName.includes('Hentai') ? '' : 'true'),
 	});
 
@@ -53,6 +58,17 @@ export const AnimeGridBlock = () => {
 		producersData && dispatch(DropDownDataActions.setProducerData(producersData))
 		seasonsData && dispatch(DropDownDataActions.setSeasonData(seasonsData))
 	}, [producersData, seasonsData, AddSeasonsToQuery])
+	const handleShowMore = () => {
+		SearchData && setPrevPageData(prevData => [...prevData, ...SearchData]);
+		setPages(pages + 1);
+	}
+	const handleNextPage = () => {
+		setPages(pages === 1 ? pages : pages - 1);
+	}
+	const handlePrevPage = () => {
+		setPages(pages + 1);
+	}
+
 
 	return (
 		<div className={styles['animegrid']}>
@@ -62,7 +78,10 @@ export const AnimeGridBlock = () => {
 					<div className={styles['animegrid-content__items']}>
 						{filteredLoading && <p>Загрузка информации...</p>}
 						{filteredErrors && <p>Ошибка при загрузке данных</p>}
-						{filteredData && AddSeasonsToQuery === '' && filteredData.map((item: IData, index: number) => (
+						{prevPageData && prevPageData.map((item: IData, index: number) => (
+							<AnimeCard key={index} index={index} item={item} />
+						))}
+						{SearchData && AddSeasonsToQuery === '' && SearchData.map((item: IData, index: number) => (
 							<AnimeCard key={index} index={index} item={item} />
 						))}
 						{animeSeasonData && animeSeasonData.map((item: IData, index: number) => (
@@ -72,6 +91,10 @@ export const AnimeGridBlock = () => {
 					<div className={styles['animegrid-content__filter']}>
 						<FilterBlock />
 					</div>
+				</div>
+				<div className={styles['pagination']}>
+					<button className={[styles['pagination-button'], styles[pages === 1 ? 'disabled' : '']].join(' ')} onClick={handleNextPage}>{'<'}</button>
+					<button className={styles['pagination-button']} onClick={handlePrevPage}>{'>'}</button>
 				</div>
 			</div>
 		</div>

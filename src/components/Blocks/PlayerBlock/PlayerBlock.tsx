@@ -9,8 +9,6 @@ import styles from './PlayerBlock.styles.module.scss';
 
 export const PlayerBlock: React.FC<IPlayerData> = (sources) => {
 
-	console.log(sources)
-	console.log(sources.sources[3].url)
 	return (
 		<div className={styles['playerBlock']}>
 			<h2>Онлайн-плеер</h2>
