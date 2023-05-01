@@ -48,7 +48,7 @@
 <br>
 <br>
 
-<h3>Фильтры: </h3>
+<strong><h3>[X] Фильтры: </h3> </strong>
 <strong>[X] Фильтрация по рейтингу </strong> 
 <br>
 <strong>[X] Фильтрация по датам </strong> 

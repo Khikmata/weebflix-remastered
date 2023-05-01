@@ -7,7 +7,7 @@ import { translateDropdownContent } from "../../TranslateDropdown";
 import styles from '../FilterDropdown.styles.module.scss';
 export const OrderByDropdown = () => {
 
-	const [selectedOrderIndex, setSelectedOrderIndex] = useState<number | null>(null);
+	const [selectedOrderIndex, setSelectedOrderIndex] = useState<number>(0);
 
 	const orderBy = [
 		'score',

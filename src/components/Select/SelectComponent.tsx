@@ -74,10 +74,10 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({ title, tooltip
 			return GetTooltipDisplay(genreDisplay, TranslateGenresToRussian)
 		}
 		if (dropDownType === DropDownTypeEnum.TYPES) {
-			return GetTooltipDisplay(typesDisplay, TranslateTypeToRussian)
+			return typesDisplay ? TranslateTypeToRussian(typesDisplay) : tooltip
 		}
 		if (dropDownType === DropDownTypeEnum.RATING) {
-			return GetTooltipDisplay(ratingDisplay, TranslateRatingToRussian)
+			return ratingDisplay ? TranslateRatingToRussian(ratingDisplay) : tooltip
 		}
 		if (dropDownType === DropDownTypeEnum.SEASON) {
 			return seasonDisplay === ' ' ? tooltip : seasonDisplay;

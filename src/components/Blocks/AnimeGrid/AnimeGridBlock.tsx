@@ -25,8 +25,6 @@ export const AnimeGridBlock = () => {
 	const AddSortByToQuery = useAppSelector(state => state.sortFilter.sortType)
 	const AddOrderByToQuery = useAppSelector(state => state.orderByFilter.orderBy)
 
-	const [prevPageData, setPrevPageData] = useState<IData[]>([]);
-
 	const [pages, setPages] = useState(1)
 	const { data: SearchData, error: filteredErrors, isLoading: filteredLoading } = SearchAPI.useGetAnimeSearchQuery({
 		letter: AddSearchToQuery,
@@ -57,11 +55,9 @@ export const AnimeGridBlock = () => {
 		AddSeasonsToQuery && setSkip((prevState) => !prevState);
 		producersData && dispatch(DropDownDataActions.setProducerData(producersData))
 		seasonsData && dispatch(DropDownDataActions.setSeasonData(seasonsData))
-	}, [producersData, seasonsData, AddSeasonsToQuery])
-	const handleShowMore = () => {
-		SearchData && setPrevPageData(prevData => [...prevData, ...SearchData]);
-		setPages(pages + 1);
-	}
+	}, [producersData, seasonsData, AddSeasonsToQuery, dispatch])
+
+
 	const handleNextPage = () => {
 		setPages(pages === 1 ? pages : pages - 1);
 	}
@@ -78,9 +74,6 @@ export const AnimeGridBlock = () => {
 					<div className={styles['animegrid-content__items']}>
 						{filteredLoading && <p>Загрузка информации...</p>}
 						{filteredErrors && <p>Ошибка при загрузке данных</p>}
-						{prevPageData && prevPageData.map((item: IData, index: number) => (
-							<AnimeCard key={index} index={index} item={item} />
-						))}
 						{SearchData && AddSeasonsToQuery === '' && SearchData.map((item: IData, index: number) => (
 							<AnimeCard key={index} index={index} item={item} />
 						))}

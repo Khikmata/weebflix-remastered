@@ -7,7 +7,7 @@ import { sortFilterActions } from "../../../../../store/reducers/Filters/SortFil
 import styles from '../FilterDropdown.styles.module.scss';
 export const SortDropdown = () => {
 
-	const [selectedSortIndex, setSelectedSortIndex] = useState<number | null>(null);
+	const [selectedSortIndex, setSelectedSortIndex] = useState<number>(0);
 
 	const sortData = ['desc', 'asc'];
 
@@ -29,7 +29,7 @@ export const SortDropdown = () => {
 				</li>
 			))
 		)
-	}, [selectedSortIndex, sortData])
+	}, [selectedSortIndex, dispatch])
 
 	return <>{getSortDropdown}</>
 }

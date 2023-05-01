@@ -1,14 +1,14 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface CounterState {
 	ratingQuery: string,
-	ratingDisplay: string[],
+	ratingDisplay: string,
 }
 
 
 const initialState: CounterState = {
 	ratingQuery: '',
-	ratingDisplay: [],
+	ratingDisplay: '',
 }
 
 const slice = createSlice({
@@ -17,13 +17,12 @@ const slice = createSlice({
 	reducers: {
 		setRating: (state, action) => {
 			state.ratingQuery = action.payload;
-			state.ratingDisplay[0] = (action.payload);
+			state.ratingDisplay = action.payload;
 		},
-		removeRating: (state, action: PayloadAction<string>) => {
-			state.ratingQuery = state.ratingQuery.replace(`${action.payload}`, '');
-			state.ratingDisplay[0] = ('');
+		removeRating: (state) => {
+			state.ratingQuery = '';
+			state.ratingDisplay = '';
 		},
-
 	},
 })
 

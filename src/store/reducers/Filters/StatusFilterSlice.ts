@@ -1,12 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const statusType = [
-	'airing',
-	"complete",
-	"upcoming"
-]
-
-
 
 export interface CounterState {
 	statusType: string | null,

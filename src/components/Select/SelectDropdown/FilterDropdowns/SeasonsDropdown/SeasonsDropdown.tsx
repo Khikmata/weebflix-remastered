@@ -59,7 +59,7 @@ export const SeasonsDropdown = () => {
 				</div >
 			)
 		)
-	}, [seasonsData, selectedSeason, selectedYear])
+	}, [seasonsData, selectedSeason, selectedYear, dispatch])
 
 	return <>{getSeasonsDropdown}</>;
 }

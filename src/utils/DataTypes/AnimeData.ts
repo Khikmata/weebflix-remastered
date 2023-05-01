@@ -13,7 +13,7 @@ export enum DropDownTypeEnum {
 
 
 //Названия жанров
-export const genresNames = [
+export const genresNamesData = [
 	'Action', 'Adventure', 'Avant Garde', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Isekai',
 	'Mystery', 'Romance', 'Sci-fi', 'Slice of Life', 'Sports', 'Supernatural', 'Suspense', 'Josei', 'Kids',
 	'Seinen', 'Shoujo', 'Shounen', 'Boys Love', 'Girls Love', 'Adult Cast', 'Anthropomorphic', 'CGDCT', 'Childcare',
@@ -24,9 +24,9 @@ export const genresNames = [
 	'Mecha', 'Martial arts', 'Organized Crime', 'Mahou Shoujo', 'Magical Sex Shift', 'Iyashikei', 'Idols (Male)', 'Award Winning', 'Crossdressing', 'Delinquents'
 ]
 //Название типов
-export const AnimeTypes = ['tv', 'movie', 'ova', 'special', 'ona', 'music']
+export const AnimeTypesData = ['tv', 'movie', 'ova', 'special', 'ona', 'music']
 //Название рейтингов
-export const AnimeRating = [
+export const AnimeRatingData = [
 	'G - All Ages',
 	'PG - Children',
 	'PG-13 - Teens 13 or older',

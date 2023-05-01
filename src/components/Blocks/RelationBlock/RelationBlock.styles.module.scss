@@ -9,6 +9,9 @@
 	height: 200px;
 	display: flex;
 	justify-content: space-around;
+	@media (max-width: 620px) {
+		display: none;
+	}
 	&-content {
 		display: flex;
 		align-items: center;

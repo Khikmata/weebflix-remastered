@@ -20,7 +20,7 @@ export const FilterBlock = () => {
 
 	useEffect(() => {
 		genresData && dispatch(DropDownDataActions.setGenreData(genresData))
-	}, [genresData])
+	}, [genresData, dispatch])
 
 	const [openFilters, setOpenFilters] = useState(true);
 

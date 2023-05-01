@@ -37,7 +37,7 @@ export const StatusDropdown = () => {
 				</li>
 			))
 		)
-	}, [selectedStatusIndex, statusData,])
+	}, [selectedStatusIndex, statusData, dispatch])
 
 	return <>{getSeasonsDropdown}</>
 }

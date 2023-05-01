@@ -57,7 +57,7 @@ const AnimePage = () => {
 
 			setSkip(false)
 		}
-	}, [details, url])
+	}, [details, url,])
 
 	return (
 		<div className={styles['anime-page']}>

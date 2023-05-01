@@ -1,11 +1,12 @@
-import { genresNames } from "../DataTypes/AnimeData";
+import { genresNamesData } from "../DataTypes/AnimeData";
+
 
 
 export function TranslateGenresToRussian(genre: string) {
-	for (let i = 0; i < genresNames.length; i++) {
-		const genreName = genresNames[i].toLowerCase();
+	for (let i = 0; i < genresNamesData.length; i++) {
+		const genreName = genresNamesData[i].toLowerCase();
 		if (genre.toLowerCase().includes(genreName)) {
-			switch (genresNames[i]) {
+			switch (genresNamesData[i]) {
 				case 'Action':
 					return 'Экшен';
 				case 'Adventure':
@@ -159,7 +160,7 @@ export function TranslateGenresToRussian(genre: string) {
 				case 'Delinquents':
 					return 'Преступления';
 				default:
-					return genresNames[i];
+					return genresNamesData[i];
 			}
 		}
 	}

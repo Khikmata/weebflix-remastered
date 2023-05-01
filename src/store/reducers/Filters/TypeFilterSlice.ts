@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface CounterState {
 	typeQuery: string,
-	typeDisplay: string[],
+	typeDisplay: string,
 
 }
 
 
 const initialState: CounterState = {
 	typeQuery: '',
-	typeDisplay: [],
+	typeDisplay: '',
 }
 
 const slice = createSlice({
@@ -19,16 +19,11 @@ const slice = createSlice({
 	reducers: {
 		setType: (state, action) => {
 			state.typeQuery = action.payload;
-			state.typeDisplay[0] = (action.payload);
+			state.typeDisplay = action.payload;
 		},
-		removeType: (state, action) => {
-			state.typeQuery = state.typeQuery.replace(`${action.payload.mal_id}`, '');
-			const indexToRemove = state.typeDisplay.findIndex(el => el === action.payload.name);
-			if (indexToRemove !== 0) {
-				state.typeDisplay.splice(indexToRemove, 1);
-			} else {
-				state.typeDisplay.shift();
-			}
+		removeType: (state) => {
+			state.typeQuery = '';
+			state.typeDisplay = '';
 		},
 	},
 })
