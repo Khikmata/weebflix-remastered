@@ -1,28 +1,28 @@
 @import '../../../styles/variables';
 
 .newsblock {
+  height: 100%;
+  padding: 12px 24px;
+  @include block;
+  &__content {
+    width: 100%;
     height: 100%;
-    padding: 12px 24px;
-    @include block;
-    &__content {
-        width: 100%;
-        height: 100%;
-        p {
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
+    p {
+      font-weight: 500;
+      margin-bottom: 16px;
     }
+  }
 }
 .newsblock__info {
-    display: flex;
-    img {
-        max-width: 235px;
-        height: 100%;
-        margin-right: 36px;
-    }
+  display: flex;
+  img {
+    max-width: 235px;
+    height: 100%;
+    margin-right: 36px;
+  }
 }
 @media (max-width: 426px) {
-    .newsblock__info {
-        flex-direction: column;
-    }
+  .newsblock__info {
+    flex-direction: column;
+  }
 }

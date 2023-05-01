@@ -1,22 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface CounterState {
-    orderBy: string
+  orderBy: string
 }
 
 const initialState: CounterState = {
-    orderBy: 'score',
+  orderBy: 'score',
 }
 
 const slice = createSlice({
-    name: 'orderFilter',
-    initialState,
-    reducers: {
-        setOrderBy: (state, action) => {
-            state.orderBy = action.payload
-        },
+  name: 'orderFilter',
+  initialState,
+  reducers: {
+    setOrderBy: (state, action) => {
+      state.orderBy = action.payload
     },
+  },
 })
 
-export const { reducer: orderByFilterReducer, actions: orderByFilterActions } =
-    slice
+export const { reducer: orderByFilterReducer, actions: orderByFilterActions } = slice

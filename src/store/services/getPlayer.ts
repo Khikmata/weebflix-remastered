@@ -1,28 +1,25 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 import { IPlayerData } from '../../types/FetchTypes'
 
-const playerBaseQuery = retry(
-    fetchBaseQuery({ baseUrl: 'https://api.consumet.org/' }),
-    {
-        maxRetries: 2,
-    }
-)
+const playerBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.consumet.org/' }), {
+  maxRetries: 2,
+})
 interface PlayerApiEndpoints {
-    url: string
-    episodeNumber: number
+  url: string
+  episodeNumber: number
 }
 
 export const PlayerApi = createApi({
-    reducerPath: 'playerAPI',
-    baseQuery: playerBaseQuery,
-    endpoints: (builder) => ({
-        getAnimePlayer: builder.query<IPlayerData, PlayerApiEndpoints>({
-            query: ({ url, episodeNumber }) => ({
-                url: `anime/gogoanime/watch/${url}-episode-${episodeNumber}`,
-            }),
-            //transformResponse: (response: { data: IPlayerData }, meta, arg) => response.data,
-        }),
+  reducerPath: 'playerAPI',
+  baseQuery: playerBaseQuery,
+  endpoints: (builder) => ({
+    getAnimePlayer: builder.query<IPlayerData, PlayerApiEndpoints>({
+      query: ({ url, episodeNumber }) => ({
+        url: `anime/gogoanime/watch/${url}-episode-${episodeNumber}`,
+      }),
+      //transformResponse: (response: { data: IPlayerData }, meta, arg) => response.data,
     }),
+  }),
 })
 
 export const {} = PlayerApi

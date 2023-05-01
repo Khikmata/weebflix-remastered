@@ -1,82 +1,82 @@
 @import '../../../styles/variables';
 
 .anime-info-rank {
-    display: flex;
-    align-items: center;
-    padding: 12px 8px;
-    margin-top: 24px;
-    border: 1px solid $whiteColor;
-    width: 100%;
-    height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 12px 8px;
+  margin-top: 24px;
+  border: 1px solid $whiteColor;
+  width: 100%;
+  height: 100px;
 }
 .rank-avg {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: 700;
-    padding: 0px 8px;
-    border-right: 1px solid $gray;
-    p {
-        font-size: 16px;
-        margin-bottom: 4px;
-    }
-    span {
-        font-size: 36px;
-    }
-    small {
-        text-align: center;
-        font-size: 12px;
-        color: $gray;
-        font-weight: 400;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  padding: 0px 8px;
+  border-right: 1px solid $gray;
+  p {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  span {
+    font-size: 36px;
+  }
+  small {
+    text-align: center;
+    font-size: 12px;
+    color: $gray;
+    font-weight: 400;
+  }
 }
 .rank-stats {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 80%;
 }
 .rank-place,
 .rank-popularity,
 .rank-reviews {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: 700;
-    margin: 0 24px;
-    p {
-        font-size: 16px;
-    }
-    span {
-        font-size: 36px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  margin: 0 24px;
+  p {
+    font-size: 16px;
+  }
+  span {
+    font-size: 36px;
+  }
 }
 
 @media (max-width: 900px) {
-    .anime-info-rank {
-        flex-direction: column;
-        height: 200px;
-    }
-    .rank-avg {
-        border-right: 0px;
-        width: 100%;
-        padding-bottom: 8px;
-        border-bottom: 1px solid $halfopacity;
-    }
+  .anime-info-rank {
+    flex-direction: column;
+    height: 200px;
+  }
+  .rank-avg {
+    border-right: 0px;
+    width: 100%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $halfopacity;
+  }
 }
 @media (max-width: 750px) {
-    .rank-stats {
-        flex-direction: column;
-        justify-content: space-around;
-    }
-    .anime-info-rank {
-        height: 360px;
-    }
+  .rank-stats {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .anime-info-rank {
+    height: 360px;
+  }
 }
 @media (max-width: 850px) {
-    .rank-place,
-    .rank-popularity,
-    .rank-reviews {
-        margin: 0 12px;
-    }
+  .rank-place,
+  .rank-popularity,
+  .rank-reviews {
+    margin: 0 12px;
+  }
 }

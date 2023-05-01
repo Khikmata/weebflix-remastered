@@ -1,99 +1,106 @@
-@import '../../../styles/variables';
+@import "../../../styles/variables";
 .animegrid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  @include block;
+
+  &-container {
+    padding: 24px;
     width: 100%;
     height: 100%;
-    display: flex;
-    @include block;
-
-    &-container {
-        padding: 24px;
-        width: 100%;
-        height: 100%;
-        @media (max-width: 426px) {
-            gap: 4px;
-        }
-        &__content {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        h2 {
-            margin-bottom: 16px;
-        }
+    @media (max-width: 426px) {
+      gap: 4px;
     }
+    &__content {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+    }
+  }
 }
 
 .animegrid-content__items {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-wrap: wrap;
-    > div {
-        width: 180px;
-        height: 300px;
-        margin-right: 24px;
-        margin-bottom: 24px;
-        min-height: 0px;
-        img {
-            height: 260px;
-        }
-        @media (max-width: 500px) {
-            flex-direction: column;
-            width: 120px;
-            height: 220px;
-            margin-right: 12px;
-            margin-bottom: 12px;
-            img {
-                height: 180px;
-            }
-        }
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  > div {
+    width: 180px;
+    height: 300px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+    min-height: 0px;
+    img {
+      height: 260px;
     }
+    @media (max-width: 500px) {
+      flex-direction: column;
+      width: 120px;
+      height: 220px;
+      margin-right: 12px;
+      margin-bottom: 12px;
+      img {
+        height: 180px;
+      }
+    }
+  }
 }
 .animegrid-content__filter {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-start;
-    padding: 4px;
-    flex-direction: column;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 4px;
+  flex-direction: column;
 }
 
 .pagination {
+  display: flex;
+  justify-content: space-between;
+  max-width: 800px;
+  &-button {
+    padding: 12px;
+    background-color: $blockActiveColor;
+    width: 48px;
+    height: 48px;
+    color: $fontColor;
+    font-size: 24px;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
-    max-width: 800px;
-    &-button {
-        padding: 12px;
-        background-color: $blockActiveColor;
-        width: 48px;
-        height: 48px;
-        color: $fontColor;
-        font-size: 24px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media (max-width: 768px) {
-    .animegrid-container__content {
-        flex-direction: column-reverse;
-    }
-    .animegrid-content__filter {
-        width: 100%;
-        margin-bottom: 24px;
-        min-height: 0;
-    }
-    .animegrid-content__items {
-        justify-content: center;
-    }
+  .animegrid-container__content {
+    flex-direction: column-reverse;
+  }
+  .animegrid-content__filter {
+    width: 100%;
+    margin-bottom: 24px;
+    min-height: 0;
+  }
+  .animegrid-content__items {
+    justify-content: center;
+    position: relative;
+  }
 }
 @media (max-width: 500px) {
-    .animegrid-content__items {
-        justify-content: space-around;
-    }
+  .animegrid-content__items {
+    justify-content: space-around;
+  }
+}
+
+.loading-content {
+  position: absolute;
+  top: 60%;
+  left: 25%;
 }

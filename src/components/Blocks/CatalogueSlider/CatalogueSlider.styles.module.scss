@@ -1,24 +1,24 @@
 @import '../../../styles/variables';
 
 .catalogueSlider {
-    margin-bottom: 64px;
-    padding: 12px 24px;
-    display: flex;
-    @include block;
+  margin-bottom: 64px;
+  padding: 12px 24px;
+  display: flex;
+  @include block;
 }
 
 @media (max-width: 426px) {
-    .anime-card__info {
-        flex-direction: column;
-        &__title {
-            max-width: 165px;
-            margin-right: 0px;
-        }
-        &__rating {
-            border-left: none;
-        }
+  .anime-card__info {
+    flex-direction: column;
+    &__title {
+      max-width: 165px;
+      margin-right: 0px;
     }
-    .catalogue {
-        padding: 12px;
+    &__rating {
+      border-left: none;
     }
+  }
+  .catalogue {
+    padding: 12px;
+  }
 }
