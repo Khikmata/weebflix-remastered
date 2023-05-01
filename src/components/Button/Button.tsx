@@ -2,19 +2,19 @@
 import React from 'react';
 import styles from './Button.styles.module.scss';
 
-
+type Color = 'primary' | 'secondary';
 interface ButtonProps {
 	children?: React.ReactNode;
 	marginVertical?: number;
 	marginHorizontal?: number | string;
-	color?: "primary" | "secondary";
+	color?: Color;
 	borderCol?: string;
 	borderWidth?: number;
 	outlined?: boolean;
 	scale?: boolean;
 	height?: number;
 	contentPadding?: string;
-	onClick?: (e: any) => void;
+	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 

@@ -1,30 +1,45 @@
-import React from 'react';
 import ReactPlayer from 'react-player';
-import { IPlayerData } from '../../../types/FetchTypes';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { PlayerActions } from '../../../store/reducers/PlayerSlice';
+import { IDetails, ISources } from '../../../types/FetchTypes';
 import styles from './PlayerBlock.styles.module.scss';
 
+interface playerBlockProps {
+	sources: ISources[];
+	details: IDetails;
+}
 
 
+export const PlayerBlock = (props: playerBlockProps) => {
 
+	console.log(props.details.episodes)
+	const selectedEpisode = useAppSelector((state) => state.playerSlice.activeEpisode)
+	const dispatch = useAppDispatch();
 
-export const PlayerBlock: React.FC<IPlayerData> = (sources) => {
+	const handleChangeEpisode = (index: number) => {
+		dispatch(PlayerActions.setActiveEpisodeIndex(index))
+	}
 
 	return (
 		<div className={styles['playerBlock']}>
 			<h2>Онлайн-плеер</h2>
 			<div className={styles['playerBlock-player']}>
-				<ReactPlayer width='clamp(200px, 100%, 1100px)' height='100%' style={{ aspectRatio: '16/9' }} controls url={sources.sources[3].url} />
+				<ReactPlayer width='clamp(200px, 100%, 1100px)' height='100%' style={{ aspectRatio: '16/9' }} controls url={props.sources[3].url} />
 				<div className={styles['playerBlock-episode__dropdown']}>
 					<ul>
-						<li className={styles['active']}><button >1 Серия</button> </li>
-						<li><button>2 Серия</button> </li>
-						<li><button>3 Серия</button> </li>
-						<li><button>4 Серия</button> </li>
-						<li><button>5 Серия</button> </li>
-						<li><button>6 Серия</button> </li>
-						<li><button>7 Серия</button> </li>
-						<li><button>8 Серия</button> </li>
-						<li><button>9 Серия</button> </li>
+						{
+							Array.from({ length: props.details.episodes }).map((_, index: number) => (
+								<li
+									key={index + 1}
+									onClick={() => handleChangeEpisode(index + 1)}
+									className={styles[index + 1 === selectedEpisode ? 'active' : '']}
+								>
+									<button >
+										{index + 1} Серия
+									</button>
+								</li>
+							))
+						}
 					</ul>
 				</div>
 			</div>

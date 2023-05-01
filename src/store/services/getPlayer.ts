@@ -5,14 +5,17 @@ import { IPlayerData } from '../../types/FetchTypes';
 const playerBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.consumet.org/' }), {
 	maxRetries: 2,
 })
-
+interface PlayerApiEndpoints {
+	url: string,
+	episodeNumber: number;
+}
 
 export const PlayerApi = createApi({
 	reducerPath: 'playerAPI',
 	baseQuery: playerBaseQuery,
 	endpoints: (builder) => ({
-		getAnimePlayer: builder.query<IPlayerData, string>({
-			query: (url) => ({ url: `anime/gogoanime/watch/${url}-episode-1` }),
+		getAnimePlayer: builder.query<IPlayerData, PlayerApiEndpoints>({
+			query: ({ url, episodeNumber }) => ({ url: `anime/gogoanime/watch/${url}-episode-${episodeNumber}` }),
 			//transformResponse: (response: { data: IPlayerData }, meta, arg) => response.data,
 		}),
 	})

@@ -39,3 +39,8 @@ export enum AnimeTypesEnum {
 	'ona',
 	'music',
 }
+
+export interface IRelations {
+	relation: string;
+	entry: IMoreDetails;
+}

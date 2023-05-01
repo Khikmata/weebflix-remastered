@@ -12,6 +12,7 @@ import { dateFilterReducer, genreFilterReducer, producersFilterReducer, ratingFi
 import { orderByFilterReducer } from "./reducers/Filters/OrderFilterSlice";
 import { sortFilterReducer } from "./reducers/Filters/SortFilterSlice";
 import { statusFilterReducer } from "./reducers/Filters/StatusFilterSlice";
+import { PlayerReducer } from "./reducers/PlayerSlice";
 import { AnimeApi } from "./services/getAnime";
 import { PlayerApi } from "./services/getPlayer";
 import { SearchAPI } from "./services/getSearch";
@@ -25,6 +26,8 @@ const rootReducer = combineReducers({
 	catalogue: CatalogueReducer,
 
 	dropDownData: DropDownDataReducer,
+
+	playerSlice: PlayerReducer,
 
 	//фильтры
 	dateFilter: dateFilterReducer,

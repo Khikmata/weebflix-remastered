@@ -7,21 +7,32 @@ import { useEffect, useState } from 'react';
 import { CharactersBlock } from '../../components/Blocks/CharactersBlock';
 import { PlayerBlock } from '../../components/Blocks/PlayerBlock';
 import { RankBlock } from '../../components/Blocks/Rank';
+import { RelationBlock } from '../../components/Blocks/RelationBlock';
 import { Button } from '../../components/Button';
+import { useAppSelector } from '../../hooks/redux';
 import { AnimeApi } from '../../store/services/getAnime';
 import { PlayerApi } from '../../store/services/getPlayer';
 import styles from './animepage.styles.module.scss';
-import { RelationBlock } from '../../components/Blocks/RelationBlock';
+
 
 const AnimePage = () => {
 
 	const [skip, setSkip] = useState(true);
 	const [urlQuery, setUrlQuery] = useState('');
-
+	const selectedEpisode = useAppSelector((state) => state.playerSlice.activeEpisode)
 	let { id } = useParams<string>();
 
 	const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '',);
-	const { data: playerData, error: playerError, isLoading: playerLoading } = PlayerApi.useGetAnimePlayerQuery(urlQuery, { skip })
+	const { data: playerData, error: playerError, isLoading: playerLoading } = PlayerApi.useGetAnimePlayerQuery({ url: urlQuery, episodeNumber: selectedEpisode }, { skip })
+
+	console.log(details?.url)
+	if (playerError) {
+		setUrlQuery(removeHyphens(urlQuery));
+	}
+
+	function removeHyphens(str: string) {
+		return str.replace(/[-☆]/g, '');;
+	}
 
 	let url = '';
 	const getUrl = () => {
@@ -96,7 +107,7 @@ const AnimePage = () => {
 				<CharactersBlock id={id ? id : ''} />
 				<RelationBlock />
 				{playerLoading && <p>Загрузка плеера...</p>}
-				{playerData && <PlayerBlock sources={playerData.sources} />}
+				{playerData && details && <PlayerBlock sources={playerData.sources} details={details} />}
 				{playerError && <p>Произошла ошибка при загрузке плеера.</p>}
 			</div>
 		</div>

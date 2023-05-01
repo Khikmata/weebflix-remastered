@@ -2,7 +2,7 @@
 
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
 import { IGenres, IImages } from '../../types/DetailsTypes';
-import { IAnimeFilterQueries, IData, IDetails, IProducers, IRecommendations, ISeasons } from '../../types/FetchTypes';
+import { IAnimeFilterQueries, IData, IDetails, IGetCharacters, IProducers, IRecommendations, ISeasons } from '../../types/FetchTypes';
 
 export interface seasonQuery {
 	year: string,
@@ -74,9 +74,9 @@ export const AnimeApi = createApi({
 			query: () => ({ url: `https://api.jikan.moe/v4/producers` }),
 			transformResponse: (response: { data: IProducers[] }) => response.data,
 		}),
-		getAnimeCharacters: builder.query<any[], string>({
+		getAnimeCharacters: builder.query<IGetCharacters[], string>({
 			query: (id) => ({ url: `https://api.jikan.moe/v4/anime/${id}/characters` }),
-			transformResponse: (response: { data: any[] }) => response.data,
+			transformResponse: (response: { data: IGetCharacters[] }) => response.data,
 		}),
 		getAnimeGenres: builder.query<IGenres[], string>({
 			query: () => ({ url: '/genres/anime' }),
