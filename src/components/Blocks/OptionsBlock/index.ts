@@ -1,2 +1,1 @@
-export { OptionsBlock } from './OptionsBlock';
-
+export { OptionsBlock } from './OptionsBlock'

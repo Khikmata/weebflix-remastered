@@ -1,1 +1,1 @@
-export { OrderByDropdown } from './OrderByDropdown';
+export { OrderByDropdown } from './OrderByDropdown'

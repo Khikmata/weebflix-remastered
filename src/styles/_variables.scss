@@ -19,7 +19,7 @@ $blockShadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
 
 //mixins
 @mixin block {
-	background-color: $blockColor;
-	box-shadow: $blockShadow;
-	border: 1px solid $lowopacity;
+    background-color: $blockColor;
+    box-shadow: $blockShadow;
+    border: 1px solid $lowopacity;
 }

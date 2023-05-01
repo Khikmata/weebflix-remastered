@@ -1,39 +1,39 @@
-@import "../../../styles/variables";
+@import '../../../styles/variables';
 
 .options {
-	width: 100%;
-	height: 60px;
-	padding: 8px 24px;
-	background-color: $blockColor;
-	box-shadow: $blockShadow;
-	overflow: hidden;
-	&__content {
-		height: 100%;
-		ul {
-			height: 100%;
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			font-weight: 500;
-			padding: 0px 12px;
-		}
-		li {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			height: 45px;
-			width: 100%;
-			cursor: pointer;
-			&.active {
-				color: $whiteColor;
-				font-weight: 600;
-				background-color: $blockActiveColor;
-			}
-		}
-	}
+    width: 100%;
+    height: 60px;
+    padding: 8px 24px;
+    background-color: $blockColor;
+    box-shadow: $blockShadow;
+    overflow: hidden;
+    &__content {
+        height: 100%;
+        ul {
+            height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-weight: 500;
+            padding: 0px 12px;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 45px;
+            width: 100%;
+            cursor: pointer;
+            &.active {
+                color: $whiteColor;
+                font-weight: 600;
+                background-color: $blockActiveColor;
+            }
+        }
+    }
 }
 @media (max-width: 426px) {
-	.catalogue__filter {
-		padding: 0;
-	}
+    .catalogue__filter {
+        padding: 0;
+    }
 }

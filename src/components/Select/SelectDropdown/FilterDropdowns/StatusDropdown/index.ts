@@ -1,1 +1,1 @@
-export { StatusDropdown } from './StatusDropdown';
+export { StatusDropdown } from './StatusDropdown'

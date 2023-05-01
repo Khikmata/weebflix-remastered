@@ -1,1 +1,1 @@
-export { PlayerBlock } from "./PlayerBlock";
+export { PlayerBlock } from './PlayerBlock'

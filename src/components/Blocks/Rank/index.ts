@@ -1,1 +1,1 @@
-export { RankBlock } from './RankBlock';
+export { RankBlock } from './RankBlock'

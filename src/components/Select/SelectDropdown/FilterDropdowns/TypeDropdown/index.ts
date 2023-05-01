@@ -1,1 +1,1 @@
-export { TypeDropdown } from "./TypeDropdown";
+export { TypeDropdown } from './TypeDropdown'

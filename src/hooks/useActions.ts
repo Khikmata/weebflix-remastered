@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux'
 import { dateFilterActions } from '../store/reducers/Filters/DateFilterSlice'
 
 const rootActions = {
-	...dateFilterActions
+    ...dateFilterActions,
 }
 
 export const useActions = () => {
-	const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-	return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])
+    return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])
 }

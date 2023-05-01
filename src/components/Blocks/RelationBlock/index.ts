@@ -1,2 +1,1 @@
-export { RelationBlock } from "./RelationBlock";
-
+export { RelationBlock } from './RelationBlock'

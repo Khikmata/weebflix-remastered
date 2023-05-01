@@ -1,2 +1,1 @@
-export { AnimeCard } from "./AnimeCard";
-
+export { AnimeCard } from './AnimeCard'

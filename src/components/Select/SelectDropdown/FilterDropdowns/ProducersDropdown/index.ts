@@ -1,1 +1,1 @@
-export { ProducersDropdown } from "./ProducersDropdown";
+export { ProducersDropdown } from './ProducersDropdown'

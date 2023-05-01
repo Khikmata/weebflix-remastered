@@ -1,2 +1,1 @@
-export { CharactersBlock } from "./CharactersBlock";
-
+export { CharactersBlock } from './CharactersBlock'

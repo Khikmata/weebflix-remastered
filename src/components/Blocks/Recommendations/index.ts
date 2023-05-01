@@ -1,1 +1,1 @@
-export { RecommendationsBlock } from './RecommendationsBlock';
+export { RecommendationsBlock } from './RecommendationsBlock'

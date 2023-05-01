@@ -1,1 +1,1 @@
-export { SelectComponent } from './SelectComponent';
+export { SelectComponent } from './SelectComponent'

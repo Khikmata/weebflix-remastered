@@ -1,2 +1,1 @@
-export { CatalogueSlider } from './CatalogueSlider';
-
+export { CatalogueSlider } from './CatalogueSlider'

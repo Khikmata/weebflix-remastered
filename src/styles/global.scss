@@ -1,111 +1,127 @@
-@import "./variables";
+@import './variables';
 
 *,
 ::after,
 ::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Golos Text", sans-serif;
-  color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Golos Text', sans-serif;
+    color: white;
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $gray;
+    background-color: $gray;
 }
 ::-webkit-scrollbar-corner {
-  background-color: transparent;
+    background-color: transparent;
 }
 body {
-  direction: ltr;
-  font-feature-settings: "kern";
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  min-height: 100svh;
-  background-color: #1e1e1e;
-  font-family: "Lato", sans-serif;
-  color: #e9e9e9;
+    direction: ltr;
+    font-feature-settings: 'kern';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    min-height: 100svh;
+    background-color: #1e1e1e;
+    font-family: 'Lato', sans-serif;
+    color: #e9e9e9;
 }
 
 svg circle,
 svg path {
-  shape-rendering: geometricprecision;
+    shape-rendering: geometricprecision;
 }
 
 button {
-  border: none;
-  outline: 0;
-  cursor: pointer;
-  background-color: transparent;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    background-color: transparent;
 }
 
 input {
-  outline: 0;
-  background-color: transparent;
+    outline: 0;
+    background-color: transparent;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 li {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 strong {
-  font-weight: 600;
+    font-weight: 600;
 }
 .prev-button,
 .next-button {
-  font-size: 24px;
-  z-index: 1000;
-  position: absolute;
-  width: 60px;
-  height: 280px;
-  border: none;
-  top: 41%;
-  transform: translate(-50%, -50%);
+    font-size: 24px;
+    z-index: 1000;
+    position: absolute;
+    width: 60px;
+    height: 280px;
+    border: none;
+    top: 41%;
+    transform: translate(-50%, -50%);
 
-  &:disabled {
-    opacity: 0;
-  }
+    &:disabled {
+        opacity: 0;
+    }
 }
 .prev-button {
-  left: 25px;
-  background: $blockColor; /* Old browsers */
-  background: -moz-linear-gradient(left, $blockColor 0%, $whiteColor 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, $blockColor 0%, $whiteColor 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    to right,
-    $blockColor 0%,
-    rgba(255, 255, 255, 0) 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    left: 25px;
+    background: $blockColor; /* Old browsers */
+    background: -moz-linear-gradient(
+        left,
+        $blockColor 0%,
+        $whiteColor 100%
+    ); /* FF3.6-15 */
+    background: -webkit-linear-gradient(
+        left,
+        $blockColor 0%,
+        $whiteColor 100%
+    ); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+        to right,
+        $blockColor 0%,
+        rgba(255, 255, 255, 0) 100%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 .next-button {
-  right: -30px;
-  background: -moz-linear-gradient(right, $blockColor 0%, $whiteColor 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(right, $blockColor 0%, $whiteColor 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    to left,
-    $blockColor 0%,
-    rgba(255, 255, 255, 0) 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    right: -30px;
+    background: -moz-linear-gradient(
+        right,
+        $blockColor 0%,
+        $whiteColor 100%
+    ); /* FF3.6-15 */
+    background: -webkit-linear-gradient(
+        right,
+        $blockColor 0%,
+        $whiteColor 100%
+    ); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+        to left,
+        $blockColor 0%,
+        rgba(255, 255, 255, 0) 100%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 .block {
-  background-color: #3a3a3a;
-  border-radius: 4px;
-  padding: 12px;
-  &-list {
-    display: flex;
-  }
+    background-color: #3a3a3a;
+    border-radius: 4px;
+    padding: 12px;
+    &-list {
+        display: flex;
+    }
 }

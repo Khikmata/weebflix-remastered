@@ -1,1 +1,1 @@
-export { HistoryBlock } from './HistoryBlock';
+export { HistoryBlock } from './HistoryBlock'

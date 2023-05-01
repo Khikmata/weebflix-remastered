@@ -1,2 +1,1 @@
-export { RangeComponent } from './RangeComponent';
-
+export { RangeComponent } from './RangeComponent'

@@ -1,1 +1,1 @@
-export { RatingDropdown } from "./RatingDropdown";
+export { RatingDropdown } from './RatingDropdown'
