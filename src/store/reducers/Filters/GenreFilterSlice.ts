@@ -20,6 +20,7 @@ const slice = createSlice({
       state.genresName.push(action.payload.name)
     },
     removeGenre: (state, action: PayloadAction<IGenres>) => {
+
       state.genresQuery = state.genresQuery.replace(`${action.payload.mal_id},`, '')
       const indexToRemove = state.genresName.findIndex((el) => el === action.payload.name)
       if (indexToRemove !== 0) {
@@ -27,6 +28,8 @@ const slice = createSlice({
       } else {
         state.genresName.shift()
       }
+      console.log(action.payload)
+      console.log(state.genresQuery)
     },
   },
 })

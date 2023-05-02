@@ -22,4 +22,4 @@ export const PlayerApi = createApi({
   }),
 })
 
-export const {} = PlayerApi
+export const { } = PlayerApi
