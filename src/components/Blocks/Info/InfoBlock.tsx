@@ -6,7 +6,7 @@ import { TranslateRatingToRussian } from '../../../utils/Translation/TranslateRa
 import { TranslateSeasonToRussian } from '../../../utils/Translation/TranslateRelease'
 import { TranslateStatusToRussian } from '../../../utils/Translation/TranslateStatus'
 import { TranslateTypeToRussian } from '../../../utils/Translation/TranslateTypes'
-import { Button } from '../../Button'
+import { Button } from '../../UI/Button'
 import styles from './InfoBlock.styles.module.scss'
 interface InfoBlockProps {
   details: IDetails

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
-import { IAnimeFilterQueries, IData } from '../../types/FetchTypes'
+import { IAnimeFilterQueries, IGetAnime } from '../../types/FetchTypes'
 
 export interface seasonQuery {
   year: string
@@ -13,7 +13,7 @@ export const SearchAPI = createApi({
   reducerPath: 'searchAPI',
   baseQuery: staggeredBaseQuery,
   endpoints: (builder) => ({
-    getAnimeSearch: builder.query<IData[], IAnimeFilterQueries>({
+    getAnimeSearch: builder.query<IGetAnime, IAnimeFilterQueries>({
       query: ({
         page,
         limit,
@@ -51,10 +51,9 @@ export const SearchAPI = createApi({
         if (producers) url += `producers=${producers}&`
         if (end_date !== '2023') url += `end_date=${end_date}`
         return { url }
-      },
-      transformResponse: (response: { data: IData[] }) => response.data,
+      }
     }),
   }),
 })
 
-export const {} = SearchAPI
+export const { } = SearchAPI

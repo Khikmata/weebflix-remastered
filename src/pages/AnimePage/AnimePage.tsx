@@ -8,8 +8,8 @@ import { CharactersBlock } from '../../components/Blocks/CharactersBlock'
 import { PlayerBlock } from '../../components/Blocks/PlayerBlock'
 import { RankBlock } from '../../components/Blocks/Rank'
 import { RelationBlock } from '../../components/Blocks/RelationBlock'
-import { Button } from '../../components/Button'
-import { LoadingComponent } from '../../components/Loading'
+import { Button } from '../../components/UI/Button'
+import { LoadingComponent } from '../../components/UI/Loading'
 import { useAppSelector } from '../../hooks/redux'
 import { AnimeApi } from '../../store/services/getAnime'
 import { PlayerApi } from '../../store/services/getPlayer'
@@ -21,6 +21,7 @@ const AnimePage = () => {
 
   const selectedEpisode = useAppSelector((state) => state.playerSlice.activeEpisode)
   let { id } = useParams<string>()
+  const [checkForMistakes, setCheckForMistakes] = useState(true);
 
   const {
     data: details,
@@ -36,7 +37,8 @@ const AnimePage = () => {
   const removeHyphens = (str: string) => str.replace(/[-☆]/g, '')
 
 
-  if (playerError) {
+  if (playerError && checkForMistakes) {
+    setCheckForMistakes(false);
     setUrlQuery(removeHyphens(urlQuery))
   }
 

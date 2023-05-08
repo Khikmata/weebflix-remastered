@@ -9,8 +9,8 @@ import styles from './CatalogueSlider.styles.module.scss'
 import { useMemo } from 'react'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
-import { AnimeCard } from '../../Card'
-import { LoadingComponent } from '../../Loading'
+import { AnimeCard } from '../../UI/Card'
+import { LoadingComponent } from '../../UI/Loading'
 
 export const CatalogueSlider: React.FC = () => {
   const {

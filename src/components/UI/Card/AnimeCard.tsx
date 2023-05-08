@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IData } from '../../types/FetchTypes'
-import { ColorRating } from '../../utils/Coloring/ColorRating'
-import { Tooltip } from '../../utils/Tooltip'
+import { IData } from '../../../types/FetchTypes'
+import { ColorRating } from '../../../utils/Coloring/ColorRating'
 import styles from './AnimeCard.styles.module.scss'
 
 interface CatalogueCardProps {

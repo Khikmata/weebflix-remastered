@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { AnimeApi } from '../../../store/services/getAnime'
 import { IData } from '../../../types/FetchTypes'
-import { AnimeCard } from '../../Card'
+import { AnimeCard } from '../../UI/Card'
 import { FilterBlock } from '../Filter'
 
 import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice'
 import { SearchAPI } from '../../../store/services/getSearch'
-import { LoadingComponent } from '../../Loading'
+import { LoadingComponent } from '../../UI/Loading'
+import { Pagination } from '../Pagination'
 import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
@@ -24,11 +25,7 @@ export const AnimeGridBlock = () => {
   const AddOrderByToQuery = useAppSelector((state) => state.orderByFilter.orderBy)
 
   const [pages, setPages] = useState(1)
-  const {
-    data: SearchData,
-    error: filteredErrors,
-    isLoading: filteredLoading,
-  } = SearchAPI.useGetAnimeSearchQuery({
+  const { data: SearchData, error: SearchErrors, isLoading: SearchLoading, } = SearchAPI.useGetAnimeSearchQuery({
     letter: AddSearchToQuery,
     max_score: AddScoreToQuery.maxScore.toString(),
     min_score: AddScoreToQuery.minScore.toString(),
@@ -45,6 +42,8 @@ export const AnimeGridBlock = () => {
     page: pages,
     sfw: AddRatingToQuery === 'RX' || AddGenreToQuery.genresName.includes('Hentai') ? '' : 'true',
   })
+
+  const paginationData = SearchData?.pagination;
 
   const [skip, setSkip] = useState(true)
   const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery('')
@@ -63,7 +62,7 @@ export const AnimeGridBlock = () => {
     setPages(pages === 1 ? pages : pages - 1)
   }
   const handlePrevPage = () => {
-    setPages(pages + 1)
+    setPages(paginationData?.has_next_page ? pages + 1 : pages)
   }
 
   return (
@@ -72,13 +71,14 @@ export const AnimeGridBlock = () => {
         <h2>Каталог</h2>
         <div className={styles['animegrid-container__content']}>
           <div className={styles['animegrid-content__items']}>
-            {filteredLoading && <div className={styles['loading-content']}> <LoadingComponent /> </div>}
-            {filteredErrors && <p>Ошибка при загрузке данных</p>}
-            {SearchData &&
-              AddSeasonsToQuery === '' &&
-              SearchData.map((item: IData, index: number) => (
+            {SearchLoading && <LoadingComponent />}
+            {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
+            {SearchData && AddSeasonsToQuery === '' &&
+              SearchData.data.map((item: IData, index: number) => (
                 <AnimeCard key={index} index={index} item={item} />
-              ))}
+              ))
+            }
+            {SearchData && SearchData.data.length === 0 && <strong>Ничего не найдено ❌</strong>}
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (
                 <AnimeCard key={index} index={index} item={item} />
@@ -88,19 +88,14 @@ export const AnimeGridBlock = () => {
             <FilterBlock />
           </div>
         </div>
-        <div className={styles['pagination']}>
-          <button
-            className={[styles['pagination-button'], styles[pages === 1 ? 'disabled' : '']].join(
-              ' ',
-            )}
-            onClick={handleNextPage}
-          >
-            {'<'}
-          </button>
-          <button className={styles['pagination-button']} onClick={handlePrevPage}>
-            {'>'}
-          </button>
-        </div>
+        {SearchData?.data &&
+          <Pagination
+            handleNextPage={handleNextPage}
+            handlePrevPage={handlePrevPage}
+            pages={pages}
+            hasNextPage={SearchData?.pagination.has_next_page}
+          />
+        }
       </div>
     </div>
   )

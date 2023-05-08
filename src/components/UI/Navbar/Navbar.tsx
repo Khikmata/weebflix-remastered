@@ -1,17 +1,18 @@
-import { useCallback, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/icons/logo.svg'
+import logo from '../../../assets/icons/logo.svg'
 
-import closeIcon from '../../assets/icons/close.svg'
-import forwardIcon from '../../assets/icons/forward.svg'
+import closeIcon from '../../../assets/icons/close.svg'
+import forwardIcon from '../../../assets/icons/forward.svg'
 
-import profileIcon from '../../assets/icons/profile.svg'
-import searchIcon from '../../assets/icons/search.svg'
+import profileIcon from '../../../assets/icons/profile.svg'
+import searchIcon from '../../../assets/icons/search.svg'
 
 import { useDispatch } from 'react-redux'
 
+import { useDebounce } from '../../../hooks/debounce'
+import { searchFilterActions } from '../../../store/reducers/Filters'
 import styles from './Navbar.styles.module.scss'
-import { searchFilterActions } from '../../store/reducers/Filters'
 
 export const Navbar = () => {
   const [searchInput, setSearchInput] = useState('')
@@ -20,13 +21,12 @@ export const Navbar = () => {
   const dispatch = useDispatch()
   const searchRef = useRef<HTMLInputElement>(null)
 
-  const handleSearchInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchInput(e.target.value)
-      dispatch(searchFilterActions.setSearchQuery(e.target.value))
-    },
-    [dispatch, setSearchInput, searchInput],
-  )
+
+  const updateSearchInputStore = useDebounce(() => {
+    console.log('yey')
+    dispatch(searchFilterActions.setSearchQuery(searchInput))
+  }, 1000)
+
 
   const handleSearchClear = () => {
     setSearchInput('')
@@ -37,6 +37,9 @@ export const Navbar = () => {
     searchRef.current?.focus()
   }
 
+  useEffect(() => {
+    updateSearchInputStore(searchInput);
+  }, [searchInput])
   return (
     <header className={styles['navbar']}>
       <nav className={styles['navbar-content']}>
@@ -52,7 +55,7 @@ export const Navbar = () => {
             <input
               ref={searchRef}
               value={searchInput}
-              onChange={handleSearchInputChange}
+              onChange={(e) => setSearchInput(e.target.value)}
               className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')}
               placeholder="Поиск..."
             />

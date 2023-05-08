@@ -18,7 +18,7 @@ interface ButtonProps {
   max?: number
   min?: number
 
-  onChange?: (e: any) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Input: React.FC<ButtonProps> = ({

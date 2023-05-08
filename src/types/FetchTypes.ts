@@ -1,8 +1,8 @@
 import { IAired, IGenres, IImages, IMoreDetails, IPaginationItems, ITrailer } from './DetailsTypes'
 
 export interface IGetAnime {
-  pagination: IPagination
-  data: IData[]
+  pagination: IPagination;
+  data: IData[];
 }
 export interface IGetGenres {
   genres: IGenres[]

@@ -3,7 +3,7 @@ import { FreeMode, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { AnimeApi } from '../../../store/services/getAnime'
 import { IRecommendations } from '../../../types/FetchTypes'
-import { LoadingComponent } from '../../Loading'
+import { LoadingComponent } from '../../UI/Loading'
 import styles from './RecommendationsBlock.styles.module.scss'
 
 export const RecommendationsBlock: React.FC = () => {
