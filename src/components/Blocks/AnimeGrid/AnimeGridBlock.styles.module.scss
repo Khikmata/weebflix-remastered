@@ -74,6 +74,14 @@
     width: 100%;
     margin-bottom: 24px;
     min-height: 0;
+    padding: 0;
+  }
+  .animegrid-container {
+    padding: 4px;
+    h2 {
+      text-align: center;
+      margin-top: 12px;
+    }
   }
   .animegrid-content__items {
     justify-content: center;
