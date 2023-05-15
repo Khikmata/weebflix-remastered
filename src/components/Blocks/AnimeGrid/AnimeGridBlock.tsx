@@ -1,28 +1,34 @@
 import { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
-import { AnimeApi } from '../../../store/services/getAnime'
-import { IData } from '../../../types/FetchTypes'
-import { AnimeCard } from '../../UI/Card'
-import { FilterBlock } from '../Filter'
 
+import { IData } from '../../../types/FetchTypes'
+
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice'
+import { AnimeApi } from '../../../store/services/getAnime'
 import { SearchAPI } from '../../../store/services/getSearch'
+
+import { AnimeCard } from '../../UI/AnimeCard'
 import { LoadingComponent } from '../../UI/Loading'
+import { FilterBlock } from '../Filter'
 import { Pagination } from '../Pagination'
+
 import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
-  const AddDateToQuery = useAppSelector((state) => state.dateFilter)
-  const AddScoreToQuery = useAppSelector((state) => state.scoreFilter)
-  const AddGenreToQuery = useAppSelector((state) => state.genreFilter)
-  const AddTypeToQuery = useAppSelector((state) => state.typeFilter.typeQuery)
-  const AddRatingToQuery = useAppSelector((state) => state.ratingFilter.ratingQuery)
-  const AddSeasonsToQuery = useAppSelector((state) => state.seasonsFilter.seasonQuery)
-  const AddProducersToQuery = useAppSelector((state) => state.producerFilter.producersQuery)
-  const AddSearchToQuery = useAppSelector((state) => state.searchFilter.searchQuery)
-  const AddStatusToQuery = useAppSelector((state) => state.statusFilter.statusType)
-  const AddSortByToQuery = useAppSelector((state) => state.sortFilter.sortType)
-  const AddOrderByToQuery = useAppSelector((state) => state.orderByFilter.orderBy)
+
+  const { ...filterQueries } = useAppSelector((state) => state.filters)
+
+  const AddDateToQuery = filterQueries.dateFilterReducer;
+  const AddGenreToQuery = filterQueries.genreFilterReducer;
+  const AddScoreToQuery = filterQueries.scoreFilterReducer;
+  const AddTypeToQuery = filterQueries.typeFilterReducer.typeQuery;
+  const AddRatingToQuery = filterQueries.ratingFilterReducer.ratingQuery;
+  const AddSeasonsToQuery = filterQueries.seasonFilterReducer.seasonQuery;
+  const AddProducersToQuery = filterQueries.producersFilterReducer.producersQuery;
+  const AddSearchToQuery = filterQueries.searchFilterReducer.searchQuery;
+  const AddStatusToQuery = filterQueries.statusFilterReducer.statusType;
+  const AddSortByToQuery = filterQueries.sortFilterReducer.sortType;
+  const AddOrderByToQuery = filterQueries.orderByFilterReducer.orderBy;
 
   const [pages, setPages] = useState(1)
   const { data: SearchData, error: SearchErrors, isLoading: SearchLoading, } = SearchAPI.useGetAnimeSearchQuery({
@@ -61,6 +67,7 @@ export const AnimeGridBlock = () => {
   const handleNextPage = () => {
     setPages(pages === 1 ? pages : pages - 1)
   }
+
   const handlePrevPage = () => {
     setPages(paginationData?.has_next_page ? pages + 1 : pages)
   }
@@ -78,7 +85,7 @@ export const AnimeGridBlock = () => {
                 <AnimeCard key={index} index={index} item={item} />
               ))
             }
-            {SearchData && SearchData.data.length === 0 && <strong>Ничего не найдено ❌</strong>}
+            {SearchData && SearchData.data.length === 0 && AddSeasonsToQuery === '' && <strong>Ничего не найдено ❌</strong>}
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (
                 <AnimeCard key={index} index={index} item={item} />
@@ -90,8 +97,8 @@ export const AnimeGridBlock = () => {
         </div>
         {SearchData?.data &&
           <Pagination
-            handleNextPage={handleNextPage}
-            handlePrevPage={handlePrevPage}
+            handleNextPage={() => handleNextPage}
+            handlePrevPage={() => handlePrevPage}
             pages={pages}
             hasNextPage={SearchData?.pagination.has_next_page}
           />

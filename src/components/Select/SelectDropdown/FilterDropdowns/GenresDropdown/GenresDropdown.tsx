@@ -5,13 +5,14 @@ import { DropDownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
 import { translateDropdownContent } from '../../TranslateDropdown'
 
 import { useAppSelector } from '../../../../../hooks/redux'
-import { genreFilterActions } from '../../../../../store/reducers/Filters'
+
 import styles from '../FilterDropdown.styles.module.scss'
+import { genreFilterActions } from '../../../../../store/reducers/Filters'
 
 
 export const GenresDropdown = () => {
   const [selectedGenreIndex, setSelectedGenreIndex] = useState<number[]>([])
-
+  const [selectedTypeIndex, setSelectedTypeIndex] = useState<number>(0)
   const genreData = useAppSelector((state) => state.dropDownData.genreData)
   const dispatch = useDispatch()
 
@@ -20,11 +21,12 @@ export const GenresDropdown = () => {
   const getGenreDropdown = useMemo(() => {
 
     const handleGenreChange = (index: number) => {
-
       if (selectedGenreIndex.includes(index)) {
         dispatch(genreFilterActions.removeGenre(sortedGenres[index]))
         selectedGenreIndex.splice(selectedGenreIndex.indexOf(index), 1);
-      } else {
+        setSelectedTypeIndex(0)
+      }
+      else {
         dispatch(genreFilterActions.setGenre(sortedGenres[index]))
         setSelectedGenreIndex(state => [...state, index])
       }

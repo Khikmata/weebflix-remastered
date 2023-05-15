@@ -15,23 +15,16 @@ import { AnimeApi } from '../../store/services/getAnime'
 import { PlayerApi } from '../../store/services/getPlayer'
 import styles from './animepage.styles.module.scss'
 
-const AnimePage = () => {
+export const AnimePage = () => {
   const [skip, setSkip] = useState<boolean>(true)
   const [urlQuery, setUrlQuery] = useState<string>('')
 
-  const selectedEpisode = useAppSelector((state) => state.playerSlice.activeEpisode)
+  const selectedEpisode = useAppSelector((state) => state.player.activeEpisode)
   let { id } = useParams<string>()
   const [checkForMistakes, setCheckForMistakes] = useState(true);
 
-  const {
-    data: details,
-    error: detailsErrors,
-    isLoading: detailsLoading,
-  } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '')
-  const {
-    data: playerData,
-    error: playerError,
-    isLoading: playerLoading,
+  const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '')
+  const { data: playerData, error: playerError, isLoading: playerLoading,
   } = PlayerApi.useGetAnimePlayerQuery({ url: urlQuery, episodeNumber: selectedEpisode }, { skip })
 
   const removeHyphens = (str: string) => str.replace(/[-☆]/g, '')
@@ -64,6 +57,7 @@ const AnimePage = () => {
           tempUrl += details.url[i + 1]
         }
       }
+      setCheckForMistakes(false)
     }
     tempUrl = tempUrl.replace(/_/g, '-')
     setUrlQuery(tempUrl)
@@ -83,7 +77,8 @@ const AnimePage = () => {
       <div className={styles['anime-page__background__overlay']} />
       <img
         src={`${details?.images.webp.large_image_url}`}
-        alt=""
+        alt="задний фон"
+        loading='lazy'
         className={styles['anime-page__background']}
       />
       <div className={styles['anime-page__container']}>
@@ -136,4 +131,3 @@ const AnimePage = () => {
   )
 }
 
-export default AnimePage

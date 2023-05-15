@@ -9,25 +9,16 @@ import styles from './CatalogueSlider.styles.module.scss'
 import { useMemo } from 'react'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
-import { AnimeCard } from '../../UI/Card'
+import { AnimeCard } from '../../UI/AnimeCard'
 import { LoadingComponent } from '../../UI/Loading'
 
 export const CatalogueSlider: React.FC = () => {
-  const {
-    data: currentSeason,
-    error: currentSeasonErrors,
-    isLoading: currentSeasonLoading,
-  } = AnimeApi.useGetCurrentSeasonQuery(5)
-  const {
-    data: upcomingSeason,
-    error: upcomingSeasonErrors,
-    isLoading: upcomingSeasonLoading,
-  } = AnimeApi.useGetUpcomingSeasonQuery(5)
+  const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading, } = AnimeApi.useGetCurrentSeasonQuery(5)
+  const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading, } = AnimeApi.useGetUpcomingSeasonQuery(5)
 
   const selectedFilterOption = useAppSelector((state) => state.catalogueSlider.activeSliderIndex)
 
-  const currentFilter = useMemo(
-    () => [currentSeason, upcomingSeason],
+  const currentFilter = useMemo(() => [currentSeason, upcomingSeason],
     [currentSeason, upcomingSeason],
   )
 
@@ -52,12 +43,13 @@ export const CatalogueSlider: React.FC = () => {
             slidesPerView: 2,
             spaceBetween: 10,
           },
-          386: {
+          430: {
             slidesPerView: 3,
             spaceBetween: 10,
           },
           600: {
             slidesPerView: 3,
+            spaceBetween: 36,
           },
           869: {
             slidesPerView: 4,
@@ -67,10 +59,11 @@ export const CatalogueSlider: React.FC = () => {
           },
           1225: {
             slidesPerView: 6,
+
           },
         }}
       >
-        <button className="prev-button"></button>
+        <button className="prev-button">{'<'}</button>
         {currentFilter[0] && currentSeasonLoading && <span> Загрузка каталога... <LoadingComponent /></span>}
         {currentFilter[1] && upcomingSeasonLoading && <span>  Загрузка каталога... <LoadingComponent /> </span>}
         {currentFilter[0] && currentSeasonErrors && <p>Ошибка при загрузке данных каталога</p>}
@@ -81,7 +74,7 @@ export const CatalogueSlider: React.FC = () => {
               <AnimeCard index={index} item={item} />
             </SwiperSlide>
           ))}
-        <button className="next-button"></button>
+        <button className="next-button">{'>'}</button>
       </Swiper>
     </div>
   )

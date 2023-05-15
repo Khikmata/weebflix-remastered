@@ -4,8 +4,10 @@ import { AnimeRatingData, DropDownTypeEnum } from '../../../../../utils/DataType
 import { translateDropdownContent } from '../../TranslateDropdown'
 
 import { ratingFilterActions } from '../../../../../store/reducers/Filters'
-import styles from '../FilterDropdown.styles.module.scss'
 import { TranslateRatingToRussian } from '../../../../../utils/Translation/TranslateRating'
+import styles from '../FilterDropdown.styles.module.scss'
+
+
 export const RatingDropdown = () => {
   const [selectedRatingIndex, setSelectedRatingIndex] = useState<number | null>(null)
 

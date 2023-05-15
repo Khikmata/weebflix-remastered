@@ -3,7 +3,9 @@ import filterIcon from '../../../assets/icons/filters.svg'
 
 import { useAppDispatch } from '../../../hooks/redux'
 import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice'
-import { dateFilterActions, scoreFilterActions } from '../../../store/reducers/Filters'
+import { dateFilterActions } from '../../../store/reducers/Filters/DateFilterSlice'
+import { scoreFilterActions } from '../../../store/reducers/Filters/ScoreFilterSlice'
+
 import { AnimeApi } from '../../../store/services/getAnime'
 import { SelectComponent } from '../../Select'
 import { RangeComponent } from '../../UI/Range'

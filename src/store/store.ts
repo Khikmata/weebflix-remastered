@@ -3,24 +3,13 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { CatalogueReducer } from './reducers/CatalogueSlice'
 import { CatalogueSliderReducer } from './reducers/CatalogueSliderSlice'
 import { DropDownDataReducer } from './reducers/DropDownDataSlice'
-import {
-  dateFilterReducer,
-  genreFilterReducer,
-  producersFilterReducer,
-  ratingFilterReducer,
-  scoreFilterReducer,
-  searchFilterReducer,
-  seasonFilterReducer,
-  typeFilterReducer,
-} from './reducers/Filters/'
 
-import { orderByFilterReducer } from './reducers/Filters/OrderFilterSlice'
-import { sortFilterReducer } from './reducers/Filters/SortFilterSlice'
-import { statusFilterReducer } from './reducers/Filters/StatusFilterSlice'
 import { PlayerReducer } from './reducers/PlayerSlice'
 import { AnimeApi } from './services/getAnime'
 import { PlayerApi } from './services/getPlayer'
 import { SearchAPI } from './services/getSearch'
+
+import { filterReducers } from './reducers/Filters'
 
 const rootReducer = combineReducers({
   [AnimeApi.reducerPath]: AnimeApi.reducer,
@@ -32,20 +21,9 @@ const rootReducer = combineReducers({
 
   dropDownData: DropDownDataReducer,
 
-  playerSlice: PlayerReducer,
+  player: PlayerReducer,
 
-  //фильтры
-  dateFilter: dateFilterReducer,
-  scoreFilter: scoreFilterReducer,
-  genreFilter: genreFilterReducer,
-  typeFilter: typeFilterReducer,
-  ratingFilter: ratingFilterReducer,
-  seasonsFilter: seasonFilterReducer,
-  producerFilter: producersFilterReducer,
-  searchFilter: searchFilterReducer,
-  statusFilter: statusFilterReducer,
-  sortFilter: sortFilterReducer,
-  orderByFilter: orderByFilterReducer,
+  filters: filterReducers,
 })
 
 export const store = configureStore({

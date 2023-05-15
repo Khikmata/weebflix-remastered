@@ -70,32 +70,24 @@ strong {
   font-size: 24px;
   z-index: 1000;
   position: absolute;
-  width: 60px;
-  height: 280px;
-  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid $whiteColor;
+  outline: 1px solid $backgroundColor;
   top: 41%;
   transform: translate(-50%, -50%);
-
-  &:disabled {
-    opacity: 0;
-  }
-}
-.prev-button {
-  left: 25px;
-  background: $blockColor; /* Old browsers */
-  background: -moz-linear-gradient(left, $blockColor 0%, $whiteColor 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, $blockColor 0%, $whiteColor 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right, $blockColor 0%, rgba(255, 255, 255, 0) 100%);
+  text-shadow: $blockShadow;
 
   &:disabled {
     opacity: 0.4;
   }
 }
+.prev-button {
+  left: 25px;
+}
 .next-button {
-  right: -30px;
-  background: -moz-linear-gradient(right, $blockColor 0%, $whiteColor 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(right, $blockColor 0%, $whiteColor 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to left, $blockColor 0%, rgba(255, 255, 255, 0) 100%);
+  right: 0px;
 }
 
 .block {

@@ -22,8 +22,6 @@ export const RelationBlock = () => {
     <div className={styles['relationBlock']}>
       <Card />
       <Card />
-      <Card />
-      <Card />
     </div>
   )
 }

@@ -6,9 +6,12 @@
     &:hover {
       overflow: hidden;
       img {
+        content-visibility: auto;
         max-height: 254px;
         transition: all 0.2s ease-in-out;
         scale: 105%;
+
+        background-size: cover;
       }
     }
     &__rating {
@@ -21,11 +24,11 @@
       padding: 4px 8px;
     }
     img {
+      aspect-ratio: 3/4;
       transition: all 0.2s ease-in-out;
       border: 1px solid $lowopacity;
       height: 100%;
       max-height: 260px;
-      width: 100%;
       object-fit: cover;
     }
   }

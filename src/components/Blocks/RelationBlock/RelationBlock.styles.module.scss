@@ -1,4 +1,4 @@
-@import '../../../styles/_variables.scss';
+@import "../../../styles/_variables.scss";
 .relationBlock {
   margin: 24px 0px;
   @include block;
@@ -6,29 +6,38 @@
   grid-template-columns: 6 1fr;
   grid-template-rows: 1 1fr;
   gap: 8px;
-  height: 200px;
+  height: 120px;
   display: flex;
   justify-content: space-around;
-  @media (max-width: 620px) {
+  @media (max-width: 900px) {
+    justify-content: flex-start;
+  }
+  @media (max-width: 400px) {
     display: none;
   }
   &-content {
     display: flex;
     align-items: center;
-
     max-width: 400px;
+
     margin-right: 24px;
+    padding-right: 24px;
+
     &:not(:last-child) {
       border-right: 1px solid $lowopacity;
     }
-    padding-right: 24px;
+
+    @media (max-width: 900px) {
+      margin-right: 0px;
+      padding-right: 0px;
+    }
+
     &__image {
       height: 100%;
       overflow: hidden;
       margin-right: 8px;
-      border: 2px solid $buttonColorSecondary;
       img {
-        width: 100%;
+        aspect-ratio: 3/4;
         height: 100%;
         object-fit: cover;
       }

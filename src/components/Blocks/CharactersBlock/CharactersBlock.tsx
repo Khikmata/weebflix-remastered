@@ -13,7 +13,7 @@ export const CharactersBlock: React.FC<charactersBlockProps> = (id) => {
   useEffect(() => {
     setTimeout(() => {
       setSkip(false)
-    }, 300)
+    }, 500)
   }, [])
 
   const { data: charactersData } = AnimeApi.useGetAnimeCharactersQuery(id.id, {
@@ -26,7 +26,7 @@ export const CharactersBlock: React.FC<charactersBlockProps> = (id) => {
         ?.filter((item, index) => index < 8)
         .map((item: IGetCharacters, index) => (
           <div className={styles['characterCard']} key={index}>
-            <img src={item.character.images.webp.image_url} alt={'обложка'} />
+            <img src={item.character.images.webp.image_url} alt={'обложка'} loading='lazy' />
             <div className={styles['characterInfo']}>
               <p>{item.character.name}</p>
               <small>{item.role}</small>

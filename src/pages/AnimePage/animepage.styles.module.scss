@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .anime-page {
   margin-top: 124px;
@@ -58,7 +58,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: clamp(200px, 100%, 300px);
     height: 42px;
     padding-left: 16px;
     background-color: $blockActiveColor;
@@ -90,7 +90,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: clamp(200px, 100%, 300px);
     height: 42px;
     padding: 8px;
     background-color: $blockActiveColor;
@@ -130,9 +130,21 @@
 }
 
 @media (max-width: 800px) {
+  .anime-page__container {
+    padding: 12px;
+  }
+  .anime-info-title {
+    justify-content: center;
+    align-items: center;
+  }
   .anime-page__info {
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    &-title {
+      justify-content: center;
+      align-items: center;
+    }
   }
   .anime-info__image {
     display: flex;
@@ -144,6 +156,10 @@
   }
   .anime-info__leftside {
     padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .anime-info__rightside {
     padding: 0px;

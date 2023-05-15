@@ -7,7 +7,7 @@ import { RecommendationsBlock } from '../../components/Blocks/Recommendations'
 
 import styles from './home.styles.module.scss'
 
-const HomePage = () => {
+export const HomePage = () => {
   const catalogueSliderOptions = ['Актуальное', 'Скоро выйдет']
   const catalogueOptions = ['Аниме', 'Манга']
 
@@ -32,5 +32,3 @@ const HomePage = () => {
     </div>
   )
 }
-
-export default HomePage

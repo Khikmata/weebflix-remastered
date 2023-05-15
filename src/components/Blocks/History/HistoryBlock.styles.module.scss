@@ -1,9 +1,10 @@
-@import '../../../styles/variables';
+@import "../../../styles/variables";
 
 .history {
   height: 200px;
   padding: 12px 24px;
   margin-bottom: 24px;
+  width: 512px;
   @include block;
   &__content {
     display: flex;

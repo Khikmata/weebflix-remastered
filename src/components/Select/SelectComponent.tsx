@@ -29,17 +29,19 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
 }) => {
   const [openDropdown, setOpenDropdown] = useState(false)
 
-  const { year: seasonYear, season: seasonSeason } = useAppSelector((state) => state.seasonsFilter)
+  const { ...filterDisplays } = useAppSelector((state) => state.filters)
+
+  const { year: seasonYear, season: seasonSeason } = useAppSelector((state) => state.filters.seasonFilterReducer)
 
   //tooltips for inputs
-  const genreDisplay = useAppSelector((state) => state.genreFilter.genresName)
-  const typesDisplay = useAppSelector((state) => state.typeFilter.typeDisplay)
-  const ratingDisplay = useAppSelector((state) => state.ratingFilter.ratingDisplay)
-  const producersDisplay = useAppSelector((state) => state.producerFilter.producersDisplay)
+  const genreDisplay = filterDisplays.genreFilterReducer.genresName
+  const typesDisplay = filterDisplays.typeFilterReducer.typeDisplay
+  const ratingDisplay = filterDisplays.ratingFilterReducer.ratingDisplay
+  const producersDisplay = filterDisplays.ratingFilterReducer.ratingDisplay
   const seasonDisplay = `${seasonYear} ` + TranslateSeasonToRussian(seasonSeason)
-  const statusDisplay = useAppSelector((state) => state.statusFilter.statusType)
-  const sortDisplay = useAppSelector((state) => state.sortFilter.sortType)
-  const orderDisplay = useAppSelector((state) => state.orderByFilter.orderBy)
+  const statusDisplay = filterDisplays.statusFilterReducer.statusType
+  const sortDisplay = filterDisplays.sortFilterReducer.sortType
+  const orderDisplay = filterDisplays.orderByFilterReducer.orderBy
 
   //Отображение выбранных нами параметров и их перевод
   const GetTooltipDisplay = useCallback(

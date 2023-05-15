@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../../assets/icons/logo.svg'
 
@@ -22,10 +22,10 @@ export const Navbar = () => {
   const searchRef = useRef<HTMLInputElement>(null)
 
 
-  const updateSearchInputStore = useDebounce(() => {
+  const updateSearchInputStore = useCallback(useDebounce(() => {
     console.log('yey')
     dispatch(searchFilterActions.setSearchQuery(searchInput))
-  }, 1000)
+  }, 500), [searchInput, dispatch])
 
 
   const handleSearchClear = () => {
@@ -33,6 +33,9 @@ export const Navbar = () => {
   }
 
   const handleSearchButton = () => {
+    if (searchOpen) {
+      handleSearchClear();
+    }
     setSearchOpen(!searchOpen)
     searchRef.current?.focus()
   }
@@ -40,48 +43,67 @@ export const Navbar = () => {
   useEffect(() => {
     updateSearchInputStore(searchInput);
   }, [searchInput])
+
+
+
+
+  const renderNavbar = useMemo(() => {
+    return (
+      <Link to={'/'} className={styles['navbar-logo']}>
+        <img src={logo} alt={'Главная'} />
+      </Link>
+    )
+  }, [])
+
+  const renderSearch = useMemo(() => {
+    return (
+      <>
+        <div className={styles['search-container']}>
+          <input
+            ref={searchRef}
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')}
+            placeholder="Поиск..."
+          />
+          <Link
+            to={'/search'}
+            type="button"
+            className={[styles['search-bar__next'], styles[searchOpen ? 'active' : '']].join(' ')}
+            onClick={handleSearchClear}
+          >
+            <img width={12} src={forwardIcon} alt="Очистить"></img>
+          </Link>
+        </div>
+        <button type="button" onClick={handleSearchButton}>
+          <img
+            className={[styles['search-open'], styles[searchOpen ? '' : 'active']].join(' ')}
+            width={32}
+            src={searchIcon}
+            alt="Поиск"
+          ></img>
+          <img
+            className={[styles['search-close'], styles[searchOpen ? 'active' : '']].join(' ')}
+            width={32}
+            src={closeIcon}
+            alt="Закрыть"
+          />
+        </button>
+      </>
+    )
+  }, [searchOpen])
+
+
   return (
     <header className={styles['navbar']}>
       <nav className={styles['navbar-content']}>
-        <Link to={'/'} className={styles['navbar-logo']}>
-          <img src={logo} alt={'Главная'} />
-        </Link>
+        {renderNavbar}
         <div className={styles['navbar-auth']}>
           <div className={styles['profile']}>
             <button type="button"></button>
             <img width={32} src={profileIcon} alt="Профиль"></img>
           </div>
-          <div className={styles['search-container']}>
-            <input
-              ref={searchRef}
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')}
-              placeholder="Поиск..."
-            />
-            <Link
-              to={'/search'}
-              type="button"
-              className={[styles['search-bar__next'], styles[searchOpen ? 'active' : '']].join(' ')}
-              onClick={handleSearchClear}
-            >
-              <img width={12} src={forwardIcon} alt="Очистить"></img>
-            </Link>
-          </div>
-          <button type="button" onClick={handleSearchButton}>
-            <img
-              className={[styles['search-open'], styles[searchOpen ? '' : 'active']].join(' ')}
-              width={32}
-              src={searchIcon}
-              alt="Поиск"
-            ></img>
-            <img
-              className={[styles['search-close'], styles[searchOpen ? 'active' : '']].join(' ')}
-              width={32}
-              src={closeIcon}
-              alt="Закрыть"
-            />
-          </button>
+          {renderSearch}
         </div>
       </nav>
     </header>

@@ -11,7 +11,7 @@ interface playerBlockProps {
 
 export const PlayerBlock = (props: playerBlockProps) => {
   console.log(props.details.episodes)
-  const selectedEpisode = useAppSelector((state) => state.playerSlice.activeEpisode)
+  const selectedEpisode = useAppSelector((state) => state.player.activeEpisode)
   const dispatch = useAppDispatch()
 
   const handleChangeEpisode = (index: number) => {

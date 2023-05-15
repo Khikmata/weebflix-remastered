@@ -1,9 +1,10 @@
-@import '../../../styles/variables';
+@import "../../../styles/variables";
 
 .catalogueSlider {
   margin-bottom: 64px;
   padding: 12px 24px;
   display: flex;
+  height: 340px;
   @include block;
 }
 

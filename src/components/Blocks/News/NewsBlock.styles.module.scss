@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@import "../../../styles/variables";
 
 .newsblock {
   height: 100%;
@@ -16,13 +16,17 @@
 .newsblock__info {
   display: flex;
   img {
-    max-width: 235px;
+    width: clamp(40px, 100%, 245px);
     height: 100%;
     margin-right: 36px;
   }
 }
 @media (max-width: 426px) {
   .newsblock__info {
-    flex-direction: column;
+    font-size: 12px;
+    img {
+      margin-right: 12px;
+      height: 164px;
+    }
   }
 }
