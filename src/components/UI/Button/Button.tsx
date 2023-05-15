@@ -47,7 +47,7 @@ export const Button: React.FC<ButtonProps> = ({
           : 'none',
         backgroundColor:
           (color === 'primary' && '#28646c') ||
-          (color === 'secondary' && '#7d8099') ||
+          (color === 'secondary' && '#6471e7') ||
           'transparent',
       }}
       className={styles['button']}

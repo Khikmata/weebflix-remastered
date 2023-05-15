@@ -12,6 +12,9 @@ import { LoadingComponent } from '../../UI/Loading'
 import { FilterBlock } from '../Filter'
 import { Pagination } from '../Pagination'
 
+import gridIcon from '../../../assets/icons/gridMode.svg'
+import listIcon from '../../../assets/icons/listMode.svg'
+
 import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
@@ -56,6 +59,8 @@ export const AnimeGridBlock = () => {
   const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(AddSeasonsToQuery, { skip })
   const { data: producersData } = AnimeApi.useGetAnimeProducersQuery('')
 
+  const [activeDisplayMode, setActiveDisplayMode] = useState(0)
+
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -72,23 +77,40 @@ export const AnimeGridBlock = () => {
     setPages(paginationData?.has_next_page ? pages + 1 : pages)
   }
 
+  const handleDisplayMode = (index: number) => {
+    setActiveDisplayMode(index)
+  }
+
+
   return (
     <div className={styles['animegrid']}>
       <div className={styles['animegrid-container']}>
-        <h2>Каталог</h2>
+        <div className={styles['animegrid-header']}>
+          <h2>
+            Каталог
+          </h2>
+          <div className={styles['animegrid-container__mode']}>
+            <button className={styles[activeDisplayMode === 0 ? 'active' : '']} onClick={() => handleDisplayMode(0)}>
+              <img src={gridIcon} width={22} alt='Сеточная' />
+            </button>
+            <button className={styles[activeDisplayMode === 1 ? 'active' : '']} onClick={() => handleDisplayMode(1)}>
+              <img src={listIcon} width={24} alt='Таблицей' />
+            </button>
+          </div>
+        </div>
         <div className={styles['animegrid-container__content']}>
-          <div className={styles['animegrid-content__items']}>
+          <div className={[styles['animegrid-content__items'], styles[activeDisplayMode === 0 ? '' : 'list']].join('')}>
             {SearchLoading && <LoadingComponent />}
             {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
             {SearchData && AddSeasonsToQuery === '' &&
               SearchData.data.map((item: IData, index: number) => (
-                <AnimeCard key={index} index={index} item={item} />
+                <AnimeCard mode={activeDisplayMode} key={index} index={index} item={item} />
               ))
             }
             {SearchData && SearchData.data.length === 0 && AddSeasonsToQuery === '' && <strong>Ничего не найдено ❌</strong>}
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (
-                <AnimeCard key={index} index={index} item={item} />
+                <AnimeCard mode={activeDisplayMode} key={index} index={index} item={item} />
               ))}
           </div>
           <div className={styles['animegrid-content__filter']}>

@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@import "../../../styles/variables";
 .infoBlock {
   padding: 12px;
   box-shadow: $blockShadow;
@@ -11,6 +11,7 @@
   }
   &-genres {
     button {
+      padding: 4px;
       margin-right: 4px;
       transition: all 0.2s ease-in-out;
       &:hover {

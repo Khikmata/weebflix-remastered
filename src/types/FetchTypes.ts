@@ -45,6 +45,9 @@ export interface IData {
   status: string
   rank: number
   score: Float32Array
+  background: string
+  season: season;
+  synopsis: string;
 }
 
 export enum season {

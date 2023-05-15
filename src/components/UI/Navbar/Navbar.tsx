@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../../assets/icons/logo.svg'
 
 import closeIcon from '../../../assets/icons/close.svg'
@@ -20,12 +20,11 @@ export const Navbar = () => {
 
   const dispatch = useDispatch()
   const searchRef = useRef<HTMLInputElement>(null)
+  const navigate = useNavigate();
 
-
-  const updateSearchInputStore = useCallback(useDebounce(() => {
-    console.log('yey')
+  const updateSearchInputStore = useDebounce(() => {
     dispatch(searchFilterActions.setSearchQuery(searchInput))
-  }, 500), [searchInput, dispatch])
+  }, 500)
 
 
   const handleSearchClear = () => {
@@ -47,7 +46,7 @@ export const Navbar = () => {
 
 
 
-  const renderNavbar = useMemo(() => {
+  const renderLogo = useMemo(() => {
     return (
       <Link to={'/'} className={styles['navbar-logo']}>
         <img src={logo} alt={'Главная'} />
@@ -55,55 +54,52 @@ export const Navbar = () => {
     )
   }, [])
 
-  const renderSearch = useMemo(() => {
-    return (
-      <>
-        <div className={styles['search-container']}>
-          <input
-            ref={searchRef}
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')}
-            placeholder="Поиск..."
-          />
-          <Link
-            to={'/search'}
-            type="button"
-            className={[styles['search-bar__next'], styles[searchOpen ? 'active' : '']].join(' ')}
-            onClick={handleSearchClear}
-          >
-            <img width={12} src={forwardIcon} alt="Очистить"></img>
-          </Link>
-        </div>
-        <button type="button" onClick={handleSearchButton}>
-          <img
-            className={[styles['search-open'], styles[searchOpen ? '' : 'active']].join(' ')}
-            width={32}
-            src={searchIcon}
-            alt="Поиск"
-          ></img>
-          <img
-            className={[styles['search-close'], styles[searchOpen ? 'active' : '']].join(' ')}
-            width={32}
-            src={closeIcon}
-            alt="Закрыть"
-          />
-        </button>
-      </>
-    )
-  }, [searchOpen])
+  const redirectToSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    navigate('/search')
+  }
 
 
   return (
     <header className={styles['navbar']}>
       <nav className={styles['navbar-content']}>
-        {renderNavbar}
+        {renderLogo}
         <div className={styles['navbar-auth']}>
           <div className={styles['profile']}>
             <button type="button"></button>
             <img width={32} src={profileIcon} alt="Профиль"></img>
           </div>
-          {renderSearch}
+          <form onSubmit={(e) => redirectToSearch(e)} className={styles['search-container']}>
+            <input
+              ref={searchRef}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')}
+              placeholder="Поиск..."
+            />
+            <Link
+              to={'/search'}
+              type="button"
+              className={[styles['search-bar__next'], styles[searchOpen ? 'active' : '']].join(' ')}
+              onClick={handleSearchClear}
+            >
+              <img width={12} src={forwardIcon} alt="Очистить"></img>
+            </Link>
+          </form>
+          <button type="button" onClick={handleSearchButton}>
+            <img
+              className={[styles['search-open'], styles[searchOpen ? '' : 'active']].join(' ')}
+              width={32}
+              src={searchIcon}
+              alt="Поиск"
+            ></img>
+            <img
+              className={[styles['search-close'], styles[searchOpen ? 'active' : '']].join(' ')}
+              width={32}
+              src={closeIcon}
+              alt="Закрыть"
+            />
+          </button>
         </div>
       </nav>
     </header>

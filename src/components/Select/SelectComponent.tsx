@@ -37,7 +37,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
   const genreDisplay = filterDisplays.genreFilterReducer.genresName
   const typesDisplay = filterDisplays.typeFilterReducer.typeDisplay
   const ratingDisplay = filterDisplays.ratingFilterReducer.ratingDisplay
-  const producersDisplay = filterDisplays.ratingFilterReducer.ratingDisplay
+  const producersDisplay = filterDisplays.producersFilterReducer.producersDisplay
   const seasonDisplay = `${seasonYear} ` + TranslateSeasonToRussian(seasonSeason)
   const statusDisplay = filterDisplays.statusFilterReducer.statusType
   const sortDisplay = filterDisplays.sortFilterReducer.sortType
@@ -47,24 +47,22 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
   const GetTooltipDisplay = useCallback(
     (display: string[] | string | null, translateTo?: (display: string) => void) => {
       let result = ''
-      if (display !== null) {
-        if (display.length !== 0) {
-          //если текст для дисплея не нужно переводить, то возвращаем оригинальный дисплей
-          if (!translateTo) {
-            return (result += display)
-          }
-          //Дисплей переводится, для дисплея жанров добавляется ',' для перечисления
-          for (let i = 0; i < display.length; i++) {
-            translateTo &&
-              (result += `${translateTo(display[i])}${display === genreDisplay ? ', ' : ''}`)
-          }
-          //Если никакой из вариантов не выбран, получаем исходный тултип
-          if (result === ' ') {
-            return tooltip
-          }
-          //возвращаем результат дисплея (с/без) перевод(ом/а)
-          return result
+      if (display !== null && display.length !== 0) {
+        //если текст для дисплея не нужно переводить, то возвращаем оригинальный дисплей
+        if (!translateTo) {
+          return (result += display)
         }
+        //Дисплей переводится, для дисплея жанров добавляется ',' для перечисления
+        for (let i = 0; i < display.length; i++) {
+          translateTo &&
+            (result += `${translateTo(display[i])}${display === genreDisplay ? ', ' : ''}`)
+        }
+        //Если никакой из вариантов не выбран, получаем исходный тултип
+        if (result === ' ') {
+          return tooltip
+        }
+        //возвращаем результат дисплея (с/без) перевод(ом/а)
+        return result
       }
       return tooltip
     },

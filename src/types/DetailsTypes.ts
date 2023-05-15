@@ -4,7 +4,6 @@ export interface IAired {
 }
 export interface IImages {
   webp: IImagesSettings
-  jpg: IImagesSettings
 }
 export interface IImagesSettings {
   image_url: string
