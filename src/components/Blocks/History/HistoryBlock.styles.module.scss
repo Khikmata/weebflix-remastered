@@ -2,13 +2,16 @@
 
 .history {
   height: 200px;
-  padding: 12px 24px;
+  padding: 4px;
   margin-bottom: 24px;
   width: 512px;
   @include block;
   &__content {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+
+    padding: 8px;
     &__top {
       display: flex;
       justify-content: space-between;
@@ -63,10 +66,19 @@
   display: flex;
   li {
     color: $fontColor;
-    padding: 8px 12px;
+    padding: 4px 8px;
     background-color: $blockActiveColor;
     border-radius: 4px;
     margin-right: 8px;
+    cursor: pointer;
+
+    transition: all 0.3s ease ease-in-out;
+    &:hover {
+      background-color: $buttonColorSecondary;
+    }
+  }
+  p {
+    font-size: 14px;
   }
 }
 .info__rating {

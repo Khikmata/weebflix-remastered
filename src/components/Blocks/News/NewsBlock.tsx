@@ -1,5 +1,7 @@
 import styles from './NewsBlock.styles.module.scss'
 export const NewsBlock = () => {
+
+
   return (
     <div className={styles['newsblock']}>
       <div className={styles['newsblock__content']}>

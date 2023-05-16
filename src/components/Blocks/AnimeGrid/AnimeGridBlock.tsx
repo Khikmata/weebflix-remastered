@@ -34,6 +34,7 @@ export const AnimeGridBlock = () => {
   const AddOrderByToQuery = filterQueries.orderByFilterReducer.orderBy;
 
   const [pages, setPages] = useState(1)
+
   const { data: SearchData, error: SearchErrors, isLoading: SearchLoading, } = SearchAPI.useGetAnimeSearchQuery({
     letter: AddSearchToQuery,
     max_score: AddScoreToQuery.maxScore.toString(),
@@ -62,18 +63,19 @@ export const AnimeGridBlock = () => {
   const [activeDisplayMode, setActiveDisplayMode] = useState(0)
 
   const dispatch = useAppDispatch()
-
   useEffect(() => {
     AddSeasonsToQuery && setSkip((prevState) => !prevState)
     producersData && dispatch(DropDownDataActions.setProducerData(producersData))
     seasonsData && dispatch(DropDownDataActions.setSeasonData(seasonsData))
   }, [producersData, seasonsData, AddSeasonsToQuery, dispatch])
 
-  const handleNextPage = () => {
+  const handlePrevPage = () => {
+    console.log('xx')
     setPages(pages === 1 ? pages : pages - 1)
   }
 
-  const handlePrevPage = () => {
+  const handleNextPage = () => {
+    console.log('xx')
     setPages(paginationData?.has_next_page ? pages + 1 : pages)
   }
 
@@ -119,8 +121,8 @@ export const AnimeGridBlock = () => {
         </div>
         {SearchData?.data &&
           <Pagination
-            handleNextPage={() => handleNextPage}
-            handlePrevPage={() => handlePrevPage}
+            handleNextPage={handleNextPage}
+            handlePrevPage={handlePrevPage}
             pages={pages}
             hasNextPage={SearchData?.pagination.has_next_page}
           />

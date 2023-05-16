@@ -19,7 +19,7 @@ const slice = createSlice({
       state.producersQuery = action.payload.mal_id.toString()
       state.producersDisplay = action.payload.titles[0].title
     },
-    removeProducer: (state, action: PayloadAction<string>) => {
+    removeProducer: (state) => {
       state.producersQuery = ''
       state.producersDisplay = ''
     },

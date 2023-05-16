@@ -9,7 +9,7 @@ import styles from './home.styles.module.scss'
 
 export const HomePage = () => {
   const catalogueSliderOptions = ['Актуальное', 'Скоро выйдет']
-  const catalogueOptions = ['Аниме', 'Манга']
+  const catalogueOptions = ['Аниме', 'Манга(Скоро...)']
 
   return (
     <div className={styles['home']}>

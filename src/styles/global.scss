@@ -67,20 +67,43 @@ strong {
 }
 .prev-button,
 .next-button {
-  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   z-index: 1000;
   position: absolute;
+
+  top: 41%;
+  transform: translate(-50%, -50%);
+
   width: 32px;
   height: 32px;
+
   border-radius: 50%;
   border: 2px solid $whiteColor;
   outline: 1px solid $backgroundColor;
-  top: 41%;
-  transform: translate(-50%, -50%);
-  text-shadow: $blockShadow;
+  background-color: $blockColor;
+
+  font-size: 24px;
+  box-shadow: $blockShadow;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $whiteColor;
+    img {
+      filter: brightness(-100%);
+    }
+  }
 
   &:disabled {
     opacity: 0.4;
+  }
+
+  img {
+    width: 40%;
+    height: 40%;
   }
 }
 .prev-button {

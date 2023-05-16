@@ -12,6 +12,9 @@ import 'swiper/scss/navigation'
 import { AnimeCard } from '../../UI/AnimeCard'
 import { LoadingComponent } from '../../UI/Loading'
 
+import nextArrow from '../../../assets/icons/nextArrow.svg';
+import prevArrow from '../../../assets/icons/prevArrow.svg';
+
 export const CatalogueSlider: React.FC = () => {
   const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading, } = AnimeApi.useGetCurrentSeasonQuery(5)
   const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading, } = AnimeApi.useGetUpcomingSeasonQuery(5)
@@ -63,7 +66,9 @@ export const CatalogueSlider: React.FC = () => {
           },
         }}
       >
-        <button className="prev-button">{'<'}</button>
+        <button className="prev-button">
+          <img width={8} src={prevArrow} alt='' />
+        </button>
         {currentFilter[0] && currentSeasonLoading && <span> Загрузка каталога... <LoadingComponent /></span>}
         {currentFilter[1] && upcomingSeasonLoading && <span>  Загрузка каталога... <LoadingComponent /> </span>}
         {currentFilter[0] && currentSeasonErrors && <p>Ошибка при загрузке данных каталога</p>}
@@ -74,7 +79,9 @@ export const CatalogueSlider: React.FC = () => {
               <AnimeCard index={index} item={item} />
             </SwiperSlide>
           ))}
-        <button className="next-button">{'>'}</button>
+        <button className="next-button">
+          <img width={8} src={nextArrow} alt='' />
+        </button>
       </Swiper>
     </div>
   )

@@ -2,7 +2,10 @@ import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { IData } from '../../../types/FetchTypes'
 import { ColorRating } from '../../../utils/Coloring/ColorRating'
+import { TranslateSeasonToRussian } from '../../../utils/Translation/TranslateRelease'
+import { TranslateStatusToRussian } from '../../../utils/Translation/TranslateStatus'
 import styles from './AnimeCard.styles.module.scss'
+import { ColorStatus } from '../../../utils/Coloring/ColorStatus'
 
 interface CatalogueCardProps {
   index: number;
@@ -27,7 +30,7 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
             src={item.images.webp.large_image_url}
             alt={item.title_english + 'poster'}
           />
-          <div className={styles['anime-card-image__rating']} style={{ color: ColorRating(item) }}>
+          <div className={styles['anime-card-image__rating']} style={{ color: ColorRating(item.score) }}>
             {item.score || '?'}
           </div>
         </Link>
@@ -53,7 +56,7 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
             src={item.images.webp.large_image_url}
             alt={item.title_english + 'poster'}
           />
-          <div className={styles['anime-card-image__rating']} style={{ color: ColorRating(item) }}>
+          <div className={styles['anime-card-image__rating']} style={{ color: ColorRating(item.score) }}>
             {item.score || '?'}
           </div>
         </Link>
@@ -63,6 +66,9 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
             title={item.title_english ? item.title_english : item.title}
           >
             {item.title_english ? item.title_english : item.title}
+          </div>
+          <div className={styles['anime-card-info__more']} style={{ color: ColorStatus(item.status) }}>
+            {(TranslateStatusToRussian(item.status))} {item.year && `/ ${item.year}`} {item.season && `/ ${TranslateSeasonToRussian(item.season)}`}
           </div>
           <div className={styles['anime-card-info__episodes']}>
             Эпизодов: {item.episodes}

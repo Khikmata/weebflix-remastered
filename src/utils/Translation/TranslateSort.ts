@@ -1,5 +1,4 @@
 export function TranslateSortToRussian(sort: string) {
-  console.log(sort)
   switch (sort) {
     case 'asc':
       return 'По возрастающей'

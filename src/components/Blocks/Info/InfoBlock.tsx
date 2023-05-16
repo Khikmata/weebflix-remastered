@@ -1,6 +1,9 @@
 import { useState } from 'react'
-import { IMoreDetails } from '../../../types/DetailsTypes'
-import { IDetails } from '../../../types/FetchTypes'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { genreFilterActions, producersFilterActions, typeFilterActions } from '../../../store/reducers/Filters'
+import { AnimeTypesEnum, IGenres, IMoreDetails } from '../../../types/DetailsTypes'
+import { IDetails, IProducers } from '../../../types/FetchTypes'
 import { TranslateGenresToRussian } from '../../../utils/Translation/TranslateGenres'
 import { TranslateRatingToRussian } from '../../../utils/Translation/TranslateRating'
 import { TranslateSeasonToRussian } from '../../../utils/Translation/TranslateRelease'
@@ -12,15 +15,30 @@ interface InfoBlockProps {
   details: IDetails
 }
 
+type Item = IGenres | IProducers | AnimeTypesEnum;
+
+
 export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
   const [openDescription, setOpenDescirpiton] = useState(false)
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
+
+  const handleNavigateTo = (item: Item) => {
+    navigate('/search')
+
+  }
+
+
 
   return (
     <>
       <div className={styles['infoBlock']}>
-        <p>
+        <p className={styles['infoBlock-type']}>
           Тип:{' '}
-          <Button contentPadding={'3'} outlined>
+          <Button contentPadding={'3'} outlined >
             {TranslateTypeToRussian(details.type)}
           </Button>
         </p>
@@ -28,13 +46,18 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
         <p>Статус: {TranslateStatusToRussian(details.status)}</p>
         <p className={styles['infoBlock-genres']}>
           Жанры:{' '}
-          {details.genres.map((genre: IMoreDetails, index) => (
-            <Button key={index} color="secondary" contentPadding={'3'}>
+          {details.genres.map((genre: IGenres, index) => (
+            <Button
+              onClick={() => handleNavigateTo(genre)}
+              key={index}
+              color="secondary"
+              contentPadding={'3'}
+            >
               {TranslateGenresToRussian(genre.name)}
             </Button>
           ))}
         </p>
-        <p>
+        <p className={styles['infoBlock-studio']}>
           Студия:{' '}
           {details.studios.map((studio: IMoreDetails, index) => (
             <Button key={index} outlined contentPadding={'3'}>

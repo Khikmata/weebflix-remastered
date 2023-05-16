@@ -6,8 +6,8 @@ import { translateDropdownContent } from '../../TranslateDropdown'
 
 import { useAppSelector } from '../../../../../hooks/redux'
 
-import styles from '../FilterDropdown.styles.module.scss'
 import { genreFilterActions } from '../../../../../store/reducers/Filters'
+import styles from '../FilterDropdown.styles.module.scss'
 
 
 export const GenresDropdown = () => {

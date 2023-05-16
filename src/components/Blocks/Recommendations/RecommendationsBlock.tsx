@@ -6,6 +6,9 @@ import { IRecommendations } from '../../../types/FetchTypes'
 import { LoadingComponent } from '../../UI/Loading'
 import styles from './RecommendationsBlock.styles.module.scss'
 
+import nextArrow from '../../../assets/icons/nextArrow.svg'
+import prevArrow from '../../../assets/icons/prevArrow.svg'
+
 export const RecommendationsBlock: React.FC = () => {
   const {
     data: recommendations,
@@ -61,7 +64,9 @@ export const RecommendationsBlock: React.FC = () => {
               },
             }}
           >
-            <button className="prev-button"></button>
+            <button className="prev-button">
+              <img width={8} src={prevArrow} alt='' />
+            </button>
             {recomendationLoading && <span>Загрузка блока рекоммендаций... <LoadingComponent /> </span>}
             {recommendationsErrors && <p>Произошла ошибка при загрузке блока..</p>}
             {recommendations &&
@@ -76,7 +81,9 @@ export const RecommendationsBlock: React.FC = () => {
                   </Link>
                 </SwiperSlide>
               ))}
-            <button className="next-button"></button>
+            <button className="next-button">
+              <img height={8} width={8} src={nextArrow} alt='' />
+            </button>
           </Swiper>
         </div>
       </div>

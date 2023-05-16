@@ -52,8 +52,11 @@
     display: flex;
     position: relative;
     margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $lowopacity;
     .anime-card-image__list {
-      width: clamp(40px, 100%, 80px);
+      min-width: 80px;
+      max-width: 160px;
       padding-right: 8px;
       img {
         aspect-ratio: 3/4;
@@ -65,8 +68,8 @@
     }
     .anime-card-image__rating {
       position: absolute;
-      bottom: 12px;
-      left: 4px;
+      bottom: 24px;
+      left: 12px;
       background-color: $backgroundColor;
       box-shadow: $blockShadow;
       border-radius: 4px;
@@ -79,10 +82,13 @@
       flex-direction: column;
       padding: 0px 10px;
       .anime-card-info__title {
-        border-bottom: 1px solid $halfopacity;
       }
       .anime-card-info__episodes {
         color: $gray;
+        margin-top: 12px;
+      }
+      .anime-card-info__more {
+        color: $buttonColorSecondary;
       }
       .anime-card-info__description {
         margin-top: 8px;

@@ -1,10 +1,35 @@
+import { useNavigate } from 'react-router-dom'
 import star from '../../../assets/icons/star.svg'
+import { useAppDispatch } from '../../../hooks/redux'
+import { genreFilterActions } from '../../../store/reducers/Filters'
+import { AnimeApi } from '../../../store/services/getAnime'
+import { IGenres } from '../../../types/DetailsTypes'
+import { TranslateGenresToRussian } from '../../../utils/Translation/TranslateGenres'
+import { Button } from '../../UI/Button'
 import styles from './HistoryBlock.styles.module.scss'
 
 export const HistoryBlock = () => {
+
+
+  const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery('31043')
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleNavigateToSearch = (e: React.MouseEvent<HTMLElement>, genre: IGenres, index: number) => {
+    e.stopPropagation();
+    navigate('/search')
+    dispatch(genreFilterActions.setGenre(genre))
+  }
+
+  const handleNavigateToPage = (id: number) => {
+    navigate(`/anime/${id}`)
+  }
+
+
   return (
     <div className={styles['history']}>
-      <div className={styles['history__content']}>
+      <div className={styles['history__content']} onClick={() => handleNavigateToPage(31043)}>
         <div className={styles['history__content__top']}>
           <p>Последнее просмотренное:</p>
           <img loading="lazy" src={star} alt={'rate it!'} />
@@ -25,8 +50,13 @@ export const HistoryBlock = () => {
             </div>
             <div className={styles['content__info__bottom']}>
               <ul className={styles['info__genres']}>
-                <li>Триллер</li>
-                <li>Драма</li>
+                {details && details.genres.filter((details, id) => id < 2).map((genre: IGenres, index) => (
+                  <li onClick={(e) => handleNavigateToSearch(e, genre, index)} key={index}>
+                    <p>
+                      {TranslateGenresToRussian(genre.name)}
+                    </p>
+                  </li>
+                ))}
               </ul>
               <p className={styles['info__rating']}>
                 Оценка: <span>10</span>

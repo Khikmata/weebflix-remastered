@@ -46,8 +46,9 @@ export interface IData {
   rank: number
   score: Float32Array
   background: string
-  season: season;
+  season: string;
   synopsis: string;
+  year: number;
 }
 
 export enum season {
@@ -99,7 +100,7 @@ export interface IDetails {
   season: string
   year: number
   studios: IMoreDetails[]
-  genres: IMoreDetails[]
+  genres: IGenres[]
   relation: string
 }
 

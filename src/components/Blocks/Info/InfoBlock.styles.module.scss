@@ -9,9 +9,11 @@
     margin-bottom: 4px;
     text-align: left;
   }
-  &-genres {
+  &-genres,
+  &-type,
+  &-studio {
     button {
-      padding: 4px;
+      padding: 3px;
       margin-right: 4px;
       transition: all 0.2s ease-in-out;
       &:hover {

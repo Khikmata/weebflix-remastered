@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 export interface CounterState {
   typeQuery: string
@@ -14,7 +14,7 @@ const slice = createSlice({
   name: 'typeFilter',
   initialState,
   reducers: {
-    setType: (state, action) => {
+    setType: (state, action: PayloadAction<string>) => {
       state.typeQuery = action.payload
       state.typeDisplay = action.payload
     },
