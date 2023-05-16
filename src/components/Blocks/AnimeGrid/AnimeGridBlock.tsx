@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 import { IData } from '../../../types/FetchTypes'
 
@@ -7,7 +7,7 @@ import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice'
 import { AnimeApi } from '../../../store/services/getAnime'
 import { SearchAPI } from '../../../store/services/getSearch'
 
-import { AnimeCard } from '../../UI/AnimeCard'
+
 import { LoadingComponent } from '../../UI/Loading'
 import { FilterBlock } from '../Filter'
 import { Pagination } from '../Pagination'
@@ -15,6 +15,7 @@ import { Pagination } from '../Pagination'
 import gridIcon from '../../../assets/icons/gridMode.svg'
 import listIcon from '../../../assets/icons/listMode.svg'
 
+import { AnimeCard } from '../../UI/AnimeCard'
 import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
@@ -70,12 +71,10 @@ export const AnimeGridBlock = () => {
   }, [producersData, seasonsData, AddSeasonsToQuery, dispatch])
 
   const handlePrevPage = () => {
-    console.log('xx')
     setPages(pages === 1 ? pages : pages - 1)
   }
 
   const handleNextPage = () => {
-    console.log('xx')
     setPages(paginationData?.has_next_page ? pages + 1 : pages)
   }
 
@@ -106,13 +105,19 @@ export const AnimeGridBlock = () => {
             {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
             {SearchData && AddSeasonsToQuery === '' &&
               SearchData.data.map((item: IData, index: number) => (
-                <AnimeCard mode={activeDisplayMode} key={index} index={index} item={item} />
+                <Suspense fallback={<LoadingComponent />}>
+                  <AnimeCard mode={activeDisplayMode} key={index} index={index} item={item} />
+                </Suspense>
+
               ))
             }
             {SearchData && SearchData.data.length === 0 && AddSeasonsToQuery === '' && <strong>Ничего не найдено ❌</strong>}
+
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (
-                <AnimeCard mode={activeDisplayMode} key={index} index={index} item={item} />
+                <Suspense fallback={<LoadingComponent />}>
+                  <AnimeCard mode={activeDisplayMode} key={index} index={index} item={item} />
+                </Suspense>
               ))}
           </div>
           <div className={styles['animegrid-content__filter']}>

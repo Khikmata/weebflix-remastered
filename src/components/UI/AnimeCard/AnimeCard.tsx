@@ -2,10 +2,10 @@ import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { IData } from '../../../types/FetchTypes'
 import { ColorRating } from '../../../utils/Coloring/ColorRating'
-import { TranslateSeasonToRussian } from '../../../utils/Translation/TranslateRelease'
-import { TranslateStatusToRussian } from '../../../utils/Translation/TranslateStatus'
-import styles from './AnimeCard.styles.module.scss'
 import { ColorStatus } from '../../../utils/Coloring/ColorStatus'
+import { TranslateSeasonToRussian } from '../../../utils/Translation/TranslateRelease'
+
+import styles from './AnimeCard.styles.module.scss'
 
 interface CatalogueCardProps {
   index: number;
@@ -25,6 +25,8 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
       <div key={index} className={styles['anime-card']}>
         <Link to={`/anime/${item.mal_id}`} className={styles['anime-card-image']}>
           <img
+            width={180}
+            height={260}
             loading="lazy"
             decoding='async'
             src={item.images.webp.large_image_url}
@@ -67,8 +69,13 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
           >
             {item.title_english ? item.title_english : item.title}
           </div>
-          <div className={styles['anime-card-info__more']} style={{ color: ColorStatus(item.status) }}>
-            {(TranslateStatusToRussian(item.status))} {item.year && `/ ${item.year}`} {item.season && `/ ${TranslateSeasonToRussian(item.season)}`}
+          <div className={styles['anime-card-info__more']}>
+            <p style={{ color: ColorStatus(item.status) }}>
+              {((item.status))}
+            </p>
+            <p>{item.year && `/ ${item.year}`}
+              {item.season && `/ ${TranslateSeasonToRussian(item.season)}`}
+            </p>
           </div>
           <div className={styles['anime-card-info__episodes']}>
             Эпизодов: {item.episodes}

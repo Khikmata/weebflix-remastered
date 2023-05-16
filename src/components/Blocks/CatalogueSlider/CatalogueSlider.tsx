@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { useAppSelector } from '../../../hooks/redux'
 import { AnimeApi } from '../../../store/services/getAnime'
 import { IData } from '../../../types/FetchTypes'
-
+import { Suspense } from 'react'
 import styles from './CatalogueSlider.styles.module.scss'
 
 import { useMemo } from 'react'
@@ -24,6 +24,7 @@ export const CatalogueSlider: React.FC = () => {
   const currentFilter = useMemo(() => [currentSeason, upcomingSeason],
     [currentSeason, upcomingSeason],
   )
+
 
   return (
     <div className={styles.catalogueSlider}>
@@ -76,7 +77,9 @@ export const CatalogueSlider: React.FC = () => {
         {currentFilter &&
           currentFilter[selectedFilterOption]?.map((item: IData, index: number) => (
             <SwiperSlide key={index}>
-              <AnimeCard index={index} item={item} />
+              <Suspense fallback={<LoadingComponent />}>
+                <AnimeCard index={index} item={item} />
+              </Suspense>
             </SwiperSlide>
           ))}
         <button className="next-button">

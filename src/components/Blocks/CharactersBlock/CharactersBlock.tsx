@@ -23,7 +23,7 @@ export const CharactersBlock: React.FC<charactersBlockProps> = (id) => {
   return (
     <div className={styles['charactersBlock']}>
       {charactersData
-        ?.filter((item, index) => index < 8)
+        ?.filter((_, index) => index < 8)
         .map((item: IGetCharacters, index) => (
           <div className={styles['characterCard']} key={index}>
             <img src={item.character.images.webp.image_url} alt={'обложка'} loading='lazy' />

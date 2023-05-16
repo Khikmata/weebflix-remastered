@@ -72,12 +72,12 @@ export const RecommendationsBlock: React.FC = () => {
             {recommendations &&
               recommendations.map((item: IRecommendations, index: number) => (
                 <SwiperSlide key={index}>
-                  <Link className={styles['content-grid__card']} to={`/anime/${item.entry.mal_id}`}>
-                    <img
+                  <Link className={styles['content-grid-card']} to={`/anime/${item.entry.mal_id}`}>
+                    <img className={styles['content-grid-card__image']}
                       src={item.entry?.images.webp.image_url}
                       alt={item.entry.title + ' banner image'}
                     />
-                    <p>+{item.votes}</p>
+                    <p className={styles['content-grid-card__votes']}>+{item.votes}</p>
                   </Link>
                 </SwiperSlide>
               ))}
