@@ -6,15 +6,35 @@ import { translateDropdownContent } from '../../TranslateDropdown'
 
 import styles from '../FilterDropdown.styles.module.scss'
 
+import { useEffect } from 'react'
 import { useAppSelector } from '../../../../../hooks/redux'
 import { producersFilterActions } from '../../../../../store/reducers/Filters'
 import { IProducers } from '../../../../../types/FetchTypes'
 
+
 export const ProducersDropdown = () => {
-  const [selectedProducerIndex, setSelectedProducerIndex] = useState<number | null>(null)
+  const [selectedProducerIndex, setSelectedProducerIndex] = useState<number | null>(
+    () => parseInt(localStorage.getItem('selectedProducerIndex') || '') || null
+  );
 
   const producerData = useAppSelector((state) => state.dropDownData.producersData)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    localStorage.setItem('selectedProducerIndex', selectedProducerIndex?.toString() || '');
+  }, [selectedProducerIndex]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.removeItem('selectedProducerIndex');
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   const getSeasonsDropdown = useMemo(() => {
     const handleProducerChange = (index: number, selectedProducer: number | null) => {

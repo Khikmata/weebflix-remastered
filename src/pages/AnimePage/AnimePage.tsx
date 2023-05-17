@@ -74,12 +74,13 @@ export const AnimePage = () => {
 
   return (
     <div className={styles['anime-page']}>
-      <div className={styles['anime-page__background__overlay']} />
+      <div className={styles['anime-page-background__overlay']} />
       <img
         src={`${details?.images.webp.large_image_url}`}
         alt="задний фон"
         loading='lazy'
-        className={styles['anime-page__background']}
+        decoding='async'
+        className={styles['anime-page-background']}
       />
       <div className={styles['anime-page__container']}>
         <div className={styles['anime-page__info']}>

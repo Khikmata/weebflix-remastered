@@ -5,6 +5,7 @@ import { NewsBlock } from '../../components/Blocks/News'
 import { OptionsBlock } from '../../components/Blocks/OptionsBlock'
 import { RecommendationsBlock } from '../../components/Blocks/Recommendations'
 
+import homeBackground from '../../assets/images/home.webp'
 import styles from './home.styles.module.scss'
 
 export const HomePage = () => {
@@ -13,7 +14,14 @@ export const HomePage = () => {
 
   return (
     <div className={styles['home']}>
-      <div className={styles['home-background']} />
+      <div className={styles['home-background__overlay']} />
+      <img
+        src={homeBackground}
+        alt="задний фон"
+        loading='lazy'
+        decoding='async'
+        className={styles['home-background']}
+      />
       <div className={styles['home-container']}>
         <OptionsBlock options={catalogueSliderOptions} />
         <CatalogueSlider />

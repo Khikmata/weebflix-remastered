@@ -88,13 +88,15 @@
         margin-top: 12px;
       }
       .anime-card-info__more {
-        color: $buttonColorSecondary;
+        span {
+          color: $fontColor;
+        }
       }
       .anime-card-info__description {
         margin-top: 8px;
         color: $gray;
         max-width: 600px;
-        height: 40px;
+        height: 54px;
         overflow: hidden;
       }
     }

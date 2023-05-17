@@ -56,19 +56,25 @@ export const AnimeGridBlock = () => {
 
   const paginationData = SearchData?.pagination;
 
-  const [skip, setSkip] = useState(true)
-  const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery('')
-  const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(AddSeasonsToQuery, { skip })
-  const { data: producersData } = AnimeApi.useGetAnimeProducersQuery('')
+  const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery()
+  const { data: producersData } = AnimeApi.useGetAnimeProducersQuery()
+  const [trigger, { data: animeSeasonData }] = AnimeApi.useLazyGetAnimeBySeasonQuery()
 
   const [activeDisplayMode, setActiveDisplayMode] = useState(0)
 
   const dispatch = useAppDispatch()
+
   useEffect(() => {
-    AddSeasonsToQuery && setSkip((prevState) => !prevState)
-    producersData && dispatch(DropDownDataActions.setProducerData(producersData))
-    seasonsData && dispatch(DropDownDataActions.setSeasonData(seasonsData))
-  }, [producersData, seasonsData, AddSeasonsToQuery, dispatch])
+    producersData && dispatch(DropDownDataActions.setProducerData(producersData));
+
+    if (seasonsData) {
+      dispatch(DropDownDataActions.setSeasonData(seasonsData))
+    }
+    if (AddSeasonsToQuery) {
+      trigger(AddSeasonsToQuery);
+    }
+
+  }, [producersData, seasonsData, AddSeasonsToQuery])
 
   const handlePrevPage = () => {
     setPages(pages === 1 ? pages : pages - 1)
@@ -105,8 +111,8 @@ export const AnimeGridBlock = () => {
             {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
             {SearchData && AddSeasonsToQuery === '' &&
               SearchData.data.map((item: IData, index: number) => (
-                <Suspense fallback={<LoadingComponent />}>
-                  <AnimeCard mode={activeDisplayMode} key={index} index={index} item={item} />
+                <Suspense key={index} fallback={<LoadingComponent />}>
+                  <AnimeCard mode={activeDisplayMode} index={index} item={item} />
                 </Suspense>
 
               ))
@@ -115,8 +121,8 @@ export const AnimeGridBlock = () => {
 
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (
-                <Suspense fallback={<LoadingComponent />}>
-                  <AnimeCard mode={activeDisplayMode} key={index} index={index} item={item} />
+                <Suspense key={index} fallback={<LoadingComponent />}>
+                  <AnimeCard mode={activeDisplayMode} index={index} item={item} />
                 </Suspense>
               ))}
           </div>

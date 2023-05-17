@@ -16,8 +16,8 @@ import nextArrow from '../../../assets/icons/nextArrow.svg';
 import prevArrow from '../../../assets/icons/prevArrow.svg';
 
 export const CatalogueSlider: React.FC = () => {
-  const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading, } = AnimeApi.useGetCurrentSeasonQuery(5)
-  const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading, } = AnimeApi.useGetUpcomingSeasonQuery(5)
+  const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading, } = AnimeApi.useGetCurrentSeasonQuery()
+  const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading, } = AnimeApi.useGetUpcomingSeasonQuery()
 
   const selectedFilterOption = useAppSelector((state) => state.catalogueSlider.activeSliderIndex)
 

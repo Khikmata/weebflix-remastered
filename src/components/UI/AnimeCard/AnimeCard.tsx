@@ -5,6 +5,7 @@ import { ColorRating } from '../../../utils/Coloring/ColorRating'
 import { ColorStatus } from '../../../utils/Coloring/ColorStatus'
 import { TranslateSeasonToRussian } from '../../../utils/Translation/TranslateRelease'
 
+import { TranslateStatusToRussian } from '../../../utils/Translation/TranslateStatus'
 import styles from './AnimeCard.styles.module.scss'
 
 interface CatalogueCardProps {
@@ -70,12 +71,15 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
             {item.title_english ? item.title_english : item.title}
           </div>
           <div className={styles['anime-card-info__more']}>
-            <p style={{ color: ColorStatus(item.status) }}>
-              {((item.status))}
-            </p>
-            <p>{item.year && `/ ${item.year}`}
-              {item.season && `/ ${TranslateSeasonToRussian(item.season)}`}
-            </p>
+            <span style={{ color: ColorStatus(TranslateStatusToRussian(item.status)) }}>
+              {(TranslateStatusToRussian(item.status))}
+            </span>
+            <span>
+              {item.year && ` / ${item.year}`}
+            </span>
+            <span>
+              {item.season && ` / ${TranslateSeasonToRussian(item.season)}`}
+            </span>
           </div>
           <div className={styles['anime-card-info__episodes']}>
             Эпизодов: {item.episodes}

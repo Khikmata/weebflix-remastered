@@ -14,7 +14,7 @@ import styles from './FilterBlock.styles.module.scss'
 import { useEffect, useState } from 'react'
 
 export const FilterBlock = () => {
-  const { data: genresData } = AnimeApi.useGetAnimeGenresQuery('s')
+  const { data: genresData } = AnimeApi.useGetAnimeGenresQuery()
 
   const dispatch = useAppDispatch()
 
