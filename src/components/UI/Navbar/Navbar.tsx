@@ -8,17 +8,18 @@ import forwardIcon from '../../../assets/icons/forward.svg'
 import profileIcon from '../../../assets/icons/profile.svg'
 import searchIcon from '../../../assets/icons/search.svg'
 
-import { useDispatch } from 'react-redux'
 
 import { useDebounce } from '../../../hooks/debounce'
+import { useAppDispatch } from '../../../hooks/redux'
 import { searchFilterActions } from '../../../store/reducers/Filters'
 import styles from './Navbar.styles.module.scss'
+import { authModalAction } from '../../../store/reducers/Auth/AuthModal'
 
 export const Navbar = () => {
   const [searchInput, setSearchInput] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const searchRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate();
 
@@ -59,16 +60,19 @@ export const Navbar = () => {
     navigate('/search')
   }
 
+  const handleAuthModal = () => {
+    dispatch(authModalAction.setModalOpen(true))
+  }
+
 
   return (
     <header className={styles['navbar']}>
       <nav className={styles['navbar-content']}>
         {renderLogo}
         <div className={styles['navbar-auth']}>
-          <div className={styles['profile']}>
-            <button type="button"></button>
+          <button onClick={handleAuthModal} className={styles['profile']}>
             <img width={32} src={profileIcon} alt="Профиль"></img>
-          </div>
+          </button>
           <form onSubmit={(e) => redirectToSearch(e)} className={styles['search-container']}>
             <input
               ref={searchRef}

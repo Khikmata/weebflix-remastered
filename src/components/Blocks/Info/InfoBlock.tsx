@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { genreFilterActions, producersFilterActions, typeFilterActions } from '../../../store/reducers/Filters'
-import { AnimeTypesEnum, IGenres, IMoreDetails } from '../../../types/DetailsTypes'
-import { IDetails, IProducers } from '../../../types/FetchTypes'
+import { useAppDispatch } from '../../../hooks/redux'
+import { genreFilterActions, typeFilterActions } from '../../../store/reducers/Filters'
+import { IGenres, IMoreDetails } from '../../../types/DetailsTypes'
+import { IDetails } from '../../../types/FetchTypes'
 import { TranslateGenresToRussian } from '../../../utils/Translation/TranslateGenres'
 import { TranslateRatingToRussian } from '../../../utils/Translation/TranslateRating'
 import { TranslateSeasonToRussian } from '../../../utils/Translation/TranslateRelease'
@@ -15,21 +15,24 @@ interface InfoBlockProps {
   details: IDetails
 }
 
-type Item = IGenres | IProducers | AnimeTypesEnum;
 
 
 export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
   const [openDescription, setOpenDescirpiton] = useState(false)
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
 
-
-  const handleNavigateTo = (item: Item) => {
+  const handleType = (item: string) => {
     navigate('/search')
-
+    dispatch(typeFilterActions.setType(item))
   }
+  const handleGenres = (item: IGenres) => {
+    navigate('/search')
+    dispatch(genreFilterActions.setGenre(item))
+  }
+
 
 
 
@@ -38,7 +41,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
       <div className={styles['infoBlock']}>
         <p className={styles['infoBlock-type']}>
           Тип:{' '}
-          <Button contentPadding={'3'} outlined >
+          <Button onClick={() => handleType(details.type)} contentPadding={'3'} outlined >
             {TranslateTypeToRussian(details.type)}
           </Button>
         </p>
@@ -48,7 +51,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
           Жанры:{' '}
           {details.genres.map((genre: IGenres, index) => (
             <Button
-              onClick={() => handleNavigateTo(genre)}
+              onClick={() => handleGenres(genre)}
               key={index}
               color="secondary"
               contentPadding={'3'}
@@ -59,7 +62,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
         </p>
         <p className={styles['infoBlock-studio']}>
           Студия:{' '}
-          {details.studios.map((studio: IMoreDetails, index) => (
+          {details.studios.map((studio: any, index) => (
             <Button key={index} outlined contentPadding={'3'}>
               {studio.name}
             </Button>

@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { statusFilterActions } from '../../../../../store/reducers/Filters/StatusFilterSlice'
-import { DropDownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
+import { DropdownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
 import { translateDropdownContent } from '../../TranslateDropdown'
 
+import { useAppDispatch } from '../../../../../hooks/redux'
 import styles from '../FilterDropdown.styles.module.scss'
 
 export const StatusDropdown = () => {
@@ -11,7 +11,7 @@ export const StatusDropdown = () => {
 
   const statusData = ['airing', 'complete', 'upcoming']
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const getSeasonsDropdown = useMemo(() => {
     const handleStatusChange = (index: number, selectedStatus: number | null) => {
@@ -29,7 +29,7 @@ export const StatusDropdown = () => {
         onClick={() => handleStatusChange(index, selectedStatusIndex)}
         className={styles[selectedStatusIndex === index ? 'active' : '']}
       >
-        {translateDropdownContent(status, DropDownTypeEnum.STATUS)}
+        {translateDropdownContent(status, DropdownTypeEnum.STATUS)}
       </li>
     ))
   }, [selectedStatusIndex, statusData, dispatch])

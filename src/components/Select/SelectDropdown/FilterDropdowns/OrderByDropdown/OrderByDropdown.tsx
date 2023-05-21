@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
+
 import { orderByFilterActions } from '../../../../../store/reducers/Filters/OrderFilterSlice'
-import { DropDownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
+import { DropdownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
 import { translateDropdownContent } from '../../TranslateDropdown'
 
 import styles from '../FilterDropdown.styles.module.scss'
+import { useAppDispatch } from '../../../../../hooks/redux'
 export const OrderByDropdown = () => {
   const [selectedOrderIndex, setSelectedOrderIndex] = useState<number>(0)
 
@@ -24,7 +25,7 @@ export const OrderByDropdown = () => {
     'end_date',
   ]
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const getOrderDropdown = useMemo(() => {
     const handleOrderChange = (index: number) => {
@@ -37,7 +38,7 @@ export const OrderByDropdown = () => {
         onClick={() => handleOrderChange(index)}
         className={styles[selectedOrderIndex === index ? 'active' : '']}
       >
-        {translateDropdownContent(order, DropDownTypeEnum.ORDER)}
+        {translateDropdownContent(order, DropdownTypeEnum.ORDER)}
       </li>
     ))
   }, [selectedOrderIndex, orderBy])

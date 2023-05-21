@@ -18,6 +18,8 @@ interface ButtonProps {
   max?: number
   min?: number
 
+  borRad?: number;
+
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -34,6 +36,7 @@ export const Input: React.FC<ButtonProps> = ({
   type,
   max,
   min,
+  borRad,
   onChange,
 }) => {
   return (
@@ -50,6 +53,9 @@ export const Input: React.FC<ButtonProps> = ({
         marginRight: marginHorizontal,
 
         border: outlined ? '1px solid #B5B5B5' : 'none',
+        borderRadius: borRad,
+
+
         backgroundColor:
           (color === 'primary' && '#28646c') ||
           (color === 'secondary' && '#7d8099') ||

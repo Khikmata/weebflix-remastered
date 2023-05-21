@@ -24,11 +24,9 @@ export const AnimePage = () => {
   const [checkForMistakes, setCheckForMistakes] = useState(true);
 
   const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '')
-  const { data: playerData, error: playerError, isLoading: playerLoading,
-  } = PlayerApi.useGetAnimePlayerQuery({ url: urlQuery, episodeNumber: selectedEpisode }, { skip })
+  const { data: playerData, error: playerError, isLoading: playerLoading } = PlayerApi.useGetAnimePlayerQuery({ url: urlQuery, episodeNumber: selectedEpisode }, { skip })
 
   const removeHyphens = (str: string) => str.replace(/[-☆]/g, '')
-
 
   if (playerError && checkForMistakes) {
     setCheckForMistakes(false);
@@ -57,10 +55,10 @@ export const AnimePage = () => {
           tempUrl += details.url[i + 1]
         }
       }
-      setCheckForMistakes(false)
     }
     tempUrl = tempUrl.replace(/_/g, '-')
     setUrlQuery(tempUrl)
+    setCheckForMistakes(false)
   }
 
   useEffect(() => {
@@ -69,6 +67,9 @@ export const AnimePage = () => {
       if (urlQuery !== '') {
         setSkip(false)
       }
+    }
+    return () => {
+
     }
   }, [details, urlQuery])
 

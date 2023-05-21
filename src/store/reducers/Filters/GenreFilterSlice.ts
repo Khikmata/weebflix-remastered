@@ -20,7 +20,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     setGenre: (state, action: PayloadAction<IGenres>) => {
-      if (state.genresQuery.includes(`${action.payload.mal_id}`)) {
+      if (state.genresName.includes(`${action.payload.name}`)) {
         return;
       }
       state.genresQuery += `${action.payload.mal_id},`

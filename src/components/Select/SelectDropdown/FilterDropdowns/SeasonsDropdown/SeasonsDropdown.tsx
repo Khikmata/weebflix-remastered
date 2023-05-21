@@ -11,7 +11,7 @@ export const SeasonsDropdown = () => {
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
   const [selectedSeason, setSelectedSeason] = useState<number | null>(null)
 
-  const seasonsData = useAppSelector((state) => state.dropDownData.seasonsData)
+  const seasonsData = useAppSelector((state) => state.dropdownData.seasonsData)
 
   const getSeasonsDropdown = useMemo(() => {
     const handleSeasonChange = (

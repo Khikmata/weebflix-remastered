@@ -1,15 +1,15 @@
 import { useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
 
 import { translateDropdownContent } from '../../TranslateDropdown'
 
+import { useAppDispatch } from '../../../../../hooks/redux'
 import { typeFilterActions } from '../../../../../store/reducers/Filters'
-import { AnimeTypesData, DropDownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
+import { AnimeTypesData, DropdownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
 import styles from '../FilterDropdown.styles.module.scss'
 export const TypeDropdown = () => {
   const [selectedTypeIndex, setSelectedTypeIndex] = useState<number | null>(null)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const getTypeDropdown = useMemo(() => {
     const handleTypeChange = (index: number) => {
@@ -27,7 +27,7 @@ export const TypeDropdown = () => {
         onClick={() => handleTypeChange(index)}
         className={styles[selectedTypeIndex === index ? 'active' : '']}
       >
-        {translateDropdownContent(type, DropDownTypeEnum.TYPES)}
+        {translateDropdownContent(type, DropdownTypeEnum.TYPES)}
       </li>
     ))
   }, [selectedTypeIndex, AnimeTypesData, dispatch])

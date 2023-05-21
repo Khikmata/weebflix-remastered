@@ -6,14 +6,16 @@ import { OptionsBlock } from '../../components/Blocks/OptionsBlock'
 import { RecommendationsBlock } from '../../components/Blocks/Recommendations'
 
 import homeBackground from '../../assets/images/home.webp'
+import { AuthModal } from '../../components/Blocks/AuthModal'
 import styles from './home.styles.module.scss'
 
 export const HomePage = () => {
   const catalogueSliderOptions = ['Актуальное', 'Скоро выйдет']
-  const catalogueOptions = ['Аниме', 'Манга(Скоро...)']
+  const catalogueOptions = ['Аниме', '-']
 
   return (
     <div className={styles['home']}>
+      <AuthModal />
       <div className={styles['home-background__overlay']} />
       <img
         src={homeBackground}

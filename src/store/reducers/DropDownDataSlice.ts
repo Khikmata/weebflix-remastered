@@ -3,13 +3,13 @@ import { IGenres } from '../../types/DetailsTypes'
 import { ISeasons } from '../../types/FetchTypes'
 import { IProducers } from '../../types/FetchTypes'
 
-export interface CounterState {
+export interface DropdownDataState {
   genreData: IGenres[]
   producersData: IProducers[]
   seasonsData: ISeasons[]
 }
 
-const initialState: CounterState = {
+const initialState: DropdownDataState = {
   genreData: [],
   producersData: [],
   seasonsData: [],
@@ -31,4 +31,4 @@ const slice = createSlice({
   },
 })
 
-export const { reducer: DropDownDataReducer, actions: DropDownDataActions } = slice
+export const { reducer: DropdownDataReducer, actions: DropdownDataActions } = slice

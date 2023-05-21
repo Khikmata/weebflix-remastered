@@ -14,10 +14,6 @@ interface CatalogueCardProps {
   mode?: number;
 }
 
-
-
-
-
 export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) => {
 
   !mode && (mode = 0)
@@ -26,8 +22,6 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
       <div key={index} className={styles['anime-card']}>
         <Link to={`/anime/${item.mal_id}`} className={styles['anime-card-image']}>
           <img
-            width={180}
-            height={260}
             loading="lazy"
             decoding='async'
             src={item.images.webp.large_image_url}

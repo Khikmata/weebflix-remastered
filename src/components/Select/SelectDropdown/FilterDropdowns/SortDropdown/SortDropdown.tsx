@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { DropDownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
+import { DropdownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
 import { translateDropdownContent } from '../../TranslateDropdown'
 
+import { useAppDispatch } from '../../../../../hooks/redux'
 import { sortFilterActions } from '../../../../../store/reducers/Filters/SortFilterSlice'
 import styles from '../FilterDropdown.styles.module.scss'
 export const SortDropdown = () => {
@@ -10,7 +10,7 @@ export const SortDropdown = () => {
 
   const sortData = ['desc', 'asc']
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const getSortDropdown = useMemo(() => {
     const handleSortChange = (index: number) => {
@@ -23,7 +23,7 @@ export const SortDropdown = () => {
         onClick={() => handleSortChange(index)}
         className={styles[selectedSortIndex === index ? 'active' : '']}
       >
-        {translateDropdownContent(sort, DropDownTypeEnum.SORT)}
+        {translateDropdownContent(sort, DropdownTypeEnum.SORT)}
       </li>
     ))
   }, [selectedSortIndex, dispatch])

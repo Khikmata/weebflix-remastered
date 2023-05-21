@@ -3,7 +3,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { IData } from '../../../types/FetchTypes'
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
-import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice'
+import { DropdownDataActions } from '../../../store/reducers/DropdownDataSlice'
 import { AnimeApi } from '../../../store/services/getAnime'
 import { SearchAPI } from '../../../store/services/getSearch'
 
@@ -20,61 +20,48 @@ import styles from './AnimeGridBlock.styles.module.scss'
 
 export const AnimeGridBlock = () => {
 
+  const dispatch = useAppDispatch()
+
   const { ...filterQueries } = useAppSelector((state) => state.filters)
 
-  const AddDateToQuery = filterQueries.dateFilterReducer;
-  const AddGenreToQuery = filterQueries.genreFilterReducer;
-  const AddScoreToQuery = filterQueries.scoreFilterReducer;
-  const AddTypeToQuery = filterQueries.typeFilterReducer.typeQuery;
-  const AddRatingToQuery = filterQueries.ratingFilterReducer.ratingQuery;
-  const AddSeasonsToQuery = filterQueries.seasonFilterReducer.seasonQuery;
-  const AddProducersToQuery = filterQueries.producersFilterReducer.producersQuery;
-  const AddSearchToQuery = filterQueries.searchFilterReducer.searchQuery;
-  const AddStatusToQuery = filterQueries.statusFilterReducer.statusType;
-  const AddSortByToQuery = filterQueries.sortFilterReducer.sortType;
-  const AddOrderByToQuery = filterQueries.orderByFilterReducer.orderBy;
+  const AddDateToParams = filterQueries.dateFilterReducer;
+  const AddGenreToParams = filterQueries.genreFilterReducer;
+  const AddScoreToParams = filterQueries.scoreFilterReducer;
+  const AddTypeToParams = filterQueries.typeFilterReducer.typeQuery;
+  const AddRatingToParams = filterQueries.ratingFilterReducer.ratingQuery;
+  const AddSeasonsToParams = filterQueries.seasonFilterReducer.seasonQuery;
+  const AddProducersToParams = filterQueries.producersFilterReducer.producersQuery;
+  const AddSearchToParams = filterQueries.searchFilterReducer.searchQuery;
+  const AddStatusToParams = filterQueries.statusFilterReducer.statusType;
+  const AddSortByToParams = filterQueries.sortFilterReducer.sortType;
+  const AddOrderByToParams = filterQueries.orderByFilterReducer.orderBy;
 
   const [pages, setPages] = useState(1)
 
-  const { data: SearchData, error: SearchErrors, isLoading: SearchLoading, } = SearchAPI.useGetAnimeSearchQuery({
-    letter: AddSearchToQuery,
-    max_score: AddScoreToQuery.maxScore.toString(),
-    min_score: AddScoreToQuery.minScore.toString(),
-    start_date: AddDateToQuery.dateFrom.toString(),
-    end_date: AddDateToQuery.dateTo.toString(),
-    genres: AddGenreToQuery.genresQuery,
-    type: AddTypeToQuery,
-    rating: AddRatingToQuery,
-    producers: AddProducersToQuery,
-    status: AddStatusToQuery,
-    order_by: AddOrderByToQuery,
-    sort: AddSortByToQuery,
+  const { data: SearchData, error: SearchErrors, isLoading: SearchLoading, } = SearchAPI.useGetAnimeBySearchQuery({
+    letter: AddSearchToParams,
+    max_score: AddScoreToParams.maxScore.toString(),
+    min_score: AddScoreToParams.minScore.toString(),
+    start_date: AddDateToParams.dateFrom.toString(),
+    end_date: AddDateToParams.dateTo.toString(),
+    genres: AddGenreToParams.genresQuery,
+    type: AddTypeToParams,
+    rating: AddRatingToParams,
+    producers: AddProducersToParams,
+    status: AddStatusToParams,
+    order_by: AddOrderByToParams,
+    sort: AddSortByToParams,
     limit: 20,
     page: pages,
-    sfw: AddRatingToQuery === 'RX' || AddGenreToQuery.genresName.includes('Hentai') ? '' : 'true',
+    sfw: AddRatingToParams === 'RX' || AddGenreToParams.genresName.includes('Hentai') ? '' : 'true',
   })
-
-  const paginationData = SearchData?.pagination;
-
   const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery()
   const { data: producersData } = AnimeApi.useGetAnimeProducersQuery()
+  const paginationData = SearchData?.pagination;
+
   const [trigger, { data: animeSeasonData }] = AnimeApi.useLazyGetAnimeBySeasonQuery()
 
   const [activeDisplayMode, setActiveDisplayMode] = useState(0)
-
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    producersData && dispatch(DropDownDataActions.setProducerData(producersData));
-
-    if (seasonsData) {
-      dispatch(DropDownDataActions.setSeasonData(seasonsData))
-    }
-    if (AddSeasonsToQuery) {
-      trigger(AddSeasonsToQuery);
-    }
-
-  }, [producersData, seasonsData, AddSeasonsToQuery])
 
   const handlePrevPage = () => {
     setPages(pages === 1 ? pages : pages - 1)
@@ -87,6 +74,19 @@ export const AnimeGridBlock = () => {
   const handleDisplayMode = (index: number) => {
     setActiveDisplayMode(index)
   }
+
+
+  useEffect(() => {
+    producersData && dispatch(DropdownDataActions.setProducerData(producersData));
+
+    if (seasonsData) {
+      dispatch(DropdownDataActions.setSeasonData(seasonsData))
+    }
+    if (AddSeasonsToParams) {
+      trigger(AddSeasonsToParams);
+    }
+
+  }, [producersData, seasonsData, AddSeasonsToParams])
 
 
   return (
@@ -109,7 +109,7 @@ export const AnimeGridBlock = () => {
           <div className={[styles['animegrid-content__items'], styles[activeDisplayMode === 0 ? '' : 'list']].join('')}>
             {SearchLoading && <LoadingComponent />}
             {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
-            {SearchData && AddSeasonsToQuery === '' &&
+            {SearchData && AddSeasonsToParams === '' &&
               SearchData.data.map((item: IData, index: number) => (
                 <Suspense key={index} fallback={<LoadingComponent />}>
                   <AnimeCard mode={activeDisplayMode} index={index} item={item} />
@@ -117,7 +117,7 @@ export const AnimeGridBlock = () => {
 
               ))
             }
-            {SearchData && SearchData.data.length === 0 && AddSeasonsToQuery === '' && <strong>Ничего не найдено ❌</strong>}
+            {SearchData && SearchData.data.length === 0 && AddSeasonsToParams === '' && <strong>Ничего не найдено ❌</strong>}
 
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (

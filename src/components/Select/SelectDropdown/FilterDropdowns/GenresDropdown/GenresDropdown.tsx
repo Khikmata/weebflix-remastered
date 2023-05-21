@@ -1,20 +1,19 @@
 import { useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
 
-import { DropDownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
 import { translateDropdownContent } from '../../TranslateDropdown'
 
-import { useAppSelector } from '../../../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux'
 
 import { genreFilterActions } from '../../../../../store/reducers/Filters'
 import styles from '../FilterDropdown.styles.module.scss'
+import { DropdownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
 
 
 export const GenresDropdown = () => {
   const [selectedGenreIndex, setSelectedGenreIndex] = useState<number[]>([])
   const [selectedTypeIndex, setSelectedTypeIndex] = useState<number>(0)
-  const genreData = useAppSelector((state) => state.dropDownData.genreData)
-  const dispatch = useDispatch()
+  const genreData = useAppSelector((state) => state.dropdownData.genreData)
+  const dispatch = useAppDispatch()
 
   const sortedGenres = [...genreData]?.sort((a, b) => b.count - a.count)
 
@@ -38,7 +37,7 @@ export const GenresDropdown = () => {
         onClick={() => handleGenreChange(index)}
         className={styles[selectedGenreIndex.includes(index) ? 'active' : '']}
       >
-        {translateDropdownContent(genre.name, DropDownTypeEnum.GENRES)}
+        {translateDropdownContent(genre.name, DropdownTypeEnum.GENRES)}
         {` (${genre.count})`}
       </li>
     ))

@@ -13,7 +13,7 @@ export const SearchAPI = createApi({
   reducerPath: 'searchAPI',
   baseQuery: staggeredBaseQuery,
   endpoints: (builder) => ({
-    getAnimeSearch: builder.query<IGetAnime, IAnimeFilterQueries>({
+    getAnimeBySearch: builder.query<IGetAnime, IAnimeFilterQueries>({
       query: ({
         page,
         limit,

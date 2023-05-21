@@ -99,7 +99,7 @@ export interface IDetails {
   background: string
   season: string
   year: number
-  studios: IMoreDetails[]
+  studios: IProducers[]
   genres: IGenres[]
   relation: string
 }

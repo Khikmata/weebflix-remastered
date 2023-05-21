@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks/redux'
 import Dropdown from '../../assets/icons/dropdown.svg'
 import styles from './SelectComponent.styles.module.scss'
 
-import { DropDownTypeEnum } from '../../utils/DataTypes/AnimeData'
+import { DropdownTypeEnum } from '../../utils/DataTypes/AnimeData'
 
 import { TranslateGenresToRussian } from '../../utils/Translation/TranslateGenres'
 import { TranslateRatingToRussian } from '../../utils/Translation/TranslateRating'
@@ -19,13 +19,13 @@ import { SelectDropdown } from './SelectDropdown'
 interface SelectComponentProps {
   title: string
   tooltip: string
-  dropDownType: string
+  dropdownType: string
 }
 
 export const SelectComponent: React.FC<SelectComponentProps> = ({
   title,
   tooltip,
-  dropDownType,
+  dropdownType,
 }) => {
   const [openDropdown, setOpenDropdown] = useState(false)
 
@@ -71,34 +71,34 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
 
   //Перенаправление конкретных селектов для отображения
   const displayHandler = useMemo(() => {
-    if (dropDownType === DropDownTypeEnum.GENRES) {
+    if (dropdownType === DropdownTypeEnum.GENRES) {
       return GetTooltipDisplay(genreDisplay, TranslateGenresToRussian)
     }
-    if (dropDownType === DropDownTypeEnum.TYPES) {
+    if (dropdownType === DropdownTypeEnum.TYPES) {
       return typesDisplay ? TranslateTypeToRussian(typesDisplay) : tooltip
     }
-    if (dropDownType === DropDownTypeEnum.RATING) {
+    if (dropdownType === DropdownTypeEnum.RATING) {
       return ratingDisplay ? TranslateRatingToRussian(ratingDisplay) : tooltip
     }
-    if (dropDownType === DropDownTypeEnum.SEASON) {
+    if (dropdownType === DropdownTypeEnum.SEASON) {
       return seasonDisplay === ' ' ? tooltip : seasonDisplay
     }
-    if (dropDownType === DropDownTypeEnum.PRODUCER) {
+    if (dropdownType === DropdownTypeEnum.PRODUCER) {
       return GetTooltipDisplay(producersDisplay)
     }
-    if (dropDownType === DropDownTypeEnum.STATUS) {
+    if (dropdownType === DropdownTypeEnum.STATUS) {
       return statusDisplay === ''
         ? tooltip
         : TranslateStatusToRussian(statusDisplay !== null ? statusDisplay : tooltip)
     }
-    if (dropDownType === DropDownTypeEnum.SORT) {
+    if (dropdownType === DropdownTypeEnum.SORT) {
       return TranslateSortToRussian(sortDisplay)
     }
-    if (dropDownType === DropDownTypeEnum.ORDER) {
+    if (dropdownType === DropdownTypeEnum.ORDER) {
       return TranslateOrderToRussian(orderDisplay)
     }
   }, [
-    dropDownType,
+    dropdownType,
     genreDisplay,
     producersDisplay,
     ratingDisplay,
@@ -127,7 +127,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
         )}
       >
         <ul className={styles['dropdown-list']}>
-          {<SelectDropdown dropDownType={dropDownType} />}
+          {<SelectDropdown dropdownType={dropdownType} />}
         </ul>
       </div>
     </div>

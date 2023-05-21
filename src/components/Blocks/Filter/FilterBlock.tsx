@@ -2,7 +2,7 @@ import dropdownIcon from '../../../assets/icons/dropdown.svg'
 import filterIcon from '../../../assets/icons/filters.svg'
 
 import { useAppDispatch } from '../../../hooks/redux'
-import { DropDownDataActions } from '../../../store/reducers/DropDownDataSlice'
+import { DropdownDataActions } from '../../../store/reducers/DropdownDataSlice'
 import { dateFilterActions } from '../../../store/reducers/Filters/DateFilterSlice'
 import { scoreFilterActions } from '../../../store/reducers/Filters/ScoreFilterSlice'
 
@@ -19,7 +19,7 @@ export const FilterBlock = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    genresData && dispatch(DropDownDataActions.setGenreData(genresData))
+    genresData && dispatch(DropdownDataActions.setGenreData(genresData))
   }, [genresData, dispatch])
 
   const [openFilters, setOpenFilters] = useState(true)
@@ -57,7 +57,7 @@ export const FilterBlock = () => {
     'Сортировать по статусу',
     'Сортировать по оценке, Сортировать по рейтингу',
   ]
-  const SelectDropDownType = [
+  const SelectDropdownType = [
     'genres',
     'types',
     'rating',
@@ -101,7 +101,7 @@ export const FilterBlock = () => {
             key={index}
             title={selectTitle[index]}
             tooltip={selectTooltip[index]}
-            dropDownType={SelectDropDownType[index]}
+            dropdownType={SelectDropdownType[index]}
           />
         ))}
       </div>

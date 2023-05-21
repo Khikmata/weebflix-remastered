@@ -1,7 +1,7 @@
 @import "../../../styles/variables";
 .navbar {
   z-index: 10;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   height: 86px;

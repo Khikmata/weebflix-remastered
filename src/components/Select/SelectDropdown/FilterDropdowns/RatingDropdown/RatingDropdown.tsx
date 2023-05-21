@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { AnimeRatingData, DropDownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
+import { AnimeRatingData, DropdownTypeEnum } from '../../../../../utils/DataTypes/AnimeData'
 import { translateDropdownContent } from '../../TranslateDropdown'
 
+import { useAppDispatch } from '../../../../../hooks/redux'
 import { ratingFilterActions } from '../../../../../store/reducers/Filters'
 import { TranslateRatingToRussian } from '../../../../../utils/Translation/TranslateRating'
 import styles from '../FilterDropdown.styles.module.scss'
@@ -11,7 +11,7 @@ import styles from '../FilterDropdown.styles.module.scss'
 export const RatingDropdown = () => {
   const [selectedRatingIndex, setSelectedRatingIndex] = useState<number | null>(null)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const getRatingDropdown = useMemo(() => {
     const handleRatingChange = (index: number) => {
@@ -29,7 +29,7 @@ export const RatingDropdown = () => {
         onClick={() => handleRatingChange(index)}
         className={styles[selectedRatingIndex === index ? 'active' : '']}
       >
-        {translateDropdownContent(rating, DropDownTypeEnum.RATING)}
+        {translateDropdownContent(rating, DropdownTypeEnum.RATING)}
       </li>
     ))
   }, [selectedRatingIndex, AnimeRatingData, dispatch])

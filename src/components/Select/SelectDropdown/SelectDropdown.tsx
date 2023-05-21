@@ -4,37 +4,37 @@ import { SeasonsDropdown } from './FilterDropdowns/SeasonsDropdown'
 import { SortDropdown } from './FilterDropdowns/SortDropdown'
 import { StatusDropdown } from './FilterDropdowns/StatusDropdown'
 
-import { DropDownTypeEnum } from '../../../utils/DataTypes/AnimeData'
+import { DropdownTypeEnum } from '../../../utils/DataTypes/AnimeData'
 import { GenresDropdown } from './FilterDropdowns/GenresDropdown/GenresDropdown'
 import { ProducersDropdown } from './FilterDropdowns/ProducersDropdown'
 import { RatingDropdown } from './FilterDropdowns/RatingDropdown'
 import { TypeDropdown } from './FilterDropdowns/TypeDropdown'
 interface SelectDropdownProps {
-  dropDownType: string
+  dropdownType: string
 }
 
-export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropDownType }) => {
+export const SelectDropdown: React.FC<SelectDropdownProps> = ({ dropdownType }) => {
 
-  const renderDropDown = () => {
-    switch (dropDownType) {
-      case DropDownTypeEnum.GENRES:
+  const renderDropdown = () => {
+    switch (dropdownType) {
+      case DropdownTypeEnum.GENRES:
         return <GenresDropdown />
-      case DropDownTypeEnum.TYPES:
+      case DropdownTypeEnum.TYPES:
         return <TypeDropdown />
-      case DropDownTypeEnum.RATING:
+      case DropdownTypeEnum.RATING:
         return <RatingDropdown />
-      case DropDownTypeEnum.SEASON:
+      case DropdownTypeEnum.SEASON:
         return <SeasonsDropdown />
-      case DropDownTypeEnum.PRODUCER:
+      case DropdownTypeEnum.PRODUCER:
         return <ProducersDropdown />
-      case DropDownTypeEnum.STATUS:
+      case DropdownTypeEnum.STATUS:
         return <StatusDropdown />
-      case DropDownTypeEnum.SORT:
+      case DropdownTypeEnum.SORT:
         return <SortDropdown />
-      case DropDownTypeEnum.ORDER:
+      case DropdownTypeEnum.ORDER:
         return <OrderByDropdown />
     }
   }
 
-  return renderDropDown() || undefined || null
+  return renderDropdown() || undefined || null
 }

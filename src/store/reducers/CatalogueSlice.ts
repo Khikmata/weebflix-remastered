@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const catalogueOptions = ['Аниме', 'Манга']
 
-export interface CounterState {
+export interface CatalogueState {
   activeCatalogueIndex: number
 }
 
-const initialState: CounterState = {
+const initialState: CatalogueState = {
   activeCatalogueIndex: 0,
 }
 

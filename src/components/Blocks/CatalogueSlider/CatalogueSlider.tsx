@@ -1,9 +1,9 @@
+import { Suspense, useEffect } from 'react'
 import { FreeMode, Grid, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useAppSelector } from '../../../hooks/redux'
 import { AnimeApi } from '../../../store/services/getAnime'
 import { IData } from '../../../types/FetchTypes'
-import { Suspense } from 'react'
 import styles from './CatalogueSlider.styles.module.scss'
 
 import { useMemo } from 'react'
@@ -12,18 +12,27 @@ import 'swiper/scss/navigation'
 import { AnimeCard } from '../../UI/AnimeCard'
 import { LoadingComponent } from '../../UI/Loading'
 
-import nextArrow from '../../../assets/icons/nextArrow.svg';
-import prevArrow from '../../../assets/icons/prevArrow.svg';
+import nextArrow from '../../../assets/icons/nextArrow.svg'
+import prevArrow from '../../../assets/icons/prevArrow.svg'
 
 export const CatalogueSlider: React.FC = () => {
+
+  const selectedSliderOption = useAppSelector((state) => state.catalogueSlider.activeSliderIndex)
+
+  //
   const { data: currentSeason, error: currentSeasonErrors, isLoading: currentSeasonLoading, } = AnimeApi.useGetCurrentSeasonQuery()
-  const { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading, } = AnimeApi.useGetUpcomingSeasonQuery()
+  const [triggerSeason, { data: upcomingSeason, error: upcomingSeasonErrors, isLoading: upcomingSeasonLoading, }] = AnimeApi.useLazyGetUpcomingSeasonQuery({})
 
-  const selectedFilterOption = useAppSelector((state) => state.catalogueSlider.activeSliderIndex)
 
-  const currentFilter = useMemo(() => [currentSeason, upcomingSeason],
+  const activeFilter = useMemo(() => [currentSeason, upcomingSeason],
     [currentSeason, upcomingSeason],
   )
+
+  useEffect(() => {
+    if (selectedSliderOption === 1) {
+      triggerSeason();
+    }
+  }, [selectedSliderOption])
 
 
   return (
@@ -70,18 +79,19 @@ export const CatalogueSlider: React.FC = () => {
         <button className="prev-button">
           <img width={8} src={prevArrow} alt='' />
         </button>
-        {currentFilter[0] && currentSeasonLoading && <span> Загрузка каталога... <LoadingComponent /></span>}
-        {currentFilter[1] && upcomingSeasonLoading && <span>  Загрузка каталога... <LoadingComponent /> </span>}
-        {currentFilter[0] && currentSeasonErrors && <p>Ошибка при загрузке данных каталога</p>}
-        {currentFilter[1] && upcomingSeasonErrors && <p> Ошибка при загрузке данных каталога</p>}
-        {currentFilter &&
-          currentFilter[selectedFilterOption]?.map((item: IData, index: number) => (
-            <SwiperSlide key={index}>
-              <Suspense fallback={<LoadingComponent />}>
-                <AnimeCard index={index} item={item} />
-              </Suspense>
-            </SwiperSlide>
-          ))}
+        {activeFilter[0] && currentSeasonLoading && <span> Загрузка каталога... <LoadingComponent /></span>}
+        {activeFilter[1] && upcomingSeasonLoading && <span>  Загрузка каталога... <LoadingComponent /> </span>}
+
+        {activeFilter[0] && currentSeasonErrors && <p>Ошибка при загрузке данных каталога</p>}
+        {activeFilter[1] && upcomingSeasonErrors && <p> Ошибка при загрузке данных каталога</p>}
+
+        {activeFilter && activeFilter[selectedSliderOption]?.map((item: IData, index: number) => (
+          <SwiperSlide key={index}>
+            <Suspense fallback={<LoadingComponent />}>
+              <AnimeCard index={index} item={item} />
+            </Suspense>
+          </SwiperSlide>
+        ))}
         <button className="next-button">
           <img width={8} src={nextArrow} alt='' />
         </button>

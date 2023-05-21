@@ -4,7 +4,7 @@
   margin-bottom: 64px;
   padding: 12px 24px;
   display: flex;
-  height: clamp(220px, 330px, 360px);
+  height: clamp(120px, calc(35vw + 17vh), 330px);
   @include block;
 }
 

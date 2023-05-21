@@ -19,7 +19,6 @@ export interface seasonQuery {
 
 
 const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.jikan.moe/v4' }), {
-  maxRetries: 1,
 })
 
 export const AnimeApi = createApi({

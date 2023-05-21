@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export interface CounterState {
+export interface PlayerState {
   activeEpisode: number
 }
 
-const initialState: CounterState = {
+const initialState: PlayerState = {
   activeEpisode: 1,
 }
 
