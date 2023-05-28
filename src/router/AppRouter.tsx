@@ -12,6 +12,7 @@ const AppRouter = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/anime/:id" element={<AnimePage />} />
         <Route path='/search' element={<SearchPage />} />
+        <Route path='*' element={<HomePage />} />
       </Routes>
     </Layout>
   )

@@ -1,6 +1,6 @@
 
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
-import { IGenres, IImages } from '../../types/DetailsTypes'
+import { IGenres, IImages, IRelations } from '../../types/DetailsTypes'
 import {
   IAnimeFilterQueries,
   IData,
@@ -63,29 +63,33 @@ export const AnimeApi = createApi({
     }),
     getAnimeBySeason: builder.query<IData[], string>({
       query: (seasonQuery) => ({
-        url: `https://api.jikan.moe/v4/seasons/${seasonQuery}`,
+        url: `/seasons/${seasonQuery}`,
       }),
       transformResponse: (response: { data: IData[] }) => {
         return response.data
       },
     }),
     getAnimeRandom: builder.query<IDetails, any>({
-      query: () => ({ url: `https://api.jikan.moe/v4/random/anime` }),
+      query: () => ({ url: `/random/anime` }),
       transformResponse: (response: { data: IDetails }) => response.data,
     }),
     getAnimeSeasons: builder.query<ISeasons[], void | string>({
-      query: () => ({ url: `https://api.jikan.moe/v4/seasons` }),
+      query: () => ({ url: `/seasons` }),
       transformResponse: (response: { data: ISeasons[] }) => {
         return (response.data = response.data.filter((season) => season.year > 1963))
       },
     }),
     getAnimeProducers: builder.query<IProducers[], void | string>({
-      query: () => ({ url: `https://api.jikan.moe/v4/producers` }),
+      query: () => ({ url: `/producers` }),
       transformResponse: (response: { data: IProducers[] }) => response.data,
+    }),
+    getAnimeRelations: builder.query<IRelations[], void | string>({
+      query: (id) => ({ url: `/anime/${id}/relations` }),
+      transformResponse: (response: { data: IRelations[] }) => response.data,
     }),
     getAnimeCharacters: builder.query<IGetCharacters[], string>({
       query: (id) => ({
-        url: `https://api.jikan.moe/v4/anime/${id}/characters`,
+        url: `/anime/${id}/characters`,
       }),
       transformResponse: (response: { data: IGetCharacters[] }) => response.data,
     }),

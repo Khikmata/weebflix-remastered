@@ -41,5 +41,5 @@ export enum AnimeTypesEnum {
 
 export interface IRelations {
   relation: string
-  entry: IMoreDetails
+  entry: IMoreDetails[]
 }

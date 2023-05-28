@@ -124,7 +124,7 @@ export const AnimePage = () => {
           </div>
         </div>
         <CharactersBlock id={id ? id : ''} />
-        <RelationBlock />
+        <RelationBlock id={id ? id : ''} />
         {playerLoading && <span>Загрузка плеера... <LoadingComponent /></span>}
         {playerData && details && <PlayerBlock sources={playerData.sources} details={details} />}
         {playerError && <p>Произошла ошибка при загрузке плеера.</p>}

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../../hooks/redux'
 import { genreFilterActions, typeFilterActions } from '../../../store/reducers/Filters'
-import { IGenres, IMoreDetails } from '../../../types/DetailsTypes'
+import { IGenres } from '../../../types/DetailsTypes'
 import { IDetails } from '../../../types/FetchTypes'
 import { TranslateGenresToRussian } from '../../../utils/Translation/TranslateGenres'
 import { TranslateRatingToRussian } from '../../../utils/Translation/TranslateRating'
@@ -11,6 +11,8 @@ import { TranslateStatusToRussian } from '../../../utils/Translation/TranslateSt
 import { TranslateTypeToRussian } from '../../../utils/Translation/TranslateTypes'
 import { Button } from '../../UI/Button'
 import styles from './InfoBlock.styles.module.scss'
+
+
 interface InfoBlockProps {
   details: IDetails
 }
@@ -32,9 +34,6 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
     navigate('/search')
     dispatch(genreFilterActions.setGenre(item))
   }
-
-
-
 
   return (
     <>
@@ -80,7 +79,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
       >
         <strong>Описание:</strong>
         <br />
-        <p> {details.synopsis}</p>
+        <p>{details.synopsis}</p>
       </div>
     </>
   )

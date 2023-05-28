@@ -2,6 +2,7 @@
 
 .playerBlock {
   margin-top: 36px;
+
   h2 {
     margin-bottom: 12px;
   }
@@ -51,6 +52,7 @@
       }
 
       overflow: scroll;
+
       @media (max-width: 1024px) {
         ul {
           display: flex;
