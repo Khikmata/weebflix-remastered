@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react'
-import { Range, getTrackBackground } from 'react-range'
+import { useEffect, useState } from 'react';
+import { Range, getTrackBackground } from 'react-range';
 
-import styles from './Range.styles.module.scss'
-import { useDebounce } from 'hooks/debounce'
+import styles from './Range.styles.module.scss';
+import { useDebounce } from 'hooks/debounce';
 
 interface RangeComponentProps {
-  handleRange: (values: number[]) => void
-  title: string
-  step: number
-  max: number
-  min: number
-  showMiles?: boolean
+  handleRange: (values: number[]) => void;
+  title: string;
+  step: number;
+  max: number;
+  min: number;
+  showMiles?: boolean;
 }
 
 export const RangeComponent: React.FC<RangeComponentProps> = ({
@@ -21,19 +21,19 @@ export const RangeComponent: React.FC<RangeComponentProps> = ({
   handleRange,
   showMiles,
 }) => {
-  const [values, setValues] = useState([min, max])
+  const [values, setValues] = useState([min, max]);
 
   const handleWithDebounce = useDebounce(() => {
-    handleRange(values)
-  }, 300)
+    handleRange(values);
+  }, 300);
 
   const handleChange = (values: number[]) => {
-    setValues(values)
-  }
+    setValues(values);
+  };
 
   useEffect(() => {
-    handleWithDebounce(values)
-  }, [values])
+    handleWithDebounce(values);
+  }, [values]);
 
   return (
     <div className={styles['range']}>
@@ -53,7 +53,9 @@ export const RangeComponent: React.FC<RangeComponentProps> = ({
               height: '8px',
               width: showMiles ? '3px' : '1px',
               backgroundColor:
-                index * step < values[1] && index * step > values[0] ? '#abe96e' : '#ccc',
+                index * step < values[1] && index * step > values[0]
+                  ? '#abe96e'
+                  : '#ccc',
             }}
           />
         )}
@@ -121,5 +123,5 @@ export const RangeComponent: React.FC<RangeComponentProps> = ({
         )}
       />
     </div>
-  )
-}
+  );
+};

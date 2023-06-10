@@ -1,11 +1,14 @@
-import React, { useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
-import styles from './AnimeCard.styles.module.scss'
+import styles from './AnimeCard.styles.module.scss';
 import { IData } from 'types/FetchTypes';
 import { ColorRating } from 'utils/Coloring/ColorRating';
 import { ColorStatus } from 'utils/Coloring/ColorStatus';
-import { TranslateStatusToRussian, TranslateSeasonToRussian } from 'utils/Translation';
+import {
+  TranslateStatusToRussian,
+  TranslateSeasonToRussian,
+} from 'utils/Translation';
 
 interface CatalogueCardProps {
   index: number;
@@ -13,20 +16,29 @@ interface CatalogueCardProps {
   mode?: number;
 }
 
-export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) => {
-
-  !mode && (mode = 0)
+export const AnimeCard: React.FC<CatalogueCardProps> = ({
+  index,
+  item,
+  mode,
+}) => {
+  !mode && (mode = 0);
   const renderCardGrid = useMemo(() => {
     return (
       <div key={index} className={styles['anime-card']}>
-        <Link to={`/anime/${item.mal_id}`} className={styles['anime-card-image']}>
+        <Link
+          to={`/anime/${item.mal_id}`}
+          className={styles['anime-card-image']}
+        >
           <img
             loading="lazy"
-            decoding='async'
+            decoding="async"
             src={item.images.webp.large_image_url}
             alt={item.title_english + 'poster'}
           />
-          <div className={styles['anime-card-image__rating']} style={{ color: ColorRating(item.score) }}>
+          <div
+            className={styles['anime-card-image__rating']}
+            style={{ color: ColorRating(item.score) }}
+          >
             {item.score || '?'}
           </div>
         </Link>
@@ -39,20 +51,26 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
           </div>
         </div>
       </div>
-    )
-  }, [index, item])
+    );
+  }, [index, item]);
 
   const renderCardList = useMemo(() => {
     return (
       <div key={index} className={styles['anime-card__list']}>
-        <Link to={`/anime/${item.mal_id}`} className={styles['anime-card-image__list']}>
+        <Link
+          to={`/anime/${item.mal_id}`}
+          className={styles['anime-card-image__list']}
+        >
           <img
             loading="lazy"
-            decoding='async'
+            decoding="async"
             src={item.images.webp.large_image_url}
             alt={item.title_english + 'poster'}
           />
-          <div className={styles['anime-card-image__rating']} style={{ color: ColorRating(item.score) }}>
+          <div
+            className={styles['anime-card-image__rating']}
+            style={{ color: ColorRating(item.score) }}
+          >
             {item.score || '?'}
           </div>
         </Link>
@@ -64,12 +82,14 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
             {item.title_english ? item.title_english : item.title}
           </div>
           <div className={styles['anime-card-info__more']}>
-            <span style={{ color: ColorStatus(TranslateStatusToRussian(item.status)) }}>
-              {(TranslateStatusToRussian(item.status))}
+            <span
+              style={{
+                color: ColorStatus(TranslateStatusToRussian(item.status)),
+              }}
+            >
+              {TranslateStatusToRussian(item.status)}
             </span>
-            <span>
-              {item.year && ` / ${item.year}`}
-            </span>
+            <span>{item.year && ` / ${item.year}`}</span>
             <span>
               {item.season && ` / ${TranslateSeasonToRussian(item.season)}`}
             </span>
@@ -82,7 +102,7 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ index, item, mode }) =
           </div>
         </div>
       </div>
-    )
-  }, [index, item])
+    );
+  }, [index, item]);
   return <> {mode === 0 ? renderCardGrid : renderCardList} </>;
-}
+};

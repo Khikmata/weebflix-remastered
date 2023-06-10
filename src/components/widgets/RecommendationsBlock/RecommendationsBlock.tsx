@@ -1,20 +1,19 @@
-import { Link } from 'react-router-dom'
-import { FreeMode, Navigation } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import prevArrowIcon from '@assets/icons/PrevArrowIcon.svg'
-import nextArrowIcon from '@assets/icons/NextArrowIcon.svg'
-import styles from './RecommendationsBlock.styles.module.scss'
-import { IRecommendations } from 'types/FetchTypes'
-import { LoadingComponent } from '@components/shared'
-import { AnimeApi } from '@store/services'
-
+import { Link } from 'react-router-dom';
+import { FreeMode, Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import prevArrowIcon from '@assets/icons/PrevArrowIcon.svg';
+import nextArrowIcon from '@assets/icons/NextArrowIcon.svg';
+import styles from './RecommendationsBlock.styles.module.scss';
+import { IRecommendations } from 'types/FetchTypes';
+import { LoadingComponent } from '@components/shared';
+import { AnimeApi } from '@store/services';
 
 export const RecommendationsBlock: React.FC = () => {
   const {
     data: recommendations,
     error: recommendationsErrors,
     isLoading: recomendationLoading,
-  } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043)
+  } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043);
 
   return (
     <div className={styles['recommendations']}>
@@ -65,28 +64,40 @@ export const RecommendationsBlock: React.FC = () => {
             }}
           >
             <button className="prev-button">
-              <img width={8} src={prevArrowIcon} alt='' />
+              <img width={8} src={prevArrowIcon} alt="" />
             </button>
-            {recomendationLoading && <span>Загрузка блока рекоммендаций... <LoadingComponent /> </span>}
-            {recommendationsErrors && <p>Произошла ошибка при загрузке блока..</p>}
+            {recomendationLoading && (
+              <span>
+                Загрузка блока рекоммендаций... <LoadingComponent />{' '}
+              </span>
+            )}
+            {recommendationsErrors && (
+              <p>Произошла ошибка при загрузке блока..</p>
+            )}
             {recommendations &&
               recommendations.map((item: IRecommendations, index: number) => (
                 <SwiperSlide key={index}>
-                  <Link className={styles['content-grid-card']} to={`/anime/${item.entry.mal_id}`}>
-                    <img className={styles['content-grid-card__image']}
+                  <Link
+                    className={styles['content-grid-card']}
+                    to={`/anime/${item.entry.mal_id}`}
+                  >
+                    <img
+                      className={styles['content-grid-card__image']}
                       src={item.entry?.images.webp.image_url}
                       alt={item.entry.title + ' banner image'}
                     />
-                    <p className={styles['content-grid-card__votes']}>+{item.votes}</p>
+                    <p className={styles['content-grid-card__votes']}>
+                      +{item.votes}
+                    </p>
                   </Link>
                 </SwiperSlide>
               ))}
             <button className="next-button">
-              <img height={8} width={8} src={nextArrowIcon} alt='' />
+              <img height={8} width={8} src={nextArrowIcon} alt="" />
             </button>
           </Swiper>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

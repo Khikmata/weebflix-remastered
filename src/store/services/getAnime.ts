@@ -6,7 +6,7 @@ import {
   IGetCharacters,
   IProducers,
   IRecommendations,
-  ISeasons
+  ISeasons,
 } from '../../types/FetchTypes';
 
 export interface seasonQuery {
@@ -115,4 +115,20 @@ export const AnimeApi = createApi({
   }),
 });
 
-export const {} = AnimeApi;
+export const {
+  useGetAnimeBySeasonQuery,
+  useGetAnimeCharactersQuery,
+  useGetAnimeDetailsQuery,
+  useGetAnimeGenresQuery,
+  useGetAnimeNewsQuery,
+  useGetAnimePicturesQuery,
+  useGetAnimePlayerQuery,
+  useGetAnimeProducersQuery,
+  useGetAnimeRandomQuery,
+  useGetAnimeRelationsQuery,
+  useGetAnimeSeasonsQuery,
+  useGetCurrentSeasonQuery,
+  useGetRecentAnimeRecommendationsQuery,
+  useGetTopAnimeQuery,
+  useGetUpcomingSeasonQuery,
+} = AnimeApi;

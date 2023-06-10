@@ -62,4 +62,4 @@ export const SearchAPI = createApi({
   }),
 });
 
-export const {} = SearchAPI;
+export const { useGetAnimeBySearchQuery } = SearchAPI;

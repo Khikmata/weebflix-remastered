@@ -1,43 +1,49 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import styles from './InfoBlock.styles.module.scss'
-import { Button } from '@components/shared'
-import { typeFilterActions, genreFilterActions } from '@store/reducers/Filters'
-import { useAppDispatch } from 'hooks/redux'
-import { IGenres } from 'types/DetailsTypes'
-import { IDetails } from 'types/FetchTypes'
-import { TranslateTypeToRussian, TranslateStatusToRussian, TranslateGenresToRussian, TranslateRatingToRussian, TranslateSeasonToRussian } from 'utils/Translation'
-
+import styles from './InfoBlock.styles.module.scss';
+import { Button } from '@components/shared';
+import { typeFilterActions, genreFilterActions } from '@store/reducers/Filters';
+import { useAppDispatch } from 'hooks/redux';
+import { IGenres } from 'types/DetailsTypes';
+import { IDetails } from 'types/FetchTypes';
+import {
+  TranslateTypeToRussian,
+  TranslateStatusToRussian,
+  TranslateGenresToRussian,
+  TranslateRatingToRussian,
+  TranslateSeasonToRussian,
+} from 'utils/Translation';
 
 interface InfoBlockProps {
-  details: IDetails
+  details: IDetails;
 }
 
-
-
 export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
-  const [openDescription, setOpenDescirpiton] = useState(false)
+  const [openDescription, setOpenDescirpiton] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-
   const handleType = (item: string) => {
-    navigate('/search')
-    dispatch(typeFilterActions.setType(item))
-  }
+    navigate('/search');
+    dispatch(typeFilterActions.setType(item));
+  };
   const handleGenres = (item: IGenres) => {
-    navigate('/search')
-    dispatch(genreFilterActions.setGenre(item))
-  }
+    navigate('/search');
+    dispatch(genreFilterActions.setGenre(item));
+  };
 
   return (
     <>
       <div className={styles['infoBlock']}>
         <p className={styles['infoBlock-type']}>
           Тип:{' '}
-          <Button onClick={() => handleType(details.type)} contentPadding={'3'} outlined >
+          <Button
+            onClick={() => handleType(details.type)}
+            contentPadding={'3'}
+            outlined
+          >
             {TranslateTypeToRussian(details.type)}
           </Button>
         </p>
@@ -72,12 +78,15 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
       </div>
       <div
         onClick={() => setOpenDescirpiton((prevstate) => !prevstate)}
-        className={[styles['description'], styles[openDescription ? 'active' : '']].join(' ')}
+        className={[
+          styles['description'],
+          styles[openDescription ? 'active' : ''],
+        ].join(' ')}
       >
         <strong>Описание:</strong>
         <br />
         <p>{details.synopsis}</p>
       </div>
     </>
-  )
-}
+  );
+};

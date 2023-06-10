@@ -1,7 +1,5 @@
-import styles from './NewsBlock.styles.module.scss'
+import styles from './NewsBlock.styles.module.scss';
 export const NewsBlock = () => {
-
-
   return (
     <div className={styles['newsblock']}>
       <div className={styles['newsblock__content']}>
@@ -12,12 +10,13 @@ export const NewsBlock = () => {
             alt="anime-poster"
           />
           <p>
-            Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum
-            является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий
-            безымянный печатник создал большую коллекцию размеров и форм шрифтов,
+            Lorem Ipsum - это текст-"рыба", часто используемый в печати и
+            вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на
+            латинице с начала XVI века. В то время некий безымянный печатник
+            создал большую коллекцию размеров и форм шрифтов,
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

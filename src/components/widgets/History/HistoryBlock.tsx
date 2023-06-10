@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom'
-import starIcon from '@assets/icons/StarIcon.svg'
-import styles from './HistoryBlock.styles.module.scss'
+import { useNavigate } from 'react-router-dom';
+import starIcon from '@assets/icons/StarIcon.svg';
+import styles from './HistoryBlock.styles.module.scss';
 import { genreFilterActions } from '@store/reducers/Filters';
 import { AnimeApi } from '@store/services';
 import { useAppDispatch } from 'hooks/redux';
@@ -8,27 +8,35 @@ import { IGenres } from 'types/DetailsTypes';
 import { TranslateGenresToRussian } from 'utils/Translation';
 
 export const HistoryBlock = () => {
-
-
-  const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery('31043')
+  const {
+    data: details,
+    error: detailsErrors,
+    isLoading: detailsLoading,
+  } = AnimeApi.useGetAnimeDetailsQuery('31043');
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleNavigateToSearch = (e: React.MouseEvent<HTMLElement>, genre: IGenres, index: number) => {
+  const handleNavigateToSearch = (
+    e: React.MouseEvent<HTMLElement>,
+    genre: IGenres,
+    index: number,
+  ) => {
     e.stopPropagation();
-    navigate('/search')
-    dispatch(genreFilterActions.setGenre(genre))
-  }
+    navigate('/search');
+    dispatch(genreFilterActions.setGenre(genre));
+  };
 
   const handleNavigateToPage = (id: number) => {
-    navigate(`/anime/${id}`)
-  }
-
+    navigate(`/anime/${id}`);
+  };
 
   return (
     <div className={styles['history']}>
-      <div className={styles['history__content']} onClick={() => handleNavigateToPage(31043)}>
+      <div
+        className={styles['history__content']}
+        onClick={() => handleNavigateToPage(31043)}
+      >
         <div className={styles['history__content__top']}>
           <p>Последнее просмотренное:</p>
           <img loading="lazy" src={starIcon} alt={'rate it!'} />
@@ -49,13 +57,17 @@ export const HistoryBlock = () => {
             </div>
             <div className={styles['content__info__bottom']}>
               <ul className={styles['info__genres']}>
-                {details && details.genres.filter((details, id) => id < 2).map((genre: IGenres, index) => (
-                  <li onClick={(e) => handleNavigateToSearch(e, genre, index)} key={index}>
-                    <p>
-                      {TranslateGenresToRussian(genre.name)}
-                    </p>
-                  </li>
-                ))}
+                {details &&
+                  details.genres
+                    .filter((details, id) => id < 2)
+                    .map((genre: IGenres, index) => (
+                      <li
+                        onClick={(e) => handleNavigateToSearch(e, genre, index)}
+                        key={index}
+                      >
+                        <p>{TranslateGenresToRussian(genre.name)}</p>
+                      </li>
+                    ))}
               </ul>
               <p className={styles['info__rating']}>
                 Оценка: <span>10</span>
@@ -65,5 +77,5 @@ export const HistoryBlock = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

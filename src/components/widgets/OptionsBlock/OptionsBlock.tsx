@@ -1,40 +1,42 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './OptionsBlock.styles.module.scss'
-import { CatalogueActions } from '@store/reducers/Catalogue/CatalogueSlice'
-import { CatalogueSliderActions } from '@store/reducers/Catalogue/CatalogueSliderSlice'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import styles from './OptionsBlock.styles.module.scss';
+import { CatalogueActions } from '@store/reducers/Catalogue/CatalogueSlice';
+import { CatalogueSliderActions } from '@store/reducers/Catalogue/CatalogueSliderSlice';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 
 interface OptionsBlockProps {
-  options: string[]
+  options: string[];
 }
 
 export const OptionsBlock: React.FC<OptionsBlockProps> = ({ options }) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const activeCatalogueSliderOption = useAppSelector(
     (state) => state.catalogueSlider.activeSliderIndex,
-  )
-  const activeCatalogueOption = useAppSelector((state) => state.catalogue.activeCatalogueIndex)
+  );
+  const activeCatalogueOption = useAppSelector(
+    (state) => state.catalogue.activeCatalogueIndex,
+  );
 
   function handleActiveOption() {
     if (options[0] === 'Актуальное') {
-      return activeCatalogueSliderOption
+      return activeCatalogueSliderOption;
     }
     if (options[0] === 'Аниме') {
-      return activeCatalogueOption
+      return activeCatalogueOption;
     }
-    return ''
+    return '';
   }
 
   const handleChangeOption = (index: number) => {
     if (options.includes('Актуальное')) {
-      dispatch(CatalogueSliderActions.setActiveCatalogueSliderIndex(index))
+      dispatch(CatalogueSliderActions.setActiveCatalogueSliderIndex(index));
     }
     if (options.includes('Аниме')) {
-      dispatch(CatalogueActions.setActiveCatalogueIndex(index))
+      dispatch(CatalogueActions.setActiveCatalogueIndex(index));
     }
-    return ''
-  }
+    return '';
+  };
 
   return (
     <div className={styles['options']}>
@@ -44,7 +46,9 @@ export const OptionsBlock: React.FC<OptionsBlockProps> = ({ options }) => {
             <li
               key={index}
               onClick={() => handleChangeOption(index)}
-              className={styles[`${handleActiveOption() === index && 'active'}`]}
+              className={
+                styles[`${handleActiveOption() === index && 'active'}`]
+              }
             >
               {option}
             </li>
@@ -52,5 +56,5 @@ export const OptionsBlock: React.FC<OptionsBlockProps> = ({ options }) => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};

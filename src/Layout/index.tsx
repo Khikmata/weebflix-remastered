@@ -1,7 +1,7 @@
-import { Navbar } from "components/features"
+import { Navbar } from 'components/features';
 
 interface LayoutProps {
-  children: React.ReactElement
+  children: React.ReactElement;
 }
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
@@ -11,6 +11,5 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </>
       <main>{children}</main>
     </>
-  )
-}
-
+  );
+};

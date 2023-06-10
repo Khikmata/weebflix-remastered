@@ -1,23 +1,23 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react';
 
-import styles from '../FilterDropdown.styles.module.scss'
-import { useAppDispatch } from 'hooks/redux'
-import { sortFilterActions } from 'store/reducers/Filters/SortFilterSlice'
+import styles from '../FilterDropdown.styles.module.scss';
+import { useAppDispatch } from 'hooks/redux';
+import { sortFilterActions } from 'store/reducers/Filters/SortFilterSlice';
 
-import { translateDropdownContent } from '../../TranslateDropdown'
-import { DropdownTypeEnum } from 'utils/DataTypes/AnimeData'
+import { translateDropdownContent } from '../../TranslateDropdown';
+import { DropdownTypeEnum } from 'utils/DataTypes/AnimeData';
 export const SortDropdown = () => {
-  const [selectedSortIndex, setSelectedSortIndex] = useState<number>(0)
+  const [selectedSortIndex, setSelectedSortIndex] = useState<number>(0);
 
-  const sortData = ['desc', 'asc']
+  const sortData = ['desc', 'asc'];
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const getSortDropdown = useMemo(() => {
     const handleSortChange = (index: number) => {
-      dispatch(sortFilterActions.setSortType(sortData[index]))
-      setSelectedSortIndex(index)
-    }
+      dispatch(sortFilterActions.setSortType(sortData[index]));
+      setSelectedSortIndex(index);
+    };
     return sortData.map((sort, index) => (
       <li
         key={index}
@@ -26,8 +26,8 @@ export const SortDropdown = () => {
       >
         {translateDropdownContent(sort, DropdownTypeEnum.SORT)}
       </li>
-    ))
-  }, [selectedSortIndex, dispatch])
+    ));
+  }, [selectedSortIndex, dispatch]);
 
-  return <>{getSortDropdown}</>
-}
+  return <>{getSortDropdown}</>;
+};
