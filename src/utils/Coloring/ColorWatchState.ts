@@ -1,3 +1,3 @@
-import { IData } from '../../types/FetchTypes'
+import { IData } from '../../types/FetchTypes';
 
-export const ColorWatchState = (item: IData) => {}
+export const ColorWatchState = (item: IData) => {};

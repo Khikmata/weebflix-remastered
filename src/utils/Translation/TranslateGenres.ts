@@ -1,166 +1,166 @@
-import { genresNamesData } from '../DataTypes/AnimeData'
+import { genresNamesData } from '../DataTypes/AnimeData';
 
 export function TranslateGenresToRussian(genre: string) {
   for (let i = 0; i < genresNamesData.length; i++) {
-    const genreName = genresNamesData[i].toLowerCase()
+    const genreName = genresNamesData[i].toLowerCase();
     if (genre.toLowerCase().includes(genreName)) {
       switch (genresNamesData[i]) {
         case 'Action':
-          return 'Экшен'
+          return 'Экшен';
         case 'Adventure':
-          return 'Приключения'
+          return 'Приключения';
         case 'Avant Garde':
-          return 'Безумие'
+          return 'Безумие';
         case 'Comedy':
-          return 'Комедия'
+          return 'Комедия';
         case 'Drama':
-          return 'Драма'
+          return 'Драма';
         case 'Fantasy':
-          return 'Фэнтези'
+          return 'Фэнтези';
         case 'Horror':
-          return 'Хоррор'
+          return 'Хоррор';
         case 'Isekai':
-          return 'Исекай'
+          return 'Исекай';
         case 'Mystery':
-          return 'Мистика'
+          return 'Мистика';
         case 'Romance':
-          return 'Романтика'
+          return 'Романтика';
         case 'Sci-fi':
-          return 'Научная фантастика'
+          return 'Научная фантастика';
         case 'Slice of Life':
-          return 'Повседневность'
+          return 'Повседневность';
         case 'Sports':
-          return 'Спорт'
+          return 'Спорт';
         case 'Supernatural':
-          return 'Сверхъестественное'
+          return 'Сверхъестественное';
         case 'Suspense':
-          return 'Триллер'
+          return 'Триллер';
         case 'Josei':
-          return 'Джосей'
+          return 'Джосей';
         case 'Kids':
-          return 'Для детей'
+          return 'Для детей';
         case 'Seinen':
-          return 'Сейнен'
+          return 'Сейнен';
         case 'Shoujo':
-          return 'Сёдзе'
+          return 'Сёдзе';
         case 'Shounen':
-          return 'Сёнен'
+          return 'Сёнен';
         case 'Boys Love':
-          return 'Яой'
+          return 'Яой';
         case 'Girls Love':
-          return 'Юри'
+          return 'Юри';
         case 'Adult Cast':
-          return 'Для взрослых'
+          return 'Для взрослых';
         case 'Anthropomorphic':
-          return 'Антропоморфизм'
+          return 'Антропоморфизм';
         case 'CGDCT':
-          return 'CGDCT'
+          return 'CGDCT';
         case 'Childcare':
-          return 'Уход за детьми'
+          return 'Уход за детьми';
         case 'Combat Sports':
-          return 'Боевые виды спорта'
+          return 'Боевые виды спорта';
         case 'Detective':
-          return 'Детектив'
+          return 'Детектив';
         case 'Educational':
-          return 'Образовательное'
+          return 'Образовательное';
         case 'Gag Humor':
-          return 'Шутки'
+          return 'Шутки';
         case 'Gore':
-          return 'Жестокость'
+          return 'Жестокость';
         case 'Harem':
-          return 'Гарем'
+          return 'Гарем';
         case 'High Stakes Game':
-          return 'Батлрояль'
+          return 'Батлрояль';
         case 'Historical':
-          return 'Исторический'
+          return 'Исторический';
         case 'Love Polygon':
-          return 'Любовный треугольник'
+          return 'Любовный треугольник';
         case 'Idols (Female)':
-          return 'Айдолы (Девушки)'
+          return 'Айдолы (Девушки)';
         case 'Mythology':
-          return 'Мифология'
+          return 'Мифология';
         case 'Parody':
-          return 'Пародия'
+          return 'Пародия';
         case 'Psychological':
-          return 'Психологический'
+          return 'Психологический';
         case 'Racing':
-          return 'Гонки'
+          return 'Гонки';
         case 'Reverse Harem':
-          return 'Обратный гарем'
+          return 'Обратный гарем';
         case 'School':
-          return 'Школа'
+          return 'Школа';
         case 'Space':
-          return 'Космос'
+          return 'Космос';
         case 'Time Travel':
-          return 'Путешествие во времени'
+          return 'Путешествие во времени';
         case 'Vampire':
-          return 'Вампиры'
+          return 'Вампиры';
         case 'Video Game':
-          return 'Видео игра'
+          return 'Видео игра';
         case 'Ecchi':
-          return 'Эччи'
+          return 'Эччи';
         case 'Erotica':
-          return 'Эротика'
+          return 'Эротика';
         case 'Hentai':
-          return 'Хентай'
+          return 'Хентай';
         case 'Gourmet':
-          return 'Гастрономическое'
+          return 'Гастрономическое';
         case 'Workplace':
-          return 'Рабочее место'
+          return 'Рабочее место';
         case 'Visual Arts':
-          return 'Искусство'
+          return 'Искусство';
         case 'Survival':
-          return 'Выживание'
+          return 'Выживание';
         case 'Super Power':
-          return 'Суперсила'
+          return 'Суперсила';
         case 'Team Sports':
-          return 'Командные виды спорта'
+          return 'Командные виды спорта';
         case 'Showbiz':
-          return 'Шоу-бизнес'
+          return 'Шоу-бизнес';
         case 'Samurai':
-          return 'Самурай'
+          return 'Самурай';
         case 'Strategy Game':
-          return 'Стратегия'
+          return 'Стратегия';
         case 'Reincarnation':
-          return 'Реинкарнация'
+          return 'Реинкарнация';
         case 'Romantic Subtext':
-          return 'Романтическая подоплека'
+          return 'Романтическая подоплека';
         case 'Pets':
-          return 'Домашние животные'
+          return 'Домашние животные';
         case 'Performing Arts':
-          return 'Театральное искусство'
+          return 'Театральное искусство';
         case 'Otaku Culture':
-          return 'Отаку-культура'
+          return 'Отаку-культура';
         case 'Music':
-          return 'Музыка'
+          return 'Музыка';
         case 'Military':
-          return 'Военный'
+          return 'Военный';
         case 'Medical':
-          return 'Медицинский'
+          return 'Медицинский';
         case 'Mecha':
-          return 'Меха'
+          return 'Меха';
         case 'Martial arts':
-          return 'Боевые искусства'
+          return 'Боевые искусства';
         case 'Organized Crime':
-          return 'Криминал'
+          return 'Криминал';
         case 'Mahou Shoujo':
-          return 'Махо-сёдзё'
+          return 'Махо-сёдзё';
         case 'Magical Sex Shift':
-          return 'Смена пола'
+          return 'Смена пола';
         case 'Iyashikei':
-          return 'Отдых'
+          return 'Отдых';
         case 'Idols (Male)':
-          return 'Айдолы (мужчины)'
+          return 'Айдолы (мужчины)';
         case 'Award Winning':
-          return 'Номинированные'
+          return 'Номинированные';
         case 'Crossdressing':
-          return 'Кроссдрессинг'
+          return 'Кроссдрессинг';
         case 'Delinquents':
-          return 'Преступления'
+          return 'Преступления';
         default:
-          return genresNamesData[i]
+          return genresNamesData[i];
       }
     }
   }
-  return genre
+  return genre;
 }

@@ -1,18 +1,18 @@
 export function TranslateTypeToRussian(type: string) {
   switch (type.toLowerCase()) {
     case 'tv':
-      return 'ТВ-Сериал'
+      return 'ТВ-Сериал';
     case 'movie':
-      return 'Фильм'
+      return 'Фильм';
     case 'ona':
-      return 'ОНА'
+      return 'ОНА';
     case 'ova':
-      return 'ОВА'
+      return 'ОВА';
     case 'special':
-      return 'Спешл'
+      return 'Спешл';
     case 'music':
-      return 'Музыкальный'
+      return 'Музыкальный';
     default:
-      return type
+      return type;
   }
 }

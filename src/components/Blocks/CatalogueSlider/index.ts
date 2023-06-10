@@ -1,1 +1,0 @@
-export { CatalogueSlider } from './CatalogueSlider'

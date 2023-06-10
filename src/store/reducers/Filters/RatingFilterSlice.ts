@@ -1,28 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface CounterState {
-  ratingQuery: string
-  ratingDisplay: string
+  ratingQuery: string;
+  ratingDisplay: string;
 }
 
 const initialState: CounterState = {
   ratingQuery: '',
   ratingDisplay: '',
-}
+};
 
 const slice = createSlice({
   name: 'ratingFilter',
   initialState,
   reducers: {
     setRating: (state, action) => {
-      state.ratingQuery = action.payload
-      state.ratingDisplay = action.payload
+      state.ratingQuery = action.payload;
+      state.ratingDisplay = action.payload;
     },
     removeRating: (state) => {
-      state.ratingQuery = ''
-      state.ratingDisplay = ''
+      state.ratingQuery = '';
+      state.ratingDisplay = '';
     },
   },
-})
+});
 
-export const { reducer: ratingFilterReducer, actions: ratingFilterActions } = slice
+export const { reducer: ratingFilterReducer, actions: ratingFilterActions } =
+  slice;

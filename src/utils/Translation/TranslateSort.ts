@@ -1,10 +1,10 @@
 export function TranslateSortToRussian(sort: string) {
   switch (sort) {
     case 'asc':
-      return 'По возрастающей'
+      return 'По возрастающей';
     case 'desc':
-      return 'По убывающей'
+      return 'По убывающей';
     default:
-      return sort
+      return sort;
   }
 }

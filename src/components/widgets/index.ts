@@ -1,0 +1,11 @@
+export { AnimeGridBlock } from './AnimeGrid/AnimeGridBlock';
+export { CatalogueSlider } from './CatalogueSlider/CatalogueSlider';
+export { CharactersBlock } from './CharactersBlock/CharactersBlock';
+export { FilterBlock } from './FilterBlock/FilterBlock';
+export { InfoBlock } from './InfoBlock/InfoBlock';
+export { NewsBlock } from './NewsBlock/NewsBlock';
+export { OptionsBlock } from './OptionsBlock/OptionsBlock';
+export { PlayerBlock } from './PlayerBlock/PlayerBlock';
+export { RankBlock } from './RankBlock/RankBlock';
+export { RecommendationsBlock } from './RecommendationsBlock/RecommendationsBlock';
+export { RelationBlock } from './RelationBlock/RelationBlock';

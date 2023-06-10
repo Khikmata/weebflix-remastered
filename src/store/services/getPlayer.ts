@@ -1,12 +1,13 @@
-import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
-import { IPlayerData } from '../../types/FetchTypes'
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+import { IPlayerData } from '../../types/FetchTypes';
 
-const playerBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.consumet.org/' }), {
-
-})
+const playerBaseQuery = retry(
+  fetchBaseQuery({ baseUrl: 'https://api.consumet.org/' }),
+  {},
+);
 interface PlayerApiEndpoints {
-  url: string
-  episodeNumber: number
+  url: string;
+  episodeNumber: number;
 }
 
 export const PlayerApi = createApi({
@@ -19,6 +20,6 @@ export const PlayerApi = createApi({
       }),
     }),
   }),
-})
+});
 
-export const { } = PlayerApi
+export const {} = PlayerApi;

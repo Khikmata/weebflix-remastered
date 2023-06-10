@@ -1,42 +1,17 @@
 
-import { combineReducers } from '@reduxjs/toolkit'
-import { dateFilterActions, dateFilterReducer } from './DateFilterSlice'
-import { genreFilterActions, genreFilterReducer } from './GenreFilterSlice'
-import { orderByFilterReducer } from './OrderFilterSlice'
-import { producersFilterActions, producersFilterReducer } from './ProducerFilterSlice'
-import { ratingFilterActions, ratingFilterReducer } from './RatingFilterSlice'
-import { scoreFilterActions, scoreFilterReducer } from './ScoreFilterSlice'
-import { searchFilterActions, searchFilterReducer } from './SearchFilterSlice'
-import { seasonFilterActions, seasonFilterReducer } from './SeasonsFilterSlice'
-import { sortFilterReducer } from './SortFilterSlice'
-import { statusFilterReducer } from './StatusFilterSlice'
-import { typeFilterActions, typeFilterReducer } from './TypeFilterSlice'
-
+export { combineReducers } from '@reduxjs/toolkit';
+export { dateFilterActions, dateFilterReducer } from './DateFilterSlice';
+export { genreFilterActions, genreFilterReducer } from './GenreFilterSlice';
+export { orderByFilterReducer } from './OrderFilterSlice';
 export {
-  dateFilterActions,
-  genreFilterActions,
-  ratingFilterActions,
-  scoreFilterActions,
-  searchFilterActions,
-  seasonFilterActions,
-  producersFilterActions,
-  typeFilterActions,
-}
-export { filterReducers }
-
-const filterReducers = combineReducers({
-  dateFilterReducer,
-  genreFilterReducer,
-  ratingFilterReducer,
-  scoreFilterReducer,
-  searchFilterReducer,
-  seasonFilterReducer,
-  producersFilterReducer,
-  typeFilterReducer,
-  orderByFilterReducer,
-  sortFilterReducer,
-  statusFilterReducer
-});
-
-
+	producersFilterActions,
+	producersFilterReducer
+} from './ProducerFilterSlice';
+export { ratingFilterActions, ratingFilterReducer } from './RatingFilterSlice';
+export { scoreFilterActions, scoreFilterReducer } from './ScoreFilterSlice';
+export { searchFilterActions, searchFilterReducer } from './SearchFilterSlice';
+export { seasonFilterActions, seasonFilterReducer } from './SeasonsFilterSlice';
+export { sortFilterReducer } from './SortFilterSlice';
+export { statusFilterReducer } from './StatusFilterSlice';
+export { typeFilterActions, typeFilterReducer } from './TypeFilterSlice';
 

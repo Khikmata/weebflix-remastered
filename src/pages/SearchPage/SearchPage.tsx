@@ -1,4 +1,5 @@
-import { AnimeGridBlock } from '../../components/Blocks/AnimeGrid'
+
+import { AnimeGridBlock } from '../../components/widgets'
 import styles from './SearchPage.styles.module.scss'
 
 type Props = {}

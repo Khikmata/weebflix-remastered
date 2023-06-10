@@ -1,13 +1,11 @@
-import { AnimeGridBlock } from '../../components/Blocks/AnimeGrid'
-import { CatalogueSlider } from '../../components/Blocks/CatalogueSlider'
-import { HistoryBlock } from '../../components/Blocks/History'
-import { NewsBlock } from '../../components/Blocks/News'
-import { OptionsBlock } from '../../components/Blocks/OptionsBlock'
-import { RecommendationsBlock } from '../../components/Blocks/Recommendations'
 
-import homeBackground from '../../assets/images/home.webp'
-import { AuthModal } from '../../components/Blocks/AuthModal'
+
+import homeBackground from '@assets/images/home.webp'
+
 import styles from './home.styles.module.scss'
+import { AuthModal } from '@components/widgets/AuthModal/AuthModal'
+import { AnimeGridBlock, CatalogueSlider, NewsBlock, OptionsBlock, RecommendationsBlock } from '@components/widgets'
+import { HistoryBlock } from '@components/widgets/History/HistoryBlock'
 
 export const HomePage = () => {
   const catalogueSliderOptions = ['Актуальное', 'Скоро выйдет']

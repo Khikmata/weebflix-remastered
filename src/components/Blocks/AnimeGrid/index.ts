@@ -1,1 +1,0 @@
-export { AnimeGridBlock } from './AnimeGridBlock'

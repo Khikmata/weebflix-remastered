@@ -1,0 +1,97 @@
+@import "@styles/variables";
+.auth-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	&__close {
+		width: 32px;
+		height: 32px;
+
+		font-size: 24px;
+		color: $halfopacity;
+
+		border: 1px solid $halfopacity;
+		border-radius: 4px;
+
+		&:hover {
+			color: $fontColor;
+		}
+	}
+}
+.auth-middle {
+	margin-top: 24px;
+
+	border-bottom: 1px solid $halfopacity;
+
+	ul {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+
+		li {
+			padding: 4px;
+			background-color: $blockColor;
+
+			border: 1px solid $halfopacity;
+			border-bottom: none;
+			outline: 1px solid $blockColor;
+
+			&:not(:last-child) {
+				margin-right: 8px;
+			}
+
+			&.active {
+				background-color: $lowopacity;
+			}
+		}
+	}
+}
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+	margin-top: 24px;
+}
+
+.form-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	float: right;
+
+	margin-top: 12px;
+
+	width: 64px;
+	height: 32px;
+
+	border: 1px solid $halfopacity;
+	border-radius: 4px;
+
+	color: $halfopacity;
+
+	&:hover {
+		color: $fontColor;
+		border: 1px solid $fontColor;
+	}
+
+	button {
+		max-width: 100px;
+	}
+}
+
+.form-input {
+	display: flex;
+	flex-direction: column;
+	input {
+		margin: 12px 0px;
+		padding: 4px 8px;
+
+		max-width: 400px;
+		height: 32px;
+
+		background-color: transparent;
+		border: 1px solid $halfopacity;
+		border-radius: 4px;
+	}
+}

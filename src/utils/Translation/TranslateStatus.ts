@@ -1,18 +1,18 @@
 export function TranslateStatusToRussian(status: string) {
   switch (status) {
     case 'Not yet aired':
-      return 'Еще не выходит'
+      return 'Еще не выходит';
     case 'Currently Airing':
-      return 'Онгоинг'
+      return 'Онгоинг';
     case 'Finished Airing':
-      return 'Вышло'
+      return 'Вышло';
     case 'upcoming':
-      return 'Еще не выходит'
+      return 'Еще не выходит';
     case 'airing':
-      return 'Онгоинг'
+      return 'Онгоинг';
     case 'complete':
-      return 'Вышло'
+      return 'Вышло';
     default:
-      return status
+      return status;
   }
 }

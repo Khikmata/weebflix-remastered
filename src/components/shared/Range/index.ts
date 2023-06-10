@@ -1,0 +1,1 @@
+export { RangeComponent } from './RangeComponent';

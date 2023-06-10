@@ -89,9 +89,9 @@ export const genresNamesData = [
   'Award Winning',
   'Crossdressing',
   'Delinquents',
-]
+];
 //Название типов
-export const AnimeTypesData = ['tv', 'movie', 'ova', 'special', 'ona', 'music']
+export const AnimeTypesData = ['tv', 'movie', 'ova', 'special', 'ona', 'music'];
 //Название рейтингов
 export const AnimeRatingData = [
   'G - All Ages',
@@ -100,7 +100,7 @@ export const AnimeRatingData = [
   'R - 17+ (violence & profanity)',
   'R+ - Mild Nudity',
   'Rx - Hentai',
-]
+];
 
 export enum AnimeRatingQuery {
   'G - All Ages' = 'g',

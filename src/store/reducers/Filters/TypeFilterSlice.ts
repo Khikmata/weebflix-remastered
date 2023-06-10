@@ -1,28 +1,28 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface CounterState {
-  typeQuery: string
-  typeDisplay: string
+  typeQuery: string;
+  typeDisplay: string;
 }
 
 const initialState: CounterState = {
   typeQuery: '',
   typeDisplay: '',
-}
+};
 
 const slice = createSlice({
   name: 'typeFilter',
   initialState,
   reducers: {
     setType: (state, action: PayloadAction<string>) => {
-      state.typeQuery = action.payload
-      state.typeDisplay = action.payload
+      state.typeQuery = action.payload;
+      state.typeDisplay = action.payload;
     },
     removeType: (state) => {
-      state.typeQuery = ''
-      state.typeDisplay = ''
+      state.typeQuery = '';
+      state.typeDisplay = '';
     },
   },
-})
+});
 
-export const { reducer: typeFilterReducer, actions: typeFilterActions } = slice
+export const { reducer: typeFilterReducer, actions: typeFilterActions } = slice;

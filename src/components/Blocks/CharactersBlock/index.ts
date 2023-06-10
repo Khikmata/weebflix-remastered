@@ -1,1 +1,0 @@
-export { CharactersBlock } from './CharactersBlock'

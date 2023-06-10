@@ -1,19 +1,15 @@
-import { Link, useParams } from 'react-router-dom'
-import dropdown from '../../assets/icons/dropdown.svg'
-import star from '../../assets/icons/star.svg'
-import { InfoBlock } from '../../components/Blocks/Info'
-
 import { useEffect, useState } from 'react'
-import { CharactersBlock } from '../../components/Blocks/CharactersBlock'
-import { PlayerBlock } from '../../components/Blocks/PlayerBlock'
-import { RankBlock } from '../../components/Blocks/Rank'
-import { RelationBlock } from '../../components/Blocks/RelationBlock'
-import { Button } from '../../components/UI/Button'
-import { LoadingComponent } from '../../components/UI/Loading'
-import { useAppSelector } from '../../hooks/redux'
-import { AnimeApi } from '../../store/services/getAnime'
-import { PlayerApi } from '../../store/services/getPlayer'
+import { Link, useParams } from 'react-router-dom'
+import dropDownIcon from '@assets/icons/DropdownIcon.svg'
+import starIcon from '@assets/icons/StarIcon.svg'
 import styles from './animepage.styles.module.scss'
+import { AnimeApi } from 'store/services'
+import { useAppSelector } from 'hooks/redux'
+import { CharactersBlock, InfoBlock, PlayerBlock, RankBlock, RelationBlock } from '@components/widgets'
+import { Button, LoadingComponent } from '@components/shared'
+import { PlayerApi } from '@store/services/getPlayer'
+
+
 
 export const AnimePage = () => {
   const [skip, setSkip] = useState<boolean>(true)
@@ -90,14 +86,14 @@ export const AnimePage = () => {
               <img loading="lazy" src={details?.images.webp.large_image_url} alt="обложка" />
             </div>
             <button className={styles['anime-info__rate']}>
-              <img src={star} alt="оценить" />
+              <img src={starIcon} alt="оценить" />
               <p>Оцените сериал</p>
             </button>
             <button className={styles['anime-info__addlist']}>
               <p>
                 <span>+</span> Добавить в список
               </p>
-              <img src={dropdown} alt="" />
+              <img src={dropDownIcon} alt="" />
             </button>
           </div>
           <div className={styles['anime-info__rightside']}>

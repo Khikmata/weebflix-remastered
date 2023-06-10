@@ -1,9 +1,14 @@
-import { Route, Routes } from 'react-router-dom'
-import Layout from '../Layout/Layout'
 
-import { AnimePage } from '../pages/AnimePage'
-import { HomePage } from '../pages/HomePage'
-import { SearchPage } from '../pages/SearchPage'
+
+
+
+import { Layout } from 'layout'
+import { AnimePage, HomePage, SearchPage } from 'pages'
+import { Route, Routes } from 'react-router-dom'
+
+
+
+
 
 const AppRouter = () => {
   return (

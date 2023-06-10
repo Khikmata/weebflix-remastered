@@ -1,1 +1,0 @@
-export { NewsBlock } from './NewsBlock'

@@ -1,28 +1,27 @@
-
-import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
-import { IGenres, IImages, IRelations } from '../../types/DetailsTypes'
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+import { IGenres, IImages, IRelations } from '../../types/DetailsTypes';
 import {
-  IAnimeFilterQueries,
   IData,
   IDetails,
   IGetCharacters,
   IProducers,
   IRecommendations,
-  ISeasons,
-} from '../../types/FetchTypes'
+  ISeasons
+} from '../../types/FetchTypes';
 
 export interface seasonQuery {
-  year: string
-  season: string
+  year: string;
+  season: string;
 }
 
-
-
-const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.jikan.moe/v4' }), {
-})
+const staggeredBaseQuery = retry(
+  fetchBaseQuery({ baseUrl: 'https://api.jikan.moe/v4' }),
+  {},
+);
 
 export const AnimeApi = createApi({
   reducerPath: 'animeAPI',
+  tagTypes: ['Player, Search'],
   baseQuery: staggeredBaseQuery,
   endpoints: (builder) => ({
     getCurrentSeason: builder.query<IData[], void>({
@@ -41,11 +40,13 @@ export const AnimeApi = createApi({
       query: (id) => ({
         url: `anime/${id}/recommendations`,
       }),
-      transformResponse: (response: { data: IRecommendations[] }, meta, arg) => response.data,
+      transformResponse: (response: { data: IRecommendations[] }, meta, arg) =>
+        response.data,
     }),
     getAnimeDetails: builder.query<IDetails, string>({
       query: (id) => ({ url: `/anime/${id}/full` }),
-      transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
+      transformResponse: (response: { data: IDetails }, meta, arg) =>
+        response.data,
     }),
     getAnimePictures: builder.query<IImages, string>({
       query: (id) => ({ url: `/anime/${id}/pictures` }),
@@ -59,14 +60,15 @@ export const AnimeApi = createApi({
     }),
     getAnimeNews: builder.query<IDetails, string>({
       query: (id) => ({ url: `/anime/${id}/full` }),
-      transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
+      transformResponse: (response: { data: IDetails }, meta, arg) =>
+        response.data,
     }),
     getAnimeBySeason: builder.query<IData[], string>({
       query: (seasonQuery) => ({
         url: `/seasons/${seasonQuery}`,
       }),
       transformResponse: (response: { data: IData[] }) => {
-        return response.data
+        return response.data;
       },
     }),
     getAnimeRandom: builder.query<IDetails, any>({
@@ -76,7 +78,9 @@ export const AnimeApi = createApi({
     getAnimeSeasons: builder.query<ISeasons[], void | string>({
       query: () => ({ url: `/seasons` }),
       transformResponse: (response: { data: ISeasons[] }) => {
-        return (response.data = response.data.filter((season) => season.year > 1963))
+        return (response.data = response.data.filter(
+          (season) => season.year > 1963,
+        ));
       },
     }),
     getAnimeProducers: builder.query<IProducers[], void | string>({
@@ -91,12 +95,13 @@ export const AnimeApi = createApi({
       query: (id) => ({
         url: `/anime/${id}/characters`,
       }),
-      transformResponse: (response: { data: IGetCharacters[] }) => response.data,
+      transformResponse: (response: { data: IGetCharacters[] }) =>
+        response.data,
     }),
     getAnimeGenres: builder.query<IGenres[], void>({
       query: () => ({ url: '/genres/anime' }),
       transformResponse: (response: { data: IGenres[] }) => {
-        return response.data
+        return response.data;
       },
     }),
     getAnimePlayer: builder.query<IGenres[], string>({
@@ -104,10 +109,10 @@ export const AnimeApi = createApi({
         url: `anime/gogoanime/watch/${url}-episode-1?server=gogocdn`,
       }),
       transformResponse: (response: { data: IGenres[] }) => {
-        return response.data
+        return response.data;
       },
     }),
   }),
-})
+});
 
-export const { } = AnimeApi
+export const {} = AnimeApi;

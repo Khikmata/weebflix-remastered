@@ -1,2 +1,0 @@
-export { GenresDropdown } from './GenresDropdown';
-
