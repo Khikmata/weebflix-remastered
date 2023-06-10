@@ -37,6 +37,9 @@
       "@pages/*": [
         "pages/*"
       ],
+      "@utils/*": [
+        "utils/*"
+      ]
     },
   },
   "include": [
