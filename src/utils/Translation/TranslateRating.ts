@@ -1,17 +1,17 @@
 export function TranslateRatingToRussian(rating: string) {
   switch (rating) {
     case 'G - All Ages':
-      return 'G';
+      return 'g';
     case 'PG - Children':
-      return 'PG';
+      return 'pg';
     case 'PG-13 - Teens 13 or older':
-      return 'PG-13';
+      return 'pg13';
     case 'R - 17+ (violence & profanity)':
-      return 'R 17';
+      return 'r17';
     case 'R+ - Mild Nudity':
-      return 'R+ 18';
+      return 'r';
     case 'Rx - Hentai':
-      return 'RX';
+      return 'rx';
     default:
       return rating;
   }

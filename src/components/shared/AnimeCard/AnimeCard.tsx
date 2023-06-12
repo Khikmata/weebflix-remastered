@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './AnimeCard.styles.module.scss';
 import { IData } from 'types/FetchTypes';
 import { ColorRating } from 'utils/Coloring/ColorRating';
 import { ColorStatus } from 'utils/Coloring/ColorStatus';
 import {
-  TranslateStatusToRussian,
   TranslateSeasonToRussian,
+  TranslateStatusToRussian,
 } from 'utils/Translation';
+import styles from './AnimeCard.styles.module.scss';
 
 interface CatalogueCardProps {
   index: number;

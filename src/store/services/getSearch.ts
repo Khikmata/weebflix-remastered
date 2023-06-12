@@ -38,23 +38,23 @@ export const SearchAPI = createApi({
       }) => {
         let url = 'anime?';
         if (page) url += `page=${page}&`;
-        if (limit) url += `limit=${limit}&`;
+        //if (limit) url += `limit=${limit}&`;
         if (q) url += `q=${q}&`;
         if (type) url += `type=${type}&`;
         if (!status && min_score) url += `min_score=${min_score}&`;
         if (!status && max_score) url += `max_score=${max_score}&`;
         if (status) url += `status=${status}&`;
         if (rating) url += `rating=${rating}&`;
-        if (sfw) url += `sfw=${sfw}&`;
+        //if (sfw) url += `sfw=${sfw}&`;
         if (genres) url += `genres=${genres}&`;
-        if (order_by) url += `order_by=${order_by}&`;
+        //if (order_by) url += `order_by=${order_by}&`;
         if (sort)
           url += `sort=${
             order_by === ('popularity' || 'rank' || 'mal_id') ? !sort : sort
           }&`;
         if (letter) url += `letter=${letter}&`;
-        if (start_date) url += `start_date=${start_date}&`;
         if (producers) url += `producers=${producers}&`;
+        if (start_date !== '1960') url += `start_date=${start_date}-01-01&`;
         if (end_date !== '2023') url += `end_date=${end_date}`;
         return { url };
       },

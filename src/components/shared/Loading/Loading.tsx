@@ -1,5 +1,5 @@
-import styles from './LoadingComponent.styles.module.scss';
-export const LoadingComponent = () => {
+import styles from './Loading.styles.module.scss';
+export const Loading = () => {
   return (
     <div>
       <div className={styles['spinner-container']}>

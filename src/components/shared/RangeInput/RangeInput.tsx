@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Range, getTrackBackground } from 'react-range';
 
-import styles from './Range.styles.module.scss';
 import { useDebounce } from 'hooks/debounce';
+import styles from './RangeInput.styles.module.scss';
 
 interface RangeComponentProps {
   handleRange: (values: number[]) => void;
@@ -13,7 +13,7 @@ interface RangeComponentProps {
   showMiles?: boolean;
 }
 
-export const RangeComponent: React.FC<RangeComponentProps> = ({
+export const RangeInput: React.FC<RangeComponentProps> = ({
   title,
   step,
   min,
@@ -37,7 +37,7 @@ export const RangeComponent: React.FC<RangeComponentProps> = ({
 
   return (
     <div className={styles['range']}>
-      <p>{title}</p>
+      <label>{title}</label>
       <Range
         step={step}
         min={min}

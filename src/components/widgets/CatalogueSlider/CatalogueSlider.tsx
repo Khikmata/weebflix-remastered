@@ -12,7 +12,7 @@ import { AnimeApi } from '../../../store/services';
 
 import 'swiper/scss';
 import 'swiper/scss/navigation';
-import { AnimeCard, LoadingComponent } from '../../shared';
+import { AnimeCard, Loading } from '../../shared';
 
 export const CatalogueSlider: React.FC = () => {
   const selectedSliderOption = useAppSelector(
@@ -91,13 +91,13 @@ export const CatalogueSlider: React.FC = () => {
         {activeFilter[0] && currentSeasonLoading && (
           <span>
             {' '}
-            Загрузка каталога... <LoadingComponent />
+            Загрузка каталога... <Loading />
           </span>
         )}
         {activeFilter[1] && upcomingSeasonLoading && (
           <span>
             {' '}
-            Загрузка каталога... <LoadingComponent />{' '}
+            Загрузка каталога... <Loading />{' '}
           </span>
         )}
 
@@ -112,7 +112,7 @@ export const CatalogueSlider: React.FC = () => {
           activeFilter[selectedSliderOption]?.map(
             (item: IData, index: number) => (
               <SwiperSlide key={index}>
-                <Suspense fallback={<LoadingComponent />}>
+                <Suspense fallback={<Loading />}>
                   <AnimeCard index={index} item={item} />
                 </Suspense>
               </SwiperSlide>

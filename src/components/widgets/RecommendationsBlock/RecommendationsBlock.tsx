@@ -5,7 +5,7 @@ import prevArrowIcon from '@assets/icons/PrevArrowIcon.svg';
 import nextArrowIcon from '@assets/icons/NextArrowIcon.svg';
 import styles from './RecommendationsBlock.styles.module.scss';
 import { IRecommendations } from 'types/FetchTypes';
-import { LoadingComponent } from '@components/shared';
+import { Loading } from '@components/shared';
 import { AnimeApi } from '@store/services';
 
 export const RecommendationsBlock: React.FC = () => {
@@ -68,7 +68,7 @@ export const RecommendationsBlock: React.FC = () => {
             </button>
             {recomendationLoading && (
               <span>
-                Загрузка блока рекоммендаций... <LoadingComponent />{' '}
+                Загрузка блока рекоммендаций... <Loading />{' '}
               </span>
             )}
             {recommendationsErrors && (

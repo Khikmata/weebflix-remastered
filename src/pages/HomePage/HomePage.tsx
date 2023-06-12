@@ -1,7 +1,6 @@
 import homeBackground from '@assets/images/home.webp';
 
-import styles from './home.styles.module.scss';
-import { AuthModal } from '@components/widgets/AuthModal/AuthModal';
+import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper';
 import {
   AnimeGridBlock,
   CatalogueSlider,
@@ -9,38 +8,30 @@ import {
   OptionsBlock,
   RecommendationsBlock,
 } from '@components/widgets';
+import { AuthModal } from '@components/widgets/AuthModal/AuthModal';
 import { HistoryBlock } from '@components/widgets/History/HistoryBlock';
+import styles from './home.styles.module.scss';
 
 export const HomePage = () => {
   const catalogueSliderOptions = ['Актуальное', 'Скоро выйдет'];
   const catalogueOptions = ['Аниме', '-'];
 
   return (
-    <div className={styles['home']}>
+    <PageWrapper source={homeBackground} filled={false}>
       <AuthModal />
-      <div className={styles['home-background__overlay']} />
-      <img
-        src={homeBackground}
-        alt="задний фон"
-        loading="lazy"
-        decoding="async"
-        className={styles['home-background']}
-      />
-      <div className={styles['home-container']}>
-        <OptionsBlock options={catalogueSliderOptions} />
-        <CatalogueSlider />
-        <div className={styles['home-container__content']}>
-          <div className={styles['home-content__left']}>
-            <HistoryBlock />
-            <RecommendationsBlock />
-          </div>
-          <div className={styles['home-content__right']}>
-            <NewsBlock />
-          </div>
+      <OptionsBlock options={catalogueSliderOptions} />
+      <CatalogueSlider />
+      <div className={styles['home-container__content']}>
+        <div className={styles['home-content__left']}>
+          <HistoryBlock />
+          <RecommendationsBlock />
         </div>
-        <OptionsBlock options={catalogueOptions} />
-        <AnimeGridBlock />
+        <div className={styles['home-content__right']}>
+          <NewsBlock />
+        </div>
       </div>
-    </div>
+      <OptionsBlock options={catalogueOptions} />
+      <AnimeGridBlock />
+    </PageWrapper>
   );
 };

@@ -3,13 +3,13 @@ import filterIcon from '@assets/icons/FiltersIcon.svg';
 
 import styles from './FilterBlock.styles.module.scss';
 
-import { useEffect, useState } from 'react';
-import { AnimeApi } from '@store/services';
 import { Select } from '@components/features';
-import { RangeComponent } from '@components/shared';
+import { RangeInput } from '@components/shared';
 import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice';
-import { scoreFilterActions, dateFilterActions } from '@store/reducers/Filters';
+import { dateFilterActions, scoreFilterActions } from '@store/reducers/Filters';
+import { AnimeApi } from '@store/services';
 import { useAppDispatch } from 'hooks/redux';
+import { useEffect, useState } from 'react';
 
 export const FilterBlock = () => {
   const { data: genresData } = AnimeApi.useGetAnimeGenresQuery();
@@ -87,14 +87,14 @@ export const FilterBlock = () => {
           styles[openFilters ? 'active' : ''],
         ].join(' ')}
       >
-        <RangeComponent
+        <RangeInput
           min={0}
           max={10}
           step={1}
           title={'Сортировка по рейтингу:'}
           handleRange={handleScoreChange}
         />
-        <RangeComponent
+        <RangeInput
           showMiles={false}
           min={1960}
           max={2023}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { LoadingComponent } from '@components/shared';
+import { Loading } from '@components/shared';
 import { AnimeApi } from '@store/services';
 import { IRelations } from 'types/DetailsTypes';
 import styles from './RelationBlock.styles.module.scss';
@@ -36,7 +36,7 @@ export const RelationBlock = (id: any) => {
     <div className={styles['relationBlock']}>
       {relationsLoading && (
         <p>
-          Идет загрузка... <LoadingComponent />
+          Идет загрузка... <Loading />
         </p>
       )}
       {relationsData &&

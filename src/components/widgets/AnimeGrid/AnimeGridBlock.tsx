@@ -3,15 +3,15 @@ import { Suspense, useEffect, useState } from 'react';
 import gridIcon from '@assets/icons/GridIcon.svg';
 import listIcon from '@assets/icons/ListIcon.svg';
 
-import styles from './AnimeGridBlock.styles.module.scss';
-import { LoadingComponent, AnimeCard } from '@components/shared';
+import { Pagination } from '@components/features';
+import { AnimeCard, Loading } from '@components/shared';
 import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice';
 import { AnimeApi } from '@store/services';
+import { SearchAPI } from '@store/services/getSearch';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { IData } from 'types/FetchTypes';
-import { Pagination } from '@components/features';
-import { SearchAPI } from '@store/services/getSearch';
 import { FilterBlock } from '../FilterBlock/FilterBlock';
+import styles from './AnimeGridBlock.styles.module.scss';
 
 export const AnimeGridBlock = () => {
   const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ export const AnimeGridBlock = () => {
     error: SearchErrors,
     isLoading: SearchLoading,
   } = SearchAPI.useGetAnimeBySearchQuery({
-    letter: AddSearchToParams,
+    q: AddSearchToParams,
     max_score: AddScoreToParams.maxScore.toString(),
     min_score: AddScoreToParams.minScore.toString(),
     start_date: AddDateToParams.dateFrom.toString(),
@@ -117,12 +117,12 @@ export const AnimeGridBlock = () => {
               styles[activeDisplayMode === 0 ? '' : 'list'],
             ].join('')}
           >
-            {SearchLoading && <LoadingComponent />}
+            {SearchLoading && <Loading />}
             {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
             {SearchData &&
               AddSeasonsToParams === '' &&
               SearchData.data.map((item: IData, index: number) => (
-                <Suspense key={index} fallback={<LoadingComponent />}>
+                <Suspense key={index} fallback={<Loading />}>
                   <AnimeCard
                     mode={activeDisplayMode}
                     index={index}
@@ -135,10 +135,9 @@ export const AnimeGridBlock = () => {
               AddSeasonsToParams === '' && (
                 <strong>Ничего не найдено ❌</strong>
               )}
-
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (
-                <Suspense key={index} fallback={<LoadingComponent />}>
+                <Suspense key={index} fallback={<Loading />}>
                   <AnimeCard
                     mode={activeDisplayMode}
                     index={index}

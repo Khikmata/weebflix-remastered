@@ -2,9 +2,6 @@ import React from 'react';
 import styles from './Input.styles.module.scss';
 
 interface ButtonProps {
-  className?: string;
-  children?: React.ReactNode;
-
   marginVertical?: number;
   marginHorizontal?: number;
 
@@ -24,8 +21,6 @@ interface ButtonProps {
 }
 
 export const Input: React.FC<ButtonProps> = ({
-  className,
-  children,
   marginHorizontal,
   marginVertical,
   color,
@@ -61,11 +56,10 @@ export const Input: React.FC<ButtonProps> = ({
           'transparent',
       }}
       className={styles['button']}
+      onChange={onChange}
       type={type}
       max={max}
       min={min}
-    >
-      {children}
-    </input>
+    />
   );
 };
