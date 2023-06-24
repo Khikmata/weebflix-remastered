@@ -29,7 +29,7 @@ export const SeasonsDropdown = () => {
           <p className={styles[yearSeason.year === activeYear ? 'active' : '']}>{yearSeason.year}</p>
           {yearSeason.seasons.map((season: string) => (
             <li
-              key={yearSeason.year + season.length}
+              key={yearSeason.year + season}
               className={styles[yearSeason.year === activeYear && season === activeSeason ? 'active' : '']}
               onClick={() => handleSeasonChange(yearSeason.year, season)}
             >

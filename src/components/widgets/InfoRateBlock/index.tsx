@@ -1,6 +1,6 @@
-import dropDownIcon from '@assets/icons/DropdownIcon.svg';
-import starIcon from '@assets/icons/StarIcon.svg';
-import styles from './InfoRateBlock.styles.module.scss';
+import dropDownIcon from '@assets/icons/DropdownIcon.svg'
+import starIcon from '@assets/icons/StarIcon.svg'
+import styles from './InfoRateBlock.styles.module.scss'
 
 export const InfoRateBlock = () => {
   return (
@@ -16,5 +16,5 @@ export const InfoRateBlock = () => {
         <img src={dropDownIcon} alt="" />
       </button>
     </>
-  );
-};
+  )
+}

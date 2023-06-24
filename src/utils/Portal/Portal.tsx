@@ -1,11 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-const portalRoot = document.body;
+const portalRoot = document.body
 
 export function Portal({ children }: { children: React.ReactNode }) {
-  return ReactDOM.createPortal(
-    <div className="modal">{children}</div>,
-    portalRoot,
-  );
+  return ReactDOM.createPortal(<div className="modal">{children}</div>, portalRoot)
 }

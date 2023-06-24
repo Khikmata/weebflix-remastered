@@ -1,5 +1,5 @@
-import { AnimeGridBlock } from '../../components/widgets';
-import styles from './SearchPage.styles.module.scss';
+import { AnimeGridBlock } from '../../components/widgets'
+import styles from './SearchPage.styles.module.scss'
 
 export const SearchPage = () => {
   return (
@@ -8,5 +8,5 @@ export const SearchPage = () => {
         <AnimeGridBlock />
       </div>
     </div>
-  );
-};
+  )
+}

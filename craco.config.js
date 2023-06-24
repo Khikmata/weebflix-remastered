@@ -1,12 +1,9 @@
-const path = require('path');
+const path = require('path')
 
-const resolvePath = (p) => path.resolve(__dirname, p);
+const resolvePath = (p) => path.resolve(__dirname, p)
 
 module.exports = {
   webpack: {
-    configure: {
-      entry: './src',
-    },
     alias: {
       '@components': resolvePath('./src/components'),
       '@assets': resolvePath('./src/assets'),
@@ -16,4 +13,4 @@ module.exports = {
       '@pages': resolvePath('./src/pages'),
     },
   },
-};
+}

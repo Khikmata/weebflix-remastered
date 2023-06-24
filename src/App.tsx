@@ -1,6 +1,5 @@
 import { lazy } from 'react'
 
-import { useTranslation } from 'react-i18next'
 import './styles/global.scss'
 
 const AppRouter = lazy(() => import('./router/AppRouter'))

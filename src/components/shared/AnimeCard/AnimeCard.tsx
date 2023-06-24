@@ -5,6 +5,7 @@ import { IData } from 'types/FetchTypes'
 import { ColorRating } from 'utils/Coloring/ColorRating'
 import { ColorStatus } from 'utils/Coloring/ColorStatus'
 
+import { useTranslation } from 'react-i18next'
 import styles from './AnimeCard.styles.module.scss'
 
 interface CatalogueCardProps {
@@ -19,6 +20,9 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
   mode,
 }) => {
   !mode && (mode = 0)
+
+  const { t } = useTranslation() // Assuming you have the useTranslation hook imported correctly
+
   const renderCardGrid = useMemo(() => {
     return (
       <div key={index} className={styles['anime-card']}>
@@ -39,6 +43,12 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
             {item.score || '?'}
           </div>
         </Link>
+        {/* <div className={styles['anime-card__preview']}>
+          <p>{item.title}</p>
+          <p>Статус: {item.status}</p>
+          <span>{item.background}</span>
+          <p>Тип: {item.type}</p>
+        </div> */}
         <div className={styles['anime-card-info']}>
           <div
             className={styles['anime-card-info__title']}
@@ -98,6 +108,6 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
         </div>
       </div>
     )
-  }, [index, item])
+  }, [index, item, t])
   return <> {mode === 0 ? renderCardGrid : renderCardList} </>
 }

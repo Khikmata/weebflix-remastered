@@ -1,22 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 export interface statusFilterProps {
-  statusType: string | null;
+  statusType: string | null
 }
 
 const initialState: statusFilterProps = {
-  statusType: '',
-};
+  statusType: null,
+}
 
 const slice = createSlice({
   name: 'statusFilter',
   initialState,
   reducers: {
     setStatusType: (state, action) => {
-      state.statusType = action.payload;
+      state.statusType = action.payload
     },
   },
-});
+})
 
-export const { reducer: statusFilterReducer, actions: statusFilterActions } =
-  slice;
+export const { reducer: statusFilterReducer, actions: statusFilterActions } = slice

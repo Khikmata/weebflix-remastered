@@ -1,3 +1,3 @@
 export const Graphlq = () => {
-  return <div>Graphlq</div>;
-};
+  return <div>Graphlq</div>
+}

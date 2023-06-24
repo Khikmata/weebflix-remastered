@@ -49,7 +49,7 @@ export const Navbar = () => {
   useEffect(() => {
     updateSearchInputStore(searchInput)
     i18n.changeLanguage(currentLanguage)
-  }, [searchInput, updateSearchInputStore])
+  }, [currentLanguage])
 
   const renderLogo = useMemo(() => {
     return (

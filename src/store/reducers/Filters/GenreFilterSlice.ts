@@ -1,16 +1,15 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IGenres } from 'types/DetailsTypes';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { IGenres } from 'types/DetailsTypes'
 
-
- interface genreFilterProps {
-  selectedGenresNames: string[] ;
-  selectedGenresIndexes: number[];
+interface genreFilterProps {
+  selectedGenresNames: string[]
+  selectedGenresIndexes: number[]
 }
 
 const initialState: genreFilterProps = {
   selectedGenresIndexes: [],
   selectedGenresNames: [],
-};
+}
 
 const slice = createSlice({
   name: 'genreFilter',
@@ -18,7 +17,7 @@ const slice = createSlice({
   reducers: {
     setGenre: (state, action: PayloadAction<IGenres>) => {
       //Если данный жанр уже существует в массиве, возвращаем ничего
-      state.selectedGenresIndexes.push(action.payload.mal_id);
+      state.selectedGenresIndexes.push(action.payload.mal_id)
       state.selectedGenresNames.push(action.payload.name)
     },
     excludeGenre: (state, action: PayloadAction<IGenres>) => {
@@ -27,10 +26,9 @@ const slice = createSlice({
     removeGenre: (state, action: PayloadAction<IGenres>) => {
       //Удаление жанра из массива
       state.selectedGenresIndexes.splice(state.selectedGenresIndexes.indexOf(action.payload.mal_id), 1)
-      state.selectedGenresNames.splice(state.selectedGenresIndexes.indexOf(action.payload.mal_id), 1);
+      state.selectedGenresNames.splice(state.selectedGenresIndexes.indexOf(action.payload.mal_id), 1)
     },
   },
-});
+})
 
-export const { reducer: genreFilterReducer, actions: genreFilterActions } =
-  slice;
+export const { reducer: genreFilterReducer, actions: genreFilterActions } = slice

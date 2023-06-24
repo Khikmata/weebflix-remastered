@@ -15,6 +15,9 @@
 	"filter_producers": "Producers",
 	"filter_status": "Status",
 	"filter_sort": "Sort by",
-	"filter_order": "Order by"
+	"filter_order": "Order by",
 
+	"anime_status_onair": "On air",
+	"anime_status_aired": "Aired",
+	"anime_status_notaired": "Not yet airing"
 }

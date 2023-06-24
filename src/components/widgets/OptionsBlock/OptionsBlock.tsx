@@ -12,12 +12,8 @@ interface OptionsBlockProps {
 
 export const OptionsBlock: React.FC<OptionsBlockProps> = ({ options }) => {
   const dispatch = useAppDispatch()
-  const activeCatalogueSliderOption = useAppSelector(
-    (state) => state.catalogueSlider.activeSliderIndex,
-  )
-  const activeCatalogueOption = useAppSelector(
-    (state) => state.catalogue.activeCatalogueIndex,
-  )
+  const activeCatalogueSliderOption = useAppSelector((state) => state.catalogueSlider.activeSliderIndex)
+  const activeCatalogueOption = useAppSelector((state) => state.catalogue.activeCatalogueIndex)
 
   const { t } = useTranslation()
 
@@ -49,9 +45,7 @@ export const OptionsBlock: React.FC<OptionsBlockProps> = ({ options }) => {
             <li
               key={index}
               onClick={() => handleChangeOption(index)}
-              className={
-                styles[`${handleActiveOption() === index && 'active'}`]
-              }
+              className={styles[`${handleActiveOption() === index && 'active'}`]}
             >
               {option}
             </li>

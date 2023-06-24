@@ -1,8 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { authModalReducer } from './reducers/Auth/AuthModal';
-import { CatalogueReducer } from './reducers/Catalogue/CatalogueSlice';
-import { CatalogueSliderReducer } from './reducers/Catalogue/CatalogueSliderSlice';
-import { DropdownDataReducer } from './reducers/Dropdown/DropdownDataSlice';
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { authModalReducer } from './reducers/Auth/AuthModal'
+import { CatalogueReducer } from './reducers/Catalogue/CatalogueSlice'
+import { CatalogueSliderReducer } from './reducers/Catalogue/CatalogueSliderSlice'
+import { DropdownDataReducer } from './reducers/Dropdown/DropdownDataSlice'
 import {
   dateFilterReducer,
   genreFilterReducer,
@@ -15,11 +15,11 @@ import {
   sortFilterReducer,
   statusFilterReducer,
   typeFilterReducer,
-} from './reducers/Filters';
-import { PlayerReducer } from './reducers/Player/PlayerSlice';
+} from './reducers/Filters'
+import { PlayerReducer } from './reducers/Player/PlayerSlice'
 
-import { season } from 'types/FetchTypes';
-import { AnimeApi, PlayerApi, SearchAPI } from './services';
+import { season } from 'types/FetchTypes'
+import { AnimeApi, PlayerApi, SearchAPI } from './services'
 
 const filterReducer = combineReducers({
   dateFilters: dateFilterReducer,
@@ -33,7 +33,7 @@ const filterReducer = combineReducers({
   orderFilters: orderByFilterReducer,
   producerFilters: producersFilterReducer,
   seasonFilters: seasonFilterReducer,
-});
+})
 
 const rootReducer = combineReducers({
   [AnimeApi.reducerPath]: AnimeApi.reducer,
@@ -50,16 +50,13 @@ const rootReducer = combineReducers({
   auth: authModalReducer,
 
   filterReducer,
-});
+})
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(AnimeApi.middleware)
-      .concat(PlayerApi.middleware)
-      .concat(SearchAPI.middleware),
-});
+    getDefaultMiddleware().concat(AnimeApi.middleware).concat(PlayerApi.middleware).concat(SearchAPI.middleware),
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

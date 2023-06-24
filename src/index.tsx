@@ -6,7 +6,7 @@ import App from './App'
 import ScrollToTop from './hooks/scroll'
 import { store } from './store'
 
-import { ErrorBlock, LoadingBlock } from '@components/widgets'
+import { ErrorBlock, LoadingBlock } from '@components/widgets/index'
 import { ErrorBoundary } from 'react-error-boundary'
 import './i18n/i18n'
 

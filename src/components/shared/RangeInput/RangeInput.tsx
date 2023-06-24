@@ -1,39 +1,32 @@
-import { useEffect, useState } from 'react';
-import { Range, getTrackBackground } from 'react-range';
+import { useEffect, useState } from 'react'
+import { Range, getTrackBackground } from 'react-range'
 
-import { useDebounce } from 'hooks/debounce';
-import styles from './RangeInput.styles.module.scss';
+import { useDebounce } from 'hooks/debounce'
+import styles from './RangeInput.styles.module.scss'
 
 interface RangeComponentProps {
-  handleRange: (values: number[]) => void;
-  title: string;
-  step: number;
-  max: number;
-  min: number;
-  showMiles?: boolean;
+  handleRange: (values: number[]) => void
+  title: string
+  step: number
+  max: number
+  min: number
+  showMiles?: boolean
 }
 
-export const RangeInput: React.FC<RangeComponentProps> = ({
-  title,
-  step,
-  min,
-  max,
-  handleRange,
-  showMiles,
-}) => {
-  const [values, setValues] = useState([min, max]);
+export const RangeInput: React.FC<RangeComponentProps> = ({ title, step, min, max, handleRange, showMiles }) => {
+  const [values, setValues] = useState([min, max])
 
   const handleWithDebounce = useDebounce(() => {
-    handleRange(values);
-  }, 300);
+    handleRange(values)
+  }, 300)
 
   const handleChange = (values: number[]) => {
-    setValues(values);
-  };
+    setValues(values)
+  }
 
   useEffect(() => {
-    handleWithDebounce(values);
-  }, [values]);
+    handleWithDebounce(values)
+  }, [values])
 
   return (
     <div className={styles['range']}>
@@ -52,10 +45,7 @@ export const RangeInput: React.FC<RangeComponentProps> = ({
               bottom: '13px',
               height: '8px',
               width: showMiles ? '3px' : '1px',
-              backgroundColor:
-                index * step < values[1] && index * step > values[0]
-                  ? '#abe96e'
-                  : '#ccc',
+              backgroundColor: index * step < values[1] && index * step > values[0] ? '#abe96e' : '#ccc',
             }}
           />
         )}
@@ -123,5 +113,5 @@ export const RangeInput: React.FC<RangeComponentProps> = ({
         )}
       />
     </div>
-  );
-};
+  )
+}

@@ -1,12 +1,6 @@
 import { Button, Loading } from '@components/shared'
 import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
-import {
-  CharactersBlock,
-  InfoBlock,
-  PlayerBlock,
-  RankBlock,
-  RelationBlock,
-} from '@components/widgets'
+import { CharactersBlock, InfoBlock, PlayerBlock, RankBlock, RelationBlock } from '@components/widgets'
 import { InfoRateBlock } from '@components/widgets/InfoRateBlock'
 import { PlayerApi } from '@store/services/getPlayer'
 import axios from 'axios'
@@ -33,17 +27,12 @@ export const AnimePage = () => {
     data: playerData,
     error: playerError,
     isLoading: playerLoading,
-  } = PlayerApi.useGetAnimePlayerQuery(
-    { url: urlQuery, episodeNumber: selectedEpisode },
-    { skip },
-  )
+  } = PlayerApi.useGetAnimePlayerQuery({ url: urlQuery, episodeNumber: selectedEpisode }, { skip })
 
   const fetchAnimeDetails = async () => {
     try {
       if (details) {
-        const response = await axios.get(
-          `https://weebflix-backend.onrender.com/getParsedUrl/${details.title}`,
-        )
+        const response = await axios.get(`https://weebflix-backend.onrender.com/getParsedUrl/${details.title}`)
         console.log(response.data)
         setUrlQuery(response.data.url)
       }
@@ -66,11 +55,7 @@ export const AnimePage = () => {
       <div className={styles['anime-page__info']}>
         <div className={styles['anime-info__leftside']}>
           <div className={styles['anime-info__image']}>
-            <img
-              loading="lazy"
-              src={details?.images.webp.large_image_url}
-              alt="обложка"
-            />
+            <img loading="lazy" src={details?.images.webp.large_image_url} alt="обложка" />
           </div>
           <InfoRateBlock />
         </div>
@@ -81,11 +66,7 @@ export const AnimePage = () => {
           </div>
           {details && <RankBlock details={details} />}
           <Button scale height={40} marginVertical={16} color="primary">
-            <Link
-              to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}
-            >
-              Смотреть трейлер
-            </Link>
+            <Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Смотреть трейлер</Link>
           </Button>
           {detailsLoading && (
             <span>
@@ -103,9 +84,7 @@ export const AnimePage = () => {
           Загрузка плеера... <Loading />
         </span>
       )}
-      {playerData && details && (
-        <PlayerBlock sources={playerData.sources} details={details} />
-      )}
+      {playerData && details && <PlayerBlock sources={playerData.sources} details={details} />}
       {playerError && <p>Произошла ошибка при загрузке плеера.</p>}
     </PageWrapper>
   )

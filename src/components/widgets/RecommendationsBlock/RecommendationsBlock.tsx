@@ -72,24 +72,17 @@ export const RecommendationsBlock: React.FC = () => {
                 Загрузка блока рекоммендаций... <Loading />{' '}
               </span>
             )}
-            {recommendationsErrors && (
-              <p>Произошла ошибка при загрузке блока..</p>
-            )}
+            {recommendationsErrors && <p>Произошла ошибка при загрузке блока..</p>}
             {recommendations &&
               recommendations.map((item: IRecommendations, index: number) => (
                 <SwiperSlide key={index}>
-                  <Link
-                    className={styles['content-grid-card']}
-                    to={`/anime/${item.entry.mal_id}`}
-                  >
+                  <Link className={styles['content-grid-card']} to={`/anime/${item.entry.mal_id}`}>
                     <img
                       className={styles['content-grid-card__image']}
                       src={item.entry?.images.webp.image_url}
                       alt={item.entry.title + ' banner image'}
                     />
-                    <p className={styles['content-grid-card__votes']}>
-                      +{item.votes}
-                    </p>
+                    <p className={styles['content-grid-card__votes']}>+{item.votes}</p>
                   </Link>
                 </SwiperSlide>
               ))}

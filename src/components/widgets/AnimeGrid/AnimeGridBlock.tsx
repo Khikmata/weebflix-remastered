@@ -9,10 +9,10 @@ import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice'
 import { AnimeApi } from '@store/services'
 import { SearchAPI } from '@store/services/getSearch'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { useTranslation } from 'react-i18next'
 import { IData } from 'types/FetchTypes'
 import { FilterBlock } from '../FilterBlock/FilterBlock'
 import styles from './AnimeGridBlock.styles.module.scss'
-import { useTranslation } from 'react-i18next'
 
 export const AnimeGridBlock = () => {
   const dispatch = useAppDispatch()
@@ -52,16 +52,19 @@ export const AnimeGridBlock = () => {
     sort: AddSortByToParams,
     limit: 20,
     page: pages,
-    sfw: AddRatingToParams === 'RX' || AddGenreToParams.selectedGenresNames.includes('Hentai') ? '' : 'true',
+    sfw:
+      AddRatingToParams === 'RX' ||
+      AddGenreToParams.selectedGenresNames.includes('Hentai')
+        ? ''
+        : 'true',
   })
-
-  const filteredData = SearchData?.data.filter((item) => item.score !== null)
 
   const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery()
   const { data: producersData } = AnimeApi.useGetAnimeProducersQuery()
   const paginationData = SearchData?.pagination
 
-  const [trigger, { data: animeSeasonData }] = AnimeApi.useLazyGetAnimeBySeasonQuery()
+  const [trigger, { data: animeSeasonData }] =
+    AnimeApi.useLazyGetAnimeBySeasonQuery()
 
   const [activeDisplayMode, setActiveDisplayMode] = useState(0)
 
@@ -78,7 +81,8 @@ export const AnimeGridBlock = () => {
   }
   const { t } = useTranslation()
   useEffect(() => {
-    producersData && dispatch(DropdownDataActions.setProducerData(producersData))
+    producersData &&
+      dispatch(DropdownDataActions.setProducerData(producersData))
 
     if (seasonsData) {
       dispatch(DropdownDataActions.setSeasonData(seasonsData))
@@ -86,7 +90,7 @@ export const AnimeGridBlock = () => {
     if (AddSeasonsToParams) {
       trigger(AddSeasonsToParams)
     }
-  }, [producersData, seasonsData, AddSeasonsToParams])
+  }, [producersData, seasonsData, AddSeasonsToParams, SearchData])
 
   return (
     <div className={styles['animegrid']}>
@@ -94,32 +98,54 @@ export const AnimeGridBlock = () => {
         <div className={styles['animegrid-header']}>
           <h2>{t('catalogue_title')}</h2>
           <div className={styles['animegrid-container__mode']}>
-            <button className={styles[activeDisplayMode === 0 ? 'active' : '']} onClick={() => handleDisplayMode(0)}>
+            <button
+              className={styles[activeDisplayMode === 0 ? 'active' : '']}
+              onClick={() => handleDisplayMode(0)}
+            >
               <img src={gridIcon} width={22} alt="Сеточная" />
             </button>
-            <button className={styles[activeDisplayMode === 1 ? 'active' : '']} onClick={() => handleDisplayMode(1)}>
+            <button
+              className={styles[activeDisplayMode === 1 ? 'active' : '']}
+              onClick={() => handleDisplayMode(1)}
+            >
               <img src={listIcon} width={24} alt="Таблицей" />
             </button>
           </div>
         </div>
         <div className={styles['animegrid-container__content']}>
-          <div className={[styles['animegrid-content__items'], styles[activeDisplayMode === 0 ? '' : 'list']].join('')}>
+          <div
+            className={[
+              styles['animegrid-content__items'],
+              styles[activeDisplayMode === 0 ? '' : 'list'],
+            ].join('')}
+          >
             {SearchLoading && <Loading />}
             {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
-            {filteredData &&
-              AddSeasonsToParams === '' &&
-              filteredData.map((item: IData, index: number) => (
+            {SearchData?.data &&
+              AddSeasonsToParams === null &&
+              SearchData?.data.map((item: IData, index: number) => (
                 <Suspense key={index} fallback={<Loading />}>
-                  <AnimeCard mode={activeDisplayMode} index={index} item={item} />
+                  <AnimeCard
+                    mode={activeDisplayMode}
+                    index={index}
+                    item={item}
+                  />
                 </Suspense>
               ))}
-            {filteredData && filteredData.length === 0 && AddSeasonsToParams === '' && (
-              <strong>Ничего не найдено ❌</strong>
-            )}
+            {seasonsData &&
+              SearchData &&
+              SearchData.data.length === 0 &&
+              AddSeasonsToParams === '' && (
+                <strong>Ничего не найдено ❌</strong>
+              )}
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (
                 <Suspense key={index} fallback={<Loading />}>
-                  <AnimeCard mode={activeDisplayMode} index={index} item={item} />
+                  <AnimeCard
+                    mode={activeDisplayMode}
+                    index={index}
+                    item={item}
+                  />
                 </Suspense>
               ))}
           </div>

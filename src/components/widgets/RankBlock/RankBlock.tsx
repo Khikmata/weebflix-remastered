@@ -1,8 +1,8 @@
-import { IDetails } from 'types/FetchTypes';
-import styles from './RankBlock.styles.module.scss';
+import { IDetails } from 'types/FetchTypes'
+import styles from './RankBlock.styles.module.scss'
 
 interface RankBlockProps {
-  details: IDetails;
+  details: IDetails
 }
 
 export const RankBlock: React.FC<RankBlockProps> = ({ details }) => {
@@ -28,5 +28,5 @@ export const RankBlock: React.FC<RankBlockProps> = ({ details }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

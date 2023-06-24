@@ -17,12 +17,7 @@ export const ErrorBlock = () => {
           alt="изображение ошибки"
         />
       </div>
-      <Button
-        onClick={handleNavigateToPrevPage}
-        color="primary"
-        contentPadding="8px"
-        marginVertical={12}
-      >
+      <Button onClick={handleNavigateToPrevPage} color="primary" contentPadding="8px" marginVertical={12}>
         <p>Вернуться обратно</p>
       </Button>
     </div>

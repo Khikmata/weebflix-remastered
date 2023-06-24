@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { authModalAction } from '../../../store/reducers/Auth/AuthModal';
-import { Modal } from '../../features/Modal';
-import styles from './AuthModal.styles.module.scss';
+import React, { useState } from 'react'
+
+import styles from './AuthModal.styles.module.scss'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { authModalAction } from '@store/reducers/Auth/AuthModal'
+import { Modal } from '@components/features'
 
 export const AuthModal = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const isOpen = useAppSelector((state) => state.auth.isOpen);
+  const isOpen = useAppSelector((state) => state.auth.isOpen)
 
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [username, setUsername] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    setUsername('');
-    setPassword('');
-  };
+    setUsername('')
+    setPassword('')
+  }
 
   const handleClose = () => {
-    dispatch(authModalAction.setModalOpen(false));
-    setUsername('');
-    setPassword('');
-  };
+    dispatch(authModalAction.setModalOpen(false))
+    setUsername('')
+    setPassword('')
+  }
 
   if (!isOpen) {
-    return null;
+    return null
   }
 
   return (
@@ -51,21 +52,14 @@ export const AuthModal = () => {
       <form onSubmit={(e) => handleSubmit(e)} className={styles['auth-form']}>
         <label className={styles['form-input']}>
           Никнейм
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+          <input value={username} onChange={(e) => setUsername(e.target.value)} />
         </label>
         <label className={styles['form-input']}>
           Пароль
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
         <button className={styles['form-button']}>Войти</button>
       </form>
     </Modal>
-  );
-};
+  )
+}

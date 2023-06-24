@@ -12,4 +12,4 @@ export const orderBy = [
   { id: 10, value: 'episodes' },
   { id: 11, value: 'start_date' },
   { id: 12, value: 'end_date' },
-];
+]

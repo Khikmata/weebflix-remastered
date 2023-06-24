@@ -32,11 +32,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
       <div className={styles['infoBlock']}>
         <p className={styles['infoBlock-type']}>
           Тип:{' '}
-          <Button
-            onClick={() => handleType(details.type)}
-            contentPadding={'3'}
-            outlined
-          >
+          <Button onClick={() => handleType(details.type)} contentPadding={'3'} outlined>
             {details.type}
           </Button>
         </p>
@@ -45,12 +41,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
         <p className={styles['infoBlock-genres']}>
           Жанры:{' '}
           {details.genres.map((genre: IGenres, index) => (
-            <Button
-              onClick={() => handleGenres(genre)}
-              key={index}
-              color="secondary"
-              contentPadding={'3'}
-            >
+            <Button onClick={() => handleGenres(genre)} key={index} color="secondary" contentPadding={'3'}>
               {genre.name}
             </Button>
           ))}
@@ -71,10 +62,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
       </div>
       <div
         onClick={() => setOpenDescirpiton((prevstate) => !prevstate)}
-        className={[
-          styles['description'],
-          styles[openDescription ? 'active' : ''],
-        ].join(' ')}
+        className={[styles['description'], styles[openDescription ? 'active' : '']].join(' ')}
       >
         <strong>Описание:</strong>
         <br />

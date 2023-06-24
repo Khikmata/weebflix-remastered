@@ -56,45 +56,17 @@ export const FilterBlock = () => {
     'Сортировать по статусу',
     'Сортировать по оценке, Сортировать по рейтингу',
   ]
-  const SelectDropdownType = [
-    'genres',
-    'types',
-    'rating',
-    'season',
-    'producer',
-    'status',
-    'sort',
-    'order',
-  ]
+  const SelectDropdownType = ['genres', 'types', 'rating', 'season', 'producer', 'status', 'sort', 'order']
 
   return (
     <>
-      <button
-        onClick={handleFiltersDropdown}
-        className={styles['filter-title']}
-      >
+      <button onClick={handleFiltersDropdown} className={styles['filter-title']}>
         <img width={16} src={filterIcon} alt="Фильтр картинка" />
         {t('filterBlock_title')}
-        <img
-          className={styles['filter-title__dropdown']}
-          src={dropdownIcon}
-          width={12}
-          alt="Выпадающее меню"
-        ></img>
+        <img className={styles['filter-title__dropdown']} src={dropdownIcon} width={12} alt="Выпадающее меню"></img>
       </button>
-      <div
-        className={[
-          styles['filterblock'],
-          styles[openFilters ? 'active' : ''],
-        ].join(' ')}
-      >
-        <RangeInput
-          min={0}
-          max={10}
-          step={1}
-          title={'Сортировка по рейтингу:'}
-          handleRange={handleScoreChange}
-        />
+      <div className={[styles['filterblock'], styles[openFilters ? 'active' : '']].join(' ')}>
+        <RangeInput min={0} max={10} step={1} title={'Сортировка по рейтингу:'} handleRange={handleScoreChange} />
         <RangeInput
           showMiles={false}
           min={1960}

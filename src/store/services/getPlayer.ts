@@ -1,19 +1,18 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPlayerData } from '../../types/FetchTypes';
-
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IPlayerData } from '../../types/FetchTypes'
 
 interface PlayerApiEndpoints {
-  url: string;
-  episodeNumber: number;
+  url: string
+  episodeNumber: number
 }
 
 const animeUrl = (url: string) => {
-  return url.replace('https://www3.gogoanimes.fi/category/', '');
-} 
+  return url.replace('https://www3.gogoanimes.fi/category/', '')
+}
 
 export const PlayerApi = createApi({
   reducerPath: 'playerAPI',
-  baseQuery: fetchBaseQuery({baseUrl:'https://api.consumet.org/'}) ,
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.consumet.org/' }),
   endpoints: (builder) => ({
     getAnimePlayer: builder.query<IPlayerData, PlayerApiEndpoints>({
       query: ({ url, episodeNumber }) => ({
@@ -21,6 +20,6 @@ export const PlayerApi = createApi({
       }),
     }),
   }),
-});
+})
 
-export const { useGetAnimePlayerQuery } = PlayerApi;
+export const { useGetAnimePlayerQuery } = PlayerApi

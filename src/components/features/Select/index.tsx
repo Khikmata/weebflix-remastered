@@ -25,7 +25,7 @@ export const Select: React.FC<SelectComponentProps> = ({ title, tooltip, dropdow
   const typesDisplay = filterDisplays.typeFilters.typeDisplay
   const ratingDisplay = filterDisplays.ratingFilters.ratingDisplay
   const producersDisplay = filterDisplays.producerFilters.producersDisplay
-  const seasonDisplay = seasonYear && seasonSeason && seasonYear + seasonSeason
+  const seasonDisplay = seasonYear && seasonSeason && seasonYear + ' ' + seasonSeason
   const statusDisplay = filterDisplays.statusFilters.statusType
   const sortDisplay = filterDisplays.sortFilters.sortType
   const orderDisplay = filterDisplays.orderFilters.orderBy.value
@@ -36,19 +36,19 @@ export const Select: React.FC<SelectComponentProps> = ({ title, tooltip, dropdow
       return genreDisplay.length !== 0 ? genreDisplay.join(', ') : tooltip
     }
     if (dropdownType === DropdownTypeEnum.TYPES) {
-      return typesDisplay ? genreDisplay : tooltip
+      return typesDisplay ? typesDisplay : tooltip
     }
     if (dropdownType === DropdownTypeEnum.RATING) {
-      return ratingDisplay ? genreDisplay : tooltip
+      return ratingDisplay ? ratingDisplay : tooltip
     }
     if (dropdownType === DropdownTypeEnum.SEASON) {
-      return seasonDisplay ? genreDisplay : tooltip
+      return seasonDisplay ? seasonDisplay : tooltip
     }
     if (dropdownType === DropdownTypeEnum.PRODUCER) {
-      return producersDisplay ? genreDisplay : tooltip
+      return producersDisplay ? producersDisplay : tooltip
     }
     if (dropdownType === DropdownTypeEnum.STATUS) {
-      return statusDisplay ? genreDisplay : tooltip
+      return statusDisplay ? statusDisplay : tooltip
     }
     if (dropdownType === DropdownTypeEnum.SORT) {
       return sortDisplay
