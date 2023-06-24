@@ -39,6 +39,11 @@ export enum AnimeTypesEnum {
   'music',
 }
 
+export interface IDropdownItem{
+  id: number;
+  value: string;
+}
+
 export interface IRelations {
   relation: string;
   entry: IMoreDetails[];

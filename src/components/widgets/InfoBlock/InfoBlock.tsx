@@ -1,38 +1,31 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import styles from './InfoBlock.styles.module.scss';
-import { Button } from '@components/shared';
-import { typeFilterActions, genreFilterActions } from '@store/reducers/Filters';
-import { useAppDispatch } from 'hooks/redux';
-import { IGenres } from 'types/DetailsTypes';
-import { IDetails } from 'types/FetchTypes';
-import {
-  TranslateTypeToRussian,
-  TranslateStatusToRussian,
-  TranslateGenresToRussian,
-  TranslateRatingToRussian,
-  TranslateSeasonToRussian,
-} from 'utils/Translation';
+import { Button } from '@components/shared'
+import { genreFilterActions, typeFilterActions } from '@store/reducers/Filters'
+import { useAppDispatch } from 'hooks/redux'
+import { IGenres } from 'types/DetailsTypes'
+import { IDetails } from 'types/FetchTypes'
+import styles from './InfoBlock.styles.module.scss'
 
 interface InfoBlockProps {
-  details: IDetails;
+  details: IDetails
 }
 
 export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
-  const [openDescription, setOpenDescirpiton] = useState(false);
+  const [openDescription, setOpenDescirpiton] = useState(false)
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const handleType = (item: string) => {
-    navigate('/search');
-    dispatch(typeFilterActions.setType(item));
-  };
+    navigate('/search')
+    dispatch(typeFilterActions.setType(item))
+  }
   const handleGenres = (item: IGenres) => {
-    navigate('/search');
-    dispatch(genreFilterActions.setGenre(item));
-  };
+    navigate('/search')
+    dispatch(genreFilterActions.setGenre(item))
+  }
 
   return (
     <>
@@ -44,11 +37,11 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
             contentPadding={'3'}
             outlined
           >
-            {TranslateTypeToRussian(details.type)}
+            {details.type}
           </Button>
         </p>
         <p>Эпизоды: {details.episodes || 0}</p>
-        <p>Статус: {TranslateStatusToRussian(details.status)}</p>
+        <p>Статус: {details.status}</p>
         <p className={styles['infoBlock-genres']}>
           Жанры:{' '}
           {details.genres.map((genre: IGenres, index) => (
@@ -58,7 +51,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
               color="secondary"
               contentPadding={'3'}
             >
-              {TranslateGenresToRussian(genre.name)}
+              {genre.name}
             </Button>
           ))}
         </p>
@@ -70,10 +63,10 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
             </Button>
           ))}
         </p>
-        <p>Рейтинг: {TranslateRatingToRussian(details.rating)}</p>
+        <p>Рейтинг: {details.rating}</p>
         <p>Длительность: {details.duration}</p>
         <p>
-          Выпуск: {TranslateSeasonToRussian(details.season)} {details.year}{' '}
+          Выпуск: {details.season} {details.year}{' '}
         </p>
       </div>
       <div
@@ -88,5 +81,5 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
         <p>{details.synopsis}</p>
       </div>
     </>
-  );
-};
+  )
+}

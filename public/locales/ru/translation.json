@@ -1,0 +1,20 @@
+
+{
+	"option_relevance": "Актуальное",
+	"option_upcoming": "Скоро выйдет",
+	"option_anime": "Аниме",
+	"option_manga": "Манга (пока не работает)",
+	"historyBlock_title": "Последние просмотренные",
+	"recommendedationsBlock_title": "Похожее на то, что вы смотрели ранее",
+	"newsBlock_title": "Новости",
+	"catalogue_title": "Каталог",
+	"filterBlock_title": "Фильтр",
+	"filter_genres": "Жанры",
+	"filter_types": "Типы",
+	"filter_rating": "Рейтинг",
+	"filter_seasons": "Сезоны",
+	"filter_producers": "Студия",
+	"filter_status": "Статус",
+	"filter_sort": "Сортировать по",
+	"filter_order": "Упорядочить по"
+}

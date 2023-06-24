@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface CounterState {
+export interface statusFilterProps {
   statusType: string | null;
 }
 
-const initialState: CounterState = {
+const initialState: statusFilterProps = {
   statusType: '',
 };
 

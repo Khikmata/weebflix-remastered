@@ -1,33 +1,33 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react'
 
-import styles from '../FilterDropdown.styles.module.scss';
-import { useAppDispatch } from 'hooks/redux';
-import { sortFilterActions } from 'store/reducers/Filters/SortFilterSlice';
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { sortFilterActions } from 'store/reducers/Filters/SortFilterSlice'
+import styles from '../FilterDropdown.styles.module.scss'
 
-import { translateDropdownContent } from '../../TranslateDropdown';
-import { DropdownTypeEnum } from 'utils/DataTypes/AnimeData';
 export const SortDropdown = () => {
-  const [selectedSortIndex, setSelectedSortIndex] = useState<number>(0);
+  const activeSort = useAppSelector((state) => state.filterReducer.sortFilters.sortType)
 
-  const sortData = ['desc', 'asc'];
-
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const getSortDropdown = useMemo(() => {
-    const handleSortChange = (index: number) => {
-      dispatch(sortFilterActions.setSortType(sortData[index]));
-      setSelectedSortIndex(index);
-    };
-    return sortData.map((sort, index) => (
-      <li
-        key={index}
-        onClick={() => handleSortChange(index)}
-        className={styles[selectedSortIndex === index ? 'active' : '']}
-      >
-        {translateDropdownContent(sort, DropdownTypeEnum.SORT)}
-      </li>
-    ));
-  }, [selectedSortIndex, dispatch]);
+    const sortData = [
+      { id: 0, value: 'desc' },
+      { id: 1, value: 'asc' },
+    ]
 
-  return <>{getSortDropdown}</>;
-};
+    const handleSortChange = (index: number) => {
+      dispatch(sortFilterActions.setSortType(sortData[index].value))
+    }
+    return sortData.map((sort) => (
+      <li
+        key={sort.id}
+        onClick={() => handleSortChange(sort.id)}
+        className={styles[sort.value === activeSort ? 'active' : '']}
+      >
+        {sort.value}
+      </li>
+    ))
+  }, [activeSort, dispatch])
+
+  return <>{getSortDropdown}</>
+}

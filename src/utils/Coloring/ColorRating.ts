@@ -1,4 +1,4 @@
-export const ColorRating = (score: Float32Array) => {
+export const ColorRating = (score: number) => {
   if (Number(score) > 8.8) {
     return '#79F9F9';
   }

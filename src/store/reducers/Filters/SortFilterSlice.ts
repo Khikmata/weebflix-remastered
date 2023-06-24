@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-export interface CounterState {
+ interface sortFilterProps {
   sortType: string;
 }
 
-const initialState: CounterState = {
+const initialState: sortFilterProps = {
   sortType: 'desc',
 };
 

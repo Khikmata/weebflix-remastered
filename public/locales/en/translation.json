@@ -1,0 +1,20 @@
+{
+	"option_relevance": "Popular",
+	"option_upcoming": "Upcoming",
+	"option_anime": "Anime",
+	"option_manga": "Manga (not working yet)",
+	"historyBlock_title": "Last viewed",
+	"recommendedationsBlock_title": "Similar to what you watched earlier",
+	"newsBlock_title": "News",
+	"catalogue_title": "Catalog",
+	"filterBlock_title": "Filter",
+	"filter_genres": "Genres",
+	"filter_types": "Types",
+	"filter_rating": "Rating",
+	"filter_seasons": "Seasons",
+	"filter_producers": "Producers",
+	"filter_status": "Status",
+	"filter_sort": "Sort by",
+	"filter_order": "Order by"
+
+}

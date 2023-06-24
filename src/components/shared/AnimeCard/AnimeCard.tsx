@@ -1,19 +1,16 @@
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useMemo } from 'react'
+import { Link } from 'react-router-dom'
 
-import { IData } from 'types/FetchTypes';
-import { ColorRating } from 'utils/Coloring/ColorRating';
-import { ColorStatus } from 'utils/Coloring/ColorStatus';
-import {
-  TranslateSeasonToRussian,
-  TranslateStatusToRussian,
-} from 'utils/Translation';
-import styles from './AnimeCard.styles.module.scss';
+import { IData } from 'types/FetchTypes'
+import { ColorRating } from 'utils/Coloring/ColorRating'
+import { ColorStatus } from 'utils/Coloring/ColorStatus'
+
+import styles from './AnimeCard.styles.module.scss'
 
 interface CatalogueCardProps {
-  index: number;
-  item: IData;
-  mode?: number;
+  index: number
+  item: IData
+  mode?: number
 }
 
 export const AnimeCard: React.FC<CatalogueCardProps> = ({
@@ -21,7 +18,7 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
   item,
   mode,
 }) => {
-  !mode && (mode = 0);
+  !mode && (mode = 0)
   const renderCardGrid = useMemo(() => {
     return (
       <div key={index} className={styles['anime-card']}>
@@ -51,8 +48,8 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
           </div>
         </div>
       </div>
-    );
-  }, [index, item]);
+    )
+  }, [index, item])
 
   const renderCardList = useMemo(() => {
     return (
@@ -84,15 +81,13 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
           <div className={styles['anime-card-info__more']}>
             <span
               style={{
-                color: ColorStatus(TranslateStatusToRussian(item.status)),
+                color: ColorStatus(item.status),
               }}
             >
-              {TranslateStatusToRussian(item.status)}
+              {item.status}
             </span>
             <span>{item.year && ` / ${item.year}`}</span>
-            <span>
-              {item.season && ` / ${TranslateSeasonToRussian(item.season)}`}
-            </span>
+            <span>{item.season && ` / ${item.season}`}</span>
           </div>
           <div className={styles['anime-card-info__episodes']}>
             Эпизодов: {item.episodes}
@@ -102,7 +97,7 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
           </div>
         </div>
       </div>
-    );
-  }, [index, item]);
-  return <> {mode === 0 ? renderCardGrid : renderCardList} </>;
-};
+    )
+  }, [index, item])
+  return <> {mode === 0 ? renderCardGrid : renderCardList} </>
+}

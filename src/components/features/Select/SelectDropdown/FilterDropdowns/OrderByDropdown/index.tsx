@@ -1,47 +1,32 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react'
 
-import { useAppDispatch } from 'hooks/redux';
-import { orderByFilterActions } from 'store/reducers/Filters/OrderFilterSlice';
-import { DropdownTypeEnum } from 'utils/DataTypes/AnimeData';
-import { translateDropdownContent } from '../../TranslateDropdown';
-import styles from '../FilterDropdown.styles.module.scss';
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { orderByFilterActions } from 'store/reducers/Filters/OrderFilterSlice'
+
+import styles from '../FilterDropdown.styles.module.scss'
+import { orderBy } from './constants'
 
 export const OrderByDropdown = () => {
-  const [selectedOrderIndex, setSelectedOrderIndex] = useState<number>(0);
-
-  const orderBy = [
-    'score',
-    'popularity',
-    'rank',
-    'scored_by',
-    'favorites',
-    'members',
-    'mal_id',
-    'title',
-    'type',
-    'rating',
-    'episodes',
-    'start_date',
-    'end_date',
-  ];
-
-  const dispatch = useAppDispatch();
-
+  const dispatch = useAppDispatch()
+  const activeOrder = useAppSelector(
+    (state) => state.filterReducer.orderFilters.orderBy,
+  )
   const getOrderDropdown = useMemo(() => {
     const handleOrderChange = (index: number) => {
-      dispatch(orderByFilterActions.setOrderBy(orderBy[index]));
-      setSelectedOrderIndex(index);
-    };
-    return orderBy.map((order, index) => (
+      console.log(index)
+      console.log(activeOrder)
+      dispatch(orderByFilterActions.setOrderBy(orderBy[index]))
+    }
+    return orderBy.map((order) => (
       <li
-        key={index}
-        onClick={() => handleOrderChange(index)}
-        className={styles[selectedOrderIndex === index ? 'active' : '']}
+        key={order.id}
+        onClick={() => handleOrderChange(order.id)}
+        className={styles[activeOrder.id === order.id ? 'active' : '']}
       >
-        {translateDropdownContent(order, DropdownTypeEnum.ORDER)}
+        {order.value}
       </li>
-    ));
-  }, [selectedOrderIndex, orderBy]);
+    ))
+  }, [activeOrder, dispatch])
 
-  return <>{getOrderDropdown}</>;
-};
+  return <>{getOrderDropdown}</>
+}

@@ -6,8 +6,6 @@ import { IRelations } from 'types/DetailsTypes';
 import styles from './RelationBlock.styles.module.scss';
 
 const Card = (item: IRelations) => {
-  console.log(item);
-
   return (
     <>
       <div className={styles['relationBlock-content']}>

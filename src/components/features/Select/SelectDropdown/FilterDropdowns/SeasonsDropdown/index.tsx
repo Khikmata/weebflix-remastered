@@ -1,69 +1,45 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react'
 
-import styles from '../FilterDropdown.styles.module.scss';
+import styles from '../FilterDropdown.styles.module.scss'
 
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { seasonFilterActions } from 'store/reducers/Filters';
-import { TranslateSeasonToRussian } from 'utils/Translation';
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { seasonFilterActions } from 'store/reducers/Filters'
+import { ISeasons } from 'types/FetchTypes'
 
 export const SeasonsDropdown = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
+  const activeYear = useAppSelector((state) => state.filterReducer.seasonFilters.year)
+  const activeSeason = useAppSelector((state) => state.filterReducer.seasonFilters.season)
 
-  const seasonsData = useAppSelector((state) => state.dropdownData.seasonsData);
+  const seasonsData = useAppSelector((state) => state.dropdownData.seasonsData)
 
   const getSeasonsDropdown = useMemo(() => {
-    const handleSeasonChange = (
-      year: string,
-      season: string,
-      yearIndex: number,
-      seasonIndex: number,
-    ) => {
-      if (yearIndex === selectedYear && seasonIndex === selectedSeason) {
-        dispatch(seasonFilterActions.removeSeasonData({ year, season }));
-        setSelectedYear(null);
-        setSelectedSeason(null);
+    const handleSeasonChange = (year: string, season: string) => {
+      if (year === activeYear && season === activeSeason) {
+        dispatch(seasonFilterActions.removeSeasonData({ year: year, season: season }))
       } else {
-        dispatch(seasonFilterActions.setSeasonData({ year, season }));
-        setSelectedYear(yearIndex);
-        setSelectedSeason(seasonIndex);
+        dispatch(seasonFilterActions.setSeasonData({ year: year, season: season }))
       }
-    };
+    }
     return (
       seasonsData &&
-      seasonsData.map((yearSeasons, yearIndex) => (
-        <div key={yearIndex} className={styles['container']}>
-          <p className={styles[yearIndex === selectedYear ? 'active' : '']}>
-            {yearSeasons.year}
-          </p>
-          {yearSeasons.seasons.map((season, seasonIndex) => (
+      seasonsData.map((yearSeason: ISeasons) => (
+        <div key={yearSeason.year} className={styles['container']}>
+          <p className={styles[yearSeason.year === activeYear ? 'active' : '']}>{yearSeason.year}</p>
+          {yearSeason.seasons.map((season: string) => (
             <li
-              key={seasonIndex}
-              className={
-                styles[
-                  yearIndex === selectedYear && seasonIndex === selectedSeason
-                    ? 'active'
-                    : ''
-                ]
-              }
-              onClick={() =>
-                handleSeasonChange(
-                  yearSeasons.year.toString(),
-                  season,
-                  yearIndex,
-                  seasonIndex,
-                )
-              }
+              key={yearSeason.year + season.length}
+              className={styles[yearSeason.year === activeYear && season === activeSeason ? 'active' : '']}
+              onClick={() => handleSeasonChange(yearSeason.year, season)}
             >
-              {TranslateSeasonToRussian(season)}
+              {season}
             </li>
           ))}
         </div>
       ))
-    );
-  }, [seasonsData, selectedSeason, selectedYear, dispatch]);
+    )
+  }, [seasonsData, activeSeason, activeYear, dispatch])
 
-  return <>{getSeasonsDropdown}</>;
-};
+  return <>{getSeasonsDropdown}</>
+}

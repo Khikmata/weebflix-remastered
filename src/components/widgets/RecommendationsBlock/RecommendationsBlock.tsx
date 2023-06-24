@@ -1,24 +1,25 @@
-import { Link } from 'react-router-dom';
-import { FreeMode, Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import prevArrowIcon from '@assets/icons/PrevArrowIcon.svg';
-import nextArrowIcon from '@assets/icons/NextArrowIcon.svg';
-import styles from './RecommendationsBlock.styles.module.scss';
-import { IRecommendations } from 'types/FetchTypes';
-import { Loading } from '@components/shared';
-import { AnimeApi } from '@store/services';
+import nextArrowIcon from '@assets/icons/NextArrowIcon.svg'
+import prevArrowIcon from '@assets/icons/PrevArrowIcon.svg'
+import { Loading } from '@components/shared'
+import { AnimeApi } from '@store/services'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import { FreeMode, Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { IRecommendations } from 'types/FetchTypes'
+import styles from './RecommendationsBlock.styles.module.scss'
 
 export const RecommendationsBlock: React.FC = () => {
   const {
     data: recommendations,
     error: recommendationsErrors,
     isLoading: recomendationLoading,
-  } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043);
-
+  } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043)
+  const { t } = useTranslation()
   return (
     <div className={styles['recommendations']}>
       <div className={styles['recommendations-content']}>
-        <p>Похожее на то, что вы смотрели ранее:</p>
+        <p>{t('recommendedationsBlock_title')}</p>
         <div className={styles['recommendations-content__grid']}>
           <Swiper
             modules={[Navigation, FreeMode]}
@@ -46,18 +47,18 @@ export const RecommendationsBlock: React.FC = () => {
                 slidesPerView: 5,
               },
               600: {
-                slidesPerView: 2,
+                slidesPerView: 5,
                 spaceBetween: 8,
               },
               800: {
-                slidesPerView: 4,
+                slidesPerView: 6,
                 spaceBetween: 8,
               },
               900: {
-                slidesPerView: 5,
+                slidesPerView: 7,
                 spaceBetween: 16,
               },
-              1225: {
+              1000: {
                 spaceBetween: 20,
                 slidesPerView: 4,
               },
@@ -99,5 +100,5 @@ export const RecommendationsBlock: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,38 +1,34 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react'
 
-import styles from '../FilterDropdown.styles.module.scss';
-import { useAppDispatch } from 'hooks/redux';
-import { typeFilterActions } from 'store/reducers/Filters';
-import { AnimeTypesData, DropdownTypeEnum } from 'utils/DataTypes/AnimeData';
-import { translateDropdownContent } from '../../TranslateDropdown';
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { typeFilterActions } from 'store/reducers/Filters'
+import { IDropdownItem } from 'types/DetailsTypes'
+import { AnimeTypesData } from 'utils/DataTypes/AnimeData'
+import styles from '../FilterDropdown.styles.module.scss'
 
 export const TypeDropdown = () => {
-  const [selectedTypeIndex, setSelectedTypeIndex] = useState<number | null>(
-    null,
-  );
+  const activeType = useAppSelector((state) => state.filterReducer.typeFilters.typeQuery)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const getTypeDropdown = useMemo(() => {
-    const handleTypeChange = (index: number) => {
-      if (index === selectedTypeIndex) {
-        dispatch(typeFilterActions.removeType());
-        setSelectedTypeIndex(null);
+    const handleTypeChange = (type: IDropdownItem) => {
+      if (type.value === activeType) {
+        dispatch(typeFilterActions.removeType())
       } else {
-        dispatch(typeFilterActions.setType(AnimeTypesData[index]));
-        setSelectedTypeIndex(index);
+        dispatch(typeFilterActions.setType(AnimeTypesData[type.id].value))
       }
-    };
-    return AnimeTypesData.map((type, index) => (
+    }
+    return AnimeTypesData.map((type) => (
       <li
-        key={index}
-        onClick={() => handleTypeChange(index)}
-        className={styles[selectedTypeIndex === index ? 'active' : '']}
+        key={type.id}
+        onClick={() => handleTypeChange(type)}
+        className={styles[activeType === type.value ? 'active' : '']}
       >
-        {translateDropdownContent(type, DropdownTypeEnum.TYPES)}
+        {type.value}
       </li>
-    ));
-  }, [selectedTypeIndex, AnimeTypesData, dispatch]);
+    ))
+  }, [activeType, dispatch])
 
-  return <>{getTypeDropdown}</>;
-};
+  return <>{getTypeDropdown}</>
+}

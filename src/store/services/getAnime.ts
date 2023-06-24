@@ -9,6 +9,8 @@ import {
   ISeasons,
 } from '../../types/FetchTypes';
 
+
+
 export interface seasonQuery {
   year: string;
   season: string;
@@ -79,7 +81,7 @@ export const AnimeApi = createApi({
       query: () => ({ url: `/seasons` }),
       transformResponse: (response: { data: ISeasons[] }) => {
         return (response.data = response.data.filter(
-          (season) => season.year > 1963,
+          (season) => Number(season.year) > 1963,
         ));
       },
     }),

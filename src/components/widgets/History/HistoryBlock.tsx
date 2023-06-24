@@ -1,35 +1,37 @@
-import { useNavigate } from 'react-router-dom';
-import starIcon from '@assets/icons/StarIcon.svg';
-import styles from './HistoryBlock.styles.module.scss';
-import { genreFilterActions } from '@store/reducers/Filters';
-import { AnimeApi } from '@store/services';
-import { useAppDispatch } from 'hooks/redux';
-import { IGenres } from 'types/DetailsTypes';
-import { TranslateGenresToRussian } from 'utils/Translation';
+import starIcon from '@assets/icons/StarIcon.svg'
+import { genreFilterActions } from '@store/reducers/Filters'
+import { AnimeApi } from '@store/services'
+import { useAppDispatch } from 'hooks/redux'
+import { useNavigate } from 'react-router-dom'
+import { IGenres } from 'types/DetailsTypes'
+import styles from './HistoryBlock.styles.module.scss'
+import { useTranslation } from 'react-i18next'
 
 export const HistoryBlock = () => {
   const {
     data: details,
     error: detailsErrors,
     isLoading: detailsLoading,
-  } = AnimeApi.useGetAnimeDetailsQuery('31043');
+  } = AnimeApi.useGetAnimeDetailsQuery('31043')
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const { t } = useTranslation()
+
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const handleNavigateToSearch = (
     e: React.MouseEvent<HTMLElement>,
     genre: IGenres,
     index: number,
   ) => {
-    e.stopPropagation();
-    navigate('/search');
-    dispatch(genreFilterActions.setGenre(genre));
-  };
+    e.stopPropagation()
+    navigate('/search')
+    dispatch(genreFilterActions.setGenre(genre))
+  }
 
   const handleNavigateToPage = (id: number) => {
-    navigate(`/anime/${id}`);
-  };
+    navigate(`/anime/${id}`)
+  }
 
   return (
     <div className={styles['history']}>
@@ -38,7 +40,7 @@ export const HistoryBlock = () => {
         onClick={() => handleNavigateToPage(31043)}
       >
         <div className={styles['history__content__top']}>
-          <p>Последнее просмотренное:</p>
+          <p>{t('historyBlock_title')}</p>
           <img loading="lazy" src={starIcon} alt={'rate it!'} />
         </div>
         <div className={styles['history__content__middle']}>
@@ -65,7 +67,7 @@ export const HistoryBlock = () => {
                         onClick={(e) => handleNavigateToSearch(e, genre, index)}
                         key={index}
                       >
-                        <p>{TranslateGenresToRussian(genre.name)}</p>
+                        <p>{genre.name}</p>
                       </li>
                     ))}
               </ul>
@@ -77,5 +79,5 @@ export const HistoryBlock = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

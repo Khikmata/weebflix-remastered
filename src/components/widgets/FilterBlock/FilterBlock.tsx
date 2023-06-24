@@ -1,51 +1,52 @@
-import dropdownIcon from '@assets/icons/DropdownIcon.svg';
-import filterIcon from '@assets/icons/FiltersIcon.svg';
+import dropdownIcon from '@assets/icons/DropdownIcon.svg'
+import filterIcon from '@assets/icons/FiltersIcon.svg'
 
-import styles from './FilterBlock.styles.module.scss';
+import styles from './FilterBlock.styles.module.scss'
 
-import { Select } from '@components/features';
-import { RangeInput } from '@components/shared';
-import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice';
-import { dateFilterActions, scoreFilterActions } from '@store/reducers/Filters';
-import { AnimeApi } from '@store/services';
-import { useAppDispatch } from 'hooks/redux';
-import { useEffect, useState } from 'react';
+import { Select } from '@components/features'
+import { RangeInput } from '@components/shared'
+import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice'
+import { dateFilterActions, scoreFilterActions } from '@store/reducers/Filters'
+import { AnimeApi } from '@store/services'
+import { useAppDispatch } from 'hooks/redux'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const FilterBlock = () => {
-  const { data: genresData } = AnimeApi.useGetAnimeGenresQuery();
+  const { data: genresData } = AnimeApi.useGetAnimeGenresQuery()
 
-  const dispatch = useAppDispatch();
-
+  const dispatch = useAppDispatch()
+  const { t } = useTranslation()
   useEffect(() => {
-    genresData && dispatch(DropdownDataActions.setGenreData(genresData));
-  }, [genresData, dispatch]);
+    genresData && dispatch(DropdownDataActions.setGenreData(genresData))
+  }, [genresData, dispatch])
 
-  const [openFilters, setOpenFilters] = useState(true);
+  const [openFilters, setOpenFilters] = useState(true)
 
   const handleFiltersDropdown = () => {
-    setOpenFilters(!openFilters);
-  };
+    setOpenFilters(!openFilters)
+  }
 
   const handleScoreChange = (values: number[]) => {
-    dispatch(scoreFilterActions.setMinScore(values[0]));
-    dispatch(scoreFilterActions.setMaxScore(values[1]));
-  };
+    dispatch(scoreFilterActions.setMinScore(values[0]))
+    dispatch(scoreFilterActions.setMaxScore(values[1]))
+  }
 
   const handleDateChange = (values: number[]) => {
-    dispatch(dateFilterActions.setDateFrom(values[0]));
-    dispatch(dateFilterActions.setDateTo(values[1]));
-  };
+    dispatch(dateFilterActions.setDateFrom(values[0]))
+    dispatch(dateFilterActions.setDateTo(values[1]))
+  }
 
   const selectTitle = [
-    'Жанры',
-    'Тип',
-    'Рейтинг',
-    'Сезон',
-    'Студия',
-    'Статус',
-    'Отсортровать:',
-    'Упорядочить:',
-  ];
+    t('filter_genres'),
+    t('filter_types'),
+    t('filter_rating'),
+    t('filter_seasons'),
+    t('filter_producers'),
+    t('filter_status'),
+    t('filter_sort'),
+    t('filter_order'),
+  ]
   const selectTooltip = [
     'Cортировать по жанрам',
     'Сортировать по типам',
@@ -54,7 +55,7 @@ export const FilterBlock = () => {
     'Сортировать по студии',
     'Сортировать по статусу',
     'Сортировать по оценке, Сортировать по рейтингу',
-  ];
+  ]
   const SelectDropdownType = [
     'genres',
     'types',
@@ -64,7 +65,7 @@ export const FilterBlock = () => {
     'status',
     'sort',
     'order',
-  ];
+  ]
 
   return (
     <>
@@ -73,7 +74,7 @@ export const FilterBlock = () => {
         className={styles['filter-title']}
       >
         <img width={16} src={filterIcon} alt="Фильтр картинка" />
-        Фильтр
+        {t('filterBlock_title')}
         <img
           className={styles['filter-title__dropdown']}
           src={dropdownIcon}
@@ -112,5 +113,5 @@ export const FilterBlock = () => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}

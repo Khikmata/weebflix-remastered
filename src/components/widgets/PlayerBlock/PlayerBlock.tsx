@@ -1,22 +1,23 @@
-import ReactPlayer from 'react-player';
+import ReactPlayer from 'react-player'
 
-import styles from './PlayerBlock.styles.module.scss';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { PlayerActions } from '@store/reducers/Player/PlayerSlice';
-import { ISources, IDetails } from 'types/FetchTypes';
-
+import { PlayerActions } from '@store/reducers/Player/PlayerSlice'
+import axios from 'axios'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { useEffect } from 'react'
+import { IDetails, ISources } from 'types/FetchTypes'
+import styles from './PlayerBlock.styles.module.scss'
 interface playerBlockProps {
-  sources: ISources[];
-  details: IDetails;
+  sources: ISources[]
+  details: IDetails
 }
 
 export const PlayerBlock = (props: playerBlockProps) => {
-  const selectedEpisode = useAppSelector((state) => state.player.activeEpisode);
-  const dispatch = useAppDispatch();
+  const selectedEpisode = useAppSelector((state) => state.player.activeEpisode)
+  const dispatch = useAppDispatch()
 
   const handleChangeEpisode = (index: number) => {
-    dispatch(PlayerActions.setActiveEpisodeIndex(index));
-  };
+    dispatch(PlayerActions.setActiveEpisodeIndex(index))
+  }
 
   return (
     <div className={styles['playerBlock']}>
@@ -48,5 +49,5 @@ export const PlayerBlock = (props: playerBlockProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

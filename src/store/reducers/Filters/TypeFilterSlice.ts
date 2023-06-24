@@ -1,26 +1,27 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { IDropdownItem } from 'types/DetailsTypes';
 
-export interface CounterState {
-  typeQuery: string;
-  typeDisplay: string;
+interface typeFilterProps {
+  typeQuery: string | null;
+  typeDisplay: string | null;
 }
 
-const initialState: CounterState = {
-  typeQuery: '',
-  typeDisplay: '',
+const initialState: typeFilterProps = {
+  typeQuery: null,
+  typeDisplay: null,
 };
 
 const slice = createSlice({
   name: 'typeFilter',
   initialState,
   reducers: {
-    setType: (state, action: PayloadAction<string>) => {
+    setType: (state, action: PayloadAction <string>) => {
       state.typeQuery = action.payload;
       state.typeDisplay = action.payload;
     },
     removeType: (state) => {
-      state.typeQuery = '';
-      state.typeDisplay = '';
+      state.typeQuery = null;
+      state.typeDisplay = null;
     },
   },
 });

@@ -2,9 +2,8 @@ import {
   IAired,
   IGenres,
   IImages,
-  IMoreDetails,
   IPaginationItems,
-  ITrailer,
+  ITrailer
 } from './DetailsTypes';
 
 export interface IGetAnime {
@@ -24,18 +23,18 @@ export interface IAnimeFilterQueries {
   page?: number;
   limit?: number;
   q?: string;
-  type?: string;
+  type?: string | null;
   score?: number;
   min_score?: string;
   max_score?: string;
   status?: string | null;
-  rating?: string;
-  genres?: string;
+  rating?: string | null;
+  genres?: number[];
   genres_exclude?: string[];
   order_by?: string;
   sort?: string;
   letter?: string;
-  producers?: string;
+  producers?: number | null;
   start_date?: string;
   end_date?: string;
   sfw?: string;
@@ -51,7 +50,7 @@ export interface IData {
   episodes: string;
   status: string;
   rank: number;
-  score: Float32Array;
+  score: number;
   background: string;
   season: string;
   synopsis: string;
@@ -66,7 +65,7 @@ export enum season {
 }
 
 export interface ISeasons {
-  year: number;
+  year: string;
   seasons: string[];
 }
 

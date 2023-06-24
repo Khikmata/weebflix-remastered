@@ -1,14 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IProducers } from '../../../types/FetchTypes';
 
-export interface CounterState {
-  producersQuery: string;
-  producersDisplay: string;
+ interface producerFIlterProps {
+  producersQuery: number | null;
+  producersDisplay: string | null;
 }
 
-const initialState: CounterState = {
-  producersQuery: '',
-  producersDisplay: '',
+const initialState: producerFIlterProps = {
+  producersQuery: null,
+  producersDisplay: null,
 };
 
 const slice = createSlice({
@@ -16,12 +16,12 @@ const slice = createSlice({
   initialState,
   reducers: {
     setProducer: (state, action: PayloadAction<IProducers>) => {
-      state.producersQuery = action.payload.mal_id.toString();
+      state.producersQuery = action.payload.mal_id;
       state.producersDisplay = action.payload.titles[0].title;
     },
     removeProducer: (state) => {
-      state.producersQuery = '';
-      state.producersDisplay = '';
+      state.producersQuery = null;
+      state.producersDisplay = null;
     },
   },
 });

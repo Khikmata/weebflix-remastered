@@ -1,20 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-export interface CounterState {
-  year: string;
-  season: string;
-  seasonQuery: string;
+ interface seasonsFilterProps {
+  year: string | null;
+  season: string | null;
+  seasonQuery: string | null;
 }
 
-const initialState: CounterState = {
-  year: '',
-  season: '',
-  seasonQuery: '',
+const initialState: seasonsFilterProps = {
+  year: null,
+  season: null,
+  seasonQuery: null,
 };
 
 interface SeasonData {
-  year: string;
-  season: string;
+  year: string | null;
+  season: string | null;
 }
 
 const slice = createSlice({
@@ -27,9 +27,9 @@ const slice = createSlice({
       state.seasonQuery = `${state.year}/${state.season}`;
     },
     removeSeasonData: (state, action: PayloadAction<SeasonData>) => {
-      state.seasonQuery = '';
-      state.year = '';
-      state.season = '';
+      state.seasonQuery = null;
+      state.year = null;
+      state.season = null;
     },
   },
 });

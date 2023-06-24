@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-export interface CounterState {
+ interface scoreFilterProps {
   maxScore: number;
   minScore: number;
 }
 
-const initialState: CounterState = {
+const initialState: scoreFilterProps = {
   maxScore: 10,
   minScore: 0,
 };

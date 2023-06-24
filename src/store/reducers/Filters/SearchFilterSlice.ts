@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-export interface CounterState {
+ interface searchFilterProps {
   searchQuery: string;
   sfw: string;
 }
 
-const initialState: CounterState = {
+const initialState: searchFilterProps = {
   searchQuery: '',
   sfw: 'true',
 };

@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-export interface CounterState {
+ interface dateFilterProps {
   dateFrom: number;
   dateTo: number;
 }
 
-const initialState: CounterState = {
+const initialState: dateFilterProps = {
   dateFrom: 1960,
   dateTo: 2023,
 };

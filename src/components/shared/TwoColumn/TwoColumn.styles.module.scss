@@ -1,0 +1,18 @@
+.twocolumn-container {
+	position: relative;
+	z-index: 2;
+	margin: 0 auto;
+	max-width: 1400px;
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+	justify-content: space-between;
+	gap: 24px;
+	margin-bottom: 64px;
+}
+@media (max-width: 1025px) {
+	.twocolumn-container {
+		flex-direction: column;
+	}
+}

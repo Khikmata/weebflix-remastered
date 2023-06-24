@@ -1,34 +1,34 @@
-import dropDownIcon from '@assets/icons/DropdownIcon.svg';
-import starIcon from '@assets/icons/StarIcon.svg';
-import { Button, Loading } from '@components/shared';
-import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper';
+import { Button, Loading } from '@components/shared'
+import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
 import {
   CharactersBlock,
   InfoBlock,
   PlayerBlock,
   RankBlock,
   RelationBlock,
-} from '@components/widgets';
-import { PlayerApi } from '@store/services/getPlayer';
-import { useAppSelector } from 'hooks/redux';
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { AnimeApi } from 'store/services';
-import styles from './animepage.styles.module.scss';
+} from '@components/widgets'
+import { InfoRateBlock } from '@components/widgets/InfoRateBlock'
+import { PlayerApi } from '@store/services/getPlayer'
+import axios from 'axios'
+import { useAppSelector } from 'hooks/redux'
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { AnimeApi } from 'store/services'
+import styles from './animepage.styles.module.scss'
 
 export const AnimePage = () => {
-  const [skip, setSkip] = useState<boolean>(true);
-  const [urlQuery, setUrlQuery] = useState<string>('');
+  const [skip, setSkip] = useState<boolean>(true)
+  const [urlQuery, setUrlQuery] = useState<string>('')
 
-  const selectedEpisode = useAppSelector((state) => state.player.activeEpisode);
-  const { id } = useParams<string>();
-  const [checkForMistakes, setCheckForMistakes] = useState(true);
+  const selectedEpisode = useAppSelector((state) => state.player.activeEpisode)
+  const { id } = useParams<string>()
 
   const {
     data: details,
     error: detailsErrors,
     isLoading: detailsLoading,
-  } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '');
+  } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '')
+
   const {
     data: playerData,
     error: playerError,
@@ -36,51 +36,30 @@ export const AnimePage = () => {
   } = PlayerApi.useGetAnimePlayerQuery(
     { url: urlQuery, episodeNumber: selectedEpisode },
     { skip },
-  );
+  )
 
-  const removeHyphens = (str: string) => str.replace(/[-☆]/g, '');
-
-  if (playerError && checkForMistakes) {
-    setCheckForMistakes(false);
-    setUrlQuery(removeHyphens(urlQuery));
-  }
-
-  const getUrl = () => {
-    let tempSlashes = 0;
-    let tempUnderscores = 0;
-    let tempUrl = '';
-    if (details?.url) {
-      //преобразование юрла и замена _ на - для плеера
-      for (let i = 0; i < details?.url.length; i++) {
-        if (details.url[i] === '/') {
-          tempSlashes++;
-        }
-        if (tempSlashes > 4 && i !== details.url.length - 1) {
-          if (details.url[i + 1] === '_') {
-            tempUnderscores++;
-            if (tempUnderscores === 2) {
-              continue;
-            }
-          } else {
-            tempUnderscores = 0;
-          }
-          tempUrl += details.url[i + 1];
-        }
+  const fetchAnimeDetails = async () => {
+    try {
+      if (details) {
+        const response = await axios.get(
+          `https://weebflix-backend.onrender.com/getParsedUrl/${details.title}`,
+        )
+        console.log(response.data)
+        setUrlQuery(response.data.url)
       }
+    } catch (error) {
+      console.error('Error:', error)
     }
-    tempUrl = tempUrl.replace(/_/g, '-');
-    setUrlQuery(tempUrl);
-    setCheckForMistakes(false);
-  };
+  }
+  useEffect(() => {
+    fetchAnimeDetails()
+  }, [details])
 
   useEffect(() => {
-    if (details) {
-      getUrl();
-      if (urlQuery !== '') {
-        setSkip(false);
-      }
+    if (urlQuery !== '') {
+      setSkip(false)
     }
-  }, [details, urlQuery]);
+  }, [details, urlQuery])
 
   return (
     <PageWrapper source={details?.images.webp.large_image_url} filled={true}>
@@ -93,16 +72,7 @@ export const AnimePage = () => {
               alt="обложка"
             />
           </div>
-          <button className={styles['anime-info__rate']}>
-            <img src={starIcon} alt="оценить" />
-            <p>Оцените сериал</p>
-          </button>
-          <button className={styles['anime-info__addlist']}>
-            <p>
-              <span>+</span> Добавить в список
-            </p>
-            <img src={dropDownIcon} alt="" />
-          </button>
+          <InfoRateBlock />
         </div>
         <div className={styles['anime-info__rightside']}>
           <div className={styles['anime-info-title']}>
@@ -138,5 +108,5 @@ export const AnimePage = () => {
       )}
       {playerError && <p>Произошла ошибка при загрузке плеера.</p>}
     </PageWrapper>
-  );
-};
+  )
+}

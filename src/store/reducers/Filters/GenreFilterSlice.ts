@@ -1,18 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IGenres } from '../../../types/DetailsTypes';
+import { IGenres } from 'types/DetailsTypes';
 
-export interface CounterState {
-  genresQuery: string;
-  genresName: string[];
-  genresExcludeQuery: string;
-  genresExcludeName: string[];
+
+ interface genreFilterProps {
+  selectedGenresNames: string[] ;
+  selectedGenresIndexes: number[];
 }
 
-const initialState: CounterState = {
-  genresQuery: '',
-  genresName: [],
-  genresExcludeQuery: '',
-  genresExcludeName: [],
+const initialState: genreFilterProps = {
+  selectedGenresIndexes: [],
+  selectedGenresNames: [],
 };
 
 const slice = createSlice({
@@ -20,33 +17,17 @@ const slice = createSlice({
   initialState,
   reducers: {
     setGenre: (state, action: PayloadAction<IGenres>) => {
-      if (state.genresName.includes(`${action.payload.name}`)) {
-        return;
-      }
-      state.genresQuery += `${action.payload.mal_id},`;
-      state.genresName.push(action.payload.name);
+      //Если данный жанр уже существует в массиве, возвращаем ничего
+      state.selectedGenresIndexes.push(action.payload.mal_id);
+      state.selectedGenresNames.push(action.payload.name)
     },
     excludeGenre: (state, action: PayloadAction<IGenres>) => {
-      state.genresExcludeQuery += `${action.payload.mal_id},`;
-      state.genresExcludeName.push(action.payload.name);
+      // TODO: Выбор исключенных жанров
     },
     removeGenre: (state, action: PayloadAction<IGenres>) => {
-      state.genresQuery = state.genresQuery.replace(
-        `${action.payload.mal_id},`,
-        '',
-      );
-      state.genresExcludeQuery = state.genresExcludeQuery.replace(
-        `${action.payload.mal_id},`,
-        '',
-      );
-      const indexToRemove = state.genresName.findIndex(
-        (el) => el === action.payload.name,
-      );
-      if (indexToRemove !== 0) {
-        state.genresName.splice(indexToRemove, 1);
-      } else {
-        state.genresName.shift();
-      }
+      //Удаление жанра из массива
+      state.selectedGenresIndexes.splice(state.selectedGenresIndexes.indexOf(action.payload.mal_id), 1)
+      state.selectedGenresNames.splice(state.selectedGenresIndexes.indexOf(action.payload.mal_id), 1);
     },
   },
 });

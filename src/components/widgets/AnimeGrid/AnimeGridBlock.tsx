@@ -1,36 +1,37 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react'
 
-import gridIcon from '@assets/icons/GridIcon.svg';
-import listIcon from '@assets/icons/ListIcon.svg';
+import gridIcon from '@assets/icons/GridIcon.svg'
+import listIcon from '@assets/icons/ListIcon.svg'
 
-import { Pagination } from '@components/features';
-import { AnimeCard, Loading } from '@components/shared';
-import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice';
-import { AnimeApi } from '@store/services';
-import { SearchAPI } from '@store/services/getSearch';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { IData } from 'types/FetchTypes';
-import { FilterBlock } from '../FilterBlock/FilterBlock';
-import styles from './AnimeGridBlock.styles.module.scss';
+import { Pagination } from '@components/features'
+import { AnimeCard, Loading } from '@components/shared'
+import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice'
+import { AnimeApi } from '@store/services'
+import { SearchAPI } from '@store/services/getSearch'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { IData } from 'types/FetchTypes'
+import { FilterBlock } from '../FilterBlock/FilterBlock'
+import styles from './AnimeGridBlock.styles.module.scss'
+import { useTranslation } from 'react-i18next'
 
 export const AnimeGridBlock = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const { ...filterQueries } = useAppSelector((state) => state.filterReducer);
+  const { ...filterQueries } = useAppSelector((state) => state.filterReducer)
 
-  const AddDateToParams = filterQueries.dateFilters;
-  const AddGenreToParams = filterQueries.genreFilters;
-  const AddScoreToParams = filterQueries.scoreFilters;
-  const AddTypeToParams = filterQueries.typeFilters.typeQuery;
-  const AddRatingToParams = filterQueries.ratingFilters.ratingQuery;
-  const AddSeasonsToParams = filterQueries.seasonFilters.seasonQuery;
-  const AddProducersToParams = filterQueries.producerFilters.producersQuery;
-  const AddSearchToParams = filterQueries.searchFilters.searchQuery;
-  const AddStatusToParams = filterQueries.statusFilters.statusType;
-  const AddSortByToParams = filterQueries.sortFilters.sortType;
-  const AddOrderByToParams = filterQueries.orderFilters.orderBy;
+  const AddDateToParams = filterQueries.dateFilters
+  const AddGenreToParams = filterQueries.genreFilters
+  const AddScoreToParams = filterQueries.scoreFilters
+  const AddTypeToParams = filterQueries.typeFilters.typeQuery
+  const AddRatingToParams = filterQueries.ratingFilters.ratingQuery
+  const AddSeasonsToParams = filterQueries.seasonFilters.seasonQuery
+  const AddProducersToParams = filterQueries.producerFilters.producersQuery
+  const AddSearchToParams = filterQueries.searchFilters.searchQuery
+  const AddStatusToParams = filterQueries.statusFilters.statusType
+  const AddSortByToParams = filterQueries.sortFilters.sortType
+  const AddOrderByToParams = filterQueries.orderFilters.orderBy
 
-  const [pages, setPages] = useState(1);
+  const [pages, setPages] = useState(1)
 
   const {
     data: SearchData,
@@ -42,107 +43,83 @@ export const AnimeGridBlock = () => {
     min_score: AddScoreToParams.minScore.toString(),
     start_date: AddDateToParams.dateFrom.toString(),
     end_date: AddDateToParams.dateTo.toString(),
-    genres: AddGenreToParams.genresQuery,
+    genres: AddGenreToParams.selectedGenresIndexes,
     type: AddTypeToParams,
     rating: AddRatingToParams,
     producers: AddProducersToParams,
     status: AddStatusToParams,
-    order_by: AddOrderByToParams,
+    order_by: AddOrderByToParams.value,
     sort: AddSortByToParams,
     limit: 20,
     page: pages,
-    sfw:
-      AddRatingToParams === 'RX' ||
-      AddGenreToParams.genresName.includes('Hentai')
-        ? ''
-        : 'true',
-  });
-  const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery();
-  const { data: producersData } = AnimeApi.useGetAnimeProducersQuery();
-  const paginationData = SearchData?.pagination;
+    sfw: AddRatingToParams === 'RX' || AddGenreToParams.selectedGenresNames.includes('Hentai') ? '' : 'true',
+  })
 
-  const [trigger, { data: animeSeasonData }] =
-    AnimeApi.useLazyGetAnimeBySeasonQuery();
+  const filteredData = SearchData?.data.filter((item) => item.score !== null)
 
-  const [activeDisplayMode, setActiveDisplayMode] = useState(0);
+  const { data: seasonsData } = AnimeApi.useGetAnimeSeasonsQuery()
+  const { data: producersData } = AnimeApi.useGetAnimeProducersQuery()
+  const paginationData = SearchData?.pagination
+
+  const [trigger, { data: animeSeasonData }] = AnimeApi.useLazyGetAnimeBySeasonQuery()
+
+  const [activeDisplayMode, setActiveDisplayMode] = useState(0)
 
   const handlePrevPage = () => {
-    setPages(pages === 1 ? pages : pages - 1);
-  };
+    setPages(pages === 1 ? pages : pages - 1)
+  }
 
   const handleNextPage = () => {
-    setPages(paginationData?.has_next_page ? pages + 1 : pages);
-  };
+    setPages(paginationData?.has_next_page ? pages + 1 : pages)
+  }
 
   const handleDisplayMode = (index: number) => {
-    setActiveDisplayMode(index);
-  };
-
+    setActiveDisplayMode(index)
+  }
+  const { t } = useTranslation()
   useEffect(() => {
-    producersData &&
-      dispatch(DropdownDataActions.setProducerData(producersData));
+    producersData && dispatch(DropdownDataActions.setProducerData(producersData))
 
     if (seasonsData) {
-      dispatch(DropdownDataActions.setSeasonData(seasonsData));
+      dispatch(DropdownDataActions.setSeasonData(seasonsData))
     }
     if (AddSeasonsToParams) {
-      trigger(AddSeasonsToParams);
+      trigger(AddSeasonsToParams)
     }
-  }, [producersData, seasonsData, AddSeasonsToParams]);
+  }, [producersData, seasonsData, AddSeasonsToParams])
 
   return (
     <div className={styles['animegrid']}>
       <div className={styles['animegrid-container']}>
         <div className={styles['animegrid-header']}>
-          <h2>Каталог</h2>
+          <h2>{t('catalogue_title')}</h2>
           <div className={styles['animegrid-container__mode']}>
-            <button
-              className={styles[activeDisplayMode === 0 ? 'active' : '']}
-              onClick={() => handleDisplayMode(0)}
-            >
+            <button className={styles[activeDisplayMode === 0 ? 'active' : '']} onClick={() => handleDisplayMode(0)}>
               <img src={gridIcon} width={22} alt="Сеточная" />
             </button>
-            <button
-              className={styles[activeDisplayMode === 1 ? 'active' : '']}
-              onClick={() => handleDisplayMode(1)}
-            >
+            <button className={styles[activeDisplayMode === 1 ? 'active' : '']} onClick={() => handleDisplayMode(1)}>
               <img src={listIcon} width={24} alt="Таблицей" />
             </button>
           </div>
         </div>
         <div className={styles['animegrid-container__content']}>
-          <div
-            className={[
-              styles['animegrid-content__items'],
-              styles[activeDisplayMode === 0 ? '' : 'list'],
-            ].join('')}
-          >
+          <div className={[styles['animegrid-content__items'], styles[activeDisplayMode === 0 ? '' : 'list']].join('')}>
             {SearchLoading && <Loading />}
             {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
-            {SearchData &&
+            {filteredData &&
               AddSeasonsToParams === '' &&
-              SearchData.data.map((item: IData, index: number) => (
+              filteredData.map((item: IData, index: number) => (
                 <Suspense key={index} fallback={<Loading />}>
-                  <AnimeCard
-                    mode={activeDisplayMode}
-                    index={index}
-                    item={item}
-                  />
+                  <AnimeCard mode={activeDisplayMode} index={index} item={item} />
                 </Suspense>
               ))}
-            {SearchData &&
-              SearchData.data.length === 0 &&
-              AddSeasonsToParams === '' && (
-                <strong>Ничего не найдено ❌</strong>
-              )}
+            {filteredData && filteredData.length === 0 && AddSeasonsToParams === '' && (
+              <strong>Ничего не найдено ❌</strong>
+            )}
             {animeSeasonData &&
               animeSeasonData.map((item: IData, index: number) => (
                 <Suspense key={index} fallback={<Loading />}>
-                  <AnimeCard
-                    mode={activeDisplayMode}
-                    index={index}
-                    item={item}
-                  />
+                  <AnimeCard mode={activeDisplayMode} index={index} item={item} />
                 </Suspense>
               ))}
           </div>
@@ -150,15 +127,15 @@ export const AnimeGridBlock = () => {
             <FilterBlock />
           </div>
         </div>
-        {SearchData?.data && (
+        {SearchData && (
           <Pagination
             handleNextPage={handleNextPage}
             handlePrevPage={handlePrevPage}
             pages={pages}
-            hasNextPage={SearchData?.pagination.has_next_page}
+            hasNextPage={SearchData.pagination.has_next_page}
           />
         )}
       </div>
     </div>
-  );
-};
+  )
+}

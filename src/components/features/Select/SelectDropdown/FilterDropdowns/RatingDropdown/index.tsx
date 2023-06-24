@@ -1,44 +1,35 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react'
 
-import styles from '../FilterDropdown.styles.module.scss';
+import styles from '../FilterDropdown.styles.module.scss'
 
-import { useAppDispatch } from 'hooks/redux';
-import { ratingFilterActions } from 'store/reducers/Filters';
-import { AnimeRatingData, DropdownTypeEnum } from 'utils/DataTypes/AnimeData';
-import { TranslateRatingToRussian } from 'utils/Translation';
-import { translateDropdownContent } from '../../TranslateDropdown';
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { ratingFilterActions } from 'store/reducers/Filters'
+import { IDropdownItem } from 'types/DetailsTypes'
+import { AnimeRatingData } from 'utils/DataTypes/AnimeData'
 
 export const RatingDropdown = () => {
-  const [selectedRatingIndex, setSelectedRatingIndex] = useState<number | null>(
-    null,
-  );
-
-  const dispatch = useAppDispatch();
+  const activeRating = useAppSelector((state) => state.filterReducer.ratingFilters.ratingDisplay)
+  const dispatch = useAppDispatch()
 
   const getRatingDropdown = useMemo(() => {
-    const handleRatingChange = (index: number) => {
-      if (index === selectedRatingIndex) {
-        dispatch(ratingFilterActions.removeRating());
-        setSelectedRatingIndex(null);
+    const handleRatingChange = (rating: IDropdownItem) => {
+      if (rating.value === activeRating) {
+        dispatch(ratingFilterActions.removeRating())
       } else {
-        dispatch(
-          ratingFilterActions.setRating(
-            TranslateRatingToRussian(AnimeRatingData[index]),
-          ),
-        );
-        setSelectedRatingIndex(index);
+        dispatch(ratingFilterActions.setRating(AnimeRatingData[rating.id]))
       }
-    };
-    return AnimeRatingData.map((rating, index) => (
+      console.log(rating.value, activeRating)
+    }
+    return AnimeRatingData.map((rating) => (
       <li
-        key={index}
-        onClick={() => handleRatingChange(index)}
-        className={styles[selectedRatingIndex === index ? 'active' : '']}
+        key={rating.id}
+        onClick={() => handleRatingChange(rating)}
+        className={styles[rating.value === activeRating ? 'active' : '']}
       >
-        {translateDropdownContent(rating, DropdownTypeEnum.RATING)}
+        {rating.value}
       </li>
-    ));
-  }, [selectedRatingIndex, AnimeRatingData, dispatch]);
+    ))
+  }, [activeRating, dispatch])
 
-  return <>{getRatingDropdown}</>;
-};
+  return <>{getRatingDropdown}</>
+}

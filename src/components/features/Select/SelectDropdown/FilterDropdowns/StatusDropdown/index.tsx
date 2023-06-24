@@ -1,43 +1,39 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react'
 
-import styles from '../FilterDropdown.styles.module.scss';
-import { useAppDispatch } from 'hooks/redux';
-import { statusFilterActions } from 'store/reducers/Filters/StatusFilterSlice';
-import { DropdownTypeEnum } from 'utils/DataTypes/AnimeData';
-import { translateDropdownContent } from '../../TranslateDropdown';
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { statusFilterActions } from 'store/reducers/Filters/StatusFilterSlice'
+import { IDropdownItem } from 'types/DetailsTypes'
+import styles from '../FilterDropdown.styles.module.scss'
 
 export const StatusDropdown = () => {
-  const [selectedStatusIndex, setSelectedStatusIndex] = useState<number | null>(
-    null,
-  );
+  const activeStatus = useAppSelector((state) => state.filterReducer.statusFilters.statusType)
 
-  const statusData = ['airing', 'complete', 'upcoming'];
-
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const getSeasonsDropdown = useMemo(() => {
-    const handleStatusChange = (
-      index: number,
-      selectedStatus: number | null,
-    ) => {
-      if (index === selectedStatus) {
-        dispatch(statusFilterActions.setStatusType(null));
-        setSelectedStatusIndex(null);
-      } else {
-        dispatch(statusFilterActions.setStatusType(statusData[index]));
-        setSelectedStatusIndex(index);
-      }
-    };
-    return statusData.map((status, index) => (
-      <li
-        key={index}
-        onClick={() => handleStatusChange(index, selectedStatusIndex)}
-        className={styles[selectedStatusIndex === index ? 'active' : '']}
-      >
-        {translateDropdownContent(status, DropdownTypeEnum.STATUS)}
-      </li>
-    ));
-  }, [selectedStatusIndex, statusData, dispatch]);
+    const statusData = [
+      { id: 0, value: 'airing' },
+      { id: 1, value: 'complete' },
+      { id: 2, value: 'upcoming' },
+    ]
 
-  return <>{getSeasonsDropdown}</>;
-};
+    const handleStatusChange = (status: IDropdownItem) => {
+      if (status.value === activeStatus) {
+        dispatch(statusFilterActions.setStatusType(null))
+      } else {
+        dispatch(statusFilterActions.setStatusType(statusData[status.id].value))
+      }
+    }
+    return statusData.map((status) => (
+      <li
+        key={status.id}
+        onClick={() => handleStatusChange(status)}
+        className={styles[status.value === activeStatus ? 'active' : '']}
+      >
+        {status.value}
+      </li>
+    ))
+  }, [activeStatus, dispatch])
+
+  return <>{getSeasonsDropdown}</>
+}

@@ -1,30 +1,32 @@
-import { Suspense, useEffect, useMemo } from 'react';
-import { FreeMode, Grid, Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Suspense, useEffect, useMemo } from 'react'
+import { FreeMode, Grid, Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { useAppSelector } from '../../../hooks/redux';
-import { IData } from '../../../types/FetchTypes';
-import styles from './CatalogueSlider.styles.module.scss';
+import { useAppSelector } from '../../../hooks/redux'
+import { IData } from '../../../types/FetchTypes'
+import styles from './CatalogueSlider.styles.module.scss'
 
-import nextArrow from '../../../assets/icons/NextArrowIcon.svg';
-import prevArrow from '../../../assets/icons/PrevArrowIcon.svg';
-import { AnimeApi } from '../../../store/services';
+import nextArrow from '../../../assets/icons/NextArrowIcon.svg'
+import prevArrow from '../../../assets/icons/PrevArrowIcon.svg'
+import { AnimeApi } from '../../../store/services'
 
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import { AnimeCard, Loading } from '../../shared';
+import 'swiper/scss'
+import 'swiper/scss/navigation'
+import { AnimeCard, Loading } from '../../shared'
+import { useTranslation } from 'react-i18next'
 
 export const CatalogueSlider: React.FC = () => {
   const selectedSliderOption = useAppSelector(
     (state) => state.catalogueSlider.activeSliderIndex,
-  );
+  )
 
+  const { t } = useTranslation()
   //
   const {
     data: currentSeason,
     error: currentSeasonErrors,
     isLoading: currentSeasonLoading,
-  } = AnimeApi.useGetCurrentSeasonQuery();
+  } = AnimeApi.useGetCurrentSeasonQuery()
   const [
     triggerSeason,
     {
@@ -32,18 +34,18 @@ export const CatalogueSlider: React.FC = () => {
       error: upcomingSeasonErrors,
       isLoading: upcomingSeasonLoading,
     },
-  ] = AnimeApi.useLazyGetUpcomingSeasonQuery({});
+  ] = AnimeApi.useLazyGetUpcomingSeasonQuery({})
 
   const activeFilter = useMemo(
     () => [currentSeason, upcomingSeason],
     [currentSeason, upcomingSeason],
-  );
+  )
 
   useEffect(() => {
     if (selectedSliderOption === 1) {
-      triggerSeason();
+      triggerSeason()
     }
-  }, [selectedSliderOption]);
+  }, [selectedSliderOption])
 
   return (
     <div className={styles.catalogueSlider}>
@@ -123,5 +125,5 @@ export const CatalogueSlider: React.FC = () => {
         </button>
       </Swiper>
     </div>
-  );
-};
+  )
+}

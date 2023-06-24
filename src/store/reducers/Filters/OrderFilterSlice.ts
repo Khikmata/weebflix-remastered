@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface CounterState {
-  orderBy: string;
+interface orderByFilterProps{
+  orderBy: {id: number, value: string};
 }
 
-const initialState: CounterState = {
-  orderBy: 'score',
+const initialState: orderByFilterProps = {
+  orderBy: {id: 0, value: 'score'},
 };
 
 const slice = createSlice({

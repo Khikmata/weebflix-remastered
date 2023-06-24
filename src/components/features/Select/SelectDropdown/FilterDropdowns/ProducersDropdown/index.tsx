@@ -1,63 +1,35 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react'
 
-import styles from '../FilterDropdown.styles.module.scss';
+import styles from '../FilterDropdown.styles.module.scss'
 
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { useEffect } from 'react';
-import { producersFilterActions } from 'store/reducers/Filters';
-import { IProducers } from 'types/FetchTypes';
-import { translateDropdownContent } from '../../TranslateDropdown';
-import { DropdownTypeEnum } from 'utils/DataTypes/AnimeData';
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { producersFilterActions } from 'store/reducers/Filters'
+import { IProducers } from 'types/FetchTypes'
 
 export const ProducersDropdown = () => {
-  const [selectedProducerIndex, setSelectedProducerIndex] = useState<
-    number | null
-  >(
-    () => parseInt(localStorage.getItem('selectedProducerIndex') || '') || null,
-  );
-
-  const producerData = useAppSelector(
-    (state) => state.dropdownData.producersData,
-  );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    window.sessionStorage.getItem('selectedProducerIndex');
-  }, []);
-
-  useEffect(() => {
-    window.sessionStorage.setItem(
-      'selectedProducerIndex',
-      selectedProducerIndex?.toString() || '',
-    );
-  }, [selectedProducerIndex]);
+  const producerData = useAppSelector((state) => state.dropdownData.producersData)
+  const activeProducer = useAppSelector((state) => state.filterReducer.producerFilters)
+  const dispatch = useAppDispatch()
 
   const getSeasonsDropdown = useMemo(() => {
-    const handleProducerChange = (
-      index: number,
-      selectedProducer: number | null,
-    ) => {
-      if (index === selectedProducer) {
-        dispatch(producersFilterActions.removeProducer());
-        setSelectedProducerIndex(null);
+    const handleProducerChange = (producer: IProducers) => {
+      if (producer.mal_id === activeProducer.producersQuery) {
+        dispatch(producersFilterActions.removeProducer())
       } else {
-        dispatch(producersFilterActions.setProducer(producerData[index]));
-        setSelectedProducerIndex(index);
+        dispatch(producersFilterActions.setProducer(producer))
       }
-    };
-    return producerData.map((producer: IProducers, index) => (
+      console.log(producer, activeProducer, producerData)
+    }
+    return producerData.map((producer: IProducers) => (
       <li
-        key={index}
-        onClick={() => handleProducerChange(index, selectedProducerIndex)}
-        className={styles[selectedProducerIndex === index ? 'active' : '']}
+        key={producer.mal_id}
+        onClick={() => handleProducerChange(producer)}
+        className={styles[activeProducer.producersQuery === producer.mal_id ? 'active' : '']}
       >
-        {translateDropdownContent(
-          producer.titles[0].title,
-          DropdownTypeEnum.PRODUCER,
-        )}
+        {producer.titles[0].title}
       </li>
-    ));
-  }, [selectedProducerIndex, producerData]);
+    ))
+  }, [activeProducer, producerData, dispatch])
 
-  return <>{getSeasonsDropdown}</>;
-};
+  return <>{getSeasonsDropdown}</>
+}

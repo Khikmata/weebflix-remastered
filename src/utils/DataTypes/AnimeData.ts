@@ -91,15 +91,21 @@ export const genresNamesData = [
   'Delinquents',
 ];
 //Название типов
-export const AnimeTypesData = ['tv', 'movie', 'ova', 'special', 'ona', 'music'];
+export const AnimeTypesData = [
+{id: 0, value: 'tv'},
+{id: 1, value: 'movie'},
+{id: 2, value: 'ova' },
+{id: 3, value: 'special'},
+{id: 4, value: 'ona'},
+{id: 5, value: 'music'}]
 //Название рейтингов
 export const AnimeRatingData = [
-  'G - All Ages',
-  'PG - Children',
-  'PG-13 - Teens 13 or older',
-  'R - 17+ (violence & profanity)',
-  'R+ - Mild Nudity',
-  'Rx - Hentai',
+  {id: 0, value: 'G - All Ages',},
+  {id: 1, value: 'PG - Children',},
+  {id: 2, value: 'PG-13 - Teens 13 or older',},
+  {id: 3, value: 'R - 17+ (violence & profanity)',},
+  {id: 4, value: 'R+ - Mild Nudity',},
+  {id: 5, value: 'Rx - Hentai',},
 ];
 
 export enum AnimeRatingQuery {
