@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IGenres } from 'types/DetailsTypes'
+import { IGenres } from '@store/types/DetailsTypes'
 
 interface genreFilterProps {
   selectedGenresNames: string[]
@@ -25,8 +25,14 @@ const slice = createSlice({
     },
     removeGenre: (state, action: PayloadAction<IGenres>) => {
       //Удаление жанра из массива
-      state.selectedGenresIndexes.splice(state.selectedGenresIndexes.indexOf(action.payload.mal_id), 1)
-      state.selectedGenresNames.splice(state.selectedGenresIndexes.indexOf(action.payload.mal_id), 1)
+      state.selectedGenresIndexes.splice(
+        state.selectedGenresIndexes.indexOf(action.payload.mal_id),
+        1,
+      )
+      state.selectedGenresNames.splice(
+        state.selectedGenresIndexes.indexOf(action.payload.mal_id),
+        1,
+      )
     },
   },
 })

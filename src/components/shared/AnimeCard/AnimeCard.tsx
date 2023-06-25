@@ -1,35 +1,26 @@
 import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
-import { IData } from 'types/FetchTypes'
+import { IData } from '@store/types/FetchTypes'
 import { ColorRating } from 'utils/Coloring/ColorRating'
 import { ColorStatus } from 'utils/Coloring/ColorStatus'
 
-import { useTranslation } from 'react-i18next'
+import { useAppSelector } from 'hooks/redux'
 import styles from './AnimeCard.styles.module.scss'
 
 interface CatalogueCardProps {
-  index: number
   item: IData
-  mode?: number
 }
 
-export const AnimeCard: React.FC<CatalogueCardProps> = ({
-  index,
-  item,
-  mode,
-}) => {
-  !mode && (mode = 0)
+export const AnimeCard: React.FC<CatalogueCardProps> = ({ item }) => {
+  const colorStatus = useMemo(() => ColorStatus(item.status), [item.status])
 
-  const { t } = useTranslation() // Assuming you have the useTranslation hook imported correctly
+  const activeLayout = useAppSelector((state) => state.catalogue.activeLayout)
 
   const renderCardGrid = useMemo(() => {
     return (
-      <div key={index} className={styles['anime-card']}>
-        <Link
-          to={`/anime/${item.mal_id}`}
-          className={styles['anime-card-image']}
-        >
+      <div key={item.mal_id} className={styles['anime-card']}>
+        <Link to={`/anime/${item.mal_id}`} className={styles['anime-card-image']}>
           <img
             loading="lazy"
             decoding="async"
@@ -43,7 +34,8 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
             {item.score || '?'}
           </div>
         </Link>
-        {/* <div className={styles['anime-card__preview']}>
+        {/* TODO: Показывать превью след страницы при наведении на карточку
+         <div className={styles['anime-card__preview']}>
           <p>{item.title}</p>
           <p>Статус: {item.status}</p>
           <span>{item.background}</span>
@@ -59,15 +51,12 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
         </div>
       </div>
     )
-  }, [index, item])
+  }, [item])
 
   const renderCardList = useMemo(() => {
     return (
-      <div key={index} className={styles['anime-card__list']}>
-        <Link
-          to={`/anime/${item.mal_id}`}
-          className={styles['anime-card-image__list']}
-        >
+      <div key={item.mal_id} className={styles['anime-card__list']}>
+        <Link to={`/anime/${item.mal_id}`} className={styles['anime-card-image__list']}>
           <img
             loading="lazy"
             decoding="async"
@@ -91,7 +80,7 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
           <div className={styles['anime-card-info__more']}>
             <span
               style={{
-                color: ColorStatus(item.status),
+                color: colorStatus,
               }}
             >
               {item.status}
@@ -108,6 +97,11 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
         </div>
       </div>
     )
-  }, [index, item, t])
-  return <> {mode === 0 ? renderCardGrid : renderCardList} </>
+  }, [item, colorStatus])
+  return (
+    <>
+      {(activeLayout === 'grid' || !activeLayout) && renderCardGrid}
+      {activeLayout === 'list' && renderCardList}
+    </>
+  )
 }

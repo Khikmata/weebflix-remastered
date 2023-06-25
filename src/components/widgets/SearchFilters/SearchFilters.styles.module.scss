@@ -1,0 +1,63 @@
+@import "@styles/_variables.scss";
+
+.searchFilters {
+  @include block;
+  width: clamp(300px, 100%, 400px);
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 4px;
+  flex-direction: column;
+  position: static;
+  top: 30px;
+}
+.searchFilters-content {
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  padding: 0px 24px;
+  &.active {
+    padding: 24px;
+    @include block;
+    height: clamp(1024px, 100%, 2048px);
+  }
+}
+
+.searchFilters {
+  &::after {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    background-color: red;
+  }
+  &-title {
+    font-size: 20px;
+    background-color: $blockActiveColor;
+    position: relative;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 500;
+    padding: 24px 24px;
+    img {
+      margin-right: 8px;
+    }
+    &__dropdown {
+      margin-left: 4px;
+      margin-top: 4px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .searchFilters {
+    position: unset;
+    width: 100%;
+    margin-bottom: 24px;
+    min-height: 0;
+    padding: 0;
+  }
+}

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IGenres } from 'types/DetailsTypes'
-import { IProducers, ISeasons } from 'types/FetchTypes'
+import { IGenres } from '@store/types/DetailsTypes'
+import { IProducers, ISeasons } from '@store/types/FetchTypes'
 
 export interface DropdownDataState {
   genreData: IGenres[]

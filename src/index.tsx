@@ -6,7 +6,7 @@ import App from './App'
 import ScrollToTop from './hooks/scroll'
 import { store } from './store'
 
-import { ErrorBlock, LoadingBlock } from '@components/widgets/index'
+import { ErrorPopup, LoadingBlock } from '@components/widgets/index'
 import { ErrorBoundary } from 'react-error-boundary'
 import './i18n/i18n'
 
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <React.StrictMode>
-    <ErrorBoundary FallbackComponent={ErrorBlock}>
+    <ErrorBoundary FallbackComponent={ErrorPopup}>
       <Suspense fallback={<LoadingBlock />}>
         <Provider store={store}>
           <BrowserRouter>

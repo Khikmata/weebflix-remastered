@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IDropdownItem } from 'types/DetailsTypes'
 
 interface typeFilterProps {
   typeQuery: string | null

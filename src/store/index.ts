@@ -1,7 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { authModalReducer } from './reducers/Auth/AuthModal'
-import { CatalogueReducer } from './reducers/Catalogue/CatalogueSlice'
-import { CatalogueSliderReducer } from './reducers/Catalogue/CatalogueSliderSlice'
 import { DropdownDataReducer } from './reducers/Dropdown/DropdownDataSlice'
 import {
   dateFilterReducer,
@@ -18,8 +16,10 @@ import {
 } from './reducers/Filters'
 import { PlayerReducer } from './reducers/Player/PlayerSlice'
 
-import { season } from 'types/FetchTypes'
-import { AnimeApi, PlayerApi, SearchAPI } from './services'
+import { CarouselReducer } from './reducers/Carousel/CarouselOptionsSlice'
+import { CatalogueReducer } from './reducers/Catalogue/CatalogueSlice'
+import { AnimeApi } from './services'
+import { PlayerApi } from './services/getPlayer'
 
 const filterReducer = combineReducers({
   dateFilters: dateFilterReducer,
@@ -38,12 +38,11 @@ const filterReducer = combineReducers({
 const rootReducer = combineReducers({
   [AnimeApi.reducerPath]: AnimeApi.reducer,
   [PlayerApi.reducerPath]: PlayerApi.reducer,
-  [SearchAPI.reducerPath]: SearchAPI.reducer,
-
-  catalogueSlider: CatalogueSliderReducer,
-  catalogue: CatalogueReducer,
 
   dropdownData: DropdownDataReducer,
+
+  carousel: CarouselReducer,
+  catalogue: CatalogueReducer,
 
   player: PlayerReducer,
 
@@ -55,7 +54,9 @@ const rootReducer = combineReducers({
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(AnimeApi.middleware).concat(PlayerApi.middleware).concat(SearchAPI.middleware),
+    getDefaultMiddleware()
+      .concat(AnimeApi.middleware)
+      .concat(PlayerApi.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

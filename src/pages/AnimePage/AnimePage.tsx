@@ -2,13 +2,14 @@ import { Modal } from '@components/features'
 import { Button, Loading } from '@components/shared'
 import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
 import {
-  CharactersBlock,
+  CharacterSection,
   InfoBlock,
   PlayerBlock,
   RankBlock,
   RelationBlock,
 } from '@components/widgets'
-import { InfoRateBlock } from '@components/widgets/InfoRateBlock'
+import { InfoRateBlock } from '@components/widgets/InfoRateBlock/InfoRateBlock'
+import { getAnimeDetails } from '@store/services/getAnimeDetails'
 import { PlayerApi } from '@store/services/getPlayer'
 import axios from 'axios'
 import { useAppSelector } from 'hooks/redux'
@@ -16,7 +17,6 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactPlayer from 'react-player'
 import { useParams } from 'react-router-dom'
-import { AnimeApi } from 'store/services'
 import styles from './animepage.styles.module.scss'
 
 export const AnimePage = () => {
@@ -36,7 +36,7 @@ export const AnimePage = () => {
     data: details,
     error: detailsErrors,
     isLoading: detailsLoading,
-  } = AnimeApi.useGetAnimeDetailsQuery(id ? id : '')
+  } = getAnimeDetails.useGetAnimeDetailsQuery(id ? id : '')
 
   const {
     data: playerData,
@@ -130,7 +130,7 @@ export const AnimePage = () => {
         </div>
       </div>
 
-      <CharactersBlock id={id ? id : ''} />
+      <CharacterSection id={id ? id : ''} />
       <RelationBlock id={id ? id : ''} />
       {playerLoading && (
         <span>

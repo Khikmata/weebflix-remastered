@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IProducers } from '../../../types/FetchTypes'
+import { IProducers } from '@store/types/FetchTypes'
 
 interface producerFIlterProps {
   producersQuery: number | null

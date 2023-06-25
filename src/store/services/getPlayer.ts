@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IPlayerData } from '../../types/FetchTypes'
+import { IPlayerData } from '@store/types/FetchTypes'
 
 interface PlayerApiEndpoints {
   url: string

@@ -1,21 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { CatalogueLayoutType, CatalogueOptionsType } from './types'
 
-export const catalogueOptions = ['Аниме', 'Манга']
-
-export interface CatalogueState {
-  activeCatalogueIndex: number
+interface CatalogueState {
+  activeCatalogueOptionIndex: number
+  activeLayout: CatalogueLayoutType
 }
 
 const initialState: CatalogueState = {
-  activeCatalogueIndex: 0,
+  activeCatalogueOptionIndex: 0,
+  activeLayout: 'grid',
 }
 
 const slice = createSlice({
   name: 'catalogue',
   initialState,
   reducers: {
-    setActiveCatalogueIndex: (state, action) => {
-      state.activeCatalogueIndex = action.payload
+    setActiveCatalogueOptionIndex: (state, action: PayloadAction<number>) => {
+      state.activeCatalogueOptionIndex = action.payload
+    },
+    setActiveLayout: (state, action: PayloadAction<CatalogueLayoutType>) => {
+      state.activeLayout = action.payload
     },
   },
 })

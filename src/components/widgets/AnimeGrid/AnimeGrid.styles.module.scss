@@ -1,0 +1,82 @@
+@import "@styles/variables";
+
+.animegrid-container__content {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  h2 {
+    margin-bottom: 16px;
+  }
+}
+
+.animegrid-content__items {
+  &.list {
+    width: clamp(300px, 100%, 900px);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  width: clamp(300px, 100%, 900px);
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  > strong {
+    margin: 0 auto;
+    margin-top: 48px;
+    font-size: 32px;
+  }
+  > div {
+    width: 180px;
+    height: 300px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+    min-height: 0px;
+    img {
+      height: 260px;
+    }
+    @media (max-width: 500px) {
+      flex-direction: column;
+      width: 120px;
+      height: 220px;
+      margin-right: 12px;
+      margin-bottom: 12px;
+      img {
+        height: 180px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .animegrid-container__content {
+    flex-direction: column-reverse;
+  }
+  .animegrid-content__filter {
+    position: unset;
+    width: 100%;
+    margin-bottom: 24px;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .animegrid-content__items {
+    justify-content: center;
+    position: relative;
+  }
+}
+@media (max-width: 500px) {
+  .animegrid-content__items {
+    justify-content: space-around;
+  }
+}
+
+.loading-content {
+  position: absolute;
+  top: 60%;
+  left: 25%;
+}

@@ -1,5 +1,5 @@
+import { IDetails } from '@store/types/FetchTypes'
 import { useTranslation } from 'react-i18next'
-import { IDetails } from 'types/FetchTypes'
 import styles from './RankBlock.styles.module.scss'
 
 interface RankBlockProps {

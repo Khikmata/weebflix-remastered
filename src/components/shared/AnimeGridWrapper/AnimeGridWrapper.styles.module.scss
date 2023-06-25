@@ -1,0 +1,34 @@
+@import "@styles/variables";
+.animegrid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+
+  @include block;
+}
+.animegrid-header {
+  width: clamp(300px, 65%, 800px);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.animegrid-container {
+  padding: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .animegrid-header {
+    width: 100%;
+  }
+  .animegrid-container {
+    padding: 4px;
+    h2 {
+      text-align: center;
+      margin-top: 12px;
+    }
+  }
+}

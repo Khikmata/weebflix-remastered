@@ -1,0 +1,11 @@
+.changelayout__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	button {
+		padding: 4px;
+		&.active {
+			filter: brightness(200%);
+		}
+	}
+}

@@ -1,10 +1,8 @@
 import ReactPlayer from 'react-player'
 
 import { PlayerActions } from '@store/reducers/Player/PlayerSlice'
-import axios from 'axios'
+import { IDetails, ISources } from '@store/types/FetchTypes'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
-import { useEffect } from 'react'
-import { IDetails, ISources } from 'types/FetchTypes'
 import styles from './PlayerBlock.styles.module.scss'
 interface playerBlockProps {
   sources: ISources[]

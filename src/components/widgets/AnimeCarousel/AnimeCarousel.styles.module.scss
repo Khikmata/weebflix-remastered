@@ -1,0 +1,9 @@
+@import "@styles/variables";
+
+.animeCarousel {
+  margin-bottom: 64px;
+  padding: 12px 24px;
+  display: flex;
+  height: clamp(120px, calc(35vw + 17vh), 330px);
+  @include block;
+}

@@ -1,18 +1,12 @@
-import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
-import { IAnimeFilterQueries, IGetAnime } from '../../types/FetchTypes'
+import { IAnimeFilterQueries, IGetAnime } from '@store/types/FetchTypes'
+import { AnimeApi } from './getAnime'
 
 export interface seasonQuery {
   year: string
   season: string
 }
-const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.jikan.moe/v4' }), {
-  maxRetries: 3,
 
-})
-
-export const SearchAPI = createApi({
-  reducerPath: 'searchAPI',
-  baseQuery: staggeredBaseQuery,
+export const SearchAPI = AnimeApi.injectEndpoints({
   endpoints: (builder) => ({
     getAnimeBySearch: builder.query<IGetAnime, IAnimeFilterQueries>({
       query: ({
@@ -58,4 +52,4 @@ export const SearchAPI = createApi({
   }),
 })
 
-export const { useGetAnimeBySearchQuery } = SearchAPI
+export const { endpoints } = SearchAPI

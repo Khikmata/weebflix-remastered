@@ -1,0 +1,16 @@
+.errorPopup {
+	width: 100vw;
+	height: 90vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	&-title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		&__image {
+			margin-left: 12px;
+		}
+	}
+}

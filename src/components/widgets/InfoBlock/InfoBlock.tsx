@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@components/shared'
 import { genreFilterActions, typeFilterActions } from '@store/reducers/Filters'
 import { statusFilterActions } from '@store/reducers/Filters/StatusFilterSlice'
+import { IGenres } from '@store/types/DetailsTypes'
+import { IDetails } from '@store/types/FetchTypes'
 import { useAppDispatch } from 'hooks/redux'
 import { useTranslation } from 'react-i18next'
-import { IGenres } from 'types/DetailsTypes'
-import { IDetails } from 'types/FetchTypes'
 import styles from './InfoBlock.styles.module.scss'
 import { transformStatusToQuery } from './helpers/transformStringToQuery'
 
@@ -37,11 +37,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
       <div className={styles['infoBlock']}>
         <p className={styles['infoBlock-outlined']}>
           {t('animepage_info_type') + ' '}
-          <Button
-            onClick={() => handleType(details.type)}
-            contentPadding={'3'}
-            outlined
-          >
+          <Button onClick={() => handleType(details.type)} contentPadding={'3'} outlined>
             {details.type}
           </Button>
         </p>

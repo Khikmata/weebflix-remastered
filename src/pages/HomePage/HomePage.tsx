@@ -3,26 +3,55 @@ import homeBackground from '@assets/images/home.webp'
 import { TwoColumn } from '@components/shared'
 import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
 import {
-  AnimeGridBlock,
-  CatalogueSlider,
+  AnimeCarousel,
+  AnimeGrid,
   NewsBlock,
   OptionsBlock,
   RecommendationsBlock,
 } from '@components/widgets'
-import { AuthModal } from '@components/widgets/AuthModal/AuthModal'
-import { HistoryBlock } from '@components/widgets/History/HistoryBlock'
+import { HistoryBlock } from '@components/widgets/HistoryBlock/HistoryBlock'
+import { CarouselActions } from '@store/reducers/Carousel/CarouselOptionsSlice'
+import { CatalogueActions } from '@store/reducers/Catalogue/CatalogueSlice'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { useTranslation } from 'react-i18next'
 import styles from './home.styles.module.scss'
 
 export const HomePage = () => {
   const { t } = useTranslation()
-  const catalogueSliderOptions = [t('option_relevance'), t('option_upcoming')]
-  const catalogueOptions = [t('option_anime'), t('option_manga')]
+
+  const animeCarouselOptions = [
+    { id: 0, value: t('option_relevance') },
+    { id: 1, value: t('option_upcoming') },
+  ]
+  const catalogueOptions = [
+    { id: 0, value: t('option_anime') },
+    { id: 1, value: t('option_manga') },
+  ]
+
+  const dispatch = useAppDispatch()
+
+  const handleCarouselOptions = (index: number) => {
+    dispatch(CarouselActions.setActiveCarouselOptionIndex(index))
+  }
+  const handleCatalogueOptions = (index: number) => {
+    dispatch(CatalogueActions.setActiveCatalogueOptionIndex(index))
+  }
+
+  const activeCarouselOptionIndex = useAppSelector(
+    (state) => state.carousel.activeCarouselOptionIndex,
+  )
+  const activeCatalogueOptionIndex = useAppSelector(
+    (state) => state.catalogue.activeCatalogueOptionIndex,
+  )
 
   return (
     <PageWrapper source={homeBackground} filled={false}>
-      <OptionsBlock options={catalogueSliderOptions} />
-      <CatalogueSlider />
+      <OptionsBlock
+        options={animeCarouselOptions}
+        handleOptions={handleCarouselOptions}
+        activeOption={activeCarouselOptionIndex}
+      />
+      <AnimeCarousel />
       <TwoColumn>
         <div className={styles['home-content__left']}>
           <HistoryBlock />
@@ -32,8 +61,12 @@ export const HomePage = () => {
           <NewsBlock />
         </div>
       </TwoColumn>
-      <OptionsBlock options={catalogueOptions} />
-      <AnimeGridBlock />
+      <OptionsBlock
+        options={catalogueOptions}
+        handleOptions={handleCatalogueOptions}
+        activeOption={activeCatalogueOptionIndex}
+      />
+      <AnimeGrid />
     </PageWrapper>
   )
 }

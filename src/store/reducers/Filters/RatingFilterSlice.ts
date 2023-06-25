@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IDropdownItem } from 'types/DetailsTypes'
+import { IDropdownItem } from '@store/types/DetailsTypes'
 
 export function transformRating(rating: string) {
   switch (rating) {

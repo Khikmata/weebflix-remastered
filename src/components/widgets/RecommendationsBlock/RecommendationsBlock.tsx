@@ -2,11 +2,11 @@ import nextArrowIcon from '@assets/icons/NextArrowIcon.svg'
 import prevArrowIcon from '@assets/icons/PrevArrowIcon.svg'
 import { Loading } from '@components/shared'
 import { AnimeApi } from '@store/services'
+import { IRecommendations } from '@store/types/FetchTypes'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { FreeMode, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { IRecommendations } from 'types/FetchTypes'
 import styles from './RecommendationsBlock.styles.module.scss'
 
 export const RecommendationsBlock: React.FC = () => {
@@ -76,7 +76,10 @@ export const RecommendationsBlock: React.FC = () => {
             {recommendations &&
               recommendations.map((item: IRecommendations, index: number) => (
                 <SwiperSlide key={index}>
-                  <Link className={styles['content-grid-card']} to={`/anime/${item.entry.mal_id}`}>
+                  <Link
+                    className={styles['content-grid-card']}
+                    to={`/anime/${item.entry.mal_id}`}
+                  >
                     <img
                       className={styles['content-grid-card__image']}
                       src={item.entry?.images.webp.image_url}
