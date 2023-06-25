@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { IDetails } from 'types/FetchTypes'
 import styles from './RankBlock.styles.module.scss'
 
@@ -6,24 +7,25 @@ interface RankBlockProps {
 }
 
 export const RankBlock: React.FC<RankBlockProps> = ({ details }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={styles['anime-info-rank']}>
-      <div className={styles['rank-avg']}>
-        <p>Рейтинг</p>
-        <span>{details?.score || '?'}</span>
-        <small>Всего оценок: {details.scored_by}</small>
-      </div>
       <div className={styles['rank-stats']}>
+        <div className={styles['rank-avg']}>
+          <p>{t('animepage_info_score')}</p>
+          <span>{details?.score || '?'}</span>
+        </div>
         <div className={styles['rank-place']}>
-          <p>Место</p>
+          <p>{t('animepage_info_place')}</p>
           <span>{details?.rank === null ? '?' : '#' + details?.rank}</span>
         </div>
         <div className={styles['rank-popularity']}>
-          <p>Популярность</p>
+          <p>{t('animepage_info_popularity')}</p>
           <span>#{details?.popularity || '?'}</span>
         </div>
         <div className={styles['rank-reviews']}>
-          <p>Оценок</p>
+          <p>{t('animepage_info_scoredby')}</p>
           <span>{details?.scored_by || '?'}</span>
         </div>
       </div>

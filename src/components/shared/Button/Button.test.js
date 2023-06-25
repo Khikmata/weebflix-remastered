@@ -1,69 +1,89 @@
-// import { fireEvent, render } from '@testing-library/react';
-// import { Button } from './Button';
+import { fireEvent, render, screen } from '@testing-library/react'
+import { Button } from './Button'
 
-// describe('Button component', () => {
-//   it('renders without errors', () => {
-//     render(<Button />);
-//   });
+describe('Button', () => {
+  test('renders button element with correct styles', () => {
+    render(<Button color="primary" outlined />)
+    const button = screen.getByRole('button')
 
-//   it('displays the provided children', () => {
-//     const { getByText } = render(<Button>Hello World</Button>);
-//     expect(getByText('Hello World')).toBeInTheDocument();
-//   });
+    expect(button).toBeInTheDocument()
+    expect(button).toHaveStyle('border: 1px solid white')
+    expect(button).toHaveStyle('background-color: #28646c')
+  })
 
-//   it('applies margin vertical correctly', () => {
-//     const { container } = render(<Button marginVertical={10} />);
-//     expect(container.firstChild).toHaveStyle('margin-top: 10px');
-//     expect(container.firstChild).toHaveStyle('margin-bottom: 10px');
-//   });
+  test('renders button with provided children', () => {
+    const buttonText = 'Click me'
+    render(<Button>{buttonText}</Button>)
+    const button = screen.getByRole('button')
 
-//   it('applies margin horizontal correctly', () => {
-//     const { container } = render(<Button marginHorizontal={20} />);
-//     expect(container.firstChild).toHaveStyle('margin-left: 20px');
-//     expect(container.firstChild).toHaveStyle('margin-right: 20px');
-//   });
+    expect(button).toHaveTextContent(buttonText)
+  })
 
-//   it('applies color correctly', () => {
-//     const { container } = render(<Button color="primary" />);
-//     expect(container.firstChild).toHaveStyle('background-color: #28646c');
-//   });
+  test('calls onClick handler when button is clicked', () => {
+    const onClickMock = jest.fn()
+    render(<Button onClick={onClickMock} />)
+    const button = screen.getByRole('button')
 
-//   it('applies outlined style correctly', () => {
-//     const { container } = render(<Button outlined />);
-//     expect(container.firstChild).toHaveStyle('border: 1px solid white');
-//   });
+    fireEvent.click(button)
 
-//   it('calls onClick handler when clicked', () => {
-//     const onClickMock = jest.fn();
-//     const { container } = render(<Button onClick={onClickMock} />);
-//     fireEvent.click(container.firstChild);
-//     expect(onClickMock).toHaveBeenCalledTimes(1);
-//   });
+    expect(onClickMock).toHaveBeenCalledTimes(1)
+  })
 
-//   it('renders with custom height', () => {
-//     const { container } = render(<Button height={50} />);
-//     expect(container.firstChild).toHaveStyle('height: 50px');
-//   });
+  test('applies correct dimensions and padding', () => {
+    render(<Button height={50} contentPadding="10px" />)
+    const button = screen.getByRole('button')
 
-//   it('applies custom content padding', () => {
-//     const { container } = render(<Button contentPadding="10px 20px" />);
-//     expect(container.firstChild).toHaveStyle('padding: 10px 20px');
-//   });
+    expect(button).toHaveStyle({ height: '50px', padding: '10px' })
+  })
 
-//   it('renders with custom border color and width when outlined', () => {
-//     const { container } = render(
-//       <Button outlined borderCol="red" borderWidth={2} />,
-//     );
-//     expect(container.firstChild).toHaveStyle('border: 2px solid red');
-//   });
+  test('applies correct margins', () => {
+    render(<Button marginVertical={20} marginHorizontal={10} />)
+    const button = screen.getByRole('button')
 
-//   it('renders with full width when scale prop is true', () => {
-//     const { container } = render(<Button scale />);
-//     expect(container.firstChild).toHaveStyle('width: 100%');
-//   });
+    expect(button).toHaveStyle({
+      marginBottom: '20px',
+      marginTop: '20px',
+      marginLeft: '10px',
+      marginRight: '10px',
+    })
+  })
 
-//   it('renders with transparent background when color prop is not provided', () => {
-//     const { container } = render(<Button />);
-//     expect(container.firstChild).toHaveStyle('background-color: transparent');
-//   });
-// });
+  test('applies correct border styles', () => {
+    render(<Button outlined borderWidth={2} borderCol="red" />)
+    const button = screen.getByRole('button')
+
+    expect(button).toHaveStyle('border: 2px solid red')
+  })
+
+  test('applies correct width based on scale prop', () => {
+    render(<Button scale={false} />)
+    const button = screen.getByRole('button')
+
+    expect(button).toHaveStyle('width: auto')
+
+    render(<Button scale />)
+    expect(button).toHaveStyle('width: 100%')
+  })
+
+  test('renders button element with default styles if no props provided', () => {
+    render(<Button />)
+    const button = screen.getByRole('button')
+
+    expect(button).toBeInTheDocument()
+    expect(button).not.toHaveStyle('border: 1px solid white')
+    expect(button).not.toHaveStyle('background-color: #28646c')
+    expect(button).toHaveStyle('border: none')
+    expect(button).toHaveStyle('background-color: transparent')
+  })
+
+  test('calls onClick handler when button is clicked with mouse event', () => {
+    const onClickMock = jest.fn()
+    render(<Button onClick={onClickMock} />)
+    const button = screen.getByRole('button')
+
+    fireEvent.click(button)
+
+    expect(onClickMock).toHaveBeenCalledTimes(1)
+    expect(onClickMock).toHaveBeenCalledWith(expect.any(MouseEvent))
+  })
+})

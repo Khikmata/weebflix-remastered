@@ -88,6 +88,9 @@
 }
 .info__watchstate {
   color: $greenColor;
+  background-color: $blockActiveColor;
+  box-shadow: $blockShadow;
+  padding: 4px;
 }
 
 @media (max-width: 1025px) {

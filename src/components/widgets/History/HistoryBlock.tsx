@@ -8,14 +8,22 @@ import styles from './HistoryBlock.styles.module.scss'
 import { useTranslation } from 'react-i18next'
 
 export const HistoryBlock = () => {
-  const { data: details, error: detailsErrors, isLoading: detailsLoading } = AnimeApi.useGetAnimeDetailsQuery('31043')
+  const {
+    data: details,
+    error: detailsErrors,
+    isLoading: detailsLoading,
+  } = AnimeApi.useGetAnimeDetailsQuery('31043')
 
   const { t } = useTranslation()
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const handleNavigateToSearch = (e: React.MouseEvent<HTMLElement>, genre: IGenres, index: number) => {
+  const handleNavigateToSearch = (
+    e: React.MouseEvent<HTMLElement>,
+    genre: IGenres,
+    index: number,
+  ) => {
     e.stopPropagation()
     navigate('/search')
     dispatch(genreFilterActions.setGenre(genre))
@@ -27,7 +35,10 @@ export const HistoryBlock = () => {
 
   return (
     <div className={styles['history']}>
-      <div className={styles['history__content']} onClick={() => handleNavigateToPage(31043)}>
+      <div
+        className={styles['history__content']}
+        onClick={() => handleNavigateToPage(31043)}
+      >
         <div className={styles['history__content__top']}>
           <p>{t('historyBlock_title')}</p>
           <img loading="lazy" src={starIcon} alt={'rate it!'} />
@@ -43,8 +54,12 @@ export const HistoryBlock = () => {
               <p>Erased</p>
             </div>
             <div className={styles['content__info__middle']}>
-              <p className={styles['info__watchstate']}>Просмотрено</p>
-              <p className={styles['info__episodes']}>24 эпизодов</p>
+              <p className={styles['info__watchstate']}>
+                {t('user_status_completed')}
+              </p>
+              <p className={styles['info__episodes']}>
+                24 {t('historyBlock_episodes')}
+              </p>
             </div>
             <div className={styles['content__info__bottom']}>
               <ul className={styles['info__genres']}>
@@ -52,7 +67,10 @@ export const HistoryBlock = () => {
                   details.genres
                     .filter((details, id) => id < 2)
                     .map((genre: IGenres, index) => (
-                      <li onClick={(e) => handleNavigateToSearch(e, genre, index)} key={index}>
+                      <li
+                        onClick={(e) => handleNavigateToSearch(e, genre, index)}
+                        key={index}
+                      >
                         <p>{genre.name}</p>
                       </li>
                     ))}

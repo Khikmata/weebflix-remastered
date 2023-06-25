@@ -38,6 +38,9 @@
 		&.filled {
 			background-color: $blockColor;
 			padding: 32px;
+			@media (max-width: 600px) {
+				padding: 8px;
+			}
 		}
 	}
 }

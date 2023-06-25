@@ -7,8 +7,12 @@ import { producersFilterActions } from 'store/reducers/Filters'
 import { IProducers } from 'types/FetchTypes'
 
 export const ProducersDropdown = () => {
-  const producerData = useAppSelector((state) => state.dropdownData.producersData)
-  const activeProducer = useAppSelector((state) => state.filterReducer.producerFilters)
+  const producerData = useAppSelector(
+    (state) => state.dropdownData.producersData,
+  )
+  const activeProducer = useAppSelector(
+    (state) => state.filterReducer.producerFilters,
+  )
   const dispatch = useAppDispatch()
 
   const getSeasonsDropdown = useMemo(() => {
@@ -18,13 +22,16 @@ export const ProducersDropdown = () => {
       } else {
         dispatch(producersFilterActions.setProducer(producer))
       }
-      console.log(producer, activeProducer, producerData)
     }
     return producerData.map((producer: IProducers) => (
       <li
         key={producer.mal_id}
         onClick={() => handleProducerChange(producer)}
-        className={styles[activeProducer.producersQuery === producer.mal_id ? 'active' : '']}
+        className={
+          styles[
+            activeProducer.producersQuery === producer.mal_id ? 'active' : ''
+          ]
+        }
       >
         {producer.titles[0].title}
       </li>

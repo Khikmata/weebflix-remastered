@@ -9,29 +9,15 @@
     margin-bottom: 4px;
     text-align: left;
   }
-  &-genres,
-  &-type,
-  &-studio {
+  &-outlined {
     button {
       padding: 3px;
-      margin-right: 4px;
+      margin-left: 6px;
       transition: all 0.2s ease-in-out;
       &:hover {
         filter: brightness(110%);
         filter: hue-rotate(-45deg);
       }
     }
-  }
-}
-
-.description {
-  margin-top: 24px;
-  @include block;
-  padding: 8px;
-  max-height: 200px;
-  overflow: hidden;
-
-  &.active {
-    max-height: none;
   }
 }

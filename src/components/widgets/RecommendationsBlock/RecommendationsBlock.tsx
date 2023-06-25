@@ -19,7 +19,7 @@ export const RecommendationsBlock: React.FC = () => {
   return (
     <div className={styles['recommendations']}>
       <div className={styles['recommendations-content']}>
-        <p>{t('recommendedationsBlock_title')}</p>
+        <p>{t('recommendationsBlock_title')}</p>
         <div className={styles['recommendations-content__grid']}>
           <Swiper
             modules={[Navigation, FreeMode]}

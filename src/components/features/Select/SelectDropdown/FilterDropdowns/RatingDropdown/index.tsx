@@ -8,7 +8,9 @@ import { IDropdownItem } from 'types/DetailsTypes'
 import { AnimeRatingData } from 'utils/DataTypes/AnimeData'
 
 export const RatingDropdown = () => {
-  const activeRating = useAppSelector((state) => state.filterReducer.ratingFilters.ratingDisplay)
+  const activeRating = useAppSelector(
+    (state) => state.filterReducer.ratingFilters.ratingDisplay,
+  )
   const dispatch = useAppDispatch()
 
   const getRatingDropdown = useMemo(() => {
@@ -18,7 +20,6 @@ export const RatingDropdown = () => {
       } else {
         dispatch(ratingFilterActions.setRating(AnimeRatingData[rating.id]))
       }
-      console.log(rating.value, activeRating)
     }
     return AnimeRatingData.map((rating) => (
       <li

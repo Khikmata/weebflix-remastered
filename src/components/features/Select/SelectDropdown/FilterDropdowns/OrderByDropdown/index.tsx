@@ -8,11 +8,11 @@ import { orderBy } from './constants'
 
 export const OrderByDropdown = () => {
   const dispatch = useAppDispatch()
-  const activeOrder = useAppSelector((state) => state.filterReducer.orderFilters.orderBy)
+  const activeOrder = useAppSelector(
+    (state) => state.filterReducer.orderFilters.orderBy,
+  )
   const getOrderDropdown = useMemo(() => {
     const handleOrderChange = (index: number) => {
-      console.log(index)
-      console.log(activeOrder)
       dispatch(orderByFilterActions.setOrderBy(orderBy[index]))
     }
     return orderBy.map((order) => (

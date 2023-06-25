@@ -5,7 +5,7 @@ interface sortFilterProps {
 }
 
 const initialState: sortFilterProps = {
-  sortType: 'desc',
+  sortType: 'asc',
 }
 
 const slice = createSlice({

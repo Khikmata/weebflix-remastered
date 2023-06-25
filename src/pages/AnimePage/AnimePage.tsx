@@ -1,12 +1,21 @@
+import { Modal } from '@components/features'
 import { Button, Loading } from '@components/shared'
 import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
-import { CharactersBlock, InfoBlock, PlayerBlock, RankBlock, RelationBlock } from '@components/widgets'
+import {
+  CharactersBlock,
+  InfoBlock,
+  PlayerBlock,
+  RankBlock,
+  RelationBlock,
+} from '@components/widgets'
 import { InfoRateBlock } from '@components/widgets/InfoRateBlock'
 import { PlayerApi } from '@store/services/getPlayer'
 import axios from 'axios'
 import { useAppSelector } from 'hooks/redux'
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import ReactPlayer from 'react-player'
+import { useParams } from 'react-router-dom'
 import { AnimeApi } from 'store/services'
 import styles from './animepage.styles.module.scss'
 
@@ -16,6 +25,12 @@ export const AnimePage = () => {
 
   const selectedEpisode = useAppSelector((state) => state.player.activeEpisode)
   const { id } = useParams<string>()
+
+  const [openTrailerModal, setOpenTrailerModal] = useState(false)
+
+  const handleTrailerModal = () => {
+    setOpenTrailerModal((open) => (open = !open))
+  }
 
   const {
     data: details,
@@ -27,13 +42,19 @@ export const AnimePage = () => {
     data: playerData,
     error: playerError,
     isLoading: playerLoading,
-  } = PlayerApi.useGetAnimePlayerQuery({ url: urlQuery, episodeNumber: selectedEpisode }, { skip })
+  } = PlayerApi.useGetAnimePlayerQuery(
+    { url: urlQuery, episodeNumber: selectedEpisode },
+    { skip },
+  )
 
+  const { t } = useTranslation()
+  const [openDescription, setOpenDescirpiton] = useState(false)
   const fetchAnimeDetails = async () => {
     try {
       if (details) {
-        const response = await axios.get(`https://weebflix-backend.onrender.com/getParsedUrl/${details.title}`)
-        console.log(response.data)
+        const response = await axios.get(
+          `http://localhost:5001/getParsedUrl/${details.title}`,
+        )
         setUrlQuery(response.data.url)
       }
     } catch (error) {
@@ -52,31 +73,63 @@ export const AnimePage = () => {
 
   return (
     <PageWrapper source={details?.images.webp.large_image_url} filled={true}>
-      <div className={styles['anime-page__info']}>
-        <div className={styles['anime-info__leftside']}>
-          <div className={styles['anime-info__image']}>
-            <img loading="lazy" src={details?.images.webp.large_image_url} alt="обложка" />
+      {openTrailerModal && (
+        <Modal handleClose={handleTrailerModal}>
+          <ReactPlayer url={details?.trailer.embed_url} />
+        </Modal>
+      )}
+      <div>
+        <div className={styles['anime-page__info']}>
+          <div className={styles['anime-info__leftside']}>
+            <div className={styles['anime-info__image']}>
+              <img
+                loading="lazy"
+                src={details?.images.webp.large_image_url}
+                alt="обложка"
+              />
+            </div>
+            <div className={styles['anime-info_mobile']}>
+              <div className={styles['anime-info-title__mobile']}>
+                <p>{details?.title_english || details?.title}</p>
+                <span> {details?.title_japanese}</span>
+              </div>
+              <InfoRateBlock />
+            </div>
           </div>
-          <InfoRateBlock />
+          <div className={styles['anime-info__rightside']}>
+            <div className={styles['anime-info-title']}>
+              <p>{details?.title_english || details?.title}</p>
+              <span> {details?.title_japanese}</span>
+            </div>
+            {details && <RankBlock details={details} />}
+            <Button
+              onClick={handleTrailerModal}
+              scale
+              height={40}
+              marginVertical={16}
+              color="primary"
+            >
+              Смотреть трейлер
+            </Button>
+            {details && <InfoBlock details={details} />}
+          </div>
         </div>
-        <div className={styles['anime-info__rightside']}>
-          <div className={styles['anime-info-title']}>
-            <p>{details?.title_english || details?.title}</p>
-            <span> {details?.title_japanese}</span>
-          </div>
-          {details && <RankBlock details={details} />}
-          <Button scale height={40} marginVertical={16} color="primary">
-            <Link to={`https://www.youtube.com/watch?v=${details?.trailer.youtube_id}`}>Смотреть трейлер</Link>
-          </Button>
-          {detailsLoading && (
-            <span>
-              Загрузка описания... <Loading />
-            </span>
-          )}
-          {detailsErrors && <p>Ошибка при загрузке описания...</p>}
-          {details && <InfoBlock details={details} />}
+        <div
+          onClick={() => setOpenDescirpiton((prevstate) => !prevstate)}
+          className={[
+            styles['description'],
+            styles[openDescription ? 'active' : ''],
+          ].join(' ')}
+        >
+          {' '}
+          <strong>
+            {t('animepage_info_description')}
+            <br />
+            <p>{details?.synopsis}</p>
+          </strong>
         </div>
       </div>
+
       <CharactersBlock id={id ? id : ''} />
       <RelationBlock id={id ? id : ''} />
       {playerLoading && (
@@ -84,7 +137,9 @@ export const AnimePage = () => {
           Загрузка плеера... <Loading />
         </span>
       )}
-      {playerData && details && <PlayerBlock sources={playerData.sources} details={details} />}
+      {playerData && details && (
+        <PlayerBlock sources={playerData.sources} details={details} />
+      )}
       {playerError && <p>Произошла ошибка при загрузке плеера.</p>}
     </PageWrapper>
   )

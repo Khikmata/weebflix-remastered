@@ -3,10 +3,15 @@
 	"option_upcoming": "Upcoming",
 	"option_anime": "Anime",
 	"option_manga": "Manga (not working yet)",
+
 	"historyBlock_title": "Last viewed",
-	"recommendedationsBlock_title": "Similar to what you watched earlier",
+	"historyBlock_episodes": "Episodes",
+
+	"recommendationsBlock_title": "Similar to what you watched earlier",
+
 	"newsBlock_title": "News",
 	"catalogue_title": "Catalog",
+
 	"filterBlock_title": "Filter",
 	"filter_genres": "Genres",
 	"filter_types": "Types",
@@ -17,7 +22,38 @@
 	"filter_sort": "Sort by",
 	"filter_order": "Order by",
 
+	"search_inputfield": "Search...",
+
 	"anime_status_onair": "On air",
 	"anime_status_aired": "Aired",
-	"anime_status_notaired": "Not yet airing"
+	"anime_status_notaired": "Not yet airing",
+
+	"user_status_completed": "Completed",
+	"user_status_watching": "Watching",
+	"user_status_planned": "Planned",
+	"user_status_dropped": "Dropped",
+	
+	"auth_login_title": "Login",
+	"auth_register_title": "Register",
+	"auth_username_input": "Username",
+	"auth_password_input": "Password",
+	"auth_signin_button": "Sign In",
+
+	"animepage_info_score": "Score",
+	"animepage_info_place": "Placed",
+	"animepage_info_popularity": "Popularity",
+	"animepage_info_scoredby": "Scored by",
+
+	"animepage_info_type": "Type:",
+	"animepage_info_episodes": "Episodes:",
+	"animepage_info_status": "Status:",
+	"animepage_info_genres": "Genres:",
+	"animepage_info_producers": "Producers:",
+	"animepage_info_rating": "Rating:",
+	"animepage_info_duration": "Duration:",
+	"animepage_info_release": "Released:",
+	"animepage_info_description": "Description:",
+
+	"animepage_rate_button": "Rate",
+	"animepage_add_button": "Add to list"
 }

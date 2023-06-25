@@ -79,6 +79,7 @@ export const AnimeGridBlock = () => {
   const handleDisplayMode = (index: number) => {
     setActiveDisplayMode(index)
   }
+
   const { t } = useTranslation()
   useEffect(() => {
     producersData &&

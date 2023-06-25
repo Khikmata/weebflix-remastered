@@ -7,6 +7,7 @@ export interface seasonQuery {
 }
 const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: 'https://api.jikan.moe/v4' }), {
   maxRetries: 3,
+
 })
 
 export const SearchAPI = createApi({
@@ -50,6 +51,7 @@ export const SearchAPI = createApi({
         if (producers) url += `producers=${producers}&`
         if (start_date !== '1960') url += `start_date=${start_date}-01-01&`
         if (end_date !== '2023') url += `end_date=${end_date}-01-01`
+        console.log(url)
         return { url }
       },
     }),

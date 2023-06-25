@@ -12,5 +12,21 @@ module.exports = {
       '@utils': resolvePath('./src/utils'),
       '@pages': resolvePath('./src/pages'),
     },
+    configure: (webpackConfig, { env }) => {
+      if (env !== 'production') {
+        return webpackConfig
+      }
+
+      webpackConfig.optimization = {
+        ...webpackConfig.optimization,
+        runtimeChunk: true,
+        splitChunks: {
+          ...webpackConfig.optimization.splitChunks,
+          chunks: 'all',
+        },
+      }
+
+      return webpackConfig
+    },
   },
 }

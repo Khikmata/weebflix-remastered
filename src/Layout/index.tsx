@@ -1,3 +1,4 @@
+import { AuthModal } from '@components/widgets/AuthModal/AuthModal'
 import { Navbar } from 'components/features'
 
 interface LayoutProps {
@@ -7,6 +8,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <>
+        <AuthModal />
         <Navbar />
       </>
       <main>{children}</main>

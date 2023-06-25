@@ -4,10 +4,15 @@
 	"option_upcoming": "Скоро выйдет",
 	"option_anime": "Аниме",
 	"option_manga": "Манга (пока не работает)",
+
 	"historyBlock_title": "Последние просмотренные",
-	"recommendedationsBlock_title": "Похожее на то, что вы смотрели ранее",
+	"historyBlock_episodes": "Эпизоды",
+
+	"recommendationsBlock_title": "Похожее на то, что вы смотрели ранее",
+
 	"newsBlock_title": "Новости",
 	"catalogue_title": "Каталог",
+
 	"filterBlock_title": "Фильтр",
 	"filter_genres": "Жанры",
 	"filter_types": "Типы",
@@ -16,5 +21,40 @@
 	"filter_producers": "Студия",
 	"filter_status": "Статус",
 	"filter_sort": "Сортировать по",
-	"filter_order": "Упорядочить по"
+	"filter_order": "Упорядочить по",
+
+	"search_inputfield": "Поиск...",
+
+	"anime_status_onair": "Онгоинг",
+	"anime_status_aired": "Вышло",
+	"anime_status_notaired": "Еще не выходит",
+
+	"user_status_completed": "Завершено",
+	"user_status_watching": "Смотрю",
+	"user_status_planned": "Запланировано",
+	"user_status_dropped": "Брошено",
+
+	"auth_login_title": "Вход",
+	"auth_register_title": "Регистрация",
+	"auth_username_input": "Имя пользователя",
+	"auth_password_input": "Пароль",
+	"auth_signin_button": "Войти",
+
+	"animepage_info_score": "Оценка",
+	"animepage_info_place": "Место",
+	"animepage_info_popularity": "Популярность",
+	"animepage_info_scoredby": "Всего оценок",
+
+	"animepage_info_type": "Тип:",
+	"animepage_info_episodes": "Эпизоды:",
+	"animepage_info_status": "Статус:",
+	"animepage_info_genres": "Жанры:",
+	"animepage_info_producers": "Студия:",
+	"animepage_info_rating": "Рейтинг:",
+	"animepage_info_duration": "Длительность эпизода:",
+	"animepage_info_release": "Выпуск:",
+	"animepage_info_description": "Описание:",
+
+	"animepage_rate_button": "Оценить",
+	"animepage_add_button": "Добавить в список"
 }

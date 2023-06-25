@@ -2,7 +2,13 @@ import homeBackground from '@assets/images/home.webp'
 
 import { TwoColumn } from '@components/shared'
 import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
-import { AnimeGridBlock, CatalogueSlider, NewsBlock, OptionsBlock, RecommendationsBlock } from '@components/widgets'
+import {
+  AnimeGridBlock,
+  CatalogueSlider,
+  NewsBlock,
+  OptionsBlock,
+  RecommendationsBlock,
+} from '@components/widgets'
 import { AuthModal } from '@components/widgets/AuthModal/AuthModal'
 import { HistoryBlock } from '@components/widgets/History/HistoryBlock'
 import { useTranslation } from 'react-i18next'
@@ -15,7 +21,6 @@ export const HomePage = () => {
 
   return (
     <PageWrapper source={homeBackground} filled={false}>
-      <AuthModal />
       <OptionsBlock options={catalogueSliderOptions} />
       <CatalogueSlider />
       <TwoColumn>

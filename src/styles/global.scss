@@ -74,16 +74,15 @@ strong {
   z-index: 1000;
   position: absolute;
 
-  top: 41%;
+  top: 45%;
   transform: translate(-50%, -50%);
 
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
 
   border-radius: 50%;
-  border: 2px solid $whiteColor;
-  outline: 1px solid $backgroundColor;
-  background-color: $blockColor;
+  border: 1px solid $whiteColor;
+  background-color: transparent;
 
   font-size: 24px;
   box-shadow: $blockShadow;

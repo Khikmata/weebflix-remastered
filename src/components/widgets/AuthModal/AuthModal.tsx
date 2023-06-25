@@ -31,7 +31,7 @@ export const AuthModal = () => {
   }
 
   return (
-    <Modal>
+    <Modal handleClose={handleClose}>
       <div className={styles['auth-top']}>
         <b>Авторизация (недоступно)</b>
         <button className={styles['auth-top__close']} onClick={handleClose}>
@@ -52,11 +52,18 @@ export const AuthModal = () => {
       <form onSubmit={(e) => handleSubmit(e)} className={styles['auth-form']}>
         <label className={styles['form-input']}>
           Никнейм
-          <input value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </label>
         <label className={styles['form-input']}>
           Пароль
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </label>
         <button className={styles['form-button']}>Войти</button>
       </form>
