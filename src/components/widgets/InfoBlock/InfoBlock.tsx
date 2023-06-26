@@ -37,7 +37,11 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
       <div className={styles['infoBlock']}>
         <p className={styles['infoBlock-outlined']}>
           {t('animepage_info_type') + ' '}
-          <Button onClick={() => handleType(details.type)} contentPadding={'3'} outlined>
+          <Button
+            onClick={() => handleType(details.type)}
+            contentPadding={'3'}
+            outlined
+          >
             {details.type}
           </Button>
         </p>

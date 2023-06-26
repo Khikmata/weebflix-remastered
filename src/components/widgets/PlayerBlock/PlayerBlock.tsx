@@ -30,15 +30,19 @@ export const PlayerBlock = (props: playerBlockProps) => {
         />
         <div className={styles['playerBlock-episode__dropdown']}>
           <ul>
-            {Array.from({ length: props.details.episodes }).map((_, index: number) => (
-              <li
-                key={index + 1}
-                onClick={() => handleChangeEpisode(index + 1)}
-                className={styles[index + 1 === selectedEpisode ? 'active' : '']}
-              >
-                <button>{index + 1} Серия</button>
-              </li>
-            ))}
+            {Array.from({ length: props.details.episodes }).map(
+              (_, index: number) => (
+                <li
+                  key={index + 1}
+                  onClick={() => handleChangeEpisode(index + 1)}
+                  className={
+                    styles[index + 1 === selectedEpisode ? 'active' : '']
+                  }
+                >
+                  <button>{index + 1} Серия</button>
+                </li>
+              ),
+            )}
           </ul>
         </div>
       </div>

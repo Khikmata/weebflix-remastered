@@ -16,7 +16,16 @@ i18n
     fallbackLng: 'ru',
     debug: true,
     detection: {
-      order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+      order: [
+        'querystring',
+        'cookie',
+        'localStorage',
+        'sessionStorage',
+        'navigator',
+        'htmlTag',
+        'path',
+        'subdomain',
+      ],
     },
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

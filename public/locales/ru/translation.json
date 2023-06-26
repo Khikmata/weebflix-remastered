@@ -22,6 +22,37 @@
   "filter_sort": "Сортировать по",
   "filter_order": "Упорядочить по",
 
+  "filter_genres_placeholder": "Cортировать по жанрам",
+  "filter_types_placeholder": "Сортировать по типам",
+  "filter_rating_placeholder": "Сортировать по рейтингу",
+  "filter_seasons_placeholder": "Сортировать по сезонам",
+  "filter_producers_placeholder": "Сортировать по студии",
+  "filter_status_placeholder": "Сортировать по статусу",
+
+  "type_tv": "TV-Сериал",
+  "type_movie": "Фильм",
+  "type_ova": "ОВА",
+  "type_ona": "ОНА",
+  "type_special": "Спешл",
+  "type_music": "Музыкальный",
+
+  "sort_asc": "По возрастанию",
+  "sort_desc": "По убыванию",
+
+  "order_mal_id": "Индексу",
+  "order_title": "Названию",
+  "order_type": "Типу",
+  "order_rating": "Рейтингу",
+  "order_startdate": "Дате начала",
+  "order_enddate": "Дате окончания",
+  "order_episodes": "Количеству эпизодов",
+  "order_score": "Оценке",
+  "order_scoredby": "Количеству оценок",
+  "order_rank": "Рангу",
+  "order_popularity": "Популярности",
+  "order_members": "Участникам",
+  "order_favorites": "Любимым",
+
   "search_inputfield": "Поиск...",
 
   "anime_status_onair": "Онгоинг",

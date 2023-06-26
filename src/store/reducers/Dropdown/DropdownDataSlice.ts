@@ -30,4 +30,5 @@ const slice = createSlice({
   },
 })
 
-export const { reducer: DropdownDataReducer, actions: DropdownDataActions } = slice
+export const { reducer: DropdownDataReducer, actions: DropdownDataActions } =
+  slice

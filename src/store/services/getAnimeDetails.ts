@@ -6,7 +6,8 @@ export const getAnimeDetails = AnimeApi.injectEndpoints({
   endpoints: (builder) => ({
     getAnimeDetails: builder.query<IDetails, string>({
       query: (id) => ({ url: `/anime/${id}/full` }),
-      transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
+      transformResponse: (response: { data: IDetails }, meta, arg) =>
+        response.data,
     }),
     getAnimePictures: builder.query<IImages, string>({
       query: (id) => ({ url: `/anime/${id}/pictures` }),
@@ -16,11 +17,13 @@ export const getAnimeDetails = AnimeApi.injectEndpoints({
       query: (id) => ({
         url: `/anime/${id}/characters`,
       }),
-      transformResponse: (response: { data: IGetCharacters[] }) => response.data,
+      transformResponse: (response: { data: IGetCharacters[] }) =>
+        response.data,
     }),
     getAnimeNews: builder.query<IDetails, string>({
       query: (id) => ({ url: `/anime/${id}/full` }),
-      transformResponse: (response: { data: IDetails }, meta, arg) => response.data,
+      transformResponse: (response: { data: IDetails }, meta, arg) =>
+        response.data,
     }),
     getAnimeRelations: builder.query<IRelations[], void | string>({
       query: (id) => ({ url: `/anime/${id}/relations` }),

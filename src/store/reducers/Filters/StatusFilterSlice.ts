@@ -18,4 +18,5 @@ const slice = createSlice({
   },
 })
 
-export const { reducer: statusFilterReducer, actions: statusFilterActions } = slice
+export const { reducer: statusFilterReducer, actions: statusFilterActions } =
+  slice

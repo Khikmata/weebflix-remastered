@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import styles from './AuthModal.styles.module.scss'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
-import { authModalAction } from '@store/reducers/Auth/AuthModal'
 import { Modal } from '@components/features'
+import { authModalAction } from '@store/reducers/Auth/AuthModal'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import styles from './AuthModal.styles.module.scss'
 
 export const AuthModal = () => {
   const dispatch = useAppDispatch()

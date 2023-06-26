@@ -20,7 +20,10 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ item }) => {
   const renderCardGrid = useMemo(() => {
     return (
       <div key={item.mal_id} className={styles['anime-card']}>
-        <Link to={`/anime/${item.mal_id}`} className={styles['anime-card-image']}>
+        <Link
+          to={`/anime/${item.mal_id}`}
+          className={styles['anime-card-image']}
+        >
           <img
             loading="lazy"
             decoding="async"
@@ -56,7 +59,10 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({ item }) => {
   const renderCardList = useMemo(() => {
     return (
       <div key={item.mal_id} className={styles['anime-card__list']}>
-        <Link to={`/anime/${item.mal_id}`} className={styles['anime-card-image__list']}>
+        <Link
+          to={`/anime/${item.mal_id}`}
+          className={styles['anime-card-image__list']}
+        >
           <img
             loading="lazy"
             decoding="async"

@@ -1,4 +1,10 @@
-import { IAired, IGenres, IImages, IPaginationItems, ITrailer } from './DetailsTypes'
+import {
+  IAired,
+  IGenres,
+  IImages,
+  IPaginationItems,
+  ITrailer,
+} from './DetailsTypes'
 
 export interface IGetAnime {
   pagination: IPagination

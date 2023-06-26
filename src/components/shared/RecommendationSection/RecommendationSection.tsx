@@ -7,20 +7,20 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { FreeMode, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import styles from './RecommendationsBlock.styles.module.scss'
+import styles from './RecommendationSection.styles.module.scss'
 
-export const RecommendationsBlock: React.FC = () => {
+export const RecommendationSection: React.FC = () => {
   const {
-    data: recommendations,
-    error: recommendationsErrors,
+    data: recommendation,
+    error: recommendationErrors,
     isLoading: recomendationLoading,
   } = AnimeApi.useGetRecentAnimeRecommendationsQuery(31043)
   const { t } = useTranslation()
   return (
-    <div className={styles['recommendations']}>
-      <div className={styles['recommendations-content']}>
-        <p>{t('recommendationsBlock_title')}</p>
-        <div className={styles['recommendations-content__grid']}>
+    <div className={styles['recommendation']}>
+      <div className={styles['recommendation-content']}>
+        <p>{t('recommendationsection_title')}</p>
+        <div className={styles['recommendation-content__grid']}>
           <Swiper
             modules={[Navigation, FreeMode]}
             speed={400}
@@ -72,10 +72,12 @@ export const RecommendationsBlock: React.FC = () => {
                 Загрузка блока рекоммендаций... <Loading />{' '}
               </span>
             )}
-            {recommendationsErrors && <p>Произошла ошибка при загрузке блока..</p>}
-            {recommendations &&
-              recommendations.map((item: IRecommendations, index: number) => (
-                <SwiperSlide key={index}>
+            {recommendationErrors && (
+              <p>Произошла ошибка при загрузке блока..</p>
+            )}
+            {recommendation &&
+              recommendation.map((item: IRecommendations) => (
+                <SwiperSlide key={item.entry.mal_id}>
                   <Link
                     className={styles['content-grid-card']}
                     to={`/anime/${item.entry.mal_id}`}
@@ -85,7 +87,9 @@ export const RecommendationsBlock: React.FC = () => {
                       src={item.entry?.images.webp.image_url}
                       alt={item.entry.title + ' banner image'}
                     />
-                    <p className={styles['content-grid-card__votes']}>+{item.votes}</p>
+                    <p className={styles['content-grid-card__votes']}>
+                      +{item.votes}
+                    </p>
                   </Link>
                 </SwiperSlide>
               ))}

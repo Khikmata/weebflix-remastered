@@ -45,4 +45,5 @@ const slice = createSlice({
   },
 })
 
-export const { reducer: ratingFilterReducer, actions: ratingFilterActions } = slice
+export const { reducer: ratingFilterReducer, actions: ratingFilterActions } =
+  slice

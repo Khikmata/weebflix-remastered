@@ -7,7 +7,7 @@
   "historyBlock_title": "Last viewed",
   "historyBlock_episodes": "Episodes",
 
-  "recommendationsBlock_title": "Similar to what you watched earlier",
+  "recommendationsection_title": "Similar to what you watched earlier",
 
   "newsBlock_title": "News",
   "catalogue_title": "Catalog",
@@ -21,6 +21,37 @@
   "filter_status": "Status",
   "filter_sort": "Sort by",
   "filter_order": "Order by",
+
+  "filter_genres_placeholder": "Sort by genres",
+  "filter_types_placeholder": "Sort by types",
+  "filter_rating_placeholder": "Sort by rating",
+  "filter_seasons_placeholder": "Sort by seasons",
+  "filter_producers_placeholder": "Sort by studio",
+  "filter_status_placeholder": "Sort by status",
+
+  "type_tv": "TV-Series",
+  "type_movie": "Movie",
+  "type_ova": "OVA",
+  "type_ona": "ONA",
+  "type_special": "Special",
+  "type_music": "Music",
+
+  "sort_asc": "Ascending",
+  "sort_desc": "Descending",
+
+  "order_mal_id": "ID",
+  "order_title": "Title",
+  "order_type": "Type",
+  "order_rating": "Rating",
+  "order_startdate": "Start date",
+  "order_enddate": "End date",
+  "order_episode": "Episodes",
+  "order_score": "Score",
+  "order_scoredby": "Scored by",
+  "order_rank": "Rank",
+  "order_popularity": "Popularity",
+  "order_members": "Members",
+  "order_favorites": "Favorites",
 
   "search_inputfield": "Search...",
 

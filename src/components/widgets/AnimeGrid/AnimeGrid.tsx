@@ -6,7 +6,6 @@ import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice'
 import { AnimeApi } from '@store/services'
 
 import { AnimeGridWrapper } from '@components/shared/AnimeGridWrapper/AnimeGridWrapper'
-import { CatalogueLayoutType } from '@store/reducers/Catalogue/types'
 import { getAnimeData } from '@store/services/getAnimeData'
 import { SearchAPI } from '@store/services/getSearch'
 import { IData } from '@store/types/FetchTypes'
@@ -64,7 +63,8 @@ export const AnimeGrid = () => {
   const { data: producersData } = getAnimeData.useGetAnimeProducersQuery()
   const paginationData = SearchData?.pagination
 
-  const [trigger, { data: animeSeasonData }] = AnimeApi.useLazyGetAnimeBySeasonQuery()
+  const [trigger, { data: animeSeasonData }] =
+    AnimeApi.useLazyGetAnimeBySeasonQuery()
 
   const activeLayout = useAppSelector((state) => state.catalogue.activeLayout)
 
@@ -77,7 +77,8 @@ export const AnimeGrid = () => {
   }
 
   useEffect(() => {
-    producersData && dispatch(DropdownDataActions.setProducerData(producersData))
+    producersData &&
+      dispatch(DropdownDataActions.setProducerData(producersData))
 
     if (seasonsData) {
       dispatch(DropdownDataActions.setSeasonData(seasonsData))
@@ -85,15 +86,20 @@ export const AnimeGrid = () => {
     if (AddSeasonsToParams) {
       trigger(AddSeasonsToParams)
     }
-  }, [producersData, seasonsData, AddSeasonsToParams, SearchData])
+  }, [
+    producersData,
+    seasonsData,
+    AddSeasonsToParams,
+    SearchData,
+    dispatch,
+    trigger,
+  ])
 
-  const MemoizedAnimeCard = React.memo(
-    ({ activeLayout, item }: { activeLayout: CatalogueLayoutType; item: IData }) => (
-      <ErrorBoundary fallback={<p>Ошибка при загрузке карточки</p>}>
-        <AnimeCard item={item} />
-      </ErrorBoundary>
-    ),
-  )
+  const MemoizedAnimeCard = React.memo(({ item }: { item: IData }) => (
+    <ErrorBoundary fallback={<p>Ошибка при загрузке карточки</p>}>
+      <AnimeCard item={item} />
+    </ErrorBoundary>
+  ))
 
   return (
     <>
@@ -109,27 +115,21 @@ export const AnimeGrid = () => {
             {SearchLoading && <Loading />}
             {SearchData?.data &&
               AddSeasonsToParams === null &&
-              SearchData?.data.map((item: IData, index: number) => (
-                <Suspense fallback={<Loading />}>
-                  <MemoizedAnimeCard
-                    key={item.mal_id}
-                    activeLayout={activeLayout}
-                    item={item}
-                  />
+              SearchData?.data.map((item: IData) => (
+                <Suspense key={item.mal_id} fallback={<Loading />}>
+                  <MemoizedAnimeCard item={item} />
                 </Suspense>
               ))}
             {seasonsData &&
               SearchData &&
               SearchData.data.length === 0 &&
-              AddSeasonsToParams === '' && <strong>Ничего не найдено ❌</strong>}
+              AddSeasonsToParams === '' && (
+                <strong>Ничего не найдено ❌</strong>
+              )}
             {animeSeasonData &&
-              animeSeasonData.map((item: IData, index: number) => (
-                <Suspense fallback={<Loading />}>
-                  <MemoizedAnimeCard
-                    key={item.mal_id}
-                    activeLayout={activeLayout}
-                    item={item}
-                  />
+              animeSeasonData.map((item: IData) => (
+                <Suspense key={item.mal_id} fallback={<Loading />}>
+                  <MemoizedAnimeCard item={item} />
                 </Suspense>
               ))}
           </div>

@@ -34,4 +34,5 @@ const slice = createSlice({
   },
 })
 
-export const { reducer: seasonFilterReducer, actions: seasonFilterActions } = slice
+export const { reducer: seasonFilterReducer, actions: seasonFilterActions } =
+  slice

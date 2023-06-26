@@ -1,11 +1,11 @@
-import React, { useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { genreFilterActions } from 'store/reducers/Filters'
-import styles from '../FilterDropdown.styles.module.scss'
+import styles from '../DropdownContentShared.styles.module.scss'
 import { SortGenres } from './helpers/SortGenres'
 
-export const GenresDropdown = React.memo(() => {
+export const GenresDropdown = memo(() => {
   const selectedGenresIndexes = useAppSelector(
     (state) => state.filterReducer.genreFilters.selectedGenresIndexes,
   )
@@ -17,7 +17,7 @@ export const GenresDropdown = React.memo(() => {
 
   const handleGenreChange = useCallback(
     (index: number) => {
-      //Если текущий жанр находится в локальном массиве жанров, то он удаляется из стора и из локального массива
+      //Если текущий жанр уже находится в локальном массиве жанров, то он удаляется из стора и из локального массива
       if (selectedGenresIndexes.includes(index)) {
         dispatch(
           genreFilterActions.removeGenre(

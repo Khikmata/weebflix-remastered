@@ -50,7 +50,10 @@ export const Input: React.FC<ButtonProps> = ({
         border: outlined ? '1px solid #B5B5B5' : 'none',
         borderRadius: borRad,
 
-        backgroundColor: (color === 'primary' && '#28646c') || (color === 'secondary' && '#7d8099') || 'transparent',
+        backgroundColor:
+          (color === 'primary' && '#28646c') ||
+          (color === 'secondary' && '#7d8099') ||
+          'transparent',
       }}
       className={styles['button']}
       onChange={onChange}

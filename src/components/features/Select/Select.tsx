@@ -1,80 +1,30 @@
-import { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import Dropdown from 'assets/icons/DropdownIcon.svg'
 import styles from './SelectComponent.styles.module.scss'
 
-import { useAppSelector } from 'hooks/redux'
-import { DropdownTypeEnum } from 'utils/DataTypes/AnimeData'
-import { SelectDropdownRedirect } from './SelectDropdown/SelectDropdownRedirect'
+import { DropdownTypeEnum } from '@utils/constants/AnimeData'
+import { useDisplayHandler } from 'hooks/useDisplayHandler'
 
-interface SelectComponentProps {
+interface IDropdownData {
+  id: number
   title: string
   tooltip: string
-  dropdownType: string
+  type: DropdownTypeEnum
+  element?: React.MemoExoticComponent<React.FC>
 }
 
-export const Select: React.FC<SelectComponentProps> = ({
-  title,
-  tooltip,
-  dropdownType,
-}) => {
+interface SelectComponentProps {
+  dropdownData: IDropdownData
+}
+
+export const Select = ({ dropdownData }: SelectComponentProps) => {
   const [openDropdown, setOpenDropdown] = useState(false)
 
-  const { ...filterDisplays } = useAppSelector((state) => state.filterReducer)
-
-  const { year: seasonYear, season: seasonSeason } = useAppSelector(
-    (state) => state.filterReducer.seasonFilters,
-  )
+  const { element: Element, title, tooltip, type } = dropdownData
 
   //tooltips for inputs
-  const genreDisplay = filterDisplays.genreFilters.selectedGenresNames
-  const typesDisplay = filterDisplays.typeFilters.typeDisplay
-  const ratingDisplay = filterDisplays.ratingFilters.ratingDisplay
-  const producersDisplay = filterDisplays.producerFilters.producersDisplay
-  const seasonDisplay =
-    seasonYear && seasonSeason && seasonYear + ' ' + seasonSeason
-  const statusDisplay = filterDisplays.statusFilters.statusType
-  const sortDisplay = filterDisplays.sortFilters.sortType
-  const orderDisplay = filterDisplays.orderFilters.orderBy.value
-
-  //Перенаправление конкретных селектов для отображения
-  const displayHandler = useMemo(() => {
-    if (dropdownType === DropdownTypeEnum.GENRES) {
-      return genreDisplay.length !== 0 ? genreDisplay.join(', ') : tooltip
-    }
-    if (dropdownType === DropdownTypeEnum.TYPES) {
-      return typesDisplay ? typesDisplay : tooltip
-    }
-    if (dropdownType === DropdownTypeEnum.RATING) {
-      return ratingDisplay ? ratingDisplay : tooltip
-    }
-    if (dropdownType === DropdownTypeEnum.SEASON) {
-      return seasonDisplay ? seasonDisplay : tooltip
-    }
-    if (dropdownType === DropdownTypeEnum.PRODUCER) {
-      return producersDisplay ? producersDisplay : tooltip
-    }
-    if (dropdownType === DropdownTypeEnum.STATUS) {
-      return statusDisplay ? statusDisplay : tooltip
-    }
-    if (dropdownType === DropdownTypeEnum.SORT) {
-      return sortDisplay
-    }
-    if (dropdownType === DropdownTypeEnum.ORDER) {
-      return orderDisplay
-    }
-  }, [
-    dropdownType,
-    genreDisplay,
-    producersDisplay,
-    ratingDisplay,
-    seasonDisplay,
-    tooltip,
-    typesDisplay,
-    statusDisplay,
-    sortDisplay,
-    orderDisplay,
-  ])
+  const displayedValue = useDisplayHandler({ dropdownType: type, tooltip })
 
   const handleDropdown = useCallback(() => {
     setOpenDropdown((prevState) => !prevState)
@@ -87,8 +37,13 @@ export const Select: React.FC<SelectComponentProps> = ({
         onClick={handleDropdown}
         className={styles['selectComponent-container']}
       >
-        <p>{displayHandler}</p>
-        <img src={Dropdown} width={12} alt="Выпадающее меню" />
+        <p>{displayedValue}</p>
+        <img
+          src={Dropdown}
+          width={12}
+          alt="Выпадающее меню"
+          className={styles[openDropdown ? 'dropdown-icon__active' : '']}
+        />
       </button>
       <div
         className={[
@@ -96,9 +51,7 @@ export const Select: React.FC<SelectComponentProps> = ({
           styles[openDropdown ? 'active' : ''],
         ].join(' ')}
       >
-        <ul className={styles['dropdown-list']}>
-          {<SelectDropdownRedirect dropdownType={dropdownType} />}
-        </ul>
+        <ul className={styles['dropdown-list']}>{Element && <Element />}</ul>
       </div>
     </div>
   )

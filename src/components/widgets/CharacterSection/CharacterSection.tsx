@@ -17,15 +17,21 @@ export const CharacterSection: React.FC<characterSectionProps> = (id) => {
     }, 500)
   }, [])
 
-  const { data: characterData } = getAnimeDetails.useGetAnimeCharactersQuery(id.id, {
-    skip,
-  })
+  const { data: characterData } = getAnimeDetails.useGetAnimeCharactersQuery(
+    id.id,
+    {
+      skip,
+    },
+  )
   return (
     <div className={styles['characterSection']}>
       {characterData
-        ?.filter((item, index: number) => index < 8)
+        ?.filter((_, index: number) => index < 8)
         .map((character: IGetCharacters) => (
-          <div className={styles['characterCard']} key={character.character.mal_id}>
+          <div
+            className={styles['characterCard']}
+            key={character.character.mal_id}
+          >
             <img
               src={character.character.images.webp.image_url}
               alt={'обложка'}

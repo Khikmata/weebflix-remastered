@@ -22,7 +22,6 @@ export const HistoryBlock = () => {
   const handleNavigateToSearch = (
     e: React.MouseEvent<HTMLElement>,
     genre: IGenres,
-    index: number,
   ) => {
     e.stopPropagation()
     navigate('/search')
@@ -54,18 +53,22 @@ export const HistoryBlock = () => {
               <p>Erased</p>
             </div>
             <div className={styles['content__info__middle']}>
-              <p className={styles['info__watchstate']}>{t('user_status_completed')}</p>
-              <p className={styles['info__episodes']}>24 {t('historyBlock_episodes')}</p>
+              <p className={styles['info__watchstate']}>
+                {t('user_status_completed')}
+              </p>
+              <p className={styles['info__episodes']}>
+                24 {t('historyBlock_episodes')}
+              </p>
             </div>
             <div className={styles['content__info__bottom']}>
               <ul className={styles['info__genres']}>
                 {details &&
                   details.genres
-                    .filter((details, id) => id < 2)
-                    .map((genre: IGenres, index) => (
+                    .filter((_, index) => index < 2)
+                    .map((genre: IGenres) => (
                       <li
-                        onClick={(e) => handleNavigateToSearch(e, genre, index)}
-                        key={index}
+                        onClick={(e) => handleNavigateToSearch(e, genre)}
+                        key={genre.mal_id}
                       >
                         <p>{genre.name}</p>
                       </li>

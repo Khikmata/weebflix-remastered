@@ -42,8 +42,15 @@ export const Button: React.FC<ButtonProps> = ({
         marginLeft: marginHorizontal,
         marginRight: marginHorizontal,
 
-        border: outlined ? `${borderWidth ? borderWidth : 1}px solid ${borderCol ? borderCol : 'white'}` : 'none',
-        backgroundColor: (color === 'primary' && '#28646c') || (color === 'secondary' && '#6471e7') || 'transparent',
+        border: outlined
+          ? `${borderWidth ? borderWidth : 1}px solid ${
+              borderCol ? borderCol : 'white'
+            }`
+          : 'none',
+        backgroundColor:
+          (color === 'primary' && '#28646c') ||
+          (color === 'secondary' && '#6471e7') ||
+          'transparent',
       }}
       className={styles['button']}
       type="button"

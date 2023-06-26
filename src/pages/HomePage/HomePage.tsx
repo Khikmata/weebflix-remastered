@@ -1,14 +1,9 @@
 import homeBackground from '@assets/images/home.webp'
 
-import { TwoColumn } from '@components/shared'
+import { OptionsBlock } from '@components/features'
+import { RecommendationSection, TwoColumn } from '@components/shared'
 import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
-import {
-  AnimeCarousel,
-  AnimeGrid,
-  NewsBlock,
-  OptionsBlock,
-  RecommendationsBlock,
-} from '@components/widgets'
+import { AnimeCarousel, AnimeGrid, NewsBlock } from '@components/widgets'
 import { HistoryBlock } from '@components/widgets/HistoryBlock/HistoryBlock'
 import { CarouselActions } from '@store/reducers/Carousel/CarouselOptionsSlice'
 import { CatalogueActions } from '@store/reducers/Catalogue/CatalogueSlice'
@@ -55,7 +50,7 @@ export const HomePage = () => {
       <TwoColumn>
         <div className={styles['home-content__left']}>
           <HistoryBlock />
-          <RecommendationsBlock />
+          <RecommendationSection />
         </div>
         <div className={styles['home-content__right']}>
           <NewsBlock />

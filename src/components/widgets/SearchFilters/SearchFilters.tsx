@@ -3,7 +3,6 @@ import filterIcon from '@assets/icons/FiltersIcon.svg'
 
 import styles from './SearchFilters.styles.module.scss'
 
-import { Select } from '@components/features'
 import { RangeInput } from '@components/shared'
 import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice'
 import { dateFilterActions, scoreFilterActions } from '@store/reducers/Filters'
@@ -11,6 +10,7 @@ import { getAnimeData } from '@store/services/getAnimeData'
 import { useAppDispatch } from 'hooks/redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { FilterDropdown } from '@components/features/FilterDropdown/FilterDropdown'
 
 export const SearchFilters = () => {
   const { data: genresData } = getAnimeData.useGetAnimeGenresQuery()
@@ -37,39 +37,12 @@ export const SearchFilters = () => {
     dispatch(dateFilterActions.setDateTo(values[1]))
   }
 
-  const selectTitle = [
-    t('filter_genres'),
-    t('filter_types'),
-    t('filter_rating'),
-    t('filter_seasons'),
-    t('filter_producers'),
-    t('filter_status'),
-    t('filter_sort'),
-    t('filter_order'),
-  ]
-  const selectTooltip = [
-    'Cортировать по жанрам',
-    'Сортировать по типам',
-    'Сортировать по рейтингу',
-    'Сортировать по сезонам',
-    'Сортировать по студии',
-    'Сортировать по статусу',
-    'Сортировать по оценке, Сортировать по рейтингу',
-  ]
-  const SelectDropdownType = [
-    'genres',
-    'types',
-    'rating',
-    'season',
-    'producer',
-    'status',
-    'sort',
-    'order',
-  ]
-
   return (
     <div className={styles['searchFilters']}>
-      <button onClick={handleFiltersDropdown} className={styles['searchFilters-title']}>
+      <button
+        onClick={handleFiltersDropdown}
+        className={styles['searchFilters-title']}
+      >
         <img width={16} src={filterIcon} alt="Фильтр картинка" />
         {t('searchFilters_title')}
         <img
@@ -100,14 +73,7 @@ export const SearchFilters = () => {
           title={'Сортировка по дате:'}
           handleRange={handleDateChange}
         />
-        {selectTitle.map((_, index) => (
-          <Select
-            key={index}
-            title={selectTitle[index]}
-            tooltip={selectTooltip[index]}
-            dropdownType={SelectDropdownType[index]}
-          />
-        ))}
+        <FilterDropdown />
       </div>
     </div>
   )

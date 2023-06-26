@@ -23,4 +23,5 @@ const slice = createSlice({
   },
 })
 
-export const { reducer: scoreFilterReducer, actions: scoreFilterActions } = slice
+export const { reducer: scoreFilterReducer, actions: scoreFilterActions } =
+  slice

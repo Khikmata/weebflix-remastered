@@ -11,17 +11,28 @@ interface PaginationProps {
   pages: number
 }
 
-export const Pagination: React.FC<PaginationProps> = ({ handleNextPage, handlePrevPage, hasNextPage, pages }) => {
+export const Pagination: React.FC<PaginationProps> = ({
+  handleNextPage,
+  handlePrevPage,
+  hasNextPage,
+  pages,
+}) => {
   return (
     <div className={styles['pagination']}>
       <button
-        className={[styles['pagination-button'], styles[pages === 1 ? 'disabled' : '']].join(' ')}
+        className={[
+          styles['pagination-button'],
+          styles[pages === 1 ? 'disabled' : ''],
+        ].join(' ')}
         onClick={handlePrevPage}
       >
         <img width={12} src={prevArrow} alt="прошлая страница" />
       </button>
       <button
-        className={[styles['pagination-button'], styles[hasNextPage === false ? 'disabled' : '']].join(' ')}
+        className={[
+          styles['pagination-button'],
+          styles[hasNextPage === false ? 'disabled' : ''],
+        ].join(' ')}
         onClick={handleNextPage}
       >
         <img width={12} src={nextArrow} alt="след страница" />

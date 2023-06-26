@@ -21,20 +21,22 @@ const slice = createSlice({
       state.selectedGenresNames.push(action.payload.name)
     },
     excludeGenre: (state, action: PayloadAction<IGenres>) => {
-      // TODO: Выбор исключенных жанров
+      // TODO: Выбор исклsюченных жанров
     },
     removeGenre: (state, action: PayloadAction<IGenres>) => {
       //Удаление жанра из массива
+      console.log(action.payload.mal_id)
       state.selectedGenresIndexes.splice(
         state.selectedGenresIndexes.indexOf(action.payload.mal_id),
         1,
       )
       state.selectedGenresNames.splice(
-        state.selectedGenresIndexes.indexOf(action.payload.mal_id),
+        state.selectedGenresNames.indexOf(action.payload.name),
         1,
       )
     },
   },
 })
 
-export const { reducer: genreFilterReducer, actions: genreFilterActions } = slice
+export const { reducer: genreFilterReducer, actions: genreFilterActions } =
+  slice

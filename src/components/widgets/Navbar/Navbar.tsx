@@ -10,7 +10,7 @@ import searchIcon from '@assets/icons/SearchIcon.svg'
 
 import { authModalAction } from '@store/reducers/Auth/AuthModal'
 import { searchFilterActions } from '@store/reducers/Filters'
-import { useDebounce } from 'hooks/debounce'
+import { useDebounce } from 'hooks/useDebounce'
 import { useAppDispatch } from 'hooks/redux'
 import { useTranslation } from 'react-i18next'
 import styles from './Navbar.styles.module.scss'
@@ -30,7 +30,9 @@ export const Navbar = () => {
   }, 500)
 
   const handleLanguageChange = () => {
-    currentLanguage === 'en' ? setCurrentLanguage('ru') : setCurrentLanguage('en')
+    currentLanguage === 'en'
+      ? setCurrentLanguage('ru')
+      : setCurrentLanguage('en')
   }
   const [currentLanguage, setCurrentLanguage] = useState<string>('en')
 
@@ -79,18 +81,27 @@ export const Navbar = () => {
           <button className={styles['language']} onClick={handleLanguageChange}>
             <img width={32} src={languageIcon} alt="смена языка" />
           </button>
-          <form onSubmit={(e) => redirectToSearch(e)} className={styles['search-container']}>
+          <form
+            onSubmit={(e) => redirectToSearch(e)}
+            className={styles['search-container']}
+          >
             <input
               ref={searchRef}
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              className={[styles['search-bar'], styles[searchOpen ? 'active' : '']].join(' ')}
+              className={[
+                styles['search-bar'],
+                styles[searchOpen ? 'active' : ''],
+              ].join(' ')}
               placeholder="Поиск..."
             />
             <Link
               to={'/search'}
               type="button"
-              className={[styles['search-bar__next'], styles[searchOpen ? 'active' : '']].join(' ')}
+              className={[
+                styles['search-bar__next'],
+                styles[searchOpen ? 'active' : ''],
+              ].join(' ')}
               onClick={handleSearchClear}
             >
               <img width={12} src={forwardIcon} alt="Очистить"></img>
@@ -98,13 +109,19 @@ export const Navbar = () => {
           </form>
           <button type="button" onClick={handleSearchButton}>
             <img
-              className={[styles['search-open'], styles[searchOpen ? '' : 'active']].join(' ')}
+              className={[
+                styles['search-open'],
+                styles[searchOpen ? '' : 'active'],
+              ].join(' ')}
               width={32}
               src={searchIcon}
               alt="Поиск"
             ></img>
             <img
-              className={[styles['search-close'], styles[searchOpen ? 'active' : '']].join(' ')}
+              className={[
+                styles['search-close'],
+                styles[searchOpen ? 'active' : ''],
+              ].join(' ')}
               width={32}
               src={closeIcon}
               alt="Закрыть"

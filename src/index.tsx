@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
-import ScrollToTop from './hooks/scroll'
+import ScrollToTop from './hooks/useScrollToTop'
 import { store } from './store'
 
 import { ErrorPopup, LoadingBlock } from '@components/widgets/index'

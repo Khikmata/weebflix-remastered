@@ -1,3 +1,4 @@
+export { RecommendationSection } from './RecommendationSection/RecommendationSection'
 export { AnimeCard } from './AnimeCard/AnimeCard'
 export { Button } from './Button/Button'
 export { Input } from './Input/Input'

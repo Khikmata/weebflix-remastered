@@ -20,4 +20,5 @@ const slice = createSlice({
   },
 })
 
-export const { reducer: searchFilterReducer, actions: searchFilterActions } = slice
+export const { reducer: searchFilterReducer, actions: searchFilterActions } =
+  slice

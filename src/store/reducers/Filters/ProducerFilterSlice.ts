@@ -26,4 +26,7 @@ const slice = createSlice({
   },
 })
 
-export const { reducer: producersFilterReducer, actions: producersFilterActions } = slice
+export const {
+  reducer: producersFilterReducer,
+  actions: producersFilterActions,
+} = slice

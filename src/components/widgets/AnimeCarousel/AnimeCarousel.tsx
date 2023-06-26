@@ -106,13 +106,15 @@ export const AnimeCarousel: React.FC = () => {
         )}
 
         {activeFilter &&
-          activeFilter[selectedCarouselOption]?.map((item: IData, index: number) => (
-            <SwiperSlide key={index}>
-              <Suspense fallback={<Loading />}>
-                <AnimeCard item={item} />
-              </Suspense>
-            </SwiperSlide>
-          ))}
+          activeFilter[selectedCarouselOption]?.map(
+            (item: IData, index: number) => (
+              <SwiperSlide key={index}>
+                <Suspense fallback={<Loading />}>
+                  <AnimeCard item={item} />
+                </Suspense>
+              </SwiperSlide>
+            ),
+          )}
         <button className="next-button">
           <img width={8} src={nextArrow} alt="" />
         </button>

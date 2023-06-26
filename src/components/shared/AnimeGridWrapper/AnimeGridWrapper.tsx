@@ -1,8 +1,7 @@
+import { ChangeGridLayout } from '@components/features/ChangeGridLayout/ChangeGridLayout'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './AnimeGridWrapper.styles.module.scss'
-import { ChangeGridLayout } from '@components/features/ChangeGridLayout/ChangeGridLayout'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
 
 interface AnimeGridWrapperProps {
   title: string
