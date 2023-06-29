@@ -1,12 +1,8 @@
 import { useTranslation } from 'react-i18next'
 
-interface useTranslateTypeProps {
-  type?: string | null
-  tooltip?: string
-}
-
-export const UseTranslateType = ({ type, tooltip }: useTranslateTypeProps) => {
+export const TranslateType = (type: string | null) => {
   const { t } = useTranslation()
+
   switch (type?.toLowerCase()) {
     case 'tv':
       return t('type_tv')
@@ -21,6 +17,6 @@ export const UseTranslateType = ({ type, tooltip }: useTranslateTypeProps) => {
     case 'music':
       return t('type_music')
     default:
-      return tooltip ? tooltip : type
+      return t('filter_types_placeholder')
   }
 }

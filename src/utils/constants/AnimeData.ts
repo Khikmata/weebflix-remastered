@@ -108,12 +108,3 @@ export const AnimeRatingData = [
   { id: 4, value: 'R+ - Mild Nudity' },
   { id: 5, value: 'Rx - Hentai' },
 ]
-
-export enum AnimeRatingQuery {
-  'G - All Ages' = 'g',
-  'PG - Children' = 'pg',
-  'PG-13 - Teens 13 or older' = 'pg13',
-  'R - 17+' = 'r17',
-  'R+ - Mild Nudity' = 'r',
-  'Rx - Hentai' = 'rx',
-}

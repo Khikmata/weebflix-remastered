@@ -68,31 +68,30 @@ export const RecommendationSection: React.FC = () => {
               <img width={8} src={prevArrowIcon} alt="" />
             </button>
             {recomendationLoading && (
-              <span>
-                Загрузка блока рекоммендаций... <Loading />{' '}
-              </span>
+              <>
+                Загрузка блока рекоммендаций... <Loading />
+              </>
             )}
             {recommendationErrors && (
               <p>Произошла ошибка при загрузке блока..</p>
             )}
-            {recommendation &&
-              recommendation.map((item: IRecommendations) => (
-                <SwiperSlide key={item.entry.mal_id}>
-                  <Link
-                    className={styles['content-grid-card']}
-                    to={`/anime/${item.entry.mal_id}`}
-                  >
-                    <img
-                      className={styles['content-grid-card__image']}
-                      src={item.entry?.images.webp.image_url}
-                      alt={item.entry.title + ' banner image'}
-                    />
-                    <p className={styles['content-grid-card__votes']}>
-                      +{item.votes}
-                    </p>
-                  </Link>
-                </SwiperSlide>
-              ))}
+            {recommendation?.map((item: IRecommendations) => (
+              <SwiperSlide key={item.entry.mal_id}>
+                <Link
+                  className={styles['content-grid-card']}
+                  to={`/anime/${item.entry.mal_id}`}
+                >
+                  <img
+                    className={styles['content-grid-card__image']}
+                    src={item.entry?.images.webp.image_url}
+                    alt={item.entry.title + ' banner image'}
+                  />
+                  <p className={styles['content-grid-card__votes']}>
+                    +{item.votes}
+                  </p>
+                </Link>
+              </SwiperSlide>
+            ))}
             <button className="next-button">
               <img height={8} width={8} src={nextArrowIcon} alt="" />
             </button>

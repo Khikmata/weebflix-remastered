@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-export const UseTranslateSort = (sort: string) => {
+export const TranslateSort = (sort: string) => {
   const { t } = useTranslation()
 
   switch (sort) {

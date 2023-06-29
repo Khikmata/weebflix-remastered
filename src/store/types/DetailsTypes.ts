@@ -1,6 +1,5 @@
 export interface IAired {
-  from: string
-  to: string
+  string: string
 }
 export interface IImages {
   webp: IImagesSettings

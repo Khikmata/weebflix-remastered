@@ -3,7 +3,7 @@ import { memo, useCallback, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { genreFilterActions } from 'store/reducers/Filters'
 import styles from '../DropdownContentShared.styles.module.scss'
-import { SortGenres } from './helpers/SortGenres'
+import { SortGenres } from './constants'
 
 export const GenresDropdown = memo(() => {
   const selectedGenresIndexes = useAppSelector(

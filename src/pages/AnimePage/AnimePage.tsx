@@ -133,9 +133,9 @@ export const AnimePage = () => {
       <CharacterSection id={id ? id : ''} />
       <RelationBlock id={id ? id : ''} />
       {playerLoading && (
-        <span>
-          Загрузка плеера... <Loading />
-        </span>
+        <>
+          'Загрузка плеера...' <Loading />
+        </>
       )}
       {playerData && details && (
         <PlayerBlock sources={playerData.sources} details={details} />

@@ -1,14 +1,17 @@
-export function TranslateSeasonToRussian(season: string) {
+import { useTranslation } from 'react-i18next'
+
+export const TranslateSeason = (season: string | null): string => {
+  const { t } = useTranslation()
   switch (season) {
     case 'winter':
-      return 'Зима'
+      return t('season_winter')
     case 'summer':
-      return 'Лето'
+      return t('season_summer')
     case 'fall':
-      return 'Осень'
+      return t('season_fall')
     case 'spring':
-      return 'Весна'
+      return t('season_spring')
     default:
-      return season
+      return t('filter_seasons_placeholder')
   }
 }

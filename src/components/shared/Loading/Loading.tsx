@@ -6,13 +6,8 @@ interface LoadingProps {
 
 export const Loading = ({ width }: LoadingProps) => {
   return (
-    <div>
-      <div className={styles['spinner-container']}>
-        <div
-          className={styles['loading-spinner']}
-          style={{ width: width }}
-        ></div>
-      </div>
+    <div className={styles['spinner-container']}>
+      <div className={styles['loading-spinner']} style={{ width: width }}></div>
     </div>
   )
 }

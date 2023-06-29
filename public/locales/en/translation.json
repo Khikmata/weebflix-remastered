@@ -39,6 +39,11 @@
   "sort_asc": "Ascending",
   "sort_desc": "Descending",
 
+  "season_spring": "Spring",
+  "season_summer": "Summer",
+  "season_fall": "Autumn",
+  "season_winter": "Winter",
+
   "order_mal_id": "ID",
   "order_title": "Title",
   "order_type": "Type",
@@ -53,11 +58,21 @@
   "order_members": "Members",
   "order_favorites": "Favorites",
 
+  "rating_g": "G",
+  "rating_pg": "PG",
+  "rating_pg13": "PG 13",
+  "rating_r17": "R17",
+  "rating_r+": "R+",
+  "rating_rx": "RX",
+
   "search_inputfield": "Search...",
 
-  "anime_status_onair": "On air",
-  "anime_status_aired": "Aired",
-  "anime_status_notaired": "Not yet airing",
+  "anime_status_notyetaired": "Not yet aired",
+  "anime_status_currentlyairing": "Currently airing",
+  "anime_status_finishedairing": "Finished airing",
+  "anime_status_upcoming": "Upcoming",
+  "anime_status_airing": "Airing",
+  "anime_status_complete": "Complete",
 
   "user_status_completed": "Completed",
   "user_status_watching": "Watching",

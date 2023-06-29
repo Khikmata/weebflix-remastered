@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { IDropdownItem } from '@store/types/DetailsTypes'
 
-export function transformRating(rating: string) {
+export const transformRatingQuery = (rating: string | null) => {
   switch (rating) {
     case 'G - All Ages':
       return 'g'
@@ -16,10 +16,9 @@ export function transformRating(rating: string) {
     case 'Rx - Hentai':
       return 'rx'
     default:
-      return rating
+      return null
   }
 }
-
 interface ratingFilterProps {
   ratingQuery: string | null
   ratingDisplay: string | null
@@ -35,7 +34,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     setRating: (state, action: PayloadAction<IDropdownItem>) => {
-      state.ratingQuery = transformRating(action.payload.value)
+      state.ratingQuery = transformRatingQuery(action.payload.value)
       state.ratingDisplay = action.payload.value
     },
     removeRating: (state) => {

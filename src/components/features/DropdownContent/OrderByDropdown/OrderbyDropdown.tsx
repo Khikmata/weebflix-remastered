@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react'
 
-import { UseTranslateOrder } from '@utils/i18n'
+import { TranslateOrder } from '@utils/i18n'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { orderByFilterActions } from 'store/reducers/Filters/OrderFilterSlice'
 import styles from '../DropdownContentShared.styles.module.scss'
@@ -27,7 +27,7 @@ export const OrderbyDropdown = memo(() => {
           onClick={() => handleOrderChange(order.id)}
           className={styles[activeOrder.id === order.id ? 'active' : '']}
         >
-          {UseTranslateOrder(order.value)}
+          {TranslateOrder(order.value)}
         </li>
       ))}
     </>

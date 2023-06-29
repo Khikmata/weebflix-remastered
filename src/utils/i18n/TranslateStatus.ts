@@ -1,18 +1,21 @@
-export function TranslateStatusToRussian(status: string) {
-  switch (status) {
-    case 'Not yet aired':
-      return 'Еще не выходит'
-    case 'Currently Airing':
-      return 'Онгоинг'
-    case 'Finished Airing':
-      return 'Вышло'
+import { useTranslation } from 'react-i18next'
+
+export const TranslateStatus = (status: string | null): string => {
+  const { t } = useTranslation()
+  switch (status?.toLowerCase()) {
+    case 'not yet aired':
+      return t('anime_status_notyetaired')
+    case 'currently airing':
+      return t('anime_status_currentlyairing')
+    case 'finished airing':
+      return t('anime_status_finishedairing')
     case 'upcoming':
-      return 'Еще не выходит'
+      return t('anime_status_upcoming')
     case 'airing':
-      return 'Онгоинг'
+      return t('anime_status_airing')
     case 'complete':
-      return 'Вышло'
+      return t('anime_status_complete')
     default:
-      return status
+      return t('filter_status_placeholder')
   }
 }

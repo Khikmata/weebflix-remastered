@@ -17,6 +17,7 @@ export const SearchFilters = () => {
 
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
+
   useEffect(() => {
     genresData && dispatch(DropdownDataActions.setGenreData(genresData))
   }, [genresData, dispatch])

@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback } from 'react'
 
 import styles from '../DropdownContentShared.styles.module.scss'
 
@@ -33,37 +33,30 @@ export const SeasonsDropdown = memo(() => {
     [activeSeason, activeYear, dispatch],
   )
 
-  return useMemo(() => {
-    return (
-      <>
-        {seasonsData &&
-          seasonsData.map((yearSeason: ISeasons) => (
-            <div key={yearSeason.year} className={styles['container']}>
-              <p
-                className={
-                  styles[yearSeason.year === activeYear ? 'active' : '']
-                }
-              >
-                {yearSeason.year}
-              </p>
-              {yearSeason.seasons.map((season: string) => (
-                <li
-                  key={yearSeason.year + season}
-                  className={
-                    styles[
-                      yearSeason.year === activeYear && season === activeSeason
-                        ? 'active'
-                        : ''
-                    ]
-                  }
-                  onClick={() => handleSeasonChange(yearSeason.year, season)}
-                >
-                  {season}
-                </li>
-              ))}
-            </div>
+  return (
+    <>
+      {seasonsData?.map((yearSeason: ISeasons) => (
+        <div key={yearSeason.year} className={styles['container']}>
+          <p className={styles[yearSeason.year === activeYear ? 'active' : '']}>
+            {yearSeason.year}
+          </p>
+          {yearSeason.seasons.map((season: string) => (
+            <li
+              key={yearSeason.year + season}
+              className={
+                styles[
+                  yearSeason.year === activeYear && season === activeSeason
+                    ? 'active'
+                    : ''
+                ]
+              }
+              onClick={() => handleSeasonChange(yearSeason.year, season)}
+            >
+              {season}
+            </li>
           ))}
-      </>
-    )
-  }, [activeSeason, activeYear, handleSeasonChange, seasonsData])
+        </div>
+      ))}
+    </>
+  )
 })

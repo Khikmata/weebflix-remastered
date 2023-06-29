@@ -1,3 +1,5 @@
+export { ChangeGridLayout } from './ChangeGridLayout/ChangeGridLayout'
+
 export { OptionsBlock } from './OptionsBlock/OptionsBlock'
 
 export { Modal } from '../shared/Modal/Modal'

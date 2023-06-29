@@ -39,6 +39,11 @@
   "sort_asc": "По возрастанию",
   "sort_desc": "По убыванию",
 
+  "season_spring": "Весна",
+  "season_summer": "Лето",
+  "season_autumn": "Осень",
+  "season_winter": "Зима",
+
   "order_mal_id": "Индексу",
   "order_title": "Названию",
   "order_type": "Типу",
@@ -53,11 +58,21 @@
   "order_members": "Участникам",
   "order_favorites": "Любимым",
 
+  "rating_g": "G",
+  "rating_pg": "PG",
+  "rating_pg13": "PG 13",
+  "rating_r17": "R17",
+  "rating_r+": "R+",
+  "rating_rx": "RX",
+
   "search_inputfield": "Поиск...",
 
-  "anime_status_onair": "Онгоинг",
-  "anime_status_aired": "Вышло",
-  "anime_status_notaired": "Еще не выходит",
+  "anime_status_notyetaired": "Еще не выходит",
+  "anime_status_currentlyairing": "Сейчас выходит",
+  "anime_status_finishedairing": "Вышел",
+  "anime_status_upcoming": "Скоро выйдет",
+  "anime_status_airing": "Онгинг",
+  "anime_status_complete": "Вышел",
 
   "user_status_completed": "Завершено",
   "user_status_watching": "Смотрю",

@@ -4,7 +4,7 @@ import Dropdown from 'assets/icons/DropdownIcon.svg'
 import styles from './SelectComponent.styles.module.scss'
 
 import { DropdownTypeEnum } from '@utils/constants/AnimeData'
-import { useDisplayHandler } from 'hooks/useDisplayHandler'
+import { useDisplayHandler } from '../FilterDropdown/DisplayHandler'
 
 interface IDropdownData {
   id: number

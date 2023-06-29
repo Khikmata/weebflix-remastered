@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-export const UseTranslateOrder = (order: string) => {
+export const TranslateOrder = (order: string) => {
   const { t } = useTranslation()
 
   switch (order) {

@@ -9,14 +9,27 @@
     margin-bottom: 4px;
     text-align: left;
   }
+  span {
+    font-weight: 400;
+  }
+  &-outlined__genres {
+    button {
+      padding: 3px;
+      margin-left: 6px;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        filter: hue-rotate(-45deg);
+        background-color: $blueColor;
+      }
+    }
+  }
   &-outlined {
     button {
       padding: 3px;
       margin-left: 6px;
       transition: all 0.2s ease-in-out;
       &:hover {
-        filter: brightness(110%);
-        filter: hue-rotate(-45deg);
+        border: 1px solid $blueColor;
       }
     }
   }

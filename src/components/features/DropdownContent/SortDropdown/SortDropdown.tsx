@@ -1,4 +1,4 @@
-import { UseTranslateSort } from '@utils/i18n'
+import { TranslateSort } from '@utils/i18n'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { memo, useCallback, useMemo } from 'react'
 import { sortFilterActions } from 'store/reducers/Filters/SortFilterSlice'
@@ -27,7 +27,7 @@ export const SortDropdown = memo(() => {
           onClick={() => handleSortChange(sort.id)}
           className={styles[sort.value === activeSort ? 'active' : '']}
         >
-          {UseTranslateSort(sort.value)}
+          {TranslateSort(sort.value)}
         </li>
       ))}
     </>

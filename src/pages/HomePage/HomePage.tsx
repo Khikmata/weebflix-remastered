@@ -1,15 +1,12 @@
 import homeBackground from '@assets/images/home.webp'
 
 import { OptionsBlock } from '@components/features'
-import { RecommendationSection, TwoColumn } from '@components/shared'
 import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
-import { AnimeCarousel, AnimeGrid, NewsBlock } from '@components/widgets'
-import { HistoryBlock } from '@components/widgets/HistoryBlock/HistoryBlock'
+import { AnimeCarousel, AnimeGrid } from '@components/widgets'
 import { CarouselActions } from '@store/reducers/Carousel/CarouselOptionsSlice'
 import { CatalogueActions } from '@store/reducers/Catalogue/CatalogueSlice'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { useTranslation } from 'react-i18next'
-import styles from './home.styles.module.scss'
 
 export const HomePage = () => {
   const { t } = useTranslation()
@@ -47,7 +44,7 @@ export const HomePage = () => {
         activeOption={activeCarouselOptionIndex}
       />
       <AnimeCarousel />
-      <TwoColumn>
+      {/* <TwoColumn>
         <div className={styles['home-content__left']}>
           <HistoryBlock />
           <RecommendationSection />
@@ -55,7 +52,7 @@ export const HomePage = () => {
         <div className={styles['home-content__right']}>
           <NewsBlock />
         </div>
-      </TwoColumn>
+      </TwoColumn> */}
       <OptionsBlock
         options={catalogueOptions}
         handleOptions={handleCatalogueOptions}

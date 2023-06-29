@@ -7,15 +7,18 @@ import { ColorStatus } from 'utils/Coloring/ColorStatus'
 
 import { useAppSelector } from 'hooks/redux'
 import styles from './AnimeCard.styles.module.scss'
+import { CatalogueLayoutType } from '@store/reducers/Catalogue/types'
 
 interface CatalogueCardProps {
   item: IData
+  activeLayout?: CatalogueLayoutType
 }
 
-export const AnimeCard: React.FC<CatalogueCardProps> = ({ item }) => {
+export const AnimeCard: React.FC<CatalogueCardProps> = ({
+  item,
+  activeLayout,
+}) => {
   const colorStatus = useMemo(() => ColorStatus(item.status), [item.status])
-
-  const activeLayout = useAppSelector((state) => state.catalogue.activeLayout)
 
   const renderCardGrid = useMemo(() => {
     return (

@@ -1,7 +1,14 @@
 import { DropdownTypeEnum } from '@utils/constants/AnimeData'
-import { UseTranslateOrder, UseTranslateSort } from '@utils/i18n'
-import { UseTranslateType } from './../utils/i18n/UseTranslateType'
-import { useAppSelector } from './redux'
+
+import {
+  TranslateOrder,
+  TranslateRating,
+  TranslateSeason,
+  TranslateSort,
+  TranslateStatus,
+  TranslateType,
+} from '@utils/i18n'
+import { useAppSelector } from '../../../hooks/redux'
 
 interface displayHandlerProps {
   dropdownType: DropdownTypeEnum
@@ -15,13 +22,12 @@ export const useDisplayHandler = ({
   const { ...filterDisplays } = useAppSelector((state) => state.filterReducer)
   const { year: seasonYear, season: seasonSeason } =
     filterDisplays.seasonFilters
-
   const genreDisplay = filterDisplays.genreFilters.selectedGenresNames
   const typesDisplay = filterDisplays.typeFilters.typeDisplay
   const ratingDisplay = filterDisplays.ratingFilters.ratingDisplay
   const producersDisplay = filterDisplays.producerFilters.producersDisplay
   const seasonDisplay =
-    seasonYear && seasonSeason && seasonYear + ' ' + seasonSeason
+    TranslateSeason(seasonSeason) + (seasonYear ? ' ' + seasonYear : '')
   const statusDisplay = filterDisplays.statusFilters.statusType
   const sortDisplay = filterDisplays.sortFilters.sortType
   const orderDisplay = filterDisplays.orderFilters.orderBy.value
@@ -30,10 +36,10 @@ export const useDisplayHandler = ({
     return genreDisplay.length !== 0 ? genreDisplay.join(', ') : tooltip
   }
   if (dropdownType === DropdownTypeEnum.TYPES) {
-    return UseTranslateType({ type: typesDisplay, tooltip })
+    return TranslateType(typesDisplay)
   }
   if (dropdownType === DropdownTypeEnum.RATING) {
-    return ratingDisplay ? ratingDisplay : tooltip
+    return TranslateRating(ratingDisplay)
   }
   if (dropdownType === DropdownTypeEnum.SEASON) {
     return seasonDisplay ? seasonDisplay : tooltip
@@ -42,12 +48,12 @@ export const useDisplayHandler = ({
     return producersDisplay ? producersDisplay : tooltip
   }
   if (dropdownType === DropdownTypeEnum.STATUS) {
-    return statusDisplay ? statusDisplay : tooltip
+    return TranslateStatus(statusDisplay)
   }
   if (dropdownType === DropdownTypeEnum.SORT) {
-    return UseTranslateSort(sortDisplay)
+    return TranslateSort(sortDisplay)
   }
   if (dropdownType === DropdownTypeEnum.ORDER) {
-    return UseTranslateOrder(orderDisplay)
+    return TranslateOrder(orderDisplay)
   }
 }

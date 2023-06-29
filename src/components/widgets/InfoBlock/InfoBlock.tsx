@@ -1,10 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@components/shared'
-import { genreFilterActions, typeFilterActions } from '@store/reducers/Filters'
+import {
+  genreFilterActions,
+  producersFilterActions,
+  ratingFilterActions,
+  typeFilterActions,
+} from '@store/reducers/Filters'
 import { statusFilterActions } from '@store/reducers/Filters/StatusFilterSlice'
-import { IGenres } from '@store/types/DetailsTypes'
-import { IDetails } from '@store/types/FetchTypes'
+import { IDropdownItem, IGenres } from '@store/types/DetailsTypes'
+import { IDetails, IProducers } from '@store/types/FetchTypes'
+import { TranslateRating, TranslateStatus, TranslateType } from '@utils/i18n'
 import { useAppDispatch } from 'hooks/redux'
 import { useTranslation } from 'react-i18next'
 import styles from './InfoBlock.styles.module.scss'
@@ -31,6 +37,16 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
     navigate('/search')
     dispatch(genreFilterActions.setGenre(item))
   }
+  const handleProducers = (item: IProducers) => {
+    navigate('/search')
+    dispatch(producersFilterActions.setProducer(item))
+  }
+  const handleRating = (item: IDropdownItem) => {
+    navigate('/search')
+    dispatch(ratingFilterActions.setRating(item))
+  }
+  console.log(details)
+  const handleToSearch = () => {}
 
   return (
     <>
@@ -42,7 +58,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
             contentPadding={'3'}
             outlined
           >
-            {details.type}
+            {TranslateType(details.type)}
           </Button>
         </p>
         <p>
@@ -55,10 +71,10 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
             outlined
             contentPadding={'3'}
           >
-            {details.status}
+            {TranslateStatus(details.status)}
           </Button>
         </p>
-        <p className={styles['infoBlock-outlined']}>
+        <p className={styles['infoBlock-outlined__genres']}>
           {t('animepage_info_genres')}
           {details.genres.map((genre: IGenres, index) => (
             <Button
@@ -82,20 +98,16 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
         <p className={styles['infoBlock-outlined']}>
           {t('animepage_info_rating')}
           <Button outlined contentPadding={'3'}>
-            {details.rating}
+            {TranslateRating(details.rating)}
           </Button>
         </p>
-        <p className={styles['infoBlock-outlined']}>
+        <p>
           {t('animepage_info_duration')}
-          <Button outlined contentPadding={'3'}>
-            {details.duration}
-          </Button>
+          <span> {details.duration}</span>
         </p>
-        <p className={styles['infoBlock-outlined']}>
+        <p>
           {t('animepage_info_release')}
-          <Button outlined contentPadding={'3'}>
-            {details.season} {details.year}
-          </Button>
+          <span>{details.aired.string}</span>
         </p>
       </div>
     </>

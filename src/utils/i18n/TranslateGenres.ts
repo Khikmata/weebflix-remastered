@@ -1,6 +1,6 @@
 import { genresNamesData } from '../constants/AnimeData'
 
-export function TranslateGenresToRussian(genre: string) {
+export const TranslateGenres = (genre: string) => {
   for (let i = 0; i < genresNamesData.length; i++) {
     const genreName = genresNamesData[i].toLowerCase()
     if (genre.toLowerCase().includes(genreName)) {

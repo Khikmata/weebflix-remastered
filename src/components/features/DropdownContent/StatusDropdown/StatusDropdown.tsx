@@ -1,6 +1,7 @@
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback } from 'react'
 
 import { IDropdownItem } from '@store/types/DetailsTypes'
+import { TranslateStatus } from '@utils/i18n'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { statusFilterActions } from 'store/reducers/Filters/StatusFilterSlice'
 import styles from '../DropdownContentShared.styles.module.scss'
@@ -24,19 +25,17 @@ export const StatusDropdown = memo(() => {
     [activeStatus, dispatch],
   )
 
-  return useMemo(() => {
-    return (
-      <>
-        {statusData.map((status) => (
-          <li
-            key={status.id}
-            onClick={() => handleStatusChange(status)}
-            className={styles[status.value === activeStatus ? 'active' : '']}
-          >
-            {status.value}
-          </li>
-        ))}
-      </>
-    )
-  }, [activeStatus, handleStatusChange])
+  return (
+    <>
+      {statusData.map((status) => (
+        <li
+          key={status.id}
+          onClick={() => handleStatusChange(status)}
+          className={styles[status.value === activeStatus ? 'active' : '']}
+        >
+          {TranslateStatus(status.value)}
+        </li>
+      ))}
+    </>
+  )
 })

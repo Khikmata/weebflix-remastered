@@ -1,18 +1,22 @@
-export function TranslateRatingToRussian(rating: string) {
+import { useTranslation } from 'react-i18next'
+
+export const TranslateRating = (rating: string | null): string => {
+  const { t } = useTranslation()
+
   switch (rating) {
     case 'G - All Ages':
-      return 'g'
+      return t('rating_g')
     case 'PG - Children':
-      return 'pg'
+      return t('rating_pg')
     case 'PG-13 - Teens 13 or older':
-      return 'pg13'
+      return t('rating_pg13')
     case 'R - 17+ (violence & profanity)':
-      return 'r17'
+      return t('rating_r17')
     case 'R+ - Mild Nudity':
-      return 'r'
+      return t('rating_r+')
     case 'Rx - Hentai':
-      return 'rx'
+      return t('rating_rx')
     default:
-      return rating
+      return t('filter_rating_placeholder')
   }
 }

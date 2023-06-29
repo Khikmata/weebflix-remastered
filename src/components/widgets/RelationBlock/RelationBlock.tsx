@@ -33,12 +33,13 @@ export const RelationBlock = (id: any) => {
   return (
     <div className={styles['relationBlock']}>
       {relationsLoading && (
-        <p>
+        <>
           Идет загрузка... <Loading />
-        </p>
+        </>
       )}
-      {relationsData &&
-        relationsData.map((item: IRelations, index) => <Card {...item} />)}
+      {relationsData?.map((item: IRelations) => (
+        <Card key={item.relation} {...item} />
+      ))}
       {relationsError && <p> Произошла ошибка при загрузке данных</p>}
     </div>
   )

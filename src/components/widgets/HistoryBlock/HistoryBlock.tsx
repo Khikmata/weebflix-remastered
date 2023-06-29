@@ -62,17 +62,16 @@ export const HistoryBlock = () => {
             </div>
             <div className={styles['content__info__bottom']}>
               <ul className={styles['info__genres']}>
-                {details &&
-                  details.genres
-                    .filter((_, index) => index < 2)
-                    .map((genre: IGenres) => (
-                      <li
-                        onClick={(e) => handleNavigateToSearch(e, genre)}
-                        key={genre.mal_id}
-                      >
-                        <p>{genre.name}</p>
-                      </li>
-                    ))}
+                {details?.genres
+                  .filter((_, index) => index < 2)
+                  .map((genre: IGenres) => (
+                    <li
+                      onClick={(e) => handleNavigateToSearch(e, genre)}
+                      key={genre.mal_id}
+                    >
+                      <p>{genre.name}</p>
+                    </li>
+                  ))}
               </ul>
               <p className={styles['info__rating']}>
                 Оценка: <span>10</span>
