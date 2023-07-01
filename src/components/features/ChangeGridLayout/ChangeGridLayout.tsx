@@ -12,7 +12,6 @@ export const ChangeGridLayout = () => {
   const handleChangeLayout = (layout: CatalogueLayoutType) => {
     dispatch(CatalogueActions.setActiveLayout(layout))
   }
-
   return (
     <div className={styles['changelayout__container']}>
       <button

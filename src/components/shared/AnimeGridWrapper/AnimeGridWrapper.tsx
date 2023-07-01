@@ -18,7 +18,6 @@ export const AnimeGridWrapper = ({
     <div className={styles['animegrid']}>
       <div className={styles['animegrid-container']}>
         <div className={styles['animegrid-header']}>
-          <h2>{t(title)}</h2>
           <ChangeGridLayout />
         </div>
         {children}

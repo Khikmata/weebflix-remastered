@@ -1,6 +1,8 @@
 @import "@styles/_variables.scss";
 
 .searchFilters {
+  position: relative;
+  z-index: 2;
   @include block;
   width: clamp(300px, 100%, 400px);
   height: 100%;
@@ -8,19 +10,28 @@
   justify-content: flex-start;
   padding: 4px;
   flex-direction: column;
-  position: static;
   top: 30px;
 }
 .searchFilters-content {
   width: 100%;
   height: 0px;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
   padding: 0px 24px;
   &.active {
+    height: 100%;
     padding: 24px;
     @include block;
-    height: clamp(1024px, 100%, 2048px);
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: height(0%);
+  }
+
+  to {
+    transform: height(1000px);
   }
 }
 

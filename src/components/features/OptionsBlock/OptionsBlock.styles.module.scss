@@ -32,6 +32,10 @@
         font-weight: 600;
         background-color: $blockActiveColor;
       }
+      &:hover {
+        color: $whiteColor;
+        background-color: $hoverColor;
+      }
     }
   }
 }

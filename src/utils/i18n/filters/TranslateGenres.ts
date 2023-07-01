@@ -1,4 +1,4 @@
-import { genresNamesData } from '../constants/AnimeData'
+import { genresNamesData } from '../../constants/AnimeData'
 
 export function TranslateGenresToRussian(genre: string) {
   for (let i = 0; i < genresNamesData.length; i++) {

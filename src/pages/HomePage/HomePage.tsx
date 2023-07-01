@@ -8,7 +8,7 @@ import { CatalogueActions } from '@store/reducers/Catalogue/CatalogueSlice'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { useTranslation } from 'react-i18next'
 
-export const HomePage = () => {
+const HomePage = () => {
   const { t } = useTranslation()
 
   const animeCarouselOptions = [
@@ -62,3 +62,5 @@ export const HomePage = () => {
     </PageWrapper>
   )
 }
+
+export default HomePage

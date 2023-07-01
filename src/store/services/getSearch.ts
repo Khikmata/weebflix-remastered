@@ -43,7 +43,7 @@ export const SearchAPI = AnimeApi.injectEndpoints({
         if (sort) url += `sort=${sort}&`
         if (letter) url += `letter=${letter}&`
         if (producers) url += `producers=${producers}&`
-        if (start_date !== '1960') url += `start_date=${start_date}-01-01&`
+        if (start_date !== '1980') url += `start_date=${start_date}-01-01&`
         if (end_date !== '2023') url += `end_date=${end_date}-01-01`
         console.log(url)
         return { url }

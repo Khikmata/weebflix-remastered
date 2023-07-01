@@ -1,20 +1,31 @@
+import en from '@assets/locales/en/translation.json'
+import ru from '@assets/locales/ru/translation.json'
 import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
-
 import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
-// don't want to use this?
-// have a look at the Quick start guide
-// for passing in lng and translations on init
+import { initReactI18next } from 'react-i18next'
+
+export const resources = {
+  en: {
+    translation: en,
+  },
+  ru: {
+    translation: ru,
+  },
+} as const
 
 i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    returnNull: false,
     fallbackLng: 'ru',
     debug: true,
+    resources,
+
+    backend: {
+      loadPath: '@assets/locales/{{lng}}/{{ns}}.json',
+    },
     detection: {
       order: [
         'querystring',
@@ -26,9 +37,6 @@ i18n
         'path',
         'subdomain',
       ],
-    },
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
     },
   })
 

@@ -19,7 +19,7 @@ import ReactPlayer from 'react-player'
 import { useParams } from 'react-router-dom'
 import styles from './animepage.styles.module.scss'
 
-export const AnimePage = () => {
+const AnimePage = () => {
   const [skip, setSkip] = useState<boolean>(true)
   const [urlQuery, setUrlQuery] = useState<string>('')
 
@@ -144,3 +144,5 @@ export const AnimePage = () => {
     </PageWrapper>
   )
 }
+
+export default AnimePage

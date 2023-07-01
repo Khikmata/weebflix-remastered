@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, memo, useEffect, useState } from 'react'
 
 import { Pagination } from '@components/features'
 import { AnimeCard, Loading } from '@components/shared'
@@ -15,22 +15,22 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { SearchFilters } from '../SearchFilters/SearchFilters'
 import styles from './AnimeGrid.styles.module.scss'
 
-export const AnimeGrid = () => {
+export const AnimeGrid = memo(() => {
   const dispatch = useAppDispatch()
 
-  const { ...filterQueries } = useAppSelector((state) => state.filterReducer)
-
-  const AddDateToParams = filterQueries.dateFilters
-  const AddGenreToParams = filterQueries.genreFilters
-  const AddScoreToParams = filterQueries.scoreFilters
-  const AddTypeToParams = filterQueries.typeFilters.typeQuery
-  const AddRatingToParams = filterQueries.ratingFilters.ratingQuery
-  const AddSeasonsToParams = filterQueries.seasonFilters.seasonQuery
-  const AddProducersToParams = filterQueries.producerFilters.producersQuery
-  const AddSearchToParams = filterQueries.searchFilters.searchQuery
-  const AddStatusToParams = filterQueries.statusFilters.statusType
-  const AddSortByToParams = filterQueries.sortFilters.sortType
-  const AddOrderByToParams = filterQueries.orderFilters.orderBy
+  const {
+    dateFilters,
+    genreFilters,
+    scoreFilters,
+    typeFilters,
+    ratingFilters,
+    seasonFilters,
+    producerFilters,
+    searchFilters,
+    statusFilters,
+    sortFilters,
+    orderFilters,
+  } = useAppSelector((state) => state.filterReducer)
 
   const [pages, setPages] = useState(1)
 
@@ -39,31 +39,33 @@ export const AnimeGrid = () => {
     error: SearchErrors,
     isLoading: SearchLoading,
   } = SearchAPI.useGetAnimeBySearchQuery({
-    q: AddSearchToParams,
-    max_score: AddScoreToParams.maxScore.toString(),
-    min_score: AddScoreToParams.minScore.toString(),
-    start_date: AddDateToParams.dateFrom.toString(),
-    end_date: AddDateToParams.dateTo.toString(),
-    genres: AddGenreToParams.selectedGenresIndexes,
-    type: AddTypeToParams,
-    rating: AddRatingToParams,
-    producers: AddProducersToParams,
-    status: AddStatusToParams,
-    order_by: AddOrderByToParams.value,
-    sort: AddSortByToParams,
+    q: searchFilters.searchQuery,
+    max_score: scoreFilters.maxScore.toString(),
+    min_score: scoreFilters.minScore.toString(),
+    start_date: dateFilters.dateFrom.toString(),
+    end_date: dateFilters.dateTo.toString(),
+    genres: genreFilters.selectedGenresIndexes,
+    type: typeFilters.typeQuery,
+    rating: ratingFilters.ratingQuery,
+    producers: producerFilters.producersQuery,
+    status: statusFilters.statusType,
+    order_by: orderFilters.orderBy.value,
+    sort: sortFilters.sortType,
     limit: 20,
     page: pages,
     sfw:
-      AddRatingToParams === 'RX' ||
-      AddGenreToParams.selectedGenresNames.includes('Hentai')
+      ratingFilters.ratingQuery === 'RX' ||
+      genreFilters.selectedGenresNames.includes('Hentai')
         ? ''
         : 'true',
   })
 
   const { data: seasonsData } = getAnimeData.useGetAnimeSeasonsQuery()
+  const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(
+    searchFilters.searchQuery,
+    { skip: seasonFilters.seasonQuery === '' },
+  )
   const { data: producersData } = getAnimeData.useGetAnimeProducersQuery()
-  const [trigger, { data: animeSeasonData }] =
-    AnimeApi.useLazyGetAnimeBySeasonQuery()
 
   const paginationData = SearchData?.pagination
 
@@ -84,31 +86,13 @@ export const AnimeGrid = () => {
     if (seasonsData) {
       dispatch(DropdownDataActions.setSeasonData(seasonsData))
     }
-    if (AddSeasonsToParams) {
-      trigger(AddSeasonsToParams)
-    }
   }, [
     producersData,
     seasonsData,
-    AddSeasonsToParams,
     SearchData,
     dispatch,
-    trigger,
+    seasonFilters.seasonQuery,
   ])
-
-  const MemoizedAnimeCard = React.memo(
-    ({
-      activeLayout,
-      item,
-    }: {
-      activeLayout?: CatalogueLayoutType
-      item: IData
-    }) => (
-      <ErrorBoundary fallback={<p>Ошибка при загрузке карточки</p>}>
-        <AnimeCard item={item} activeLayout={activeLayout} />
-      </ErrorBoundary>
-    ),
-  )
 
   return (
     <>
@@ -122,7 +106,7 @@ export const AnimeGrid = () => {
           >
             {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
             {SearchLoading && <Loading />}
-            {AddSeasonsToParams === null &&
+            {seasonFilters.seasonQuery === '' &&
               SearchData?.data?.map((item: IData) => (
                 <Suspense key={item.mal_id} fallback={<Loading />}>
                   <MemoizedAnimeCard item={item} activeLayout={activeLayout} />
@@ -130,7 +114,7 @@ export const AnimeGrid = () => {
               ))}
             {seasonsData &&
               SearchData?.data.length === 0 &&
-              AddSeasonsToParams === '' && (
+              seasonFilters.seasonQuery === '' && (
                 <strong>Ничего не найдено ❌</strong>
               )}
             {animeSeasonData?.map((item: IData) => (
@@ -141,15 +125,27 @@ export const AnimeGrid = () => {
           </div>
           <SearchFilters />
         </div>
-        {SearchData && (
-          <Pagination
-            handleNextPage={handleNextPage}
-            handlePrevPage={handlePrevPage}
-            pages={pages}
-            hasNextPage={SearchData.pagination.has_next_page}
-          />
-        )}
+        <Pagination
+          handleNextPage={handleNextPage}
+          handlePrevPage={handlePrevPage}
+          pages={pages}
+          hasNextPage={SearchData?.pagination.has_next_page}
+        />
       </AnimeGridWrapper>
     </>
   )
-}
+})
+
+const MemoizedAnimeCard = React.memo(
+  ({
+    activeLayout,
+    item,
+  }: {
+    activeLayout?: CatalogueLayoutType
+    item: IData
+  }) => (
+    <ErrorBoundary fallback={<p>Ошибка при загрузке карточки</p>}>
+      <AnimeCard item={item} activeLayout={activeLayout} />
+    </ErrorBoundary>
+  ),
+)

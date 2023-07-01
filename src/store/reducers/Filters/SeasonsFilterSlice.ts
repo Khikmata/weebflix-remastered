@@ -3,13 +3,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 interface seasonsFilterProps {
   year: string | null
   season: string | null
-  seasonQuery: string | null
+  seasonQuery: string
 }
 
 const initialState: seasonsFilterProps = {
   year: null,
   season: null,
-  seasonQuery: null,
+  seasonQuery: '',
 }
 
 interface SeasonData {
@@ -27,7 +27,7 @@ const slice = createSlice({
       state.seasonQuery = `${state.year}/${state.season}`
     },
     removeSeasonData: (state, action: PayloadAction<SeasonData>) => {
-      state.seasonQuery = null
+      state.seasonQuery = ''
       state.year = null
       state.season = null
     },

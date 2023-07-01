@@ -3,7 +3,11 @@
 	align-items: center;
 	justify-content: center;
 	button {
+		transition: all 0.2s ease-in;
 		padding: 4px;
+		&:hover {
+			filter: brightness(120%);
+		}
 		&.active {
 			filter: brightness(200%);
 		}

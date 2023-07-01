@@ -28,6 +28,14 @@ export const AnimeApi = createApi({
       }),
       transformResponse: (response: { data: IData[] }) => response.data,
     }),
+    getAnimeBySeason: builder.query<IData[], string>({
+      query: (seasonQuery) => ({
+        url: `/seasons/${seasonQuery}`,
+      }),
+      transformResponse: (response: { data: IData[] }) => {
+        return response.data
+      },
+    }),
     getRecentAnimeRecommendations: builder.query<IRecommendations[], number>({
       query: (id) => ({
         url: `anime/${id}/recommendations`,
@@ -40,14 +48,6 @@ export const AnimeApi = createApi({
         url: '/top/anime',
       }),
       transformResponse: (response: { data: IData[] }) => response.data,
-    }),
-    getAnimeBySeason: builder.query<IData[], string>({
-      query: (seasonQuery) => ({
-        url: `/seasons/${seasonQuery}`,
-      }),
-      transformResponse: (response: { data: IData[] }) => {
-        return response.data
-      },
     }),
     getAnimeRandom: builder.query<IDetails, any>({
       query: () => ({ url: `/random/anime` }),

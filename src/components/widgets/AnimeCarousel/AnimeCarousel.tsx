@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo } from 'react'
+import { Suspense, memo, useEffect, useMemo } from 'react'
 import { FreeMode, Grid, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -15,7 +15,7 @@ import 'swiper/scss'
 import 'swiper/scss/navigation'
 import { breakpointValues } from './constants'
 
-export const AnimeCarousel: React.FC = () => {
+export const AnimeCarousel: React.FC = memo(() => {
   const selectedCarouselOption = useAppSelector(
     (state) => state.carousel.activeCarouselOptionIndex,
   )
@@ -33,7 +33,7 @@ export const AnimeCarousel: React.FC = () => {
     if (selectedCarouselOption === 1 && !upcomingSeason) {
       triggerSeason()
     }
-  }, [selectedCarouselOption])
+  }, [selectedCarouselOption, triggerSeason, upcomingSeason])
 
   return (
     <div className={styles.animeCarousel}>
@@ -67,7 +67,7 @@ export const AnimeCarousel: React.FC = () => {
       </Swiper>
     </div>
   )
-}
+})
 
 const PrevPaginationButton = () => {
   return (

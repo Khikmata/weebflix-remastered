@@ -6,7 +6,7 @@ interface dateFilterProps {
 }
 
 const initialState: dateFilterProps = {
-  dateFrom: 1960,
+  dateFrom: 1980,
   dateTo: 2023,
 }
 

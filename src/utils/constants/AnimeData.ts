@@ -5,7 +5,6 @@ export enum DropdownTypeEnum {
   SORT = 'sort',
   RATING = 'rating',
   SEASON = 'season',
-  EPISODE = 'episode',
   PRODUCER = 'producer',
   STATUS = 'status',
   ORDER = 'order',
