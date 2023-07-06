@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { authModalReducer } from './reducers/Auth/AuthModal'
+import { authModalReducer } from './reducers/Auth/AuthModalSlice'
 import { DropdownDataReducer } from './reducers/Dropdown/DropdownDataSlice'
 import {
   dateFilterReducer,

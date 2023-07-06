@@ -19,28 +19,11 @@ export const OrderbyDropdown = memo(() => {
     },
     [dispatch],
   )
-  const variants = {
-    open: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { stiffness: 1000, velocity: -100 },
-      },
-    },
-    closed: {
-      y: 50,
-      opacity: 0,
-      transition: {
-        y: { stiffness: 1000 },
-      },
-    },
-  }
 
   return (
     <>
       {orderBy.map((order) => (
         <motion.li
-          variants={variants}
           key={order.id}
           onClick={() => handleOrderChange(order.id)}
           className={styles[activeOrder.id === order.id ? 'active' : '']}

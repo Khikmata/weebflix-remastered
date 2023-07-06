@@ -25,7 +25,6 @@ const slice = createSlice({
     },
     removeGenre: (state, action: PayloadAction<IGenres>) => {
       //Удаление жанра из массива
-      console.log(action.payload.mal_id)
       state.selectedGenresIndexes.splice(
         state.selectedGenresIndexes.indexOf(action.payload.mal_id),
         1,

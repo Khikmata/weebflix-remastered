@@ -30,14 +30,14 @@ export const SearchAPI = AnimeApi.injectEndpoints({
       }) => {
         let url = 'anime?'
         if (page) url += `page=${page}&`
-        //if (limit) url += `limit=${limit}&`;
+        if (limit) url += `limit=${limit}&`
         if (q) url += `q=${q}&`
         if (type) url += `type=${type}&`
         if (min_score) url += `min_score=${min_score}&`
         if (max_score) url += `max_score=${max_score}&`
         if (status) url += `status=${status}&`
         if (rating) url += `rating=${rating}&`
-        //if (sfw) url += `sfw=${sfw}&`;
+        if (sfw) url += `sfw=${sfw}&`
         if (genres) url += `${genres.length !== 0 ? `genres=${genres}&` : ''}`
         if (order_by) url += `order_by=${order_by}&`
         if (sort) url += `sort=${sort}&`

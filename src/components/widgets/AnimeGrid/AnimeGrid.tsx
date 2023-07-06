@@ -15,7 +15,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { SearchFilters } from '../SearchFilters/SearchFilters'
 import styles from './AnimeGrid.styles.module.scss'
 
-export const AnimeGrid = memo(() => {
+export const AnimeGrid = memo(({ title }: { title: string }) => {
   const dispatch = useAppDispatch()
 
   const {
@@ -96,7 +96,7 @@ export const AnimeGrid = memo(() => {
 
   return (
     <>
-      <AnimeGridWrapper title={'catalogue_title'}>
+      <AnimeGridWrapper title={title}>
         <div className={styles['animegrid-container__content']}>
           <div
             className={[
@@ -125,6 +125,7 @@ export const AnimeGrid = memo(() => {
           </div>
           <SearchFilters />
         </div>
+
         <Pagination
           handleNextPage={handleNextPage}
           handlePrevPage={handlePrevPage}

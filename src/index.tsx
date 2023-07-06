@@ -8,6 +8,7 @@ import { store } from './store'
 
 import { ErrorPopup, LoadingBlock } from '@components/widgets/index'
 import { ErrorBoundary } from 'react-error-boundary'
+import { ToastContainer } from 'react-toastify'
 import './i18n/i18n'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)

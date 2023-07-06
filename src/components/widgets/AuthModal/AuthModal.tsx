@@ -1,29 +1,26 @@
-import React, { useState } from 'react'
-
+import closeIcon from '@assets/icons/CloseIcon.svg'
 import { Modal } from '@components/features'
-import { authModalAction } from '@store/reducers/Auth/AuthModal'
+import { authModalAction } from '@store/reducers/Auth/AuthModalSlice'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { useState } from 'react'
 import styles from './AuthModal.styles.module.scss'
+import { Login } from './Login/Login'
+import { Register } from './Register/Register'
+
+type AuthState = 'login' | 'register'
 
 export const AuthModal = () => {
   const dispatch = useAppDispatch()
 
+  const [authState, setAuthState] = useState<AuthState>('login')
   const isOpen = useAppSelector((state) => state.auth.isOpen)
-
-  const [username, setUsername] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    setUsername('')
-    setPassword('')
-  }
 
   const handleClose = () => {
     dispatch(authModalAction.setModalOpen(false))
-    setUsername('')
-    setPassword('')
+  }
+
+  const handleAuthState = (state: AuthState) => {
+    setAuthState(state)
   }
 
   if (!isOpen) {
@@ -31,42 +28,52 @@ export const AuthModal = () => {
   }
 
   return (
-    <Modal handleClose={handleClose}>
-      <div className={styles['auth-top']}>
-        <b>Авторизация (недоступно)</b>
-        <button className={styles['auth-top__close']} onClick={handleClose}>
-          {' '}
-          x
-        </button>
+    <Modal startPos={-100} endPos={0} handleClose={handleClose}>
+      <div className={styles['auth-modal']}>
+        <div className={styles['auth-top']}>
+          <b>Авторизация</b>
+          <button className={styles['auth-top__close']} onClick={handleClose}>
+            <img src={closeIcon} width={12} alt={'закрыть'} />
+          </button>
+        </div>
+        <div className={styles['auth-middle']}>
+          <ul>
+            <li
+              className={[
+                styles['auth-state'],
+                styles[authState === 'login' ? 'active' : ''],
+              ].join(' ')}
+            >
+              <button
+                onClick={() => handleAuthState('login')}
+                className={[
+                  styles['auth-state'],
+                  styles[authState === 'login' ? 'active' : ''],
+                ].join(' ')}
+              >
+                {' '}
+                Логин{' '}
+              </button>
+            </li>
+            <li
+              className={[
+                styles['auth-state'],
+                styles[authState === 'register' ? 'active' : ''],
+              ].join(' ')}
+            >
+              <button onClick={() => handleAuthState('register')}>
+                {' '}
+                Регистрация{' '}
+              </button>
+            </li>
+          </ul>
+        </div>
+        {authState === 'register' ? (
+          <Register />
+        ) : (
+          <Login handleClose={handleClose} />
+        )}
       </div>
-      <div className={styles['auth-middle']}>
-        <ul>
-          <li className={styles['active']}>
-            <button className={styles['auth-state']}> Логин </button>
-          </li>
-          <li>
-            <button className={styles['auth-state']}> Регистрация </button>
-          </li>
-        </ul>
-      </div>
-      <form onSubmit={(e) => handleSubmit(e)} className={styles['auth-form']}>
-        <label className={styles['form-input']}>
-          Никнейм
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label className={styles['form-input']}>
-          Пароль
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button className={styles['form-button']}>Войти</button>
-      </form>
     </Modal>
   )
 }

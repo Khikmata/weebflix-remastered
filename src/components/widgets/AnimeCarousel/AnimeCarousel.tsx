@@ -76,6 +76,7 @@ const PrevPaginationButton = () => {
     </button>
   )
 }
+
 const NextPaginationButton = () => {
   return (
     <button className="next-button">

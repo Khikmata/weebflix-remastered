@@ -1,0 +1,46 @@
+@import "@styles/variables.scss";
+
+.burger {
+	display: none;
+	@media (max-width: 768px) {
+		display: flex;
+	}
+	z-index: 1000;
+	position: relative;
+	width: 24px;
+	height: 24px;
+
+	align-items: center;
+	justify-content: center;
+	span {
+		transition: all 0.3s ease-in-out;
+		position: absolute;
+		width: 24px;
+		height: 3px;
+		opacity: 1;
+		background-color: $fontColor;
+		&:first-child {
+			top: 0;
+		}
+		&:last-child {
+			bottom: 0;
+		}
+	}
+	&.active {
+		span {
+			transition: all 0.3s ease-in-out;
+			position: absolute;
+			&:nth-child(2) {
+				opacity: 0;
+			}
+			&:nth-child(1) {
+				transform: rotate(45deg);
+				top: 10.5px;
+			}
+			&:nth-child(3) {
+				transform: rotate(-45deg);
+				bottom: 10.5px;
+			}
+		}
+	}
+}

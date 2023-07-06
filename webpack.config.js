@@ -1,7 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -9,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.min.js',
+    filename: 'app.js',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -71,10 +70,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html', // Path to your source index.html file
-      filename: 'index.html', // Output filename in the dist directory
-    }),
     new MiniCssExtractPlugin({
       filename: 'app.min.css', // Define the name for the extracted CSS file
     }),

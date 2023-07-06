@@ -7,6 +7,7 @@ interface PlayerApiEndpoints {
 }
 
 const animeUrl = (url: string) => {
+  console.log(url)
   return url.replace('https://www3.gogoanimes.fi/category/', '')
 }
 

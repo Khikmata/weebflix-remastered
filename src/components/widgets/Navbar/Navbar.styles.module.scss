@@ -26,82 +26,10 @@
     justify-content: center;
     letter-spacing: 0.11em;
     font-size: 24px;
-    .profile {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 24px;
-      button {
-        width: 32px;
-        height: 32px;
-        position: absolute;
-      }
-    }
-    .language {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
-      button {
-        width: 32px;
-        height: 32px;
-        position: absolute;
-      }
-    }
   }
 }
 
-.search {
-  &-bar {
-    width: 0px;
-    height: 40px;
-    outline: none;
-    background-color: $whiteColor;
-    color: black;
-    border-radius: 4px;
-    border: none;
-    margin-right: 12px;
-    transition: all 0.3s ease-in-out;
-    &.active {
-      padding: 0 12px;
-      width: 400px;
-    }
-    &__next {
-      display: none;
-      position: absolute;
-      top: 50%;
-      font-size: 24px;
-      font-weight: 700;
-      right: 12px;
-      transform: translate(-50%, -50%);
-      opacity: 0.4;
-      transition: all 0.2s ease-in-out;
-      &:hover {
-        opacity: 0.8;
-      }
-      &.active {
-        display: block;
-      }
-    }
-  }
-  &-container {
-    width: 100%;
-    position: relative;
-  }
-}
-
-.search-open,
-.search-close {
-  display: none;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  &.active {
-    display: block;
-    opacity: 1;
-  }
-}
-
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   .navbar-auth {
     display: none;
   }

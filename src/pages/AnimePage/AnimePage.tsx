@@ -34,8 +34,6 @@ const AnimePage = () => {
 
   const {
     data: details,
-    error: detailsErrors,
-    isLoading: detailsLoading,
   } = getAnimeDetails.useGetAnimeDetailsQuery(id ? id : '')
 
   const {
@@ -53,9 +51,9 @@ const AnimePage = () => {
     try {
       if (details) {
         const response = await axios.get(
-          `http://localhost:5001/getParsedUrl/${details.title}`,
+          `http://localhost:4001/player/parseurl/${details.title}`,
         )
-        setUrlQuery(response.data.url)
+        setUrlQuery(response.data)
       }
     } catch (error) {
       console.error('Error:', error)

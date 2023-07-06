@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { FreeMode, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import styles from './RecommendationSection.styles.module.scss'
+import { breakpoints } from './breakpoints'
 
 export const RecommendationSection: React.FC = () => {
   const {
@@ -35,34 +36,7 @@ export const RecommendationSection: React.FC = () => {
               sticky: true,
               momentumRatio: 0.5,
             }}
-            breakpoints={{
-              0: {
-                slidesPerView: 3,
-                spaceBetween: 6,
-              },
-              400: {
-                slidesPerView: 4,
-              },
-              500: {
-                slidesPerView: 5,
-              },
-              600: {
-                slidesPerView: 5,
-                spaceBetween: 8,
-              },
-              800: {
-                slidesPerView: 6,
-                spaceBetween: 8,
-              },
-              900: {
-                slidesPerView: 7,
-                spaceBetween: 16,
-              },
-              1000: {
-                spaceBetween: 20,
-                slidesPerView: 4,
-              },
-            }}
+            breakpoints={breakpoints}
           >
             <button className="prev-button">
               <img width={8} src={prevArrowIcon} alt="" />

@@ -58,7 +58,7 @@ const HomePage = () => {
         handleOptions={handleCatalogueOptions}
         activeOption={activeCatalogueOptionIndex}
       />
-      <AnimeGrid />
+      <AnimeGrid title="catalogue_title" />
     </PageWrapper>
   )
 }

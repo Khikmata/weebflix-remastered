@@ -1,0 +1,37 @@
+@import "@styles/variables.scss";
+
+.burger-curtain {
+	z-index: 2;
+	position: absolute;
+	top: -2000px;
+	right: 0;
+	transition: all 0.3s ease-in;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&.active {
+		transition: all 0.3s ease-out;
+		top: 0;
+	}
+	width: 100vw;
+	height: 60vh;
+	background-color: $backgroundColor;
+
+	ul {
+		margin-top: 12px;
+		font-size: 18px;
+		.burger-curtain__item {
+			border-left: 1px solid $blueColor;
+			padding-left: 12px;
+			margin-bottom: 24px;
+			label {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
+			button {
+				margin-right: 12px;
+			}
+		}
+	}
+}

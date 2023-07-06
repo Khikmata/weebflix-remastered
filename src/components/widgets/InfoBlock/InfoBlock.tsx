@@ -45,7 +45,6 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({ details }) => {
     navigate('/search')
     dispatch(ratingFilterActions.setRating(item))
   }
-  console.log(details)
   const handleToSearch = () => {}
 
   return (
