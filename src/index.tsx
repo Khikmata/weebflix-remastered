@@ -11,6 +11,8 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { ToastContainer } from 'react-toastify'
 import './i18n/i18n'
 
+import 'react-toastify/dist/ReactToastify.css'
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
@@ -21,6 +23,18 @@ root.render(
           <BrowserRouter>
             <ScrollToTop />
             <App />
+            <ToastContainer
+              position="bottom-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+            />
           </BrowserRouter>
         </Provider>
       </Suspense>

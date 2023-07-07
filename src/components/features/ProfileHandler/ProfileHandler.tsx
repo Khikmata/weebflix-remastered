@@ -5,29 +5,37 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './ProfileHandler.styles.module.scss'
+
 export const ProfileHandler = () => {
   const [profileDropdown, setProfileDropdown] = useState(false)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const user = useAppSelector((state) => state.auth.user)
+
   const openProfile = () => {
     setProfileDropdown((state) => (state = !state))
   }
-  const handleProfile = (value: string) => {
+
+  const handleProfile = async (value: string) => {
     if (!user) {
       dispatch(authModalAction.setModalOpen(true))
       return
     }
     if (value === 'logout') {
-      console.log('отработало')
-      window.localStorage.removeItem('token')
       dispatch(authModalAction.logout)
     }
     if (value === 'profile') {
       navigate('/profile')
     }
+    setProfileDropdown(false)
   }
+
+  const authorizedOptions = [
+    { value: 'profile', label: 'profile' },
+    { value: 'logout', label: 'logout' },
+  ]
+  const deauthorizedOptions = [{ value: 'Log in', label: 'login' }]
 
   useEffect(() => {}, [user])
   return (
@@ -36,16 +44,13 @@ export const ProfileHandler = () => {
       {user ? (
         <Dropdown
           open={profileDropdown}
-          options={[
-            { value: 'profile', label: 'profile' },
-            { value: 'logout', label: 'logout' },
-          ]}
+          options={authorizedOptions}
           onSelect={handleProfile}
         />
       ) : (
         <Dropdown
           open={profileDropdown}
-          options={[{ value: 'Log in', label: 'login' }]}
+          options={deauthorizedOptions}
           onSelect={handleProfile}
         />
       )}

@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 interface IUser {
-  token: string
+  _id: string
   userId: string
 }
 export interface AuthState {
   isOpen: boolean
-  user: null | IUser
+  user: null | string
 }
 
 const initialState: AuthState = {
@@ -23,10 +23,12 @@ const slice = createSlice({
     },
     authUser: (state, action) => {
       state.user = action.payload
+      window.localStorage.setItem('token', action.payload)
       console.log(state.user)
     },
-    logout: (state, action) => {
+    logout: (state) => {
       state.user = null
+      window.localStorage.removeItem('token')
     },
   },
 })

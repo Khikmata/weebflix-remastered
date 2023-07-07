@@ -21,6 +21,8 @@ import { CatalogueReducer } from './reducers/Catalogue/CatalogueSlice'
 import { AnimeApi } from './services'
 import { PlayerApi } from './services/getPlayer'
 
+import 'react-toastify/dist/ReactToastify.css'
+
 const filterReducer = combineReducers({
   dateFilters: dateFilterReducer,
   sortFilters: sortFilterReducer,

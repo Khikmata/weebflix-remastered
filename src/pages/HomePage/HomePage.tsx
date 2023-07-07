@@ -6,6 +6,7 @@ import { AnimeCarousel, AnimeGrid } from '@components/widgets'
 import { CarouselActions } from '@store/reducers/Carousel/CarouselOptionsSlice'
 import { CatalogueActions } from '@store/reducers/Catalogue/CatalogueSlice'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const HomePage = () => {
@@ -36,15 +37,18 @@ const HomePage = () => {
     (state) => state.catalogue.activeCatalogueOptionIndex,
   )
 
+  useEffect(() => {})
+
   return (
-    <PageWrapper source={homeBackground} filled={false}>
-      <OptionsBlock
-        options={animeCarouselOptions}
-        handleOptions={handleCarouselOptions}
-        activeOption={activeCarouselOptionIndex}
-      />
-      <AnimeCarousel />
-      {/* <TwoColumn>
+    <>
+      <PageWrapper source={homeBackground} filled={false}>
+        <OptionsBlock
+          options={animeCarouselOptions}
+          handleOptions={handleCarouselOptions}
+          activeOption={activeCarouselOptionIndex}
+        />
+        <AnimeCarousel />
+        {/* <TwoColumn>
         <div className={styles['home-content__left']}>
           <HistoryBlock />
           <RecommendationSection />
@@ -53,13 +57,14 @@ const HomePage = () => {
           <NewsBlock />
         </div>
       </TwoColumn> */}
-      <OptionsBlock
-        options={catalogueOptions}
-        handleOptions={handleCatalogueOptions}
-        activeOption={activeCatalogueOptionIndex}
-      />
-      <AnimeGrid title="catalogue_title" />
-    </PageWrapper>
+        <OptionsBlock
+          options={catalogueOptions}
+          handleOptions={handleCatalogueOptions}
+          activeOption={activeCatalogueOptionIndex}
+        />
+        <AnimeGrid title="catalogue_title" />
+      </PageWrapper>
+    </>
   )
 }
 

@@ -1,9 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
+import { useAuth } from 'hooks/useAuth'
 import { useForm } from 'react-hook-form'
 import { ZodType, z } from 'zod'
 import styles from '../AuthModal.styles.module.scss'
-import { toastError, toastSuccess } from '../Helpers/Toasts'
+import { toast } from 'react-toastify'
+
 type RegisterFormData = {
   username: string
   password: string
@@ -33,14 +35,51 @@ export const Register = () => {
   const handleFormSubmit = async (data: RegisterFormData) => {
     const BASE_URL = 'http://localhost:4001/auth'
     try {
+      const id = toast.loading('wait please', {
+        position: 'bottom-right',
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      })
       await axios
         .post(BASE_URL + '/register', {
           username: data.username,
           password: data.password,
         })
-        .then((res) => toastSuccess('Registration success'))
+        .then((res) => {
+          toast.update(id, {
+            render: 'You are now registered, you can now login',
+            type: 'success',
+            isLoading: false,
+            autoClose: 4000,
+          })
+        })
+        .catch((err) => {
+          toast.update(id, {
+            render: `${err.response.data.message}`,
+            type: 'error',
+            isLoading: false,
+            autoClose: 4000,
+          })
+        })
     } catch (error: any) {
-      toastError(error.data.message)
+      toast.error(
+        `Error from serverside, sorry ${error.response.data.message}!`,
+        {
+          position: 'bottom-right',
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        },
+      )
     }
   }
 
