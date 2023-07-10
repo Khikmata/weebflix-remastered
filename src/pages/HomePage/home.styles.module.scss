@@ -1,30 +1,5 @@
 @import "@styles/variables";
 
-.home {
-  &-background {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 50vw;
-    z-index: 0;
-    filter: blur(20px) brightness(60%);
-    &__overlay {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 52vw;
-      background: linear-gradient(360deg, $backgroundColor 12.57%, rgba(0, 0, 0, 0) 100%);
-      filter: blur(40%);
-      background-repeat: no-repeat;
-      background-position: 0% 0%;
-      background-size: cover;
-      background-size: 100% 100%;
-      z-index: 1;
-    }
-  }
-}
 .home-content__left {
   width: 512px;
 }
@@ -38,4 +13,10 @@
     display: flex;
     flex-direction: column;
   }
+}
+
+.homepage__carousel {
+  margin-bottom: 64px;
+  @include block;
+  height: clamp(120px, calc(35vw + 17vh), 330px);
 }

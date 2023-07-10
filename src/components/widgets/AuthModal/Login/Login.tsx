@@ -28,18 +28,18 @@ export const Login = ({ handleClose }: LoginProps) => {
   })
   const dispatch = useAppDispatch()
   const handleFormSubmit = async (data: LoginFormData) => {
+    const BASE_URL = 'http://localhost:4001/auth'
+    const id = toast.loading('pending...', {
+      position: 'bottom-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    })
     try {
-      const id = toast.loading('wait please', {
-        position: 'bottom-right',
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'dark',
-      })
-      const BASE_URL = 'http://localhost:4001/auth'
       await axios
         .post(BASE_URL + '/login', {
           username: data.username,
@@ -55,6 +55,7 @@ export const Login = ({ handleClose }: LoginProps) => {
             isLoading: false,
             autoClose: 4000,
           })
+          handleClose()
         })
         .catch((err) => {
           toast.update(id, {
@@ -64,17 +65,12 @@ export const Login = ({ handleClose }: LoginProps) => {
             autoClose: 4000,
           })
         })
-      handleClose()
-    } catch (error: any) {
-      toast.error('Error from serverside, sorry!', {
-        position: 'bottom-right',
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'dark',
+    } catch (err: any) {
+      toast.update(id, {
+        render: `Connection error`,
+        type: 'error',
+        isLoading: false,
+        autoClose: 4000,
       })
     }
   }

@@ -1,4 +1,6 @@
+@import "@styles/variables.scss";
 .dropdown-options {
+	z-index: 10;
 	position: absolute;
 	top: 100%;
 	left: 0;
@@ -6,7 +8,7 @@
 	padding: 0;
 	margin: 0;
 	border: 1px solid #ccc;
-	background-color: #1a1a1a;
+	background-color: $backgroundColor;
 }
 
 .dropdown-options li {
@@ -15,9 +17,9 @@
 }
 
 .dropdown-options li:hover {
-	background-color: #f0f0f0;
+	background-color: $gray;
 }
 
 .dropdown-options .selected {
-	background-color: #e0e0e0;
+	background-color: $blockActiveColor;
 }

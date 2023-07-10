@@ -32,7 +32,7 @@ export interface IAnimeFilterQueries {
   genres?: number[]
   genres_exclude?: string[]
   order_by?: string
-  sort?: string
+  sort?: 'asc' | 'desc'
   letter?: string
   producers?: number | null
   start_date?: string

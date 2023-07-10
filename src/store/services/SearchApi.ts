@@ -1,5 +1,5 @@
 import { IAnimeFilterQueries, IGetAnime } from '@store/types/FetchTypes'
-import { AnimeApi } from './getAnime'
+import { AnimeApi } from './AnimeApi'
 
 export interface seasonQuery {
   year: string
@@ -40,16 +40,16 @@ export const SearchAPI = AnimeApi.injectEndpoints({
         if (sfw) url += `sfw=${sfw}&`
         if (genres) url += `${genres.length !== 0 ? `genres=${genres}&` : ''}`
         if (order_by) url += `order_by=${order_by}&`
-        if (sort) url += `sort=${sort}&`
+        if (sort)
+          url += `sort=${order_by === 'popularity' ? (sort = 'asc') : sort}&`
         if (letter) url += `letter=${letter}&`
         if (producers) url += `producers=${producers}&`
         if (start_date !== '1980') url += `start_date=${start_date}-01-01&`
         if (end_date !== '2023') url += `end_date=${end_date}-01-01`
-        console.log(url)
         return { url }
       },
     }),
   }),
 })
 
-export const { endpoints } = SearchAPI
+export const { endpoints: searchEndpoints } = SearchAPI

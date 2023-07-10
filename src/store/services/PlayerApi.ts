@@ -7,7 +7,6 @@ interface PlayerApiEndpoints {
 }
 
 const animeUrl = (url: string) => {
-  console.log(url)
   return url.replace('https://www3.gogoanimes.fi/category/', '')
 }
 
@@ -23,4 +22,4 @@ export const PlayerApi = createApi({
   }),
 })
 
-export const { useGetAnimePlayerQuery } = PlayerApi
+export const { endpoints: playerEndpoints } = PlayerApi

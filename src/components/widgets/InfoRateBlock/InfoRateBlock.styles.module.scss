@@ -1,5 +1,8 @@
 @import "@styles/_variables";
+
 .anime-info__rate {
+	position: relative;
+
 	cursor: pointer;
 	margin-top: 12px;
 	display: flex;
@@ -8,7 +11,6 @@
 	width: clamp(100px, 100%, 300px);
 	height: 42px;
 	background-color: $blockActiveColor;
-	border-radius: 8px;
 	transition: all 0.2s ease-in-out;
 	&:hover {
 		background-color: $buttonColorPrimary;
@@ -27,6 +29,8 @@
 }
 
 .anime-info__addlist {
+	position: relative;
+
 	transition: all 0.2s ease-in-out;
 	&:hover {
 		background-color: $buttonColorPrimary;
@@ -40,7 +44,7 @@
 	height: 42px;
 	padding: 8px;
 	background-color: $blockActiveColor;
-	border-radius: 8px;
+
 	span {
 		margin-right: 4px;
 		font-weight: 700;

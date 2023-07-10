@@ -5,9 +5,8 @@ import { IData } from '@store/types/FetchTypes'
 import { ColorRating } from 'utils/Coloring/ColorRating'
 import { ColorStatus } from 'utils/Coloring/ColorStatus'
 
-import { useAppSelector } from 'hooks/redux'
-import styles from './AnimeCard.styles.module.scss'
 import { CatalogueLayoutType } from '@store/reducers/Catalogue/types'
+import styles from './AnimeCard.styles.module.scss'
 
 interface CatalogueCardProps {
   item: IData
@@ -30,7 +29,7 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
           <img
             loading="lazy"
             decoding="async"
-            src={item.images.webp.large_image_url}
+            src={item?.images?.webp?.large_image_url || ''}
             alt={item.title_english + 'poster'}
           />
           <div
@@ -69,7 +68,7 @@ export const AnimeCard: React.FC<CatalogueCardProps> = ({
           <img
             loading="lazy"
             decoding="async"
-            src={item.images.webp.large_image_url}
+            src={item?.images?.webp?.large_image_url || ''}
             alt={item.title_english + 'poster'}
           />
           <div

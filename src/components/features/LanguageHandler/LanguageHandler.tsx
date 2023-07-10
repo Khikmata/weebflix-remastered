@@ -1,4 +1,4 @@
-import languageIcon from '@assets/icons/LanguageIcon.svg'
+import { ReactComponent as LanguageIcon } from '@assets/icons/LanguageIcon.svg'
 import i18n from 'i18n/i18n'
 import { useEffect, useState } from 'react'
 import styles from './LanguageHandler.styles.module.scss'
@@ -17,7 +17,7 @@ export const LanguageHandler = () => {
 
   return (
     <button className={styles['language']} onClick={handleLanguageChange}>
-      <img width={32} src={languageIcon} alt="смена языка" />
+      <LanguageIcon />
     </button>
   )
 }

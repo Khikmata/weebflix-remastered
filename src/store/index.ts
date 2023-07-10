@@ -19,7 +19,7 @@ import { PlayerReducer } from './reducers/Player/PlayerSlice'
 import { CarouselReducer } from './reducers/Carousel/CarouselOptionsSlice'
 import { CatalogueReducer } from './reducers/Catalogue/CatalogueSlice'
 import { AnimeApi } from './services'
-import { PlayerApi } from './services/getPlayer'
+import { PlayerApi } from './services/PlayerApi'
 
 import 'react-toastify/dist/ReactToastify.css'
 

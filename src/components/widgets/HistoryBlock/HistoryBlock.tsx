@@ -1,6 +1,6 @@
-import starIcon from '@assets/icons/StarIcon.svg'
+import { ReactComponent as StarIcon } from '@assets/icons/StarIcon.svg'
 import { genreFilterActions } from '@store/reducers/Filters'
-import { getAnimeDetails } from '@store/services/getAnimeDetails'
+import { AnimeDetailsApi } from '@store/services/AnimeDetailsApi'
 import { IGenres } from '@store/types/DetailsTypes'
 import { useAppDispatch } from 'hooks/redux'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ export const HistoryBlock = () => {
     data: details,
     error: detailsErrors,
     isLoading: detailsLoading,
-  } = getAnimeDetails.useGetAnimeDetailsQuery('31043')
+  } = AnimeDetailsApi.useGetAnimeDetailsQuery('31043')
 
   const { t } = useTranslation()
 
@@ -40,7 +40,7 @@ export const HistoryBlock = () => {
       >
         <div className={styles['history__content__top']}>
           <p>{t('historyBlock_title')}</p>
-          <img loading="lazy" src={starIcon} alt={'rate it!'} />
+          <StarIcon />
         </div>
         <div className={styles['history__content__middle']}>
           <img

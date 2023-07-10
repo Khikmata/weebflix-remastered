@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Loading } from '@components/shared'
-import { getAnimeDetails } from '@store/services/getAnimeDetails'
+import { AnimeDetailsApi } from '@store/services/AnimeDetailsApi'
 import { IRelations } from '@store/types/DetailsTypes'
 import styles from './RelationBlock.styles.module.scss'
 
@@ -28,7 +28,7 @@ export const RelationBlock = (id: any) => {
     data: relationsData,
     error: relationsError,
     isLoading: relationsLoading,
-  } = getAnimeDetails.useGetAnimeRelationsQuery(id.id)
+  } = AnimeDetailsApi.useGetAnimeRelationsQuery(id.id)
 
   return (
     <div className={styles['relationBlock']}>

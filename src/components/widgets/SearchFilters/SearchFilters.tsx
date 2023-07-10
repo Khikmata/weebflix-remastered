@@ -1,20 +1,24 @@
-import dropdownIcon from '@assets/icons/DropdownIcon.svg'
-import filterIcon from '@assets/icons/FiltersIcon.svg'
-
+import { ReactComponent as DropdownIcon } from '@assets/icons/DropdownIcon.svg'
+import { ReactComponent as EraseIcon } from '@assets/icons/EraseIcon.svg'
+import { ReactComponent as FilterIcon } from '@assets/icons/FiltersIcon.svg'
 import styles from './SearchFilters.styles.module.scss'
 
 import { FilterDropdown } from '@components/features/FilterDropdown/FilterDropdown'
 import { RangeInput } from '@components/shared'
 import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice'
 import { dateFilterActions, scoreFilterActions } from '@store/reducers/Filters'
-import { getAnimeData } from '@store/services/getAnimeData'
+import { AnimeDataApi } from '@store/services/AnimeDataApi'
 import { useAnimate } from 'framer-motion'
 import { useAppDispatch } from 'hooks/redux'
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export const SearchFilters = memo(() => {
-  const { data: genresData } = getAnimeData.useGetAnimeGenresQuery()
+interface searchFilterProps {
+  clearFilters: () => void
+}
+
+export const SearchFilters = memo(({ clearFilters }: searchFilterProps) => {
+  const { data: genresData } = AnimeDataApi.useGetAnimeGenresQuery()
 
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
@@ -47,19 +51,21 @@ export const SearchFilters = memo(() => {
 
   return (
     <div className={styles['searchFilters']}>
-      <button
-        onClick={handleFiltersDropdown}
-        className={styles['searchFilters-title']}
-      >
-        <img width={16} src={filterIcon} alt="Фильтр картинка" />
-        {t('searchFilters_title')}
-        <img
-          className={styles['searchFilters-title__dropdown']}
-          src={dropdownIcon}
-          width={12}
-          alt="Выпадающее меню"
-        ></img>
-      </button>
+      <div className={styles['filters-top']}>
+        <button
+          onClick={handleFiltersDropdown}
+          className={styles['searchFilters-title']}
+        >
+          <FilterIcon />
+          {t('searchFilters_title')}
+        </button>
+        <div className={styles['filters-erase']}>
+          <button onClick={clearFilters}>
+            <EraseIcon />
+          </button>
+        </div>
+      </div>
+
       <div
         className={[
           styles['searchFilters-content'],

@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { AnimeApi } from '@store/services'
+import styles from './home.styles.module.scss'
 const HomePage = () => {
   const { t } = useTranslation()
 
@@ -37,7 +39,15 @@ const HomePage = () => {
     (state) => state.catalogue.activeCatalogueOptionIndex,
   )
 
-  useEffect(() => {})
+  const { data: currentSeason } = AnimeApi.useGetCurrentSeasonQuery()
+  const [triggerSeason, { data: upcomingSeason }] =
+    AnimeApi.useLazyGetUpcomingSeasonQuery({})
+
+  useEffect(() => {
+    if (activeCarouselOptionIndex === 1 && !upcomingSeason) {
+      triggerSeason()
+    }
+  }, [activeCarouselOptionIndex, triggerSeason, upcomingSeason])
 
   return (
     <>
@@ -47,7 +57,13 @@ const HomePage = () => {
           handleOptions={handleCarouselOptions}
           activeOption={activeCarouselOptionIndex}
         />
-        <AnimeCarousel />
+        <div className={styles['homepage__carousel']}>
+          <AnimeCarousel
+            data={
+              activeCarouselOptionIndex === 0 ? currentSeason : upcomingSeason
+            }
+          />
+        </div>
         {/* <TwoColumn>
         <div className={styles['home-content__left']}>
           <HistoryBlock />

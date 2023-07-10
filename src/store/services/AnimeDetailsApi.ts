@@ -1,8 +1,8 @@
 import { IImages, IRelations } from '@store/types/DetailsTypes'
 import { IDetails, IGetCharacters } from '@store/types/FetchTypes'
-import { AnimeApi } from './getAnime'
+import { AnimeApi } from './AnimeApi'
 
-export const getAnimeDetails = AnimeApi.injectEndpoints({
+export const AnimeDetailsApi = AnimeApi.injectEndpoints({
   endpoints: (builder) => ({
     getAnimeDetails: builder.query<IDetails, string>({
       query: (id) => ({ url: `/anime/${id}/full` }),
@@ -31,4 +31,4 @@ export const getAnimeDetails = AnimeApi.injectEndpoints({
     }),
   }),
 })
-export const { endpoints } = getAnimeDetails
+export const { endpoints: detailsEndpoints } = AnimeDetailsApi

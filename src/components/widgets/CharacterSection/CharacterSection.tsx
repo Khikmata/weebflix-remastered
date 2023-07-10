@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { getAnimeDetails } from '@store/services/getAnimeDetails'
+import { AnimeDetailsApi } from '@store/services/AnimeDetailsApi'
 import { IGetCharacters } from '@store/types/FetchTypes'
 import styles from './CharacterSection.styles.module.scss'
 
@@ -17,7 +17,7 @@ export const CharacterSection: React.FC<characterSectionProps> = (id) => {
     }, 500)
   }, [])
 
-  const { data: characterData } = getAnimeDetails.useGetAnimeCharactersQuery(
+  const { data: characterData } = AnimeDetailsApi.useGetAnimeCharactersQuery(
     id.id,
     {
       skip,

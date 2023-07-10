@@ -1,18 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
+export type sortTypes = 'asc' | 'desc'
+
 interface sortFilterProps {
-  sortType: string
+  sortType: sortTypes
 }
 
 const initialState: sortFilterProps = {
-  sortType: 'asc',
+  sortType: 'desc',
 }
 
 const slice = createSlice({
   name: 'sortFilter',
   initialState,
   reducers: {
-    setSortType: (state, action: PayloadAction<string>) => {
+    setSortType: (state, action: PayloadAction<sortTypes>) => {
       state.sortType = action.payload
     },
   },

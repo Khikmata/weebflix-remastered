@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useState } from 'react'
 
-import Dropdown from 'assets/icons/DropdownIcon.svg'
+import { ReactComponent as DropdownIcon } from 'assets/icons/DropdownIcon.svg'
 import styles from './SelectComponent.styles.module.scss'
 
 import { DropdownTypeEnum } from '@utils/constants/AnimeData'
@@ -55,12 +55,7 @@ export const Select = memo(({ dropdownData }: SelectComponentProps) => {
         className={styles['selectComponent-container']}
       >
         <p>{displayedValue}</p>
-        <img
-          src={Dropdown}
-          width={12}
-          alt="Выпадающее меню"
-          className={styles[openDropdown ? 'dropdown-icon__active' : '']}
-        />
+        <DropdownIcon />
       </button>
       <div
         className={[

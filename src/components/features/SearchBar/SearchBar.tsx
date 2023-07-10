@@ -1,4 +1,4 @@
-import forwardIcon from '@assets/icons/ForwardIcon.svg'
+import { ReactComponent as ForwardIcon } from '@assets/icons/ForwardIcon.svg'
 import { searchFilterActions } from '@store/reducers/Filters'
 import { useAppDispatch } from 'hooks/redux'
 import { useDebounce } from 'hooks/useDebounce'
@@ -32,7 +32,6 @@ export const SearchBar = memo(
 
     useEffect(() => {
       updateSearchInputStore(searchInput)
-      console.log(searchInput)
     }, [searchInput, updateSearchInputStore])
     return (
       <>
@@ -59,9 +58,7 @@ export const SearchBar = memo(
             ].join(' ')}
             onClick={handleSearchClear}
           >
-            {showTransition && (
-              <img width={12} src={forwardIcon} alt="Искать"></img>
-            )}
+            {showTransition && <ForwardIcon />}
           </Link>
         </form>
       </>

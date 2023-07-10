@@ -1,12 +1,40 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { IData } from '@store/types/FetchTypes'
 
+interface IFavourites {
+  mal_id: string
+}
+interface IWatchlistState {
+  mal_id: string
+}
+
+interface IUserDetails {
+  favourites: IFavourites[]
+  watchStateList: IWatchlistState[]
+}
+
+interface IComment {
+  user: IUser
+  anime: IData
+  content: string
+  timestamp: Date
+}
 interface IUser {
   _id: string
-  userId: string
+  username: string
+  profileImage: string
+  friends: IUser[]
+  role: 'admin' | 'user'
+  comments: IComment[]
+  favoriteList: IData[]
+  watchList: IData[]
+  starList: IData[]
+  createdAt: Date
+  updatedAt: Date
 }
 export interface AuthState {
   isOpen: boolean
-  user: null | string
+  user: null | IUser
 }
 
 const initialState: AuthState = {
@@ -23,12 +51,9 @@ const slice = createSlice({
     },
     authUser: (state, action) => {
       state.user = action.payload
-      window.localStorage.setItem('token', action.payload)
-      console.log(state.user)
     },
     logout: (state) => {
       state.user = null
-      window.localStorage.removeItem('token')
     },
   },
 })

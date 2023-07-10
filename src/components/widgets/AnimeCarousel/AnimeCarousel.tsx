@@ -1,40 +1,27 @@
-import { Suspense, memo, useEffect, useMemo } from 'react'
+import { memo } from 'react'
 import { FreeMode, Grid, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { IData } from '@store/types/FetchTypes'
-import { useAppSelector } from 'hooks/redux'
 import styles from './AnimeCarousel.styles.module.scss'
 
-import nextArrow from '@assets/icons/NextArrowIcon.svg'
-import prevArrow from '@assets/icons/PrevArrowIcon.svg'
-import { AnimeApi } from '@store/services'
+import { ReactComponent as NextArrow } from '@assets/icons/NextArrowIcon.svg'
+import { ReactComponent as PrevArrow } from '@assets/icons/PrevArrowIcon.svg'
 
-import { AnimeCard, Loading } from '@components/shared'
+import { AnimeCard } from '@components/shared'
+
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import { breakpointValues } from './constants'
 
-export const AnimeCarousel: React.FC = memo(() => {
-  const selectedCarouselOption = useAppSelector(
-    (state) => state.carousel.activeCarouselOptionIndex,
-  )
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-  const { data: currentSeason } = AnimeApi.useGetCurrentSeasonQuery()
-  const [triggerSeason, { data: upcomingSeason }] =
-    AnimeApi.useLazyGetUpcomingSeasonQuery({})
+interface AnimeCarouselProps {
+  data: IData[] | null | undefined
+}
 
-  const activeFilter = useMemo(
-    () => [currentSeason, upcomingSeason],
-    [currentSeason, upcomingSeason],
-  )
-
-  useEffect(() => {
-    if (selectedCarouselOption === 1 && !upcomingSeason) {
-      triggerSeason()
-    }
-  }, [selectedCarouselOption, triggerSeason, upcomingSeason])
-
+export const AnimeCarousel = memo(({ data }: AnimeCarouselProps) => {
   return (
     <div className={styles.animeCarousel}>
       <Swiper
@@ -54,15 +41,26 @@ export const AnimeCarousel: React.FC = memo(() => {
         breakpoints={breakpointValues}
       >
         <PrevPaginationButton />
-        {activeFilter[selectedCarouselOption]?.map(
-          (item: IData, index: number) => (
-            <SwiperSlide key={index}>
-              <Suspense fallback={<Loading />}>
+        {data
+          ? data?.map((item: IData, index: number) => (
+              <SwiperSlide key={index}>
                 <AnimeCard item={item} />
-              </Suspense>
-            </SwiperSlide>
-          ),
-        )}
+              </SwiperSlide>
+            ))
+          : Array.from({ length: 6 }).map((item, index: number) => (
+              <SwiperSlide key={index}>
+                <Skeleton
+                  baseColor="gray"
+                  highlightColor="lightgray"
+                  className={styles['skeleton']}
+                ></Skeleton>
+                <Skeleton
+                  baseColor="gray"
+                  highlightColor="lightgray"
+                  className={styles['skeleton__title']}
+                ></Skeleton>
+              </SwiperSlide>
+            ))}
         <NextPaginationButton />
       </Swiper>
     </div>
@@ -72,7 +70,7 @@ export const AnimeCarousel: React.FC = memo(() => {
 const PrevPaginationButton = () => {
   return (
     <button className="prev-button">
-      <img width={8} src={prevArrow} alt="" />
+      <PrevArrow />
     </button>
   )
 }
@@ -80,7 +78,7 @@ const PrevPaginationButton = () => {
 const NextPaginationButton = () => {
   return (
     <button className="next-button">
-      <img width={8} src={nextArrow} alt="" />
+      <NextArrow />
     </button>
   )
 }

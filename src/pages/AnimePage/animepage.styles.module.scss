@@ -12,9 +12,27 @@
   &__image {
     margin-top: 12px;
     width: 240px;
-    img {
+    position: relative;
+    &-src {
       width: 100%;
+      min-width: 140px;
       object-fit: cover;
+    }
+  }
+  &__favorite {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    padding: 4px;
+
+    &:hover {
+      svg {
+        path {
+          fill: $redColor;
+        }
+      }
     }
   }
   &__rightside {
@@ -29,7 +47,7 @@
       border-right: 1px solid $halfopacity;
       margin-right: 12px;
       padding-right: 12px;
-      font-size: 24px;
+      font-size: clamp(18px, calc(1vw + 1vh), 24px);
       font-weight: 700;
     }
     span {
@@ -45,15 +63,17 @@
       border-right: 1px solid $halfopacity;
       margin-right: 12px;
       padding-right: 12px;
-      font-size: 24px;
+      font-size: calc(2vw + 1vh);
       font-weight: 700;
     }
     span {
       color: $gray;
     }
   }
-  &_mobile {
-    margin-left: 12px;
+  &__mobile {
+    @media (max-width: 800px) {
+      margin-left: 12px;
+    }
   }
 }
 

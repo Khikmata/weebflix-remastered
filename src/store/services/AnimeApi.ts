@@ -13,7 +13,6 @@ const staggeredBaseQuery = retry(
 
 export const AnimeApi = createApi({
   reducerPath: 'animeAPI',
-  tagTypes: ['Player, Search'],
   baseQuery: staggeredBaseQuery,
   endpoints: (builder) => ({
     getCurrentSeason: builder.query<IData[], void>({
@@ -28,9 +27,15 @@ export const AnimeApi = createApi({
       }),
       transformResponse: (response: { data: IData[] }) => response.data,
     }),
-    getAnimeBySeason: builder.query<IData[], string>({
-      query: (seasonQuery) => ({
-        url: `/seasons/${seasonQuery}`,
+    getAnimeBySeason: builder.query({
+      query: ({
+        seasonQuery,
+        page,
+      }: {
+        seasonQuery: string
+        page: number
+      }) => ({
+        url: `/seasons/${seasonQuery}?page=${page}`,
       }),
       transformResponse: (response: { data: IData[] }) => {
         return response.data
@@ -56,4 +61,4 @@ export const AnimeApi = createApi({
   }),
 })
 
-export const { endpoints } = AnimeApi
+export const { endpoints: animeEndpoints } = AnimeApi

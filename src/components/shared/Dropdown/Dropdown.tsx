@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from './Dropdown.styles.module.scss'
 
 interface DropdownOption {
@@ -17,6 +17,10 @@ export const Dropdown: React.FC<DropdownProps> = ({
   open,
   onSelect,
 }) => {
+  const dropdownRef = useRef(null)
+
+  //useOutsideClick(dropdownRef, onselect, open)
+
   const handleOptionClick = (option: DropdownOption) => {
     onSelect(option.value)
   }
@@ -26,7 +30,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   }
 
   return (
-    <ul className={styles['dropdown-options']}>
+    <ul ref={dropdownRef} className={styles['dropdown-options']}>
       {options.map((option) => (
         <li key={option.value} onClick={() => handleOptionClick(option)}>
           {option.label}

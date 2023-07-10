@@ -1,8 +1,8 @@
 import { IGenres } from '@store/types/DetailsTypes'
 import { IProducers, ISeasons } from '@store/types/FetchTypes'
-import { AnimeApi } from './getAnime'
+import { AnimeApi } from './AnimeApi'
 
-export const getAnimeData = AnimeApi.injectEndpoints({
+export const AnimeDataApi = AnimeApi.injectEndpoints({
   endpoints: (builder) => ({
     getAnimeSeasons: builder.query<ISeasons[], void | string>({
       query: () => ({ url: `/seasons` }),
@@ -24,4 +24,4 @@ export const getAnimeData = AnimeApi.injectEndpoints({
     }),
   }),
 })
-export const { endpoints } = getAnimeData
+export const { endpoints: dataEndpoints } = AnimeDataApi

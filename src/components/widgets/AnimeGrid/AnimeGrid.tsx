@@ -3,12 +3,13 @@ import React, { Suspense, memo, useEffect, useState } from 'react'
 import { Pagination } from '@components/features'
 import { AnimeCard, Loading } from '@components/shared'
 import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice'
-import { AnimeApi } from '@store/services'
+import { AnimeApi, AnimeDataApi } from '@store/services'
 
 import { AnimeGridWrapper } from '@components/shared/AnimeGridWrapper/AnimeGridWrapper'
 import { CatalogueLayoutType } from '@store/reducers/Catalogue/types'
-import { getAnimeData } from '@store/services/getAnimeData'
-import { SearchAPI } from '@store/services/getSearch'
+import { dateFilterActions } from '@store/reducers/Filters'
+import { sortFilterActions } from '@store/reducers/Filters/SortFilterSlice'
+import { SearchAPI } from '@store/services/SearchApi'
 import { IData } from '@store/types/FetchTypes'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -60,12 +61,12 @@ export const AnimeGrid = memo(({ title }: { title: string }) => {
         : 'true',
   })
 
-  const { data: seasonsData } = getAnimeData.useGetAnimeSeasonsQuery()
+  const { data: seasonsData } = AnimeDataApi.useGetAnimeSeasonsQuery()
   const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(
-    searchFilters.searchQuery,
+    { seasonQuery: seasonFilters.seasonQuery, page: pages },
     { skip: seasonFilters.seasonQuery === '' },
   )
-  const { data: producersData } = getAnimeData.useGetAnimeProducersQuery()
+  const { data: producersData } = AnimeDataApi.useGetAnimeProducersQuery()
 
   const paginationData = SearchData?.pagination
 
@@ -77,6 +78,12 @@ export const AnimeGrid = memo(({ title }: { title: string }) => {
 
   const handleNextPage = () => {
     setPages(paginationData?.has_next_page ? pages + 1 : pages)
+  }
+
+  const handleClearFilters = () => {
+    dispatch(dateFilterActions.setDateFrom(1980))
+    dispatch(dateFilterActions.setDateTo(2023))
+    dispatch(sortFilterActions.setSortType('desc'))
   }
 
   useEffect(() => {
@@ -112,18 +119,18 @@ export const AnimeGrid = memo(({ title }: { title: string }) => {
                   <MemoizedAnimeCard item={item} activeLayout={activeLayout} />
                 </Suspense>
               ))}
-            {seasonsData &&
-              SearchData?.data.length === 0 &&
-              seasonFilters.seasonQuery === '' && (
-                <strong>Ничего не найдено ❌</strong>
-              )}
             {animeSeasonData?.map((item: IData) => (
               <Suspense key={item.mal_id} fallback={<Loading />}>
                 <MemoizedAnimeCard item={item} activeLayout={activeLayout} />
               </Suspense>
             ))}
+            {seasonsData &&
+              SearchData?.data.length === 0 &&
+              seasonFilters.seasonQuery === '' && (
+                <strong>Ничего не найдено ❌</strong>
+              )}
           </div>
-          <SearchFilters />
+          <SearchFilters clearFilters={handleClearFilters} />
         </div>
 
         <Pagination

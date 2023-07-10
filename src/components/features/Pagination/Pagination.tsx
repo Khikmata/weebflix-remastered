@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
 import styles from './Pagination.styles.module.scss'
 
-import nextArrow from '@assets/icons/NextArrowIcon.svg'
-import prevArrow from '@assets/icons/PrevArrowIcon.svg'
+import { ReactComponent as NextArrow } from '@assets/icons/NextArrowIcon.svg'
+import { ReactComponent as PrevArrow } from '@assets/icons/PrevArrowIcon.svg'
 
 interface PaginationProps {
   handleNextPage: () => void
@@ -22,7 +22,7 @@ export const Pagination: React.FC<PaginationProps> = memo(
           ].join(' ')}
           onClick={handlePrevPage}
         >
-          <img width={12} src={prevArrow} alt="прошлая страница" />
+          <PrevArrow />
         </button>
         <button
           className={[
@@ -31,7 +31,7 @@ export const Pagination: React.FC<PaginationProps> = memo(
           ].join(' ')}
           onClick={handleNextPage}
         >
-          <img width={12} src={nextArrow} alt="след страница" />
+          <NextArrow />
         </button>
       </div>
     )

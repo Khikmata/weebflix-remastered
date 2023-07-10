@@ -20,7 +20,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'ru',
-    debug: true,
+    debug: false,
     resources,
 
     backend: {

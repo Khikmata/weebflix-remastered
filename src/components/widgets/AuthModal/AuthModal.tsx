@@ -1,4 +1,4 @@
-import closeIcon from '@assets/icons/CloseIcon.svg'
+import { ReactComponent as CloseIcon } from '@assets/icons/CloseIcon.svg'
 import { Modal } from '@components/features'
 import { authModalAction } from '@store/reducers/Auth/AuthModalSlice'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
@@ -33,7 +33,7 @@ export const AuthModal = () => {
         <div className={styles['auth-top']}>
           <b>Авторизация</b>
           <button className={styles['auth-top__close']} onClick={handleClose}>
-            <img src={closeIcon} width={12} alt={'закрыть'} />
+            <CloseIcon />
           </button>
         </div>
         <div className={styles['auth-middle']}>

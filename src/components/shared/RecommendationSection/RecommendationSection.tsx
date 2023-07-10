@@ -1,5 +1,5 @@
-import nextArrowIcon from '@assets/icons/NextArrowIcon.svg'
-import prevArrowIcon from '@assets/icons/PrevArrowIcon.svg'
+import { ReactComponent as NextArrowIcon } from '@assets/icons/NextArrowIcon.svg'
+import { ReactComponent as PrevArrowIcon } from '@assets/icons/PrevArrowIcon.svg'
 import { Loading } from '@components/shared'
 import { AnimeApi } from '@store/services'
 import { IRecommendations } from '@store/types/FetchTypes'
@@ -39,7 +39,7 @@ export const RecommendationSection: React.FC = () => {
             breakpoints={breakpoints}
           >
             <button className="prev-button">
-              <img width={8} src={prevArrowIcon} alt="" />
+              <PrevArrowIcon />
             </button>
             {recomendationLoading && (
               <>
@@ -67,7 +67,7 @@ export const RecommendationSection: React.FC = () => {
               </SwiperSlide>
             ))}
             <button className="next-button">
-              <img height={8} width={8} src={nextArrowIcon} alt="" />
+              <NextArrowIcon />
             </button>
           </Swiper>
         </div>

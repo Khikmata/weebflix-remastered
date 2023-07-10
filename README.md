@@ -1,14 +1,12 @@
-# [Деплой](https://weebflix-remastered.vercel.app/)
+# [Деплой (без бекенда)](https://weebflix-remastered.vercel.app/)
 
 ---
 
-1. Некоторые фильтры могут не работать из-за проблем в самом апишнике
-
-2. Плеер грузится только при запуске локального бекенда в репозитории https://github.com/Khikmata/weebflix-backend
+## !Большинство функционала работает только с запущенным бекендом: https://github.com/Khikmata/weebflix-backend!
 
 ## Технологии:
 
-`React, typescript, rtk(rtkq), css-modules(scss), webpack, i18n, react-error-bounary router-dom, swiper, axios`
+`React, typescript, rtk(rtkq), css-modules(scss), framer-motion, react-hook-form + zod, react-error-bounary, router-dom, swiper, axios, craco-webpack, i18n, react-toastify, dayjs`
 
 ---
 
@@ -30,13 +28,15 @@
 
 ## Функционал
 
-**- RTK query для фетча данных с разных эндпоинтов**
+**- RTKQ для получения данных с разных эндпоинтов**
 
 **- Слайдеры**
 
 **- Переход по карточке**
 
-**- Фильтрация**
+**- Фильтры (по оценке, датам, жанрам, типу, рейтингу, сезону, студиям, статусу)**
+
+**- Упорядочивание, сортировка**
 
 **- Пагинация**
 
@@ -46,6 +46,10 @@
 
 **- Мультиязычность**
 
-**- Переключение каталога между грид/лист модом**
+**- Переключение каталога между разными вариантами отображения**
 
----
+**- Авторизация**
+
+**- Профиль пользователя**
+
+**- Анимации, контент-лоудеры, уведомления**

@@ -1,9 +1,18 @@
 @import "@styles/variables";
 
 .animeCarousel {
-  margin-bottom: 64px;
   padding: 12px 24px;
   display: flex;
-  height: clamp(120px, calc(35vw + 17vh), 330px);
-  @include block;
+  height: 100%;
+}
+
+.skeleton {
+  margin-right: 300px;
+  height: 85%;
+  width: clamp(70px, 100%, 180px);
+}
+
+.skeleton__title {
+  height: 10%;
+  width: clamp(70px, 100%, 180px);
 }

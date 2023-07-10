@@ -21,6 +21,10 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
         test: /\.module\.scss$/,
         use: [
           MiniCssExtractPlugin.loader, // Extract CSS into separate file

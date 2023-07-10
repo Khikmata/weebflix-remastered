@@ -1,4 +1,4 @@
-import profileIcon from '@assets/icons/ProfileIcon.svg'
+import { ReactComponent as ProfileIcon } from '@assets/icons/ProfileIcon.svg'
 import { Dropdown } from '@components/shared/Dropdown/Dropdown'
 import { authModalAction } from '@store/reducers/Auth/AuthModalSlice'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
@@ -13,34 +13,36 @@ export const ProfileHandler = () => {
 
   const user = useAppSelector((state) => state.auth.user)
 
-  const openProfile = () => {
+  const toggleProfile = () => {
     setProfileDropdown((state) => (state = !state))
   }
 
   const handleProfile = async (value: string) => {
-    if (!user) {
+    toggleProfile()
+    if (value === 'login') {
       dispatch(authModalAction.setModalOpen(true))
-      return
     }
     if (value === 'logout') {
       dispatch(authModalAction.logout)
+      window.localStorage.removeItem('token')
+      window.location.reload()
     }
     if (value === 'profile') {
       navigate('/profile')
     }
-    setProfileDropdown(false)
+    toggleProfile()
   }
 
   const authorizedOptions = [
     { value: 'profile', label: 'profile' },
     { value: 'logout', label: 'logout' },
   ]
-  const deauthorizedOptions = [{ value: 'Log in', label: 'login' }]
+  const deauthorizedOptions = [{ value: 'login', label: 'login' }]
 
   useEffect(() => {}, [user])
   return (
-    <button onClick={openProfile} className={styles['profile']}>
-      <img width={32} src={profileIcon} alt="Профиль"></img>
+    <button onClick={toggleProfile} className={styles['profile']}>
+      <ProfileIcon />
       {user ? (
         <Dropdown
           open={profileDropdown}

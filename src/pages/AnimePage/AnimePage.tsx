@@ -1,3 +1,4 @@
+import { ReactComponent as FavoriteIcon } from '@assets/icons/Favorite.svg'
 import { Modal } from '@components/features'
 import { Button, Loading } from '@components/shared'
 import { PageWrapper } from '@components/shared/PageWrapper/PageWrapper'
@@ -9,17 +10,17 @@ import {
   RelationBlock,
 } from '@components/widgets'
 import { InfoRateBlock } from '@components/widgets/InfoRateBlock/InfoRateBlock'
-import { getAnimeDetails } from '@store/services/getAnimeDetails'
-import { PlayerApi } from '@store/services/getPlayer'
+import { AnimeDetailsApi } from '@store/services'
+import { PlayerApi } from '@store/services/PlayerApi'
 import axios from 'axios'
 import { useAppSelector } from 'hooks/redux'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactPlayer from 'react-player'
 import { useParams } from 'react-router-dom'
 import styles from './animepage.styles.module.scss'
 
-const AnimePage = () => {
+const AnimePage = memo(() => {
   const [skip, setSkip] = useState<boolean>(true)
   const [urlQuery, setUrlQuery] = useState<string>('')
 
@@ -32,9 +33,9 @@ const AnimePage = () => {
     setOpenTrailerModal((open) => (open = !open))
   }
 
-  const {
-    data: details,
-  } = getAnimeDetails.useGetAnimeDetailsQuery(id ? id : '')
+  const { data: details } = AnimeDetailsApi.useGetAnimeDetailsQuery(
+    id ? id : '',
+  )
 
   const {
     data: playerData,
@@ -63,8 +64,32 @@ const AnimePage = () => {
     fetchAnimeDetails()
   }, [details])
 
+  const user = useAppSelector((state) => state.auth.user)
+
+  const setFavorite = async () => {
+    try {
+      await axios.post('http://localhost:4001/favorites', {
+        anime: details,
+        userId: user?._id,
+      })
+    } catch (error: any) {
+      console.log(error?.message)
+    }
+  }
+
+  // const setWatchstate = async () => {
+  //   try {
+  //     await axios.post('http://localhost:4001/watchlist', {
+  //       user: user,
+  //       animeId: details?.mal_id,
+  //     })
+  //   } catch (error: any) {
+  //     console.log(error?.message)
+  //   }
+  // }
+
   useEffect(() => {
-    if (urlQuery !== '') {
+    if (urlQuery !== '' && details?.score) {
       setSkip(false)
     }
   }, [details, urlQuery])
@@ -81,17 +106,30 @@ const AnimePage = () => {
           <div className={styles['anime-info__leftside']}>
             <div className={styles['anime-info__image']}>
               <img
+                className={styles['anime-info__image-src']}
                 loading="lazy"
                 src={details?.images.webp.large_image_url}
                 alt="обложка"
               />
+              <button
+                onClick={setFavorite}
+                className={styles['anime-info__favorite']}
+              >
+                <FavoriteIcon />
+                {/* <img
+
+                  loading="lazy"
+                  src={favoriteIcon}
+                  alt="favorite"
+                /> */}
+              </button>
             </div>
-            <div className={styles['anime-info_mobile']}>
+            <div className={styles['anime-info__mobile']}>
               <div className={styles['anime-info-title__mobile']}>
                 <p>{details?.title_english || details?.title}</p>
                 <span> {details?.title_japanese}</span>
               </div>
-              <InfoRateBlock />
+              <InfoRateBlock details={details} />
             </div>
           </div>
           <div className={styles['anime-info__rightside']}>
@@ -141,6 +179,6 @@ const AnimePage = () => {
       {playerError && <p>Произошла ошибка при загрузке плеера.</p>}
     </PageWrapper>
   )
-}
+})
 
 export default AnimePage

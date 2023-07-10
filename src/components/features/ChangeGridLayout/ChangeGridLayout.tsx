@@ -1,5 +1,5 @@
-import gridIcon from '@assets/icons/GridIcon.svg'
-import listIcon from '@assets/icons/ListIcon.svg'
+import { ReactComponent as GridIcon } from '@assets/icons/GridIcon.svg'
+import { ReactComponent as ListIcon } from '@assets/icons/ListIcon.svg'
 import { CatalogueActions } from '@store/reducers/Catalogue/CatalogueSlice'
 import { CatalogueLayoutType } from '@store/reducers/Catalogue/types'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
@@ -18,13 +18,13 @@ export const ChangeGridLayout = () => {
         className={styles[activeLayout === 'grid' ? 'active' : '']}
         onClick={() => handleChangeLayout('grid')}
       >
-        <img src={gridIcon} width={22} alt="Сеточная" />
+        <GridIcon />
       </button>
       <button
         className={styles[activeLayout === 'list' ? 'active' : '']}
         onClick={() => handleChangeLayout('list')}
       >
-        <img src={listIcon} width={24} alt="Таблицей" />
+        <ListIcon />
       </button>
     </div>
   )
