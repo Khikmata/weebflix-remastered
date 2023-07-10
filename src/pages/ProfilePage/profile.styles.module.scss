@@ -75,10 +75,22 @@
 
 .favorite {
 	background-color: $blockActiveColor;
-	height: 220px;
+	height: 300px;
 	border-radius: 12px;
-	padding: 24px;
+	padding: 12px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
 	&__title {
 		font-size: 24px;
+		margin-bottom: 12px;
+	}
+	&__card {
+		padding: 12px;
+		width: clamp(70px, 100%, 180px);
+		margin-right: 12px;
+		margin-bottom: 8px;
 	}
 }

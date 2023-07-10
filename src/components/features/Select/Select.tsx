@@ -55,7 +55,9 @@ export const Select = memo(({ dropdownData }: SelectComponentProps) => {
         className={styles['selectComponent-container']}
       >
         <p>{displayedValue}</p>
-        <DropdownIcon />
+        <DropdownIcon
+          className={`${openDropdown ? 'dropdown-icon__active' : ''}`}
+        />
       </button>
       <div
         className={[

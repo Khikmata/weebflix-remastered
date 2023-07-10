@@ -33,7 +33,7 @@ export const AuthModal = () => {
         <div className={styles['auth-top']}>
           <b>Авторизация</b>
           <button className={styles['auth-top__close']} onClick={handleClose}>
-            <CloseIcon />
+            <CloseIcon className={'auth-close'} />
           </button>
         </div>
         <div className={styles['auth-middle']}>

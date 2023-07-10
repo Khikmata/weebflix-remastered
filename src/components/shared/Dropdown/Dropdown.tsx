@@ -10,12 +10,14 @@ interface DropdownProps {
   options: DropdownOption[]
   open: boolean
   onSelect: (value: string) => void
+  direction?: 'vertical' | 'horizontal'
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
   options,
   open,
   onSelect,
+  direction,
 }) => {
   const dropdownRef = useRef(null)
 
@@ -30,7 +32,11 @@ export const Dropdown: React.FC<DropdownProps> = ({
   }
 
   return (
-    <ul ref={dropdownRef} className={styles['dropdown-options']}>
+    <ul
+      ref={dropdownRef}
+      className={styles['dropdown-options']}
+      style={{ flexDirection: direction === 'vertical' ? 'column' : 'row' }}
+    >
       {options.map((option) => (
         <li key={option.value} onClick={() => handleOptionClick(option)}>
           {option.label}

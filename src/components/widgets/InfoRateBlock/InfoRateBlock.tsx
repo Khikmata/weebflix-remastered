@@ -75,6 +75,7 @@ export const InfoRateBlock = ({ details }: InfoRateBlockProps) => {
           onSelect={handleSelectRate}
           open={rateDropdown}
           options={rateOptions}
+          direction={'horizontal'}
         />
       </button>
       <button

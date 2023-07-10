@@ -16,8 +16,14 @@
 		justify-content: center;
 		align-items: center;
 
+		&:hover {
+			background-color: $halfopacity;
+		}
 		&.disabled {
 			opacity: 0.4;
+			&:hover {
+				background-color: $blockActiveColor;
+			}
 		}
 	}
 }

@@ -1,5 +1,4 @@
-import { PageWrapper } from '@components/shared'
-import { AnimeCarousel } from '@components/widgets'
+import { AnimeCard, PageWrapper } from '@components/shared'
 import dayjs from 'dayjs'
 import { useAppSelector } from 'hooks/redux'
 import { useEffect } from 'react'
@@ -56,9 +55,13 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
+      <p className={styles['favorite__title']}>Favorite</p>
       <div className={styles['favorite']}>
-        <p className={styles['favorite__title']}>Favorite</p>
-        <AnimeCarousel data={user?.favoriteList} />
+        {user?.favoriteList.map((favItem) => (
+          <div className={styles['favorite__card']}>
+            <AnimeCard item={favItem} />
+          </div>
+        ))}
       </div>
     </PageWrapper>
   )
