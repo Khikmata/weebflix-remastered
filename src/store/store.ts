@@ -22,6 +22,7 @@ import { AnimeApi } from './services'
 import { PlayerApi } from './services/PlayerApi'
 
 import 'react-toastify/dist/ReactToastify.css'
+import { MobileReducer } from './reducers/Mobile/Mobile'
 
 const filterReducer = combineReducers({
   dateFilters: dateFilterReducer,
@@ -42,15 +43,12 @@ const rootReducer = combineReducers({
   [PlayerApi.reducerPath]: PlayerApi.reducer,
 
   dropdownData: DropdownDataReducer,
-
   carousel: CarouselReducer,
   catalogue: CatalogueReducer,
-
   player: PlayerReducer,
-
   auth: authModalReducer,
-
-  filterReducer,
+  mobile: MobileReducer,
+  filter: filterReducer,
 })
 
 export const store = configureStore({

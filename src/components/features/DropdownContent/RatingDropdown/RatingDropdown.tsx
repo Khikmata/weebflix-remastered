@@ -10,7 +10,7 @@ import { ratingFilterActions } from 'store/reducers/Filters'
 
 export const RatingDropdown = memo(() => {
   const activeRating = useAppSelector(
-    (state) => state.filterReducer.ratingFilters.ratingDisplay,
+    (state) => state.filter.ratingFilters.ratingDisplay,
   )
   const dispatch = useAppDispatch()
 

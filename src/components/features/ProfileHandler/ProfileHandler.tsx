@@ -2,11 +2,11 @@ import { ReactComponent as ProfileIcon } from '@assets/icons/ProfileIcon.svg'
 import { Dropdown } from '@components/shared/Dropdown/Dropdown'
 import { authModalAction } from '@store/reducers/Auth/AuthModalSlice'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './ProfileHandler.styles.module.scss'
 
-export const ProfileHandler = () => {
+export const ProfileHandler = memo(() => {
   const [profileDropdown, setProfileDropdown] = useState(false)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ export const ProfileHandler = () => {
     setProfileDropdown((state) => (state = !state))
   }
 
-  const handleProfile = async (value: string) => {
+  const handleProfile = (value: string) => {
     toggleProfile()
     if (value === 'login') {
       dispatch(authModalAction.setModalOpen(true))
@@ -30,6 +30,7 @@ export const ProfileHandler = () => {
     if (value === 'profile') {
       navigate('/profile')
     }
+    console.log('handle profile worked')
     toggleProfile()
   }
 
@@ -58,4 +59,4 @@ export const ProfileHandler = () => {
       )}
     </button>
   )
-}
+})

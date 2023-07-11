@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import styles from './InfoRateBlock.styles.module.scss'
+import { BACKEND_BASE_URL } from '@components/shared/Constants/Constants'
 
 interface InfoRateBlockProps {
   details: IDetails | undefined
@@ -44,7 +45,7 @@ export const InfoRateBlock = ({ details }: InfoRateBlockProps) => {
       if (!user) {
         return
       }
-      await axios.post('http://localhost:4001/star', {
+      await axios.post(BACKEND_BASE_URL + 'star', {
         animeData: details,
         myRating: rating,
         userId: user._id,

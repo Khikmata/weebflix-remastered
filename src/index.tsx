@@ -1,10 +1,8 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
 import App from './App'
-import ScrollToTop from './hooks/useScrollToTop'
-import { store } from './store'
+import { store } from './store/store'
 
 import { ErrorPopup, LoadingBlock } from '@components/widgets/index'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -20,22 +18,19 @@ root.render(
     <ErrorBoundary FallbackComponent={ErrorPopup}>
       <Suspense fallback={<LoadingBlock />}>
         <Provider store={store}>
-          <BrowserRouter>
-            <ScrollToTop />
-            <App />
-            <ToastContainer
-              position="bottom-right"
-              autoClose={2000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="colored"
-            />
-          </BrowserRouter>
+          <App />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
         </Provider>
       </Suspense>
     </ErrorBoundary>

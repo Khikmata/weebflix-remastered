@@ -1,17 +1,16 @@
+import { LoadingBlock } from '@components/widgets'
 import { AuthModal } from '@components/widgets/AuthModal/AuthModal'
 import { Navbar } from 'components/features'
+import { Outlet, useNavigation } from 'react-router-dom'
 
-interface LayoutProps {
-  children?: React.ReactElement
-}
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout = () => {
+  const navigation = useNavigation()
   return (
     <>
-      <>
-        <AuthModal />
-        <Navbar />
-      </>
-      <main>{children}</main>
+      {navigation.state === 'loading' && <LoadingBlock />}
+      <Navbar />
+      <AuthModal />
+      <Outlet />
     </>
   )
 }

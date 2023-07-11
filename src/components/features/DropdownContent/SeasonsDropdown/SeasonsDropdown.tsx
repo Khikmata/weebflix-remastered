@@ -9,11 +9,8 @@ import { seasonFilterActions } from 'store/reducers/Filters'
 export const SeasonsDropdown = memo(() => {
   const dispatch = useAppDispatch()
 
-  const activeYear = useAppSelector(
-    (state) => state.filterReducer.seasonFilters.year,
-  )
-  const activeSeason = useAppSelector(
-    (state) => state.filterReducer.seasonFilters.season,
+  const { season: activeSeason, year: activeYear } = useAppSelector(
+    (state) => state.filter.seasonFilters,
   )
 
   const seasonsData = useAppSelector((state) => state.dropdownData.seasonsData)

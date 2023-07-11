@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { memo, useRef } from 'react'
 import styles from './Dropdown.styles.module.scss'
 
 interface DropdownOption {
@@ -13,35 +13,31 @@ interface DropdownProps {
   direction?: 'vertical' | 'horizontal'
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({
-  options,
-  open,
-  onSelect,
-  direction,
-}) => {
-  const dropdownRef = useRef(null)
+export const Dropdown: React.FC<DropdownProps> = memo(
+  ({ options, open, onSelect, direction }) => {
+    const dropdownRef = useRef(null)
 
-  //useOutsideClick(dropdownRef, onselect, open)
+    const handleOptionClick = (option: DropdownOption) => {
+      console.log('click')
+      onSelect(option.value)
+    }
 
-  const handleOptionClick = (option: DropdownOption) => {
-    onSelect(option.value)
-  }
+    if (!open) {
+      return null
+    }
 
-  if (!open) {
-    return null
-  }
-
-  return (
-    <ul
-      ref={dropdownRef}
-      className={styles['dropdown-options']}
-      style={{ flexDirection: direction === 'vertical' ? 'column' : 'row' }}
-    >
-      {options.map((option) => (
-        <li key={option.value} onClick={() => handleOptionClick(option)}>
-          {option.label}
-        </li>
-      ))}
-    </ul>
-  )
-}
+    return (
+      <ul
+        ref={dropdownRef}
+        className={styles['dropdown-options']}
+        style={{ flexDirection: direction === 'vertical' ? 'column' : 'row' }}
+      >
+        {options.map((option) => (
+          <li key={option.value} onClick={() => handleOptionClick(option)}>
+            {option.label}
+          </li>
+        ))}
+      </ul>
+    )
+  },
+)

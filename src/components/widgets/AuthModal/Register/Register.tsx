@@ -1,3 +1,4 @@
+import { BACKEND_BASE_URL } from '@components/shared/Constants/Constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
@@ -10,6 +11,8 @@ type RegisterFormData = {
   password: string
   confirmPassword: string
 }
+
+const toastSettings = {}
 
 export const Register = () => {
   const RegisterSchema: ZodType<RegisterFormData> = z
@@ -32,8 +35,12 @@ export const Register = () => {
   })
 
   const handleFormSubmit = async (data: RegisterFormData) => {
-    const BASE_URL = 'http://localhost:4001/auth'
-    const id = toast.loading('pending...', {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    const toastRegister = toast.loading('pending...', {
       position: 'bottom-center',
       autoClose: 4000,
       hideProgressBar: false,
@@ -45,12 +52,16 @@ export const Register = () => {
     })
     try {
       await axios
-        .post(BASE_URL + '/register', {
-          username: data.username,
-          password: data.password,
-        })
+        .post(
+          BACKEND_BASE_URL + 'auth/register',
+          {
+            username: data.username,
+            password: data.password,
+          },
+          config,
+        )
         .then(() => {
-          toast.update(id, {
+          toast.update(toastRegister, {
             render: 'You are now registered, you can now login',
             type: 'success',
             isLoading: false,
@@ -58,7 +69,7 @@ export const Register = () => {
           })
         })
         .catch((err) => {
-          toast.update(id, {
+          toast.update(toastRegister, {
             render: `${err.response.data.message}`,
             type: 'error',
             isLoading: false,
@@ -66,7 +77,7 @@ export const Register = () => {
           })
         })
     } catch (err: any) {
-      toast.update(id, {
+      toast.update(toastRegister, {
         render: `Connection error`,
         type: 'error',
         isLoading: false,

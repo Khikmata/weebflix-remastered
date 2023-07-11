@@ -9,7 +9,7 @@ import styles from '../DropdownContentShared.styles.module.scss'
 
 export const TypeDropdown = memo(() => {
   const activeType = useAppSelector(
-    (state) => state.filterReducer.typeFilters.typeQuery,
+    (state) => state.filter.typeFilters.typeQuery,
   )
 
   const dispatch = useAppDispatch()

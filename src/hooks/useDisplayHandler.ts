@@ -13,7 +13,7 @@ import { useAppSelector } from './redux'
 
 export const useDisplayHandler = (dropdownType: DropdownTypeEnum) => {
   const { t } = useTranslation()
-  const { ...filterDisplays } = useAppSelector((state) => state.filterReducer)
+  const { ...filterDisplays } = useAppSelector((state) => state.filter)
 
   const displayMap = {
     [DropdownTypeEnum.GENRES]:

@@ -13,6 +13,8 @@ import { SearchAPI } from '@store/services/SearchApi'
 import { IData } from '@store/types/FetchTypes'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { ErrorBoundary } from 'react-error-boundary'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { SearchFilters } from '../SearchFilters/SearchFilters'
 import styles from './AnimeGrid.styles.module.scss'
 
@@ -31,14 +33,14 @@ export const AnimeGrid = memo(({ title }: { title: string }) => {
     statusFilters,
     sortFilters,
     orderFilters,
-  } = useAppSelector((state) => state.filterReducer)
+  } = useAppSelector((state) => state.filter)
 
   const [pages, setPages] = useState(1)
 
   const {
     data: SearchData,
-    error: SearchErrors,
-    isLoading: SearchLoading,
+    error: SearchDataErrors,
+    isLoading: SearchDataLoading,
   } = SearchAPI.useGetAnimeBySearchQuery({
     q: searchFilters.searchQuery,
     max_score: scoreFilters.maxScore.toString(),
@@ -61,11 +63,12 @@ export const AnimeGrid = memo(({ title }: { title: string }) => {
         : 'true',
   })
 
-  const { data: seasonsData } = AnimeDataApi.useGetAnimeSeasonsQuery()
-  const { data: animeSeasonData } = AnimeApi.useGetAnimeBySeasonQuery(
-    { seasonQuery: seasonFilters.seasonQuery, page: pages },
-    { skip: seasonFilters.seasonQuery === '' },
-  )
+  const { data: seasons } = AnimeDataApi.useGetAnimeSeasonsQuery()
+  const { data: SeasonData, isLoading: SeasonDataLoading } =
+    AnimeApi.useGetAnimeBySeasonQuery(
+      { seasonQuery: seasonFilters.seasonQuery, page: pages },
+      { skip: seasonFilters.seasonQuery === '' },
+    )
   const { data: producersData } = AnimeDataApi.useGetAnimeProducersQuery()
 
   const paginationData = SearchData?.pagination
@@ -90,16 +93,10 @@ export const AnimeGrid = memo(({ title }: { title: string }) => {
     if (producersData) {
       dispatch(DropdownDataActions.setProducerData(producersData))
     }
-    if (seasonsData) {
-      dispatch(DropdownDataActions.setSeasonData(seasonsData))
+    if (seasons) {
+      dispatch(DropdownDataActions.setSeasonData(seasons))
     }
-  }, [
-    producersData,
-    seasonsData,
-    SearchData,
-    dispatch,
-    seasonFilters.seasonQuery,
-  ])
+  }, [producersData, seasons, SearchData, dispatch, seasonFilters.seasonQuery])
 
   return (
     <>
@@ -111,22 +108,46 @@ export const AnimeGrid = memo(({ title }: { title: string }) => {
               styles[activeLayout === 'list' ? 'list' : ''],
             ].join('')}
           >
-            {SearchErrors && <p>Произошла ошибка при загрузке данных </p>}
-            {SearchLoading && <Loading />}
-            {seasonFilters.seasonQuery === '' &&
-              SearchData?.data?.map((item: IData) => (
-                <Suspense key={item.mal_id} fallback={<Loading />}>
-                  <MemoizedAnimeCard item={item} activeLayout={activeLayout} />
-                </Suspense>
+            {SearchDataErrors && <p>Произошла ошибка при загрузке данных </p>}
+            {seasonFilters.seasonQuery === ''
+              ? SearchData?.data?.map((item: IData) => (
+                  <MemoizedAnimeCard
+                    key={item.mal_id}
+                    item={item}
+                    activeLayout={activeLayout}
+                  />
+                ))
+              : SeasonData?.map((item: IData) => (
+                  <Suspense key={item.mal_id} fallback={<Loading />}>
+                    <MemoizedAnimeCard
+                      item={item}
+                      activeLayout={activeLayout}
+                    />
+                  </Suspense>
+                ))}
+            {(SeasonDataLoading || SearchDataLoading) &&
+              Array.from({ length: 20 }).map((_, index) => (
+                <div className="animecard" key={index}>
+                  <Skeleton
+                    count={1}
+                    baseColor="gray"
+                    className={styles['skeleton']}
+                  />
+                  <Skeleton
+                    count={1}
+                    baseColor="gray"
+                    className={styles['skeleton__title']}
+                  />
+                </div>
               ))}
-            {animeSeasonData?.map((item: IData) => (
-              <Suspense key={item.mal_id} fallback={<Loading />}>
-                <MemoizedAnimeCard item={item} activeLayout={activeLayout} />
-              </Suspense>
-            ))}
-            {seasonsData &&
-              SearchData?.data.length === 0 &&
+            {SeasonData &&
+              !SeasonDataLoading &&
               seasonFilters.seasonQuery === '' && (
+                <strong>Ничего не найдено ❌</strong>
+              )}
+            {SearchData &&
+              !SearchDataLoading &&
+              seasonFilters.seasonQuery !== '' && (
                 <strong>Ничего не найдено ❌</strong>
               )}
           </div>

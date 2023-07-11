@@ -2,26 +2,32 @@ import { ReactComponent as CloseIcon } from '@assets/icons/CloseIcon.svg'
 import { Modal } from '@components/features'
 import { authModalAction } from '@store/reducers/Auth/AuthModalSlice'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
-import { useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import styles from './AuthModal.styles.module.scss'
 import { Login } from './Login/Login'
 import { Register } from './Register/Register'
 
 type AuthState = 'login' | 'register'
 
-export const AuthModal = () => {
+export const AuthModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const [authState, setAuthState] = useState<AuthState>('login')
   const isOpen = useAppSelector((state) => state.auth.isOpen)
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     dispatch(authModalAction.setModalOpen(false))
-  }
+  }, [dispatch])
 
   const handleAuthState = (state: AuthState) => {
     setAuthState(state)
   }
+
+  useEffect(() => {
+    return () => {
+      handleClose()
+    }
+  }, [handleClose])
 
   if (!isOpen) {
     return null
@@ -76,4 +82,4 @@ export const AuthModal = () => {
       </div>
     </Modal>
   )
-}
+})

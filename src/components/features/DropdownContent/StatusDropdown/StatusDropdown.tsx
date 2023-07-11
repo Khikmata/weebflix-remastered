@@ -9,7 +9,7 @@ import { statusData } from './constants'
 
 export const StatusDropdown = memo(() => {
   const activeStatus = useAppSelector(
-    (state) => state.filterReducer.statusFilters.statusType,
+    (state) => state.filter.statusFilters.statusType,
   )
 
   const dispatch = useAppDispatch()

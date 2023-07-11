@@ -20,8 +20,21 @@
   padding: 0px 24px;
   &.active {
     height: 100%;
-    padding: 24px;
     @include block;
+    padding: 24px;
+  }
+  &.mobile {
+    &.active {
+      right: 0px;
+      height: 100%;
+      @include block;
+      padding: 24px;
+    }
+    overflow: scroll;
+    right: -1000px;
+    top: 100px;
+    position: fixed;
+    height: 100vh;
   }
 }
 
@@ -89,5 +102,17 @@
   }
   &:active {
     filter: brightness(180%);
+  }
+}
+
+.mobile-close {
+  margin-top: 24px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    margin-left: 8px;
+    margin-bottom: 6px;
   }
 }

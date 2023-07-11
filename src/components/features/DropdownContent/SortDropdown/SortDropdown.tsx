@@ -7,7 +7,7 @@ import { sortData } from './constants'
 
 export const SortDropdown = memo(() => {
   const activeSort = useAppSelector(
-    (state) => state.filterReducer.sortFilters.sortType,
+    (state) => state.filter.sortFilters.sortType,
   )
 
   const dispatch = useAppDispatch()

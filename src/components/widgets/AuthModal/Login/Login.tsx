@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { ZodType, z } from 'zod'
 import styles from '../AuthModal.styles.module.scss'
+import { BACKEND_BASE_URL } from '@components/shared/Constants/Constants'
 
 type LoginFormData = { username: string; password: string }
 
@@ -28,7 +29,6 @@ export const Login = ({ handleClose }: LoginProps) => {
   })
   const dispatch = useAppDispatch()
   const handleFormSubmit = async (data: LoginFormData) => {
-    const BASE_URL = 'http://localhost:4001/auth'
     const id = toast.loading('pending...', {
       position: 'bottom-center',
       autoClose: 4000,
@@ -41,7 +41,7 @@ export const Login = ({ handleClose }: LoginProps) => {
     })
     try {
       await axios
-        .post(BASE_URL + '/login', {
+        .post(BACKEND_BASE_URL + 'auth/login', {
           username: data.username,
           password: data.password,
         })

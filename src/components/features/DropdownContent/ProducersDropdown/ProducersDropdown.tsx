@@ -10,9 +10,7 @@ export const ProducersDropdown = memo(() => {
   const producerData = useAppSelector(
     (state) => state.dropdownData.producersData,
   )
-  const activeProducer = useAppSelector(
-    (state) => state.filterReducer.producerFilters,
-  )
+  const activeProducer = useAppSelector((state) => state.filter.producerFilters)
   const dispatch = useAppDispatch()
 
   const handleProducerChange = useCallback(

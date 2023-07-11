@@ -8,11 +8,6 @@ interface IWatchlistState {
   mal_id: string
 }
 
-interface IUserDetails {
-  favourites: IFavourites[]
-  watchStateList: IWatchlistState[]
-}
-
 interface IComment {
   user: IUser
   anime: IData

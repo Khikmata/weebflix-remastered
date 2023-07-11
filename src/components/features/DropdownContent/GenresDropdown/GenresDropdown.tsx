@@ -7,7 +7,7 @@ import { SortGenres } from './constants'
 
 export const GenresDropdown = memo(() => {
   const selectedGenresIndexes = useAppSelector(
-    (state) => state.filterReducer.genreFilters.selectedGenresIndexes,
+    (state) => state.filter.genreFilters.selectedGenresIndexes,
   )
   // Список жанров
   const genreData = useAppSelector((state) => state.dropdownData.genreData)

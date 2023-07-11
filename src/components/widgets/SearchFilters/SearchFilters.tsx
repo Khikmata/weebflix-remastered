@@ -1,17 +1,15 @@
-import { ReactComponent as DropdownIcon } from '@assets/icons/DropdownIcon.svg'
-import { ReactComponent as EraseIcon } from '@assets/icons/EraseIcon.svg'
+import { ReactComponent as CloseIcon } from '@assets/icons/CloseIcon.svg'
 import { ReactComponent as FilterIcon } from '@assets/icons/FiltersIcon.svg'
-import styles from './SearchFilters.styles.module.scss'
-
 import { FilterDropdown } from '@components/features/FilterDropdown/FilterDropdown'
-import { RangeInput } from '@components/shared'
+import { Button, RangeInput } from '@components/shared'
 import { DropdownDataActions } from '@store/reducers/Dropdown/DropdownDataSlice'
 import { dateFilterActions, scoreFilterActions } from '@store/reducers/Filters'
 import { AnimeDataApi } from '@store/services/AnimeDataApi'
 import { useAnimate } from 'framer-motion'
-import { useAppDispatch } from 'hooks/redux'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import styles from './SearchFilters.styles.module.scss'
 
 interface searchFilterProps {
   clearFilters: () => void
@@ -23,12 +21,20 @@ export const SearchFilters = memo(({ clearFilters }: searchFilterProps) => {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
 
+  const [openFilters, setOpenFilters] = useState(false)
   const [scope, animate] = useAnimate()
+
+  const isUserMobile = useAppSelector((state) => state.mobile.isUserMobile)
+
   useEffect(() => {
     genresData && dispatch(DropdownDataActions.setGenreData(genresData))
   }, [genresData, dispatch])
 
-  const [openFilters, setOpenFilters] = useState(true)
+  useEffect(() => {
+    if (!isUserMobile) {
+      setOpenFilters(true)
+    }
+  }, [])
 
   const handleFiltersDropdown = () => {
     setOpenFilters(!openFilters)
@@ -51,7 +57,12 @@ export const SearchFilters = memo(({ clearFilters }: searchFilterProps) => {
 
   return (
     <div className={styles['searchFilters']}>
-      <div className={styles['filters-top']}>
+      <div
+        className={[
+          styles['filters-top'],
+          styles[isUserMobile ? 'mobile' : ''],
+        ].join(' ')}
+      >
         <button
           onClick={handleFiltersDropdown}
           className={styles['searchFilters-title']}
@@ -59,17 +70,19 @@ export const SearchFilters = memo(({ clearFilters }: searchFilterProps) => {
           <FilterIcon />
           {t('searchFilters_title')}
         </button>
-        <div className={styles['filters-erase']}>
+        {/* TODO: ERASE FILTERS
+         <div className={styles['filters-erase']}>
           <button onClick={clearFilters}>
             <EraseIcon />
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div
         className={[
           styles['searchFilters-content'],
           styles[openFilters ? 'active' : ''],
+          styles[isUserMobile ? '' : ''],
         ].join(' ')}
         ref={scope}
       >
@@ -89,6 +102,17 @@ export const SearchFilters = memo(({ clearFilters }: searchFilterProps) => {
           handleRange={handleDateChange}
         />
         <FilterDropdown />
+        {/* {isUserMobile && (
+          <div className={styles['mobile-close']}>
+            <Button
+              onClick={handleFiltersDropdown}
+              contentPadding="4px 8px"
+              color="secondary"
+            >
+              <CloseIcon />
+            </Button>
+          </div>
+        )} */}
       </div>
     </div>
   )

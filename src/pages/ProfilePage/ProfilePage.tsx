@@ -13,7 +13,7 @@ const ProfilePage = () => {
     if (!user) {
       navigate('/', { replace: true })
     }
-  }, [])
+  }, [navigate, user])
 
   return (
     <PageWrapper filled>
@@ -27,6 +27,8 @@ const ProfilePage = () => {
         <div className={styles['user-info']}>
           <div>
             <p className={styles['user-info__name']}>{user?.username}</p>
+          </div>
+          <div className={styles['user-info__watchstates']}>
             <div className={styles['user-info__impact']}>
               <p>{'Comments created: ' + user?.comments.length}</p>
               <p>
@@ -34,8 +36,6 @@ const ProfilePage = () => {
                   dayjs(user?.createdAt).format('DD/MM/YYYY')}
               </p>
             </div>
-          </div>
-          <div className={styles['user-info__watchstates']}>
             <div className={styles['watchstates-track']}>
               <div className={styles['watchstates-track__completed']}></div>
               <div className={styles['watchstates-track__planned']} />

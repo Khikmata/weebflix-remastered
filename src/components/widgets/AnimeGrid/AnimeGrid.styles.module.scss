@@ -80,3 +80,14 @@
   top: 60%;
   left: 25%;
 }
+
+.skeleton {
+  margin-right: 300px;
+  height: 85%;
+  width: clamp(70px, 100%, 180px);
+}
+
+.skeleton__title {
+  height: 10%;
+  width: clamp(70px, 100%, 180px);
+}

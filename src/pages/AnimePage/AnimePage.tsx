@@ -18,7 +18,9 @@ import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactPlayer from 'react-player'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styles from './animepage.styles.module.scss'
+import { BACKEND_BASE_URL } from '@components/shared/Constants/Constants'
 
 const AnimePage = memo(() => {
   const [skip, setSkip] = useState<boolean>(true)
@@ -52,7 +54,7 @@ const AnimePage = memo(() => {
     try {
       if (details) {
         const response = await axios.get(
-          `http://localhost:4001/player/parseurl/${details.title}`,
+          `${BACKEND_BASE_URL}player/parseurl/${details.title}`,
         )
         setUrlQuery(response.data)
       }
@@ -67,26 +69,47 @@ const AnimePage = memo(() => {
   const user = useAppSelector((state) => state.auth.user)
 
   const setFavorite = async () => {
+    const toastFavorite = toast.loading('pending...', {
+      position: 'bottom-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    })
     try {
-      await axios.post('http://localhost:4001/favorites', {
-        anime: details,
-        userId: user?._id,
+      await axios
+        .post(`${BACKEND_BASE_URL}favorites`, {
+          anime: details,
+          userId: user?._id,
+        })
+        .then(() => {
+          toast.update(toastFavorite, {
+            render: 'Successfully added to your favorites',
+            type: 'success',
+            isLoading: false,
+            autoClose: 4000,
+          })
+        })
+        .catch((err) => {
+          toast.update(toastFavorite, {
+            render: err.response.data.error,
+            type: 'error',
+            isLoading: false,
+            autoClose: 4000,
+          })
+        })
+    } catch (err: any) {
+      toast.update(toastFavorite, {
+        render: err.response.data.error,
+        type: 'error',
+        isLoading: false,
+        autoClose: 4000,
       })
-    } catch (error: any) {
-      console.log(error?.message)
     }
   }
-
-  // const setWatchstate = async () => {
-  //   try {
-  //     await axios.post('http://localhost:4001/watchlist', {
-  //       user: user,
-  //       animeId: details?.mal_id,
-  //     })
-  //   } catch (error: any) {
-  //     console.log(error?.message)
-  //   }
-  // }
 
   useEffect(() => {
     if (urlQuery !== '' && details?.score) {

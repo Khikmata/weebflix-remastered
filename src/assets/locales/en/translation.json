@@ -2,7 +2,7 @@
   "option_relevance": "Popular",
   "option_upcoming": "Upcoming",
   "option_anime": "Anime",
-  "option_manga": "Manga (not working yet)",
+  "option_manga": "Manga (planned)",
 
   "historyBlock_title": "Last viewed",
   "historyBlock_episodes": "Episodes",
@@ -11,7 +11,7 @@
 
   "newsBlock_title": "News",
   "catalogue_title": "Catalog",
-"search_title": "Search",
+  "search_title": "Search",
 
   "searchFilters_title": "Filter",
   "filter_genres": "Genres",

@@ -10,7 +10,7 @@ import { orderBy } from './constants'
 export const OrderbyDropdown = memo(() => {
   const dispatch = useAppDispatch()
   const activeOrder = useAppSelector(
-    (state) => state.filterReducer.orderFilters.orderBy,
+    (state) => state.filter.orderFilters.orderBy,
   )
 
   const handleOrderChange = useCallback(
